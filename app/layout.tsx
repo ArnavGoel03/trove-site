@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,6 +27,19 @@ export default function RootLayout({
       <body className="antialiased">
         <div className="grain" aria-hidden="true" />
         {children}
+        <Toaster
+          position="bottom-right"
+          theme="dark"
+          richColors
+          closeButton
+          duration={4000}
+          toastOptions={{
+            classNames: {
+              toast:
+                "!bg-[#171922] !border-white/[0.08] !text-white !shadow-[0_10px_40px_-12px_rgba(0,0,0,0.6)]",
+            },
+          }}
+        />
       </body>
     </html>
   );

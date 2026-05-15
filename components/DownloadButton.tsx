@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Copy, Check, Apple } from "lucide-react";
+import { motion } from "motion/react";
+import { Apple } from "lucide-react";
+import { toast } from "sonner";
 import { useMacDetect } from "@/lib/useMacDetect";
 
 const ZIP_URL = "/Trove.zip";
@@ -13,7 +13,6 @@ export default function DownloadButton({
   size?: "lg" | "md";
 }) {
   const platform = useMacDetect();
-  const [copied, setCopied] = useState(false);
 
   const sizeCls =
     size === "lg" ? "px-6 py-3.5 text-[15px]" : "px-4 py-2 text-[13px]";
@@ -22,11 +21,21 @@ export default function DownloadButton({
     try {
       const url = `${window.location.origin}${ZIP_URL}`;
       await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      toast.success("Link copied", {
+        description: "Paste it in a browser on your Mac to download Trove.",
+      });
     } catch {
-      // no-op
+      toast.error("Couldn't copy", {
+        description: "Your browser blocked the clipboard write. Try selecting the URL manually.",
+      });
     }
+  }
+
+  function onMacDownload() {
+    toast.success("Download starting", {
+      description: "Check ~/Downloads/Trove.zip. Right-click → Open on first launch.",
+      duration: 6000,
+    });
   }
 
   if (platform === "unknown") {
@@ -46,6 +55,7 @@ export default function DownloadButton({
       <motion.a
         href={ZIP_URL}
         download
+        onClick={onMacDownload}
         whileHover={{ y: -1 }}
         whileTap={{ y: 0 }}
         className={`btn-primary inline-flex items-center gap-2 rounded-full font-semibold ${sizeCls} transition-all`}
@@ -59,40 +69,12 @@ export default function DownloadButton({
   // Non-Mac visitor
   return (
     <div className="inline-flex flex-col items-start gap-2.5">
-      <div
-        className={`btn-ghost inline-flex items-center gap-2 rounded-full font-medium ${sizeCls} cursor-not-allowed opacity-90`}
-        aria-disabled="true"
-      >
-        <Apple size={16} className="-ml-0.5 opacity-60" />
-        macOS only — open this link on a Mac
-      </div>
       <button
         onClick={copyLink}
-        className="inline-flex items-center gap-1.5 text-[12.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors px-2 py-1 rounded-md"
+        className={`btn-ghost inline-flex items-center gap-2 rounded-full font-medium ${sizeCls} hover:opacity-100 opacity-90 cursor-pointer`}
       >
-        <AnimatePresence mode="wait" initial={false}>
-          {copied ? (
-            <motion.span
-              key="ok"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              className="inline-flex items-center gap-1.5"
-            >
-              <Check size={13} /> Copied
-            </motion.span>
-          ) : (
-            <motion.span
-              key="copy"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              className="inline-flex items-center gap-1.5"
-            >
-              <Copy size={13} /> Copy download link
-            </motion.span>
-          )}
-        </AnimatePresence>
+        <Apple size={16} className="-ml-0.5 opacity-60" />
+        macOS only — copy link to open on a Mac
       </button>
     </div>
   );
