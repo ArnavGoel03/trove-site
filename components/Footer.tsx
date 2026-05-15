@@ -5,7 +5,7 @@ import { Github, Mail } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="relative border-t border-white/[0.05] mt-20">
-      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] gap-10">
         <div>
           <div className="flex items-center gap-2.5 mb-4">
             <span className="relative inline-flex w-7 h-7 rounded-[8px] bg-gradient-to-br from-[#ff8b5a] via-[#ff6a2a] to-[#b27cff] items-center justify-center shadow-[0_4px_12px_-2px_rgba(255,122,69,0.5)]">
@@ -27,10 +27,10 @@ export default function Footer() {
         <FooterCol
           title="Product"
           links={[
-            { label: "Features", href: "#features" },
-            { label: "Compare", href: "#compare" },
-            { label: "Privacy", href: "#privacy" },
-            { label: "Requirements", href: "#requirements" },
+            { label: "Features", href: "/#features" },
+            { label: "Compare", href: "/#compare" },
+            { label: "Privacy", href: "/#privacy" },
+            { label: "Requirements", href: "/#requirements" },
           ]}
         />
 
@@ -46,9 +46,19 @@ export default function Footer() {
         <FooterCol
           title="Company"
           links={[
-            { label: "Contact", href: "mailto:hello@toolbox.app" },
-            { label: "Privacy policy", href: "#" },
-            { label: "Terms", href: "#" },
+            { label: "Contact", href: "/contact" },
+            { label: "Security", href: "/security" },
+          ]}
+        />
+
+        <FooterCol
+          title="Legal"
+          links={[
+            { label: "Privacy Policy", href: "/privacy" },
+            { label: "Terms of Service", href: "/terms" },
+            { label: "Refund Policy", href: "/refund" },
+            { label: "Acceptable Use", href: "/acceptable-use" },
+            { label: "EULA", href: "/eula" },
           ]}
         />
       </div>
@@ -61,14 +71,14 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/ArnavGoel03/trove"
               aria-label="GitHub"
               className="text-[var(--color-fg-mute)] hover:text-white transition-colors"
             >
               <Github size={16} />
             </a>
             <a
-              href="mailto:hello@toolbox.app"
+              href="mailto:support@trove.app"
               aria-label="Email"
               className="text-[var(--color-fg-mute)] hover:text-white transition-colors"
             >
