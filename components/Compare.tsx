@@ -154,7 +154,7 @@ export default function Compare() {
             </div>
             <div className="text-3xl font-semibold tabular-nums">
               <span className="text-[var(--color-fg-mute)] mr-1">$</span>
-              XX
+              10
               <span className="text-base text-[var(--color-fg-dim)] font-normal">
                 {" "}
                 /yr
