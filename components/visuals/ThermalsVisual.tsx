@@ -63,6 +63,12 @@ export default function ThermalsVisual() {
   const filledPath = useTransform(pathD, (d) => `${d} L 100 60 L 0 60 Z`);
 
   const tempSpring = useSpring(gpuTemp, { stiffness: 80, damping: 14 });
+  // Format motion values to one decimal — without this they render full
+  // floating-point precision ("63.289727933796...") because <span>{motionValue}</span>
+  // serialises the raw number, not the displayed string.
+  const tempLabel = useTransform(tempSpring, (v) => v.toFixed(1));
+  const cpuLabel = useTransform(cpuTemp, (v) => v.toFixed(1));
+  const fanLabel = useTransform(fan, (v) => Math.round(v).toLocaleString());
 
   return (
     <div
@@ -76,7 +82,7 @@ export default function ThermalsVisual() {
           </div>
           <div className="mt-1 flex items-baseline gap-2">
             <motion.span className="text-5xl sm:text-6xl font-semibold tabular-nums tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
-              {tempSpring}
+              {tempLabel}
             </motion.span>
             <span className="text-xl text-[var(--color-fg-dim)]">°C</span>
           </div>
@@ -85,14 +91,14 @@ export default function ThermalsVisual() {
           <div>
             CPU{" "}
             <motion.span className="tabular-nums text-white font-medium">
-              {cpuTemp}
+              {cpuLabel}
             </motion.span>
             °C
           </div>
           <div>
             Fan{" "}
             <motion.span className="tabular-nums text-white font-medium">
-              {fan}
+              {fanLabel}
             </motion.span>{" "}
             rpm
           </div>
