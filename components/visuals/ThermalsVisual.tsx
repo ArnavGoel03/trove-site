@@ -1,11 +1,38 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, useSpring } from "motion/react";
-import { useEffect } from "react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  useSpring,
+  useReducedMotion,
+} from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ThermalsVisual() {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+  const reduced = useReducedMotion();
+
   const t = useMotionValue(0);
+
+  // Only animate when the visual is on screen. Off-screen sections
+  // were burning a rAF tick each frame even though nothing was
+  // visible — multiply that by 5 visuals and you get permanent
+  // main-thread load.
   useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => setInView(entries[0]?.isIntersecting ?? false),
+      { rootMargin: "100px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView || reduced) return;
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
@@ -14,14 +41,12 @@ export default function ThermalsVisual() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [t]);
+  }, [inView, reduced, t]);
 
-  // GPU temp animated value
   const gpuTemp = useTransform(t, (v) => Math.round(62 + Math.sin(v * 0.9) * 6));
   const cpuTemp = useTransform(t, (v) => Math.round(54 + Math.sin(v * 1.4) * 4));
   const fan = useTransform(t, (v) => Math.round(2200 + Math.sin(v) * 250));
 
-  // Sparkline path - sample over time
   const pathD = useTransform(t, (v) => {
     const pts: string[] = [];
     for (let i = 0; i <= 40; i++) {
@@ -35,10 +60,15 @@ export default function ThermalsVisual() {
     return pts.join(" ");
   });
 
+  const filledPath = useTransform(pathD, (d) => `${d} L 100 60 L 0 60 Z`);
+
   const tempSpring = useSpring(gpuTemp, { stiffness: 80, damping: 14 });
 
   return (
-    <div className="w-full h-full p-6 sm:p-10 flex flex-col gap-5 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(255,93,143,0.12),transparent_60%)]">
+    <div
+      ref={rootRef}
+      className="w-full h-full p-6 sm:p-10 flex flex-col gap-5 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(255,93,143,0.12),transparent_60%)]"
+    >
       <div className="flex items-baseline justify-between">
         <div>
           <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
@@ -85,7 +115,6 @@ export default function ThermalsVisual() {
               <stop offset="100%" stopColor="#ff5d8f" stopOpacity="0" />
             </linearGradient>
           </defs>
-          {/* grid lines */}
           {[12, 24, 36, 48].map((y) => (
             <line
               key={y}
@@ -98,10 +127,7 @@ export default function ThermalsVisual() {
             />
           ))}
           <motion.path d={pathD} fill="none" stroke="#ff8aae" strokeWidth="0.5" />
-          <motion.path
-            d={useTransform(pathD, (d) => `${d} L 100 60 L 0 60 Z`)}
-            fill="url(#grad)"
-          />
+          <motion.path d={filledPath} fill="url(#grad)" />
         </svg>
         <div className="absolute bottom-2 left-3 text-[10px] font-mono text-[var(--color-fg-mute)]">
           last 60s · sampled via private HID

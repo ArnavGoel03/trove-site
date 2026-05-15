@@ -1,33 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
-import Lenis from "lenis";
-
+// SmoothScroll was previously a Lenis-based smooth-scroll wrapper.
+// Lenis's rAF loop fought macOS Magic Trackpad inertia and made
+// scroll feel rubbery / laggy on real hardware, especially when
+// combined with scroll-driven motion transforms elsewhere on the page.
+//
+// We now rely on the browser's native trackpad inertia plus the
+// `html { scroll-behavior: smooth }` rule in globals.css (which is
+// suppressed under `prefers-reduced-motion`).
+//
+// Kept as a no-op so existing imports keep working — and so it can
+// be re-enabled behind a query flag in the future if needed.
 export default function SmoothScroll() {
-  useEffect(() => {
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
-
-    const lenis = new Lenis({
-      duration: 1.05,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-
-    let rafId = 0;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-    };
-  }, []);
-
   return null;
 }

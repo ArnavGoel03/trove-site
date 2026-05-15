@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, useSpring } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
 import {
   Clipboard,
@@ -82,30 +82,70 @@ export default function AppMockup({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const mx = useMotionValue(0.5);
-  const my = useMotionValue(0.5);
-  const sx = useSpring(mx, { stiffness: 90, damping: 18 });
-  const sy = useSpring(my, { stiffness: 90, damping: 18 });
+  const reduced = useReducedMotion();
 
-  const rotX = useTransform(sy, [0, 1], [6, -6]);
-  const rotY = useTransform(sx, [0, 1], [-8, 8]);
-
+  // Parallax tilt: single rAF-throttled mousemove handler that writes
+  // the transform directly to the element — no motion-value chain,
+  // no springs sampling per frame, no React state.
   useEffect(() => {
-    function onMove(e: MouseEvent) {
-      const el = ref.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      mx.set((e.clientX - rect.left) / rect.width);
-      my.set((e.clientY - rect.top) / rect.height);
+    if (reduced) return;
+    const el = ref.current;
+    if (!el) return;
+
+    let targetX = 0.5;
+    let targetY = 0.5;
+    let curX = 0.5;
+    let curY = 0.5;
+    let rafId = 0;
+    let pending = false;
+
+    function applyTransform() {
+      // Same math as the original useTransform ranges:
+      // rotX: [0,1] -> [6,-6]   rotY: [0,1] -> [-8, 8]
+      const rotX = 6 + (curY - 0) * (-12);
+      const rotY = -8 + (curX - 0) * 16;
+      el!.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
     }
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [mx, my]);
+
+    function loop() {
+      curX += (targetX - curX) * 0.12;
+      curY += (targetY - curY) * 0.12;
+      applyTransform();
+      if (
+        Math.abs(targetX - curX) > 0.001 ||
+        Math.abs(targetY - curY) > 0.001
+      ) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        pending = false;
+      }
+    }
+
+    function onMove(e: MouseEvent) {
+      const rect = el!.getBoundingClientRect();
+      targetX = (e.clientX - rect.left) / rect.width;
+      targetY = (e.clientY - rect.top) / rect.height;
+      if (!pending) {
+        pending = true;
+        rafId = requestAnimationFrame(loop);
+      }
+    }
+
+    applyTransform();
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, [reduced]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      style={{ rotateX: rotX, rotateY: rotY, transformPerspective: 1200 }}
+      style={{
+        transformStyle: "preserve-3d",
+        willChange: "transform",
+      }}
       className={`relative ${className}`}
     >
       <div className="pane rounded-2xl shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.04)] overflow-hidden">
@@ -163,6 +203,6 @@ export default function AppMockup({
             "radial-gradient(50% 50% at 50% 30%, rgba(255,122,69,0.25), transparent 70%), radial-gradient(50% 50% at 70% 70%, rgba(178,124,255,0.22), transparent 70%)",
         }}
       />
-    </motion.div>
+    </div>
   );
 }

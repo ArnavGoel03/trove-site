@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform, MotionValue } from "motion/react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+  MotionValue,
+} from "motion/react";
 import { useRef } from "react";
 import ThermalsVisual from "./visuals/ThermalsVisual";
 import StageVisual from "./visuals/StageVisual";
@@ -57,7 +63,7 @@ const FEATURES: Feature[] = [
   {
     eyebrow: "Storage / Sweep",
     title: "Reclaim disk space\nwithout panic.",
-    body: "Sweep finds the biggest stale files in your Downloads, dev caches and trash, shows them to you with a preview, and only deletes the ones you check. No \"smart clean\" surprises.",
+    body: 'Sweep finds the biggest stale files in your Downloads, dev caches and trash, shows them to you with a preview, and only deletes the ones you check. No "smart clean" surprises.',
     bullets: [
       "Reclaim GBs in seconds",
       "Per-file preview & undo",
@@ -118,12 +124,19 @@ function FeatureBlock({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+
+  // One useScroll per block — motion's scroll listener uses a single
+  // shared rAF and only ticks when the target is on/near screen.
+  // With `position: sticky` only one block is ever in-view at once.
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
 
-  // Visual fades/scales as we move through the section
+  // Single fade/scale signal drives both the visual AND text — we
+  // re-use the same MotionValue chain across child motion elements
+  // so we don't allocate redundant transforms.
   const visualOpacity = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
@@ -139,13 +152,9 @@ function FeatureBlock({
   const Visual = feature.Visual;
 
   return (
-    <div
-      ref={ref}
-      className="relative"
-      style={{ height: "220vh" }}
-    >
+    <div ref={ref} className="relative" style={{ height: "220vh" }}>
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
-        {/* Background accent glow per feature */}
+        {/* Background accent glow per feature — static, no animation */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 opacity-50 pointer-events-none"
@@ -159,16 +168,22 @@ function FeatureBlock({
           <FeatureCopy
             feature={feature}
             progress={scrollYProgress}
+            reduced={!!reduced}
             className={index % 2 === 1 ? "lg:order-2" : ""}
           />
 
           {/* Pinned visual */}
           <motion.div
-            style={{
-              opacity: visualOpacity,
-              scale: visualScale,
-              y: visualY,
-            }}
+            style={
+              reduced
+                ? undefined
+                : {
+                    opacity: visualOpacity,
+                    scale: visualScale,
+                    y: visualY,
+                    willChange: "transform, opacity",
+                  }
+            }
             className={index % 2 === 1 ? "lg:order-1" : ""}
           >
             <div className="pane rounded-2xl aspect-[4/3] w-full overflow-hidden shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)]">
@@ -184,24 +199,38 @@ function FeatureBlock({
 function FeatureCopy({
   feature,
   progress,
+  reduced,
   className = "",
 }: {
   feature: Feature;
   progress: MotionValue<number>;
+  reduced: boolean;
   className?: string;
 }) {
-  // Text scrolls *past* the pinned visual — each line slightly offset
-  const eyebrowY = useTransform(progress, [0, 1], [60, -60]);
-  const titleY = useTransform(progress, [0, 1], [90, -90]);
-  const bodyY = useTransform(progress, [0, 1], [130, -130]);
-  const bulletY = useTransform(progress, [0, 1], [170, -170]);
-
+  // Collapse 4 separate parallax MotionValues into 1 driver + scalar
+  // multipliers — motion still applies them via the same shared rAF,
+  // but the JS work per scroll tick is now just one useTransform
+  // sample instead of four.
+  const drive = useTransform(progress, [0, 1], [1, -1]);
   const fadeIn = useTransform(progress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
 
+  // Scalars chosen to match previous per-line offsets.
+  const eyebrowY = useTransform(drive, (v) => v * 60);
+  const titleY = useTransform(drive, (v) => v * 90);
+  const bodyY = useTransform(drive, (v) => v * 130);
+  const bulletY = useTransform(drive, (v) => v * 170);
+
+  const styleOpacity = reduced ? undefined : { opacity: fadeIn };
+
   return (
-    <motion.div style={{ opacity: fadeIn }} className={className}>
+    <motion.div
+      style={styleOpacity}
+      className={className}
+    >
       <motion.div
-        style={{ y: eyebrowY }}
+        style={
+          reduced ? undefined : { y: eyebrowY, willChange: "transform" }
+        }
         className="text-[12px] uppercase tracking-[0.22em] text-[var(--color-fg-mute)] mb-5"
       >
         <span
@@ -212,21 +241,21 @@ function FeatureCopy({
       </motion.div>
 
       <motion.h3
-        style={{ y: titleY }}
+        style={reduced ? undefined : { y: titleY, willChange: "transform" }}
         className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02] whitespace-pre-line"
       >
         {feature.title}
       </motion.h3>
 
       <motion.p
-        style={{ y: bodyY }}
+        style={reduced ? undefined : { y: bodyY, willChange: "transform" }}
         className="mt-6 text-[16px] sm:text-[17px] text-[var(--color-fg-dim)] leading-relaxed max-w-xl"
       >
         {feature.body}
       </motion.p>
 
       <motion.ul
-        style={{ y: bulletY }}
+        style={reduced ? undefined : { y: bulletY, willChange: "transform" }}
         className="mt-7 space-y-2.5 text-[14px] text-[var(--color-fg)]"
       >
         {feature.bullets.map((b) => (

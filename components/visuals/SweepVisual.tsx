@@ -1,7 +1,12 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "motion/react";
-import { useEffect } from "react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  useReducedMotion,
+} from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDownToLine, Trash2 } from "lucide-react";
 
 const files = [
@@ -13,8 +18,25 @@ const files = [
 ];
 
 export default function SweepVisual() {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+  const reduced = useReducedMotion();
+
   const t = useMotionValue(0);
+
   useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => setInView(entries[0]?.isIntersecting ?? false),
+      { rootMargin: "100px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView || reduced) return;
     const start = performance.now();
     let raf = 0;
     const tick = (now: number) => {
@@ -23,7 +45,7 @@ export default function SweepVisual() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [t]);
+  }, [inView, reduced, t]);
 
   const reclaimed = useTransform(t, (v) => {
     const n = 15.9 * (v / 6);
@@ -31,7 +53,10 @@ export default function SweepVisual() {
   });
 
   return (
-    <div className="w-full h-full p-6 sm:p-10 flex flex-col gap-5">
+    <div
+      ref={rootRef}
+      className="w-full h-full p-6 sm:p-10 flex flex-col gap-5"
+    >
       <div className="flex items-center justify-between">
         <div>
           <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">

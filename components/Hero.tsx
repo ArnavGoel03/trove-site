@@ -1,57 +1,84 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "motion/react";
-import { useEffect } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef } from "react";
 import DownloadButton from "./DownloadButton";
 import AppMockup from "./AppMockup";
 
 export default function Hero() {
-  const mx = useMotionValue(50);
-  const my = useMotionValue(30);
-  const sx = useSpring(mx, { stiffness: 40, damping: 20 });
-  const sy = useSpring(my, { stiffness: 40, damping: 20 });
+  // The mouse-tracked gradient is driven via a single rAF-throttled
+  // direct DOM write to CSS variables — zero React re-renders per
+  // mousemove, zero motion-value subscriptions firing per frame.
+  const gradientRef = useRef<HTMLDivElement | null>(null);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
-    function onMove(e: MouseEvent) {
-      mx.set((e.clientX / window.innerWidth) * 100);
-      my.set((e.clientY / window.innerHeight) * 100);
+    if (reduced) return;
+    const el = gradientRef.current;
+    if (!el) return;
+
+    // Initial values match the previous default.
+    let targetX = 50;
+    let targetY = 30;
+    let currentX = targetX;
+    let currentY = targetY;
+    el.style.setProperty("--mx", String(currentX));
+    el.style.setProperty("--my", String(currentY));
+
+    let rafId = 0;
+    let pending = false;
+
+    function loop() {
+      // Cheap spring-ish lerp toward the target — runs at most once
+      // per frame regardless of how many mousemove events fired.
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+      el!.style.setProperty("--mx", currentX.toFixed(2));
+      el!.style.setProperty("--my", currentY.toFixed(2));
+
+      if (
+        Math.abs(targetX - currentX) > 0.05 ||
+        Math.abs(targetY - currentY) > 0.05
+      ) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        pending = false;
+      }
     }
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [mx, my]);
+
+    function onMove(e: MouseEvent) {
+      targetX = (e.clientX / window.innerWidth) * 100;
+      targetY = (e.clientY / window.innerHeight) * 100;
+      if (!pending) {
+        pending = true;
+        rafId = requestAnimationFrame(loop);
+      }
+    }
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(rafId);
+    };
+  }, [reduced]);
 
   return (
     <section
       id="top"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 overflow-hidden"
     >
-      {/* Mouse-responsive gradient */}
-      <motion.div
+      {/* Mouse-responsive gradient — driven via CSS vars, GPU-composited */}
+      <div
+        ref={gradientRef}
         aria-hidden
         className="absolute inset-0 -z-10 opacity-90"
         style={{
           background: `
-            radial-gradient(40% 50% at calc(var(--mx) * 1%) calc(var(--my) * 1%), rgba(255, 122, 69, 0.18), transparent 60%),
-            radial-gradient(50% 60% at calc((100 - var(--mx)) * 1%) calc((100 - var(--my)) * 1%), rgba(178, 124, 255, 0.16), transparent 60%),
+            radial-gradient(40% 50% at calc(var(--mx, 50) * 1%) calc(var(--my, 30) * 1%), rgba(255, 122, 69, 0.18), transparent 60%),
+            radial-gradient(50% 60% at calc((100 - var(--mx, 50)) * 1%) calc((100 - var(--my, 30)) * 1%), rgba(178, 124, 255, 0.16), transparent 60%),
             radial-gradient(60% 60% at 50% 100%, rgba(76, 184, 255, 0.08), transparent 60%)
           `,
-        }}
-        // wire spring values to CSS vars
-        ref={(el) => {
-          if (!el) return;
-          const unsubX = sx.on("change", (v) =>
-            el.style.setProperty("--mx", String(v)),
-          );
-          const unsubY = sy.on("change", (v) =>
-            el.style.setProperty("--my", String(v)),
-          );
-          el.style.setProperty("--mx", String(sx.get()));
-          el.style.setProperty("--my", String(sy.get()));
-          // store cleanup
-          (el as HTMLElement & { __cleanup?: () => void }).__cleanup = () => {
-            unsubX();
-            unsubY();
-          };
+          willChange: "background-position",
         }}
       />
 
@@ -70,6 +97,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 max-w-5xl mx-auto text-center"
+        style={{ willChange: "transform, opacity" }}
       >
         <motion.div
           initial={{ opacity: 0, y: 8 }}
@@ -128,6 +156,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-full max-w-5xl mx-auto mt-16 sm:mt-20"
+        style={{ willChange: "transform, opacity" }}
       >
         <AppMockup />
       </motion.div>
