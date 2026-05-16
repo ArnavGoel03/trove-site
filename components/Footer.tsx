@@ -1,6 +1,7 @@
 "use client";
 
 import { Github, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
   return (
@@ -37,9 +38,21 @@ export default function Footer() {
         <FooterCol
           title="Resources"
           links={[
-            { label: "Changelog", href: "#" },
-            { label: "Press kit", href: "#" },
-            { label: "Status", href: "#" },
+            {
+              label: "Releases",
+              href: "https://github.com/ArnavGoel03/trove/releases",
+              external: true,
+            },
+            {
+              label: "Source code",
+              href: "https://github.com/ArnavGoel03/trove",
+              external: true,
+            },
+            {
+              label: "Report an issue",
+              href: "https://github.com/ArnavGoel03/trove/issues/new",
+              external: true,
+            },
           ]}
         />
 
@@ -65,11 +78,14 @@ export default function Footer() {
 
       <div className="border-t border-white/[0.04]">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="text-[12px] text-[var(--color-fg-mute)]">
-            © {new Date().getFullYear()} Trove. macOS, Apple Silicon and the
-            Apple logo are trademarks of Apple Inc.
+          <div className="flex items-center gap-3 text-[12px] text-[var(--color-fg-mute)]">
+            <span>
+              © {new Date().getFullYear()} Trove. macOS, Apple Silicon and the
+              Apple logo are trademarks of Apple Inc.
+            </span>
           </div>
           <div className="flex items-center gap-4">
+            <LatestReleaseBadge />
             <a
               href="https://github.com/ArnavGoel03/trove"
               aria-label="GitHub"
@@ -91,12 +107,55 @@ export default function Footer() {
   );
 }
 
+/// Pulls the latest release tag from the GitHub Releases API at component
+/// mount and renders a discreet `v1.2.3 · release notes` link. Falls back to
+/// "Releases" if the fetch fails (rate limit, offline, repo private) so the
+/// footer never shows a broken or stale version string. Cached client-side
+/// for the page lifetime — one network request per page load, no polling.
+function LatestReleaseBadge() {
+  const [tag, setTag] = useState<string | null>(null);
+  useEffect(() => {
+    let aborted = false;
+    fetch(
+      "https://api.github.com/repos/ArnavGoel03/trove/releases/latest",
+      { headers: { Accept: "application/vnd.github+json" } }
+    )
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (aborted) return;
+        const t: unknown = j?.tag_name;
+        if (typeof t === "string" && t.length > 0 && t.length < 32) {
+          setTag(t);
+        }
+      })
+      .catch(() => {
+        /* swallow — footer just shows "Releases" */
+      });
+    return () => {
+      aborted = true;
+    };
+  }, []);
+  return (
+    <a
+      href="https://github.com/ArnavGoel03/trove/releases"
+      className="inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors"
+    >
+      <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
+      <span className="font-mono tabular-nums">
+        {tag ?? "Releases"}
+      </span>
+      <span className="text-[var(--color-fg-mute)]">·</span>
+      <span>release notes</span>
+    </a>
+  );
+}
+
 function FooterCol({
   title,
   links,
 }: {
   title: string;
-  links: { label: string; href: string }[];
+  links: { label: string; href: string; external?: boolean }[];
 }) {
   return (
     <div>
@@ -108,6 +167,9 @@ function FooterCol({
           <li key={l.label}>
             <a
               href={l.href}
+              {...(l.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               className="text-[13.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors"
             >
               {l.label}

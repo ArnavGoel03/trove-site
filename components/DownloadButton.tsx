@@ -5,7 +5,11 @@ import { Apple, MonitorDown, Download } from "lucide-react";
 import { toast } from "sonner";
 import { useMacDetect } from "@/lib/useMacDetect";
 
-const MAC_ZIP_URL = "/Trove.zip";
+// Resolve to the latest GitHub Release at request time, so the marketing
+// site never serves a stale local zip. `releases/latest/download/<asset>`
+// is GitHub's stable redirect; it 302s to whichever asset URL is current.
+const MAC_ZIP_URL =
+  "https://github.com/ArnavGoel03/trove/releases/latest/download/Trove.zip";
 const WIN_ZIP_URL =
   "https://github.com/ArnavGoel03/trove-win/releases/latest/download/Trove-win-x64.zip";
 
@@ -36,8 +40,8 @@ export default function DownloadButton({
   function onMacDownload() {
     toast.success("Download starting", {
       description:
-        "Check ~/Downloads/Trove.zip. Right-click → Open on first launch.",
-      duration: 6000,
+        "Check ~/Downloads/Trove.zip. The first launch needs right-click → Open (Gatekeeper bypass for the ad-hoc-signed build — Developer ID notarization is on the roadmap).",
+      duration: 8000,
     });
   }
 
