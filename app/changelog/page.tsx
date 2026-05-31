@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 // revalidated every 6 hours (see lib/changelog.ts). Page itself is
 // static HTML between revalidations so visitors get the CDN-cached
 // version, not a cold function invocation.
-export const revalidate = 60 * 60 * 6;
+export const revalidate = 21600;
 
 export default async function ChangelogPage() {
   const entries = await fetchChangelog();

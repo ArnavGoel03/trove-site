@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://gettrove.vercel.app/updates" },
 };
 
-export const revalidate = 60 * 60 * 6;
+export const revalidate = 21600;
 
 export default async function UpdatesPage() {
   const posts = await listUpdates();
