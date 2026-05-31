@@ -2,7 +2,6 @@ import { troveOg } from "@/lib/og";
 import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
 
-export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "Trove — Pane";
