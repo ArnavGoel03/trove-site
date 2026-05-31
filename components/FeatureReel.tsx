@@ -221,23 +221,20 @@ function FeatureCopy({
   const drive = useTransform(progress, [0, 1], [1, -1]);
   const fadeIn = useTransform(progress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
 
-  // Per-line parallax. Originally the scalars increased going down
-  // (60, 90, 130, 170) which meant on scroll the body moved further
-  // than the title — they collapsed onto each other and the body
-  // text ran on top of the heading. The fix has two constraints:
-  //   1. Top elements move *more* than bottom ones (so the gap
-  //      between them only ever increases or stays the same, never
-  //      shrinks negative).
-  //   2. The delta between adjacent rows must be less than the CSS
-  //      gap between them (mt-6 = 24px between title and body), so
-  //      even at the extremes the rows can't visually touch.
-  // The tight 60/55/50/45 range satisfies both — preserves the
-  // "comes closer" depth cue but caps the max collapse at 5px per
-  // adjacency, well inside every margin.
-  const eyebrowY = useTransform(drive, (v) => v * 60);
-  const titleY = useTransform(drive, (v) => v * 55);
-  const bodyY = useTransform(drive, (v) => v * 50);
-  const bulletY = useTransform(drive, (v) => v * 45);
+  // Per-row Y stagger was the bug — any non-zero delta between the
+  // title's and body's Y transforms creates a chance of overlap on
+  // scroll. The previous "tight" range (60/55/50/45) still allowed
+  // ~5px gap collapse per adjacency, which at the extreme of a
+  // long-form recap with leading-relaxed body text was enough to
+  // visually touch. The fix is structural: every row in the copy
+  // column shares one Y transform, so they move as a rigid block —
+  // never relative to each other. The column-level `fadeIn` opacity
+  // still provides the scroll-in feel.
+  const sharedY = useTransform(drive, (v) => v * 50);
+  const eyebrowY = sharedY;
+  const titleY = sharedY;
+  const bodyY = sharedY;
+  const bulletY = sharedY;
 
   const styleOpacity = reduced ? undefined : { opacity: fadeIn };
 
