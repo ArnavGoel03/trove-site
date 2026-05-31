@@ -120,10 +120,10 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl mx-auto leading-relaxed"
         >
-          Trove folds a clipboard manager, a window snapper, a system monitor,
-          an OCR, a PDF kit, a disk cleaner and 27 more panes into a single,
-          fast, native macOS app — scriptable from macOS Shortcuts, installable
-          via Homebrew, sub-500 ms cold launch.
+          Clipboard manager, window snapper, system monitor, OCR, PDF kit, disk
+          cleaner, 27 more — one native macOS app, ~14 MB, scriptable from
+          Shortcuts, installable via Homebrew, cold-launches in under half a
+          second.
         </motion.p>
 
         <motion.div

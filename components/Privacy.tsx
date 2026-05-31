@@ -7,7 +7,7 @@ const POINTS = [
   {
     icon: WifiOff,
     title: "Local-only by default",
-    body: "Trove never phones home. No anonymous analytics. No \"to improve your experience.\" If a pane needs the network — say, fetching a translation — it's opt-in and labelled.",
+    body: "Trove doesn't phone home. No anonymous analytics. No \"to improve your experience\" line. The one pane that touches the network (Calculator's live currency) is off by default and clearly labelled.",
   },
   {
     icon: Lock,

@@ -28,7 +28,7 @@ const SECTIONS: Sec[] = [
   {
     icon: Lock,
     title: "Local-only by default",
-    body: "Trove does not make outbound network calls during normal operation. The only network use cases are: (a) the in-app updater polling GitHub Releases every 6 hours, (b) the homepage and footer reading the latest release tag once at first paint, and (c) the calculator's optional live-currency feature. Every other pane is fully local.",
+    body: "During normal use Trove makes no outbound calls. The three exceptions: the in-app updater polls GitHub Releases every six hours, the homepage and footer read the latest release tag once on first paint, and the calculator's live-currency conversion (opt-in, off by default) reaches the FX endpoint when you enable it. Every other pane runs entirely on your machine.",
     bullets: [
       "Stage, History, Snippets, Notes, Calculator (offline), Text Tools, Color, QR, OCR, Record, Snip, Mirror, Image Tools, PDF, Hash, Rename, Snap, Switcher, Move Files, Finder, Processes, Awake, Permissions, Log, GPU, Network, Overview, Scan, Clean, Sweep, Disk Speed, Library, Account — all process locally.",
       "OCR runs on Apple's Vision framework on-device. No cloud OCR.",
@@ -94,7 +94,7 @@ export default function SecurityPage() {
     <PageShell
       eyebrow="Trust"
       title="Security"
-      lede="Trove's posture follows from being a local-first app. The smaller the attack surface, the fewer ways things can go wrong — and Trove's attack surface is small on purpose."
+      lede="A local-first app has a small attack surface. Trove's is small on purpose, and the pages below spell out exactly what is and isn't reachable from the network."
     >
       <JsonLd
         data={webPageLd(

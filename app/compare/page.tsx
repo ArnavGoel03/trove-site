@@ -513,7 +513,7 @@ export default function ComparePage() {
       wide
       eyebrow="Honest comparison"
       title="How Trove compares"
-      lede="The bundle this replaces — and the bits where another app is still the right call. Trove doesn't try to dethrone everyone in every column; below is the unvarnished side-by-side so you can decide what stays in your dock."
+      lede="Where Trove replaces something in your stack and where it doesn't. A few of these apps still win their column outright; the table below tells you which ones, so you can decide what stays in your dock."
     >
       <JsonLd
         data={webPageLd(

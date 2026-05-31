@@ -32,7 +32,7 @@ const THEMES: ThemeSpec[] = [
     name: "Dark",
     tagline: "The default.",
     description:
-      "Near-black background with orange accents, matching the in-app default. Designed for long sessions and OLED-friendly nights.",
+      "Near-black background with orange accents — the in-app default. Holds up across long sessions and OLED panels.",
     surface: "#08080b",
     panel: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015))",
     border: "rgba(255,255,255,0.08)",
@@ -80,7 +80,7 @@ const THEMES: ThemeSpec[] = [
     name: "Cron",
     tagline: "The Cron-calendar palette, ported.",
     description:
-      "Warm graphite with a single saturated lime accent. Optimized for a single high-contrast highlight per pane — Trove's status pills inherit the green directly.",
+      "Warm graphite with a single saturated lime accent. One high-contrast highlight per pane; Trove's status pills inherit the green directly.",
     surface: "#16161a",
     panel: "linear-gradient(180deg, rgba(160,255,140,0.05), rgba(160,255,140,0.012))",
     border: "rgba(255,255,255,0.06)",

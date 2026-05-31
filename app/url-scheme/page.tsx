@@ -142,7 +142,7 @@ export default function URLSchemePage() {
       eyebrow="Reference"
       title="trove:// URL scheme"
       lede={
-        "Drive Trove from the address bar, a Keyboard Maestro macro, an Alfred workflow, a cron job, or another app. Every verb mirrors a Tools-menu / AppIntents action so behavior stays consistent across the three entry points. State-changing verbs are gated on Trove being frontmost so a drive-by <a href=\"trove://…\"> from a website can't fire them."
+        "Anything that can open a URL can drive Trove — the address bar, a Keyboard Maestro macro, an Alfred workflow, a launchd job. Every verb mirrors a Tools-menu or AppIntents action so behavior is identical across all three entry points. State-changing verbs check that Trove is frontmost before they fire, so a drive-by <a href=\"trove://…\"> from a website is refused."
       }
     >
       <JsonLd

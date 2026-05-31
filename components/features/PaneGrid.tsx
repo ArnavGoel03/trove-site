@@ -25,9 +25,9 @@ export default function PaneGrid() {
           </span>
         </h2>
         <p className="mt-5 text-[15px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
-          Every pane is hideable from the sidebar (except Stage — it&rsquo;s
-          the differentiator) via Trove → Settings → Customize. The list
-          below mirrors the in-app Customize panel exactly.
+          Hide any pane you don&rsquo;t use from Trove → Settings → Customize
+          (Stage is the only one that stays — it&rsquo;s where everything else
+          drops). The list below mirrors that panel exactly.
         </p>
       </motion.div>
 

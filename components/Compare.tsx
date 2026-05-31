@@ -107,7 +107,7 @@ export default function Compare() {
           </div>
           <div className="mt-4 text-[12px] text-[var(--color-fg-mute)] flex items-start gap-1.5">
             <X size={13} className="text-rose-400/80 mt-0.5 shrink-0" />
-            Six update notifications, six menu bar icons, six "what's new" popups.
+            Six update prompts. Six menu bar icons. Six separate preferences windows.
           </div>
         </motion.div>
 
@@ -177,9 +177,9 @@ export default function Compare() {
       </div>
 
       <div className="mt-6 text-[11.5px] text-[var(--color-fg-mute)] max-w-3xl">
-        Comparison reflects publicly-listed prices at time of writing. We're
-        not trying to dunk on these apps — several of them are excellent at one
-        thing. Trove is one app that does many of them, locally.
+        Prices listed are public, at time of writing. None of this is a dunk —
+        most of those apps are great at the one thing they do. Trove just does
+        a lot of them in one place, on your machine.
       </div>
     </section>
   );

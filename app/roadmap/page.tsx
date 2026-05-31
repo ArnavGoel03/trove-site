@@ -209,7 +209,7 @@ export default function RoadmapPage() {
     <PageShell
       eyebrow="Roadmap"
       title="What's shipped, what's next, what's deferred"
-      lede="The honest list. Trove's roadmap is bucketed by status, not by quarter — when something's done, it moves up; when something's hard, it stays parked until it's the right time to do it justice. No vaporware."
+      lede="Bucketed by status, not by quarter. Items move up when they ship and stay parked when they need a focused session to do right. Nothing on this page is aspirational."
     >
       <JsonLd
         data={webPageLd(
@@ -227,19 +227,19 @@ export default function RoadmapPage() {
 
       <Bucket
         title="Shipped — v1.1.0"
-        blurb="Live in the stable channel as of May 31, 2026. Read the changelog for per-build detail."
+        blurb="On the stable channel as of May 31, 2026. The changelog has the per-build breakdown."
         items={SHIPPED}
         tint="#5be3a4"
       />
       <Bucket
         title="In progress"
-        blurb="Actively being built. Beta-channel users will see these before they promote to stable."
+        blurb="Being built right now. Beta-channel users see these before they reach stable."
         items={IN_PROGRESS}
         tint="#4cb8ff"
       />
       <Bucket
         title="Deferred"
-        blurb="Worth doing, but not worth half-doing. Each item needs a focused session — none will ship in the next point release."
+        blurb="Worth doing, but worth doing properly. Each item needs its own week — none are slipping into the next point release."
         items={DEFERRED}
         tint="#ffd166"
       />

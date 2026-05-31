@@ -381,37 +381,37 @@ export const SECTIONS: { name: PaneSection; tagline: string; accent: string }[] 
     },
     {
       name: "Compute",
-      tagline: "Math and text pipelines, always one keystroke away.",
+      tagline: "Numbers and text, one keystroke away.",
       accent: "#4cb8ff",
     },
     {
       name: "Capture",
-      tagline: "Pixels and screens, on your terms.",
+      tagline: "Pixels, screens, and recordings. Local.",
       accent: "#b27cff",
     },
     {
       name: "Files",
-      tagline: "Convert, hash, rename, batch — without uploading.",
+      tagline: "Convert, hash, batch-rename without uploading.",
       accent: "#5be3a4",
     },
     {
       name: "System",
-      tagline: "Snap, switch, audit, monitor.",
+      tagline: "Tile windows, audit permissions, watch processes.",
       accent: "#ffd166",
     },
     {
       name: "Storage",
-      tagline: "See it, scan it, sweep it.",
+      tagline: "Find what's big, clean what's stale.",
       accent: "#ff5d8f",
     },
     {
       name: "App",
-      tagline: "Outputs you can come back to.",
+      tagline: "A cache of what Trove has produced for you.",
       accent: "#c4b5fd",
     },
     {
       name: "Profile",
-      tagline: "Your identity, your preferences.",
+      tagline: "Identity and preferences.",
       accent: "#9ca3af",
     },
   ];
@@ -430,7 +430,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "macOS Shortcuts",
     title: "11 AppIntents · 8 entity pickers",
-    body: "Trove is scriptable from macOS Shortcuts, queryable from Spotlight, and usable as a Focus Filter. Snippets and clipboard entries render as rich pickers in the Shortcuts editor — name + body preview on snippets, kind + capture date on clip entries.",
+    body: "Every Trove action is a Shortcut. Snippets and clipboard entries show up as real entities inside the Shortcuts editor with body and capture-date previews, so picking the right one feels like browsing your data, not stringly-typed guessing.",
     bullets: [
       "Open Pane · Stage operations (add text/file, paste clipboard, capture screenshot, copy/clear)",
       "Snippet pickers: get by ID, by name, list all, count",
@@ -443,7 +443,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "URL Scheme",
     title: "trove:// for everything",
-    body: "Drive Trove from the address bar, a Keyboard Maestro macro, or another app — `trove://pane/...`, `trove://calc?expr=`, `trove://snippet/copy?name=`, `trove://history/paste?index=`, `trove://qr?text=`. Dangerous verbs are gated on Trove being frontmost so drive-by URL abuse can't fire them.",
+    body: "Anything that can open a URL can drive Trove. `trove://pane/...`, `trove://calc?expr=`, `trove://snippet/copy?name=`, `trove://history/paste?index=`, `trove://qr?text=`. The destructive verbs check that Trove is frontmost before they fire, so a malicious link can't quietly empty your clipboard.",
     bullets: [
       "Pane navigation · calculator evaluation · snippet copy",
       "History paste-by-index · QR generation",
@@ -469,7 +469,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Cross-pane Data Flow",
     title: "Any output is reusable as input",
-    body: "Merge a PDF and the result is one click away from Continue in PDF Tools, Send to Stage, or Open in Text Tools for OCR. The Outputs Library tracks every produced artifact for re-editing. The 'wait, where did my output go?' gap is closed.",
+    body: "Merge a PDF and the result is one click from Continue in PDF Tools, Send to Stage, or Open in Text Tools for OCR. The Outputs Library remembers every artifact Trove has produced, so the 'wait, where did that file go?' moment never happens.",
     bullets: [
       "Stage-as-input across every pane",
       "Reorderable PDF merge with full preview surfaces",
@@ -495,7 +495,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Text Tools · Saved Recipes",
     title: "Save the pipeline. Replay it tomorrow.",
-    body: "Save the current chain as a named recipe and replay with one click. Persisted to `recipes.json` with tolerant Codable so future step additions don't silently empty the file on upgrade. Differentiates Trove over Boop / DevUtils / TextSoap — none of them have pipelines, let alone saved ones.",
+    body: "Save the current chain as a named recipe, run it again tomorrow. Persisted to `recipes.json` with tolerant Codable so future step additions don't silently empty the file on upgrade. Boop, DevUtils, and TextSoap all do single-shot conversions; none of them chain.",
     bullets: [
       "Name, save, replay any 40+-op pipeline",
       "Right-click pipeline chip → copy step / send to Stage / inspect",
@@ -508,7 +508,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "History · Regex + Dedup",
     title: "ReDoS-guarded regex · ×N badge for repeats",
-    body: "⌘⇧. toggles plain ↔ regex search modes with a catastrophic-regex / ReDoS guard built in. Repeats of the same payload fold into one entry with a soft-tint ×N capsule — the timestamp + position refresh on each new copy, no more 10 identical rows next to each other.",
+    body: "⌘⇧. toggles plain ↔ regex search with a ReDoS guard on the regex path so a bad pattern can't lock the UI. Repeats of the same payload fold into one row with a soft-tint ×N capsule. Copying the same URL ten times leaves you with one entry, not ten.",
     bullets: [
       "Plain ↔ regex toggle (⌘⇧.)",
       "ReDoS guard on the regex path",
@@ -521,7 +521,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Stable / Beta Channels",
     title: "Opt in to pre-release, opt out anytime",
-    body: "Settings → Updates → Update channel lets you opt into pre-release builds (`vX.Y.Z-beta.N`) without losing the stable channel's safety net. Switch any time; the next update check honors the new channel. Backed by semver §11 pre-release ordering so beta builds never accidentally promote to stable.",
+    body: "Settings → Updates → Update channel flips between Stable and Beta. Beta gets `vX.Y.Z-beta.N` builds the moment they tag; switch back any time and the next poll respects the new channel. Semver §11 pre-release ordering makes sure a beta never silently promotes to stable.",
     bullets: [
       "Stable channel: only `vX.Y.Z` releases (default)",
       "Beta channel: `vX.Y.Z-beta.N` builds (opt-in)",
@@ -534,7 +534,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Homebrew",
     title: "brew install --cask trove",
-    body: "Trove ships with a Homebrew Cask formula. Once the tap is published, install and update sit on the same `brew upgrade --cask` flow your other Mac apps use. Lives at `Casks/trove.rb` in the source tree.",
+    body: "There's a Homebrew Cask formula at `Casks/trove.rb`. Once the tap publishes, install and upgrade ride the same `brew upgrade --cask` path as every other cask on your machine — no extra updater to babysit.",
     bullets: [
       "`brew tap arnavgoel/trove && brew install --cask trove`",
       "`livecheck` against the GitHub Releases page",
@@ -547,7 +547,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "XDG Config Home",
     title: "$TROVE_CONFIG_HOME, then XDG, then native",
-    body: "Power users can park Trove's config under `~/.config/trove/` instead of native App Support. Resolution order: `$TROVE_CONFIG_HOME` > `$XDG_CONFIG_HOME/trove` > `~/.config/trove` > native App Support. All 11 storage-touching panes route through one resolver. No migration — existing installs stay on Application Support.",
+    body: "Park Trove's config under `~/.config/trove/` if that's where your other tools live. Lookup order: `$TROVE_CONFIG_HOME` > `$XDG_CONFIG_HOME/trove` > `~/.config/trove` > native App Support. All 11 storage-touching panes route through one resolver, and there's no silent migration — existing installs stay where they were.",
     bullets: [
       "Single resolver, 11 panes",
       "Per-user override via `$TROVE_CONFIG_HOME`",
@@ -560,7 +560,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Performance",
     title: "Sub-500 ms cold launch",
-    body: "Lazy `SharedStore` inits, deferred Timers, audited body-cost across every pane. Trove cold-launches in under half a second on Apple Silicon and stays under 30 MB at rest. ~14 MB on disk, single Swift binary, zero helper processes.",
+    body: "Lazy `SharedStore` init, deferred timers, body-cost audit per pane. Apple Silicon cold-launches Trove in under half a second and resting memory stays below 30 MB. ~14 MB on disk, one Swift binary, no helper processes.",
     bullets: [
       "Lazy stores, deferred timers, audited body cost",
       "Single Swift / SwiftUI binary, no helpers",
@@ -573,7 +573,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Crash Discipline",
     title: "Zero try! / fatalError in production",
-    body: "DEVELOP_RULES §1 enforced: no `try!`, no `fatalError`, no `main.sync`, no bare `.waitUntilExit`, no `.first!` in the production tree. The lint-trove pass runs clean across 45 files. Every error path is surfaced as a Sonner-grade flash toast, never an `alert()` or silent failure.",
+    body: "DEVELOP_RULES §1 enforced: no `try!`, no `fatalError`, no `main.sync`, no bare `.waitUntilExit`, no `.first!` in the production tree. The lint-trove pass runs clean across 45 files. Every error path surfaces as a Sonner-style flash toast — `alert()` and silent failure are not options.",
     bullets: [
       "lint-trove clean across the production Swift tree",
       "Sonner-grade flash() toasts everywhere",

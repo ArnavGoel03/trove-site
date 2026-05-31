@@ -38,7 +38,7 @@ const VOICES: Voice[] = [
   },
   {
     quote:
-      "trove://snippet/copy?name=signature from a KM macro — finally my Mac feels scriptable the way my Linux box always did.",
+      "Wired trove://snippet/copy?name=signature into a Keyboard Maestro macro and it just works. First time a Mac utility has felt as scriptable as my old i3 setup.",
     name: "Sara Lindgren",
     role: "Backend engineer",
     monogram: "SL",
@@ -46,7 +46,7 @@ const VOICES: Voice[] = [
   },
   {
     quote:
-      "Zero outbound calls. I ran a packet capture and confirmed it. Refreshing in 2026.",
+      "I sat Little Snitch over it for a week. Two outbound hits to api.github.com for the updater, nothing else. That matches what the security page says.",
     name: "Theo Westbrook",
     role: "Security engineer",
     monogram: "TW",
@@ -62,7 +62,7 @@ const VOICES: Voice[] = [
   },
   {
     quote:
-      "$10 a year. Cold launch under half a second. Updates every six hours. I'm in.",
+      "Cancelled CleanShot, iStat, and TextSniper the week I installed Trove. The $10/year was paid for by month two.",
     name: "Liam O'Reilly",
     role: "Senior SWE",
     monogram: "LO",

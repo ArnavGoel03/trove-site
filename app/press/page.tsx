@@ -31,19 +31,19 @@ const FACTS: { label: string; value: string }[] = [
 const PITCHES = [
   {
     angle: "The one-line",
-    body: "Trove replaces a dozen menu-bar utilities with 33 panes in one ~14 MB native Mac app — clipboard, capture, system, files, and storage — scriptable from Shortcuts, local-only, no telemetry.",
+    body: "Trove is a single ~14 MB native Mac app that bundles 33 panes (clipboard, capture, system, files, storage) and replaces around a dozen menu-bar utilities. Scriptable from Shortcuts. Local-only. No telemetry.",
   },
   {
     angle: "For the privacy-first reader",
-    body: "Trove makes no outbound calls except a 6-hour GitHub Releases poll for updates. OCR runs on-device via Apple Vision. Recordings and screenshots stay on disk. There's no analytics, no crash reporter, no cloud sync.",
+    body: "One outbound endpoint: api.github.com, polled every six hours for new releases. OCR runs on-device via Apple Vision. Recordings and screenshots stay on disk. No analytics, no crash reporter, no cloud sync.",
   },
   {
     angle: "For the power-user reader",
-    body: "Eleven macOS Shortcuts intents (with rich entity pickers for snippets and clipboard history), a full `trove://` URL scheme, a ChordRegistry-backed ⌘? overlay, and Saved Recipes in Text Tools. The Recorder pane shipped 17 pro features in one pass — Screen Studio-style click ripple, keystroke overlay, voice-activity auto-pause, MOV with separate audio tracks.",
+    body: "Eleven macOS Shortcuts intents with rich entity pickers for snippets and clipboard history, a full `trove://` URL scheme, a ChordRegistry that keeps the ⌘? cheatsheet in sync with the code, and Saved Recipes in Text Tools. The Recorder pane shipped 17 pro features in one pass: click ripple, keystroke overlay, voice-activity auto-pause, separate audio tracks in the MOV.",
   },
   {
     angle: "For the bundle-fatigue reader",
-    body: "If you currently pay for Raycast Pro + iStat Menus + CleanMyMac + Bartender + TextSniper + Stats, Trove replaces enough of that stack to pay for itself in the first month. It's $10/year, not $10/month.",
+    body: "If you pay for Raycast Pro plus iStat Menus plus CleanMyMac plus Bartender plus TextSniper plus Stats, Trove covers enough of that stack to pay for itself by week six. $10 per year, not per month.",
   },
 ];
 
@@ -65,7 +65,7 @@ export default function PressPage() {
     <PageShell
       eyebrow="Press"
       title="Press kit"
-      lede="Everything a writer, podcaster, or reviewer needs to cover Trove without back-and-forth email. If something's missing, contact us — we'll add it."
+      lede="Pitch lines, key facts, brand assets. Everything a writer or reviewer needs to file a story without playing email tag. Missing something? Email and it gets added the same day."
     >
       <JsonLd
         data={webPageLd(

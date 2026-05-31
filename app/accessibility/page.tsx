@@ -107,7 +107,7 @@ export default function AccessibilityPage() {
     <PageShell
       eyebrow="Inclusion"
       title="Accessibility"
-      lede="Trove is built for every Mac user — VoiceOver users, Reduced Motion users, keyboard-only users, low-vision users. The accessibility surface follows from being a focused, native app: fewer controls, more labels, every state announceable."
+      lede="VoiceOver, Reduced Motion, keyboard-only, low-vision. A small native app is easier to make accessible than a big sprawly one, and Trove leans on that: every control gets a label, every state can be announced, every motion respects your system setting."
     >
       <JsonLd
         data={webPageLd(

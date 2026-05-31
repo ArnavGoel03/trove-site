@@ -6,7 +6,7 @@ tag: "Release"
 excerpt: "33 panes, 11 Shortcuts intents, a Recorder pane that ate Screen Studio's lunch, and a ChordRegistry that finally makes ⌘? feel like a real cheatsheet. Every change in 1.1.0, explained."
 ---
 
-1.1.0 is the first release where Trove stops being a clipboard manager that grew sideways and starts being a *system utility surface* — clipboard, capture, system, files, storage, all under one roof, all native, all local.
+1.1.0 is where Trove stops feeling like a clipboard manager that kept adding features and starts feeling like one app — clipboard, capture, system, files, storage — that happens to live under a single icon.
 
 ### What actually shipped
 
@@ -30,4 +30,4 @@ The Recorder pane was rebuilt from scratch with 17 pro-grade features in one pas
 
 1.1.1 ships the signed + notarized channel — the Cask formula auto-flips when it lands, no action from you. After that, the focus shifts to the Awake pane (auto-disable on lid close), Library reorganization (smart playlists by extension), and a global Settings → Themes panel that ties the visual customization across every pane.
 
-If you've been holding off on upgrading, this is the build to install. `brew install --cask trove` once the tap publishes; until then, grab the dmg from [GitHub Releases](https://github.com/ArnavGoel03/trove/releases).
+If you've been sitting on 1.0.x, install this one. `brew install --cask trove` once the tap publishes; until then, grab the zip from [GitHub Releases](https://github.com/ArnavGoel03/trove/releases).
