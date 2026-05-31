@@ -26,21 +26,21 @@ export default function Nav() {
             Trove
           </span>
         </a>
-        <nav className="hidden md:flex items-center gap-7 text-[13px] text-[var(--color-fg-dim)]">
+        <nav className="hidden md:flex items-center gap-6 text-[13px] text-[var(--color-fg-dim)]">
           <a href="/features" className="hover:text-white transition-colors">
             Features
           </a>
-          <a href="/#compare" className="hover:text-white transition-colors">
+          <a href="/compare" className="hover:text-white transition-colors">
             Compare
           </a>
-          <a href="/#privacy" className="hover:text-white transition-colors">
-            Privacy
+          <a href="/guides" className="hover:text-white transition-colors">
+            Guides
           </a>
-          <a
-            href="/#requirements"
-            className="hover:text-white transition-colors"
-          >
-            Requirements
+          <a href="/changelog" className="hover:text-white transition-colors">
+            Changelog
+          </a>
+          <a href="/security" className="hover:text-white transition-colors">
+            Security
           </a>
         </nav>
         <a

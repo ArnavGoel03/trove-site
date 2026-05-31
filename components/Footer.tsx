@@ -30,33 +30,27 @@ export default function Footer() {
           title="Product"
           links={[
             { label: "Features", href: "/features" },
-            { label: "Compare", href: "/#compare" },
-            { label: "Privacy", href: "/#privacy" },
-            { label: "Requirements", href: "/#requirements" },
-            {
-              label: "Changelog",
-              href: "https://github.com/ArnavGoel03/trove/blob/main/macos/CHANGELOG.md",
-              external: true,
-            },
+            { label: "Compare", href: "/compare" },
+            { label: "Changelog", href: "/changelog" },
+            { label: "Roadmap", href: "/roadmap" },
           ]}
         />
 
         <FooterCol
           title="Resources"
           links={[
-            {
-              label: "Releases",
-              href: "https://github.com/ArnavGoel03/trove/releases",
-              external: true,
-            },
+            { label: "Guides", href: "/guides" },
+            { label: "Shortcuts", href: "/shortcuts" },
+            { label: "Shortcuts gallery", href: "/shortcuts-gallery" },
+            { label: "URL scheme", href: "/url-scheme" },
             {
               label: "Source code",
               href: "https://github.com/ArnavGoel03/trove",
               external: true,
             },
             {
-              label: "Report an issue",
-              href: "https://github.com/ArnavGoel03/trove/issues/new",
+              label: "Releases",
+              href: "https://github.com/ArnavGoel03/trove/releases",
               external: true,
             },
           ]}
@@ -67,6 +61,7 @@ export default function Footer() {
           links={[
             { label: "Contact", href: "/contact" },
             { label: "Security", href: "/security" },
+            { label: "Press", href: "/press" },
           ]}
         />
 

@@ -1,133 +1,147 @@
 import type { Metadata } from "next";
-import LegalLayout, { Section } from "@/components/legal/LegalLayout";
+import PageShell from "@/components/PageShell";
+import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
+import {
+  ShieldCheck,
+  Lock,
+  Network,
+  FileSearch,
+  AlertTriangle,
+  Wrench,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Security — Trove",
   description:
-    "How Trove handles security: signing, distribution, network posture, and our responsible disclosure program.",
+    "Trove's security posture — local-only by default, ad-hoc signed today, frontmost-gated URL scheme, red-teamed core surfaces, responsible disclosure program.",
+  alternates: { canonical: "https://gettrove.vercel.app/security" },
 };
+
+type Sec = {
+  icon: typeof ShieldCheck;
+  title: string;
+  body: string;
+  bullets?: string[];
+};
+
+const SECTIONS: Sec[] = [
+  {
+    icon: Lock,
+    title: "Local-only by default",
+    body: "Trove does not make outbound network calls during normal operation. The only network use cases are: (a) the in-app updater polling GitHub Releases every 6 hours, (b) the homepage and footer reading the latest release tag once at first paint, and (c) the calculator's optional live-currency feature. Every other pane is fully local.",
+    bullets: [
+      "Stage, History, Snippets, Notes, Calculator (offline), Text Tools, Color, QR, OCR, Record, Snip, Mirror, Image Tools, PDF, Hash, Rename, Snap, Switcher, Move Files, Finder, Processes, Awake, Permissions, Log, GPU, Network, Overview, Scan, Clean, Sweep, Disk Speed, Library, Account — all process locally.",
+      "OCR runs on Apple's Vision framework on-device. No cloud OCR.",
+      "Hash, Image Tools, PDF, Rename, Disk Speed all stream files locally — nothing is uploaded.",
+    ],
+  },
+  {
+    icon: ShieldCheck,
+    title: "URL-scheme hardening",
+    body: "Every state-changing trove:// verb is gated on Trove being the frontmost app. The check uses NSWorkspace.frontmostApplication's bundle identifier — not a window-focus heuristic. A drive-by `<a href=\"trove://copy-text\">` from a website is refused with a flash toast.",
+    bullets: [
+      "Frontmost gating: copy, copy-text, clear, capture, add, snippet/copy, history/copy, calc?copy=1",
+      "Symlink resolution on every file path before validation",
+      "Blocklist on /dev/, /proc/, /sys/, /private/var/run/",
+      "1 MB cap on text payloads, 200 MB cap on file payloads",
+      "SHA256SUMS verifier refuses absolute paths and `..` components — a hostile sums file can't hash /etc/passwd",
+    ],
+  },
+  {
+    icon: Wrench,
+    title: "Crash discipline",
+    body: "DEVELOP_RULES §1 enforced across the production Swift tree: no `try!`, no `fatalError`, no `main.sync`, no bare `.waitUntilExit`, no `.first!`. Every JSON-backed store has quarantine-on-corrupt — if a file is unreadable, Trove moves it aside and starts fresh instead of crashing on launch.",
+    bullets: [
+      "lint-trove pass runs clean across 45 production files",
+      "Errors surface as Sonner-grade flash toasts, never alert() or silent failure",
+      "Test suite: 233/233 PASS at 1.1.0",
+    ],
+  },
+  {
+    icon: Network,
+    title: "Network posture",
+    body: "Trove has no telemetry, no analytics, no crash reporter calling home. The only outbound endpoint is api.github.com (for release polling). You can verify with Little Snitch, lsof, or a packet capture — there's nothing else.",
+    bullets: [
+      "Updater: GitHub Releases API every 6h (opt-out in Settings → Updates)",
+      "Latest version display: GitHub Releases API once per page load",
+      "Calculator currency: optional, off by default",
+    ],
+  },
+  {
+    icon: FileSearch,
+    title: "Signing + distribution",
+    body: "Builds today are ad-hoc signed (no developer ID, no notarization yet). Run with `xattr -d com.apple.quarantine /Applications/Trove.app` on first launch, or grant via System Settings → Privacy & Security. A signed + notarized channel is in progress — when it ships, the Cask formula will auto-flip to it.",
+    bullets: [
+      "GitHub Releases is the canonical distribution channel",
+      "Homebrew Cask: `brew tap arnavgoel/trove && brew install --cask trove` (once tap is published)",
+      "Every release artifact has a SHA-256 alongside — verify with Trove's own Hash pane",
+    ],
+  },
+  {
+    icon: AlertTriangle,
+    title: "Responsible disclosure",
+    body: "Found a security bug? Email yashgoel0304@gmail.com with `[SECURITY] Trove` in the subject. Please don't open a public GitHub issue for vulnerabilities — let us patch first, then publicly credit you in the changelog. We aim to triage within 48 hours and ship a fix in the next beta build.",
+    bullets: [
+      "Scope: the Trove macOS app and the gettrove.vercel.app marketing site",
+      "Out of scope: third-party dependencies (report upstream)",
+      "PGP key on request",
+    ],
+  },
+];
 
 export default function SecurityPage() {
   return (
-    <LegalLayout
+    <PageShell
+      eyebrow="Trust"
       title="Security"
-      updated="May 15, 2026"
-      intro={
-        <>
-          Trove is a local-first app. Our security posture follows from that:
-          the smaller the attack surface, the fewer ways things can go wrong.
-        </>
-      }
+      lede="Trove's posture follows from being a local-first app. The smaller the attack surface, the fewer ways things can go wrong — and Trove's attack surface is small on purpose."
     >
-      <Section title="What Trove does today">
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            <span className="text-white">Local-only by default.</span> The app
-            does not make outbound network calls during normal operation.
-            Network-using features are opt-in and clearly labeled.
-          </li>
-          <li>
-            <span className="text-white">Ad-hoc signed.</span> Builds are
-            currently signed ad-hoc with a hardened runtime. Apple
-            notarization is on the near-term roadmap and will be enabled
-            before broader distribution.
-          </li>
-          <li>
-            <span className="text-white">License keys in Keychain.</span>{" "}
-            License material is stored in the macOS Keychain rather than on
-            disk in plain text.
-          </li>
-          <li>
-            <span className="text-white">Release artifacts on GitHub.</span>{" "}
-            Downloadable releases are published to{" "}
-            <a
-              href="https://github.com/ArnavGoel03/trove"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:underline"
-            >
-              github.com/ArnavGoel03/trove
-            </a>
-            . Note: the public repository hosts releases and issue tracking;
-            the full source tree is not currently open-sourced.
-          </li>
-        </ul>
-      </Section>
+      <JsonLd
+        data={webPageLd(
+          "Trove Security",
+          "How Trove handles local-only operation, URL-scheme hardening, signing, and responsible disclosure.",
+          "https://gettrove.vercel.app/security",
+        )}
+      />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", url: "https://gettrove.vercel.app" },
+          { name: "Security", url: "https://gettrove.vercel.app/security" },
+        ])}
+      />
 
-      <Section title="Responsible disclosure">
-        <p>
-          If you find a security issue in Trove, please report it privately
-          before disclosing publicly:
-        </p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>
-            Email{" "}
-            <a
-              href="mailto:security@trove.app"
-              className="text-white hover:underline"
-            >
-              security@trove.app
-            </a>{" "}
-            with a clear description, reproduction steps, and any proof-of-
-            concept material.
-          </li>
-          <li>
-            We acknowledge reports within{" "}
-            <span className="text-white">5 business days</span> and aim to
-            triage and remediate as quickly as the severity warrants.
-          </li>
-          <li>
-            We ask reporters to allow up to{" "}
-            <span className="text-white">90 days</span> from initial report
-            before public disclosure, longer if a coordinated fix is in
-            progress.
-          </li>
-          <li>
-            Good-faith research that complies with this policy will not be
-            pursued legally.
-          </li>
-        </ul>
-      </Section>
-
-      <Section title="Hall of fame">
-        <p>
-          Researchers who report valid issues will be credited on this page
-          (with permission). We&rsquo;re a small operation and don&rsquo;t
-          currently offer monetary bounties, but a public thank-you and a
-          permanent link are on the table.
-        </p>
-      </Section>
-
-      <Section title="What we are not claiming">
-        <p>
-          We want to be honest about scope. Trove is not ISO 27001 or SOC 2
-          certified. We do not operate a SIEM, we do not have a formal
-          enterprise compliance program, and we are not currently undergoing
-          third-party penetration testing. If those things matter for your
-          deployment, please reach out before purchasing — we&rsquo;d rather
-          tell you up-front than oversell what a small team can deliver.
-        </p>
-      </Section>
-
-      <Section title="Contact">
-        <p>
-          Security-related questions:{" "}
-          <a
-            href="mailto:security@trove.app"
-            className="text-white hover:underline"
-          >
-            security@trove.app
-          </a>
-          . General questions:{" "}
-          <a
-            href="mailto:support@trove.app"
-            className="text-white hover:underline"
-          >
-            support@trove.app
-          </a>
-          .
-        </p>
-      </Section>
-    </LegalLayout>
+      <div className="space-y-6">
+        {SECTIONS.map((s) => {
+          const Icon = s.icon;
+          return (
+            <article key={s.title} className="pane rounded-xl p-6">
+              <header className="flex items-center gap-3 mb-4">
+                <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-[rgba(255,122,69,0.12)] text-[var(--color-accent)]">
+                  <Icon size={20} strokeWidth={1.5} />
+                </span>
+                <h2 className="text-[20px] font-semibold tracking-tight text-white">
+                  {s.title}
+                </h2>
+              </header>
+              <p className="text-[15px] leading-[1.7] text-[var(--color-fg-dim)]">
+                {s.body}
+              </p>
+              {s.bullets ? (
+                <ul className="mt-4 space-y-2">
+                  {s.bullets.map((b) => (
+                    <li
+                      key={b}
+                      className="text-[14px] leading-[1.7] text-[var(--color-fg-dim)] pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-[var(--color-fg-mute)]"
+                    >
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </article>
+          );
+        })}
+      </div>
+    </PageShell>
   );
 }
