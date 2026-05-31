@@ -223,15 +223,21 @@ function FeatureCopy({
 
   // Per-line parallax. Originally the scalars increased going down
   // (60, 90, 130, 170) which meant on scroll the body moved further
-  // than the title — they collapsed onto each other. Inverting the
-  // gradient (top element moves most, each below it moves less) keeps
-  // the gap monotonically shrinking only as much as the smallest
-  // scalar, so the body / bullets approach the title gracefully
-  // instead of crashing into it.
-  const eyebrowY = useTransform(drive, (v) => v * 90);
-  const titleY = useTransform(drive, (v) => v * 60);
-  const bodyY = useTransform(drive, (v) => v * 35);
-  const bulletY = useTransform(drive, (v) => v * 15);
+  // than the title — they collapsed onto each other and the body
+  // text ran on top of the heading. The fix has two constraints:
+  //   1. Top elements move *more* than bottom ones (so the gap
+  //      between them only ever increases or stays the same, never
+  //      shrinks negative).
+  //   2. The delta between adjacent rows must be less than the CSS
+  //      gap between them (mt-6 = 24px between title and body), so
+  //      even at the extremes the rows can't visually touch.
+  // The tight 60/55/50/45 range satisfies both — preserves the
+  // "comes closer" depth cue but caps the max collapse at 5px per
+  // adjacency, well inside every margin.
+  const eyebrowY = useTransform(drive, (v) => v * 60);
+  const titleY = useTransform(drive, (v) => v * 55);
+  const bodyY = useTransform(drive, (v) => v * 50);
+  const bulletY = useTransform(drive, (v) => v * 45);
 
   const styleOpacity = reduced ? undefined : { opacity: fadeIn };
 
