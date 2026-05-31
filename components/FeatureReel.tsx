@@ -43,7 +43,7 @@ const FEATURES: Feature[] = [
     bullets: [
       "Survives reboots and logouts",
       "Per-item hotkeys (⌥1 … ⌥9)",
-      "Optional encrypted sync via iCloud",
+      "Manual iCloud Drive backup of preferences + snippets + notes — plain JSON, no clipboard history",
     ],
     Visual: StageVisual,
     accent: "#ff7a45",
@@ -97,13 +97,20 @@ export default function FeatureReel() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
-          <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
+          <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-dim)] mb-4">
             The reel
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] leading-[1.02]">
             Five panes worth showing.{" "}
             <span className="text-[var(--color-fg-dim)]">
-              The other twenty-five are in the app.
+              The other twenty-eight live on the{" "}
+              <a
+                href="/features"
+                className="text-white underline decoration-white/30 hover:decoration-white/80 underline-offset-4"
+              >
+                features page
+              </a>
+              .
             </span>
           </h2>
         </motion.div>

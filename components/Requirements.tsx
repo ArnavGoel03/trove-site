@@ -8,8 +8,8 @@ const SPECS = [
   { label: "Architecture", value: "Apple Silicon + Intel" },
   { label: "Disk", value: "~14 MB" },
   { label: "Memory at rest", value: "< 30 MB" },
-  { label: "Distribution", value: "Notarized .zip" },
-  { label: "Update channel", value: "Sparkle (in-app)" },
+  { label: "Distribution", value: "Direct download (.zip) · ad-hoc signed" },
+  { label: "Update channel", value: "GitHub Releases (in-app, every 6h)" },
 ];
 
 export default function Requirements() {
@@ -25,7 +25,7 @@ export default function Requirements() {
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
+          <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-dim)] mb-4">
             System requirements
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02]">
@@ -42,10 +42,10 @@ export default function Requirements() {
           <div className="mt-9 flex flex-col sm:flex-row items-start gap-4">
             <DownloadButton />
             <a
-              href="#features"
+              href="/features"
               className="btn-ghost inline-flex items-center gap-2 rounded-full font-medium px-5 py-3 text-[14px]"
             >
-              Tour the panes
+              Tour all 33 panes
             </a>
           </div>
         </motion.div>
@@ -63,7 +63,7 @@ export default function Requirements() {
                 key={s.label}
                 className={`grid grid-cols-[1fr_auto] items-baseline gap-6 px-5 py-4 ${i !== SPECS.length - 1 ? "border-b border-white/[0.04]" : ""}`}
               >
-                <div className="text-[12px] uppercase tracking-[0.16em] text-[var(--color-fg-mute)]">
+                <div className="text-[12px] uppercase tracking-[0.16em] text-[var(--color-fg-dim)]">
                   {s.label}
                 </div>
                 <div className="text-[14px] font-medium tabular-nums">

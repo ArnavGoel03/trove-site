@@ -2,70 +2,26 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
-import {
-  Clipboard,
-  Calculator,
-  Type,
-  Pipette,
-  QrCode,
-  ScanLine,
-  Video,
-  Crop,
-  Image as ImageIcon,
-  FileText,
-  Hash,
-  FileEdit,
-  LayoutGrid,
-  Activity,
-  Scissors,
-  Folder,
-  Cpu,
-  ShieldCheck,
-  ScrollText,
-  Thermometer,
-  Disc3,
-  Network,
-  HardDrive,
-  Trash2,
-  ArrowDownToLine,
-  Sticker,
-  StickyNote,
-  History,
-  Coffee,
-} from "lucide-react";
+import { PANES as ALL_PANES, type Pane } from "@/lib/panes";
 
-const PANES = [
-  { icon: Clipboard, label: "Stage", group: "clip" },
-  { icon: History, label: "History", group: "clip" },
-  { icon: Sticker, label: "Snippets", group: "clip" },
-  { icon: StickyNote, label: "Notes", group: "clip" },
-  { icon: Calculator, label: "Calculator", group: "compute" },
-  { icon: Type, label: "Text Tools", group: "compute" },
-  { icon: Pipette, label: "Color", group: "capture" },
-  { icon: QrCode, label: "QR", group: "capture" },
-  { icon: ScanLine, label: "OCR", group: "capture" },
-  { icon: Video, label: "Recorder", group: "capture" },
-  { icon: Crop, label: "Snip", group: "capture" },
-  { icon: ImageIcon, label: "Image Tools", group: "files" },
-  { icon: FileText, label: "PDF", group: "files" },
-  { icon: Hash, label: "Hash", group: "files" },
-  { icon: FileEdit, label: "Rename", group: "files" },
-  { icon: LayoutGrid, label: "Window Snap", group: "sys" },
-  { icon: Activity, label: "AltTab", group: "sys" },
-  { icon: Scissors, label: "Cut-paste", group: "sys" },
-  { icon: Folder, label: "Finder Tweaks", group: "sys" },
-  { icon: Cpu, label: "Processes", group: "sys" },
-  { icon: Coffee, label: "Keep Awake", group: "sys" },
-  { icon: ShieldCheck, label: "Permissions", group: "sys" },
-  { icon: ScrollText, label: "Log Viewer", group: "sys" },
-  { icon: Thermometer, label: "GPU & Thermals", group: "sys" },
-  { icon: Disc3, label: "Disk Speed", group: "sys" },
-  { icon: Network, label: "Network", group: "sys" },
-  { icon: HardDrive, label: "Overview", group: "storage" },
-  { icon: HardDrive, label: "Scan", group: "storage" },
-  { icon: Trash2, label: "Clean Caches", group: "storage" },
-  { icon: ArrowDownToLine, label: "Sweep ~/Downloads", group: "storage" },
-];
+// Drive the mockup grid from the shared panes registry so adding /
+// renaming a pane on the macOS side only needs one site edit.
+const SECTION_TO_GROUP: Record<Pane["section"], string> = {
+  Clipboard: "clip",
+  Compute: "compute",
+  Capture: "capture",
+  Files: "files",
+  System: "sys",
+  Storage: "storage",
+  App: "app",
+  Profile: "profile",
+};
+
+const PANES = ALL_PANES.map((p) => ({
+  icon: p.icon,
+  label: p.name,
+  group: SECTION_TO_GROUP[p.section],
+}));
 
 const GROUP_COLORS: Record<string, string> = {
   clip: "from-[#ff7a45]/30 to-[#ff7a45]/0",
@@ -74,6 +30,8 @@ const GROUP_COLORS: Record<string, string> = {
   files: "from-[#5be3a4]/30 to-[#5be3a4]/0",
   sys: "from-[#ffd166]/30 to-[#ffd166]/0",
   storage: "from-[#ff5d8f]/30 to-[#ff5d8f]/0",
+  app: "from-[#c4b5fd]/30 to-[#c4b5fd]/0",
+  profile: "from-[#9ca3af]/30 to-[#9ca3af]/0",
 };
 
 export default function AppMockup({
@@ -185,7 +143,7 @@ export default function AppMockup({
                     size={18}
                     className="text-white/85 group-hover:text-white transition-colors"
                   />
-                  <span className="text-[9.5px] sm:text-[10px] text-[var(--color-fg-dim)] text-center leading-tight px-1 truncate max-w-full">
+                  <span className="text-[10.5px] sm:text-[11px] text-[var(--color-fg-dim)] text-center leading-tight px-1 truncate max-w-full">
                     {p.label}
                   </span>
                 </motion.div>

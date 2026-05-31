@@ -1,0 +1,50 @@
+{
+  "$schema": "./bin/project.config.schema.json",
+  "_comment": "Canonical naming + URL config for the Trove **marketing site** (gettrove.vercel.app / trove-site-psi.vercel.app). Single source of truth — if you rename anything, edit ONLY this file, then run `bin/check-name-drift.sh` to find leftovers, and `bin/validate.sh` to confirm GitHub + Vercel + folder all agree. This config is scoped to the SITE only — the macOS app (../macos/) and the Avalonia/Windows port (../avalonia-port/) are tracked separately in their own repos. See ../macos/CLAUDE.md for the broader project handoff note.",
+
+  "version": 1,
+  "slug": "trove-site",
+  "displayName": "Trove",
+  "tagline": "Native macOS productivity suite — clipboard, snippets, OCR, screen capture, PDF tools, calculator, and more.",
+
+  "urls": {
+    "production": "https://gettrove.vercel.app",
+    "aliases": [
+      "https://trove-site-psi.vercel.app"
+    ]
+  },
+
+  "github": {
+    "owner": "ArnavGoel03",
+    "repo": "trove-site",
+    "url": "https://github.com/ArnavGoel03/trove-site"
+  },
+
+  "vercel": {
+    "project": "trove-site",
+    "teamSlug": "arnavgoel03s-projects"
+  },
+
+  "portfolio": {
+    "siteRepo": "~/Documents/Projects/portfolio",
+    "slug": "trove",
+    "url": "https://arnavgoel.dev/projects/trove"
+  },
+
+  "previousSlugs": [],
+  "previousDisplayNames": [],
+  "previousUrls": [],
+
+  "_keepReferencesIn_doc": "Paths (relative to the site repo OR portfolio root) where the drift checker should IGNORE matches against previousSlugs/previousDisplayNames/previousUrls. Add entries here when adopting a new alias that legitimately mentions an old name.",
+  "keepReferencesIn": [
+    "project.config.json",
+    "bin/check-name-drift.sh",
+    ".rename-history.jsonl"
+  ],
+
+  "notes": [
+    "Folder is `site/` inside the multi-platform `trove/` monorepo, but the canonical slug for THIS deployment is `trove-site` (matches GitHub repo + Vercel project). The folder/slug mismatch is intentional — the slug is the deployment identity, the folder is the role within the monorepo.",
+    "Trove's macOS app source lives at `../macos/` with its own repo (`ArnavGoel03/trove`). Releases of the .app are tagged there; this site's DownloadButton component resolves to `https://github.com/ArnavGoel03/trove/releases/latest/download/Trove.zip` so the marketing page automatically follows whatever's newest there.",
+    "The Avalonia/Windows port stub sits at `../avalonia-port/` (formerly `Trove.App` — renamed 2026-05-31 to stop macOS Launchpad from indexing it as a fake .app)."
+  ]
+}

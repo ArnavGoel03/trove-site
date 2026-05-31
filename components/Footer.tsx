@@ -20,18 +20,24 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-[13px] text-[var(--color-fg-dim)] max-w-sm leading-relaxed">
-            30+ panes for clipboard, capture, system, files and storage — in a
-            single 14 MB native macOS app.
+            33 panes for clipboard, capture, system, files and storage — in a
+            single ~14 MB native macOS app. Scriptable from Shortcuts.
+            Installable via Homebrew. Local-only.
           </p>
         </div>
 
         <FooterCol
           title="Product"
           links={[
-            { label: "Features", href: "/#features" },
+            { label: "Features", href: "/features" },
             { label: "Compare", href: "/#compare" },
             { label: "Privacy", href: "/#privacy" },
             { label: "Requirements", href: "/#requirements" },
+            {
+              label: "Changelog",
+              href: "https://github.com/ArnavGoel03/trove/blob/main/macos/CHANGELOG.md",
+              external: true,
+            },
           ]}
         />
 
@@ -138,13 +144,13 @@ function LatestReleaseBadge() {
   return (
     <a
       href="https://github.com/ArnavGoel03/trove/releases"
-      className="inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors"
+      className="inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors font-medium"
     >
       <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
       <span className="font-mono tabular-nums">
         {tag ?? "Releases"}
       </span>
-      <span className="text-[var(--color-fg-mute)]">·</span>
+      <span className="text-[var(--color-fg-dim)]">·</span>
       <span>release notes</span>
     </a>
   );
@@ -159,7 +165,7 @@ function FooterCol({
 }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)] mb-4">
+      <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-dim)] mb-4">
         {title}
       </div>
       <ul className="space-y-2.5">

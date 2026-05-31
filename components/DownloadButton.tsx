@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Apple, MonitorDown, Download } from "lucide-react";
 import { toast } from "sonner";
+import { useState, useEffect } from "react";
 import { useMacDetect } from "@/lib/useMacDetect";
 
 // Resolve to the latest GitHub Release at request time, so the marketing
@@ -19,6 +20,16 @@ export default function DownloadButton({
   size?: "lg" | "md";
 }) {
   const platform = useMacDetect();
+  const [winVer, setWinVer] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("https://api.github.com/repos/ArnavGoel03/trove-win/releases/latest")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (typeof j?.tag_name === "string") setWinVer(j.tag_name);
+      })
+      .catch(() => {});
+  }, []);
 
   const sizeCls =
     size === "lg" ? "px-6 py-3.5 text-[15px]" : "px-4 py-2 text-[13px]";
@@ -97,7 +108,7 @@ export default function DownloadButton({
           Download for Windows (.zip)
         </motion.a>
         <span className="text-[11.5px] text-[var(--color-fg-dim)] pl-1">
-          v0.1.0 · early build · Calculator, Text Tools, File Hash, QR ready · the rest stubbed
+          {winVer ?? "early build"} · Calculator, Text Tools, File Hash, QR ready · the rest stubbed
         </span>
       </div>
     );

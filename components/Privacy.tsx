@@ -12,12 +12,12 @@ const POINTS = [
   {
     icon: Lock,
     title: "No accounts required",
-    body: "There's no sign-in screen, no email gate, no license server. Download, open, use. Receipts and updates go through the App Store / Sparkle, not a custom backend.",
+    body: "There's no sign-in screen, no email gate, no license server. Download, open, use. Updates are delivered via the GitHub Releases page; the in-app checker polls the GitHub Releases API once every 6 hours.",
   },
   {
     icon: FileBadge2,
-    title: "Signed & notarized",
-    body: "Distributed as a notarized .zip with a hardened runtime. Apple's Gatekeeper verifies every launch. Source binaries hashed and published.",
+    title: "Ad-hoc signed · hardened runtime",
+    body: "Currently signed ad-hoc with a hardened runtime. Apple notarization is on the near-term roadmap. The first launch requires right-click → Open to pass Gatekeeper.",
   },
   {
     icon: Cpu,
@@ -36,7 +36,7 @@ export default function Privacy() {
         transition={{ duration: 0.6 }}
         className="max-w-3xl mb-14"
       >
-        <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
+        <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-dim)] mb-4">
           Privacy &amp; native
         </div>
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] leading-[1.02]">

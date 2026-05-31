@@ -27,21 +27,24 @@ export default function Nav() {
           </span>
         </a>
         <nav className="hidden md:flex items-center gap-7 text-[13px] text-[var(--color-fg-dim)]">
-          <a href="#features" className="hover:text-white transition-colors">
+          <a href="/features" className="hover:text-white transition-colors">
             Features
           </a>
-          <a href="#compare" className="hover:text-white transition-colors">
+          <a href="/#compare" className="hover:text-white transition-colors">
             Compare
           </a>
-          <a href="#privacy" className="hover:text-white transition-colors">
+          <a href="/#privacy" className="hover:text-white transition-colors">
             Privacy
           </a>
-          <a href="#requirements" className="hover:text-white transition-colors">
+          <a
+            href="/#requirements"
+            className="hover:text-white transition-colors"
+          >
             Requirements
           </a>
         </nav>
         <a
-          href="#download"
+          href="/#download"
           className="btn-ghost rounded-full px-4 py-1.5 text-[13px] font-medium"
         >
           Download

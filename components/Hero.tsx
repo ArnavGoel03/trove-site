@@ -106,7 +106,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur px-3 py-1 text-[12px] text-[var(--color-fg-dim)] mb-7"
         >
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.7)]" />
-          30+ panes. One native app. ~14 MB.
+          v1.1.0 · 33 panes · 11 Shortcuts intents · ~14 MB
         </motion.div>
 
         <h1 className="text-[44px] sm:text-[64px] md:text-[84px] leading-[0.96] font-semibold tracking-[-0.04em] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
@@ -121,8 +121,9 @@ export default function Hero() {
           className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl mx-auto leading-relaxed"
         >
           Trove folds a clipboard manager, a window snapper, a system monitor,
-          an OCR, a PDF kit, a disk cleaner and 25+ more panes into a single,
-          fast, native macOS app.
+          an OCR, a PDF kit, a disk cleaner and 27 more panes into a single,
+          fast, native macOS app — scriptable from macOS Shortcuts, installable
+          via Homebrew, sub-500 ms cold launch.
         </motion.p>
 
         <motion.div
@@ -134,10 +135,10 @@ export default function Hero() {
         >
           <DownloadButton />
           <a
-            href="#features"
+            href="/features"
             className="btn-ghost inline-flex items-center gap-2 rounded-full font-medium px-5 py-3 text-[14px] transition-all hover:translate-y-[-1px]"
           >
-            See the panes
+            See all 33 panes
           </a>
         </motion.div>
 
@@ -145,7 +146,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-5 text-[12.5px] text-[var(--color-fg-mute)]"
+          className="mt-5 text-[12.5px] text-[var(--color-fg-dim)]"
         >
           Apple Silicon &amp; Intel · macOS 13+ · Open source on GitHub
         </motion.div>
