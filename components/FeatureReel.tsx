@@ -221,11 +221,17 @@ function FeatureCopy({
   const drive = useTransform(progress, [0, 1], [1, -1]);
   const fadeIn = useTransform(progress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
 
-  // Scalars chosen to match previous per-line offsets.
-  const eyebrowY = useTransform(drive, (v) => v * 60);
-  const titleY = useTransform(drive, (v) => v * 90);
-  const bodyY = useTransform(drive, (v) => v * 130);
-  const bulletY = useTransform(drive, (v) => v * 170);
+  // Per-line parallax. Originally the scalars increased going down
+  // (60, 90, 130, 170) which meant on scroll the body moved further
+  // than the title — they collapsed onto each other. Inverting the
+  // gradient (top element moves most, each below it moves less) keeps
+  // the gap monotonically shrinking only as much as the smallest
+  // scalar, so the body / bullets approach the title gracefully
+  // instead of crashing into it.
+  const eyebrowY = useTransform(drive, (v) => v * 90);
+  const titleY = useTransform(drive, (v) => v * 60);
+  const bodyY = useTransform(drive, (v) => v * 35);
+  const bulletY = useTransform(drive, (v) => v * 15);
 
   const styleOpacity = reduced ? undefined : { opacity: fadeIn };
 
