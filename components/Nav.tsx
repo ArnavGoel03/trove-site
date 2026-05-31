@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { Github } from "lucide-react";
 
 export default function Nav() {
   return (
@@ -36,6 +37,9 @@ export default function Nav() {
           <a href="/guides" className="hover:text-white transition-colors">
             Guides
           </a>
+          <a href="/updates" className="hover:text-white transition-colors">
+            Updates
+          </a>
           <a href="/changelog" className="hover:text-white transition-colors">
             Changelog
           </a>
@@ -43,12 +47,24 @@ export default function Nav() {
             Security
           </a>
         </nav>
-        <a
-          href="/#download"
-          className="btn-ghost rounded-full px-4 py-1.5 text-[13px] font-medium"
-        >
-          Download
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href="https://github.com/ArnavGoel03/trove"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Trove on GitHub"
+            title="Source code on GitHub"
+            className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-[var(--color-fg-dim)] hover:text-white transition-colors"
+          >
+            <Github size={15} strokeWidth={1.75} />
+          </a>
+          <a
+            href="/#download"
+            className="btn-ghost rounded-full px-4 py-1.5 text-[13px] font-medium"
+          >
+            Download
+          </a>
+        </div>
       </div>
     </motion.header>
   );

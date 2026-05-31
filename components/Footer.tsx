@@ -40,12 +40,19 @@ export default function Footer() {
           title="Resources"
           links={[
             { label: "Guides", href: "/guides" },
+            { label: "Updates", href: "/updates" },
             { label: "Shortcuts", href: "/shortcuts" },
             { label: "Shortcuts gallery", href: "/shortcuts-gallery" },
             { label: "URL scheme", href: "/url-scheme" },
+            { label: "Themes", href: "/themes" },
             {
               label: "Source code",
               href: "https://github.com/ArnavGoel03/trove",
+              external: true,
+            },
+            {
+              label: "Discussions",
+              href: "https://github.com/ArnavGoel03/trove/discussions",
               external: true,
             },
             {
@@ -61,6 +68,7 @@ export default function Footer() {
           links={[
             { label: "Contact", href: "/contact" },
             { label: "Security", href: "/security" },
+            { label: "Accessibility", href: "/accessibility" },
             { label: "Press", href: "/press" },
           ]}
         />

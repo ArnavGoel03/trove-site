@@ -2,10 +2,11 @@ import type { MetadataRoute } from "next";
 import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
 import { GUIDES } from "@/lib/guides";
+import { listUpdates } from "@/lib/updates";
 
 const BASE = "https://gettrove.vercel.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const core: MetadataRoute.Sitemap = [
@@ -106,6 +107,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
+    {
+      url: `${BASE}/updates`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE}/themes`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${BASE}/accessibility`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
   ];
 
   const panes: MetadataRoute.Sitemap = PANES.map((p) => ({
@@ -122,5 +141,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...core, ...panes, ...guides];
+  const updates = await listUpdates();
+  const updatePosts: MetadataRoute.Sitemap = updates.map((p) => ({
+    url: `${BASE}/updates/${p.slug}`,
+    lastModified: new Date(p.date),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...core, ...panes, ...guides, ...updatePosts];
 }

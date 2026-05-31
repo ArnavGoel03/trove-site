@@ -153,6 +153,26 @@ export default function PressPage() {
 
       <section className="mb-14">
         <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-5">
+          Community + discussions
+        </h2>
+        <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
+          Open conversations — feature ideas, pre-release feedback, pane
+          requests, weird bugs — happen on{" "}
+          <a
+            href="https://github.com/ArnavGoel03/trove/discussions"
+            target="_blank"
+            rel="noopener"
+            className="md-link"
+          >
+            GitHub Discussions
+          </a>
+          . That&rsquo;s the public square. Reviewers are welcome to lurk for
+          quotes; please credit the original poster if you cite a thread.
+        </p>
+      </section>
+
+      <section className="mb-14">
+        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-5">
           Who built this
         </h2>
         <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
