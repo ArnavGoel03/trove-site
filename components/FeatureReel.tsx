@@ -159,8 +159,12 @@ function FeatureBlock({
   const Visual = feature.Visual;
 
   return (
-    <div ref={ref} className="relative" style={{ height: "220vh" }}>
-      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
+    <div
+      ref={ref}
+      className="relative feature-block"
+      style={{ height: "220vh" }}
+    >
+      <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden feature-block-sticky">
         {/* Background accent glow per feature — static, no animation */}
         <div
           aria-hidden

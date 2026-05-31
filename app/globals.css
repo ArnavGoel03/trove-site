@@ -31,6 +31,30 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* Account for the sticky nav so anchor jumps don't slide content under it. */
+  scroll-padding-top: 88px;
+  /* Force the document root onto the compositor — eliminates the 1-frame
+     stutter Safari shows when the FeatureReel sticky sections first scroll
+     into view on long pages. */
+  transform: translateZ(0);
+}
+
+/* Heavy off-screen content (FeatureReel blocks) doesn't paint or
+   composite until it's near the viewport — buys 50-80 ms per scroll
+   event on a long page. `contain-intrinsic-size` reserves the layout
+   slot so the scroll position doesn't jump when the browser starts
+   painting a previously-skipped block. */
+.feature-block {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 220vh;
+}
+
+/* The sticky inner of each FeatureBlock gets its own compositor layer
+   so per-scroll transforms on its children don't force a paint of the
+   surrounding section. */
+.feature-block-sticky {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 * {
