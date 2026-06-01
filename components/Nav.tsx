@@ -59,7 +59,7 @@ export default function Nav() {
             <Github size={15} strokeWidth={1.75} />
           </a>
           <a
-            href="/#download"
+            href="/download"
             className="btn-ghost rounded-full px-4 py-1.5 text-[13px] font-medium"
           >
             Download
