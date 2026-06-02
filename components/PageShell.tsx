@@ -24,7 +24,7 @@ export default function PageShell({
   wide?: boolean;
 }) {
   return (
-    <main className="relative">
+    <main id="main-content" className="relative">
       <Nav />
       <div
         className={`relative ${wide ? "max-w-6xl" : "max-w-3xl"} mx-auto px-6 pt-32 pb-24`}

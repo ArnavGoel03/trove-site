@@ -5,6 +5,7 @@ import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { GLOBAL_CHORDS, PANE_CHORDS } from "@/lib/chords";
 import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
+import PrintButton from "@/components/PrintButton";
 
 export const metadata: Metadata = {
   title: "Shortcuts cheatsheet — Trove",
@@ -59,15 +60,7 @@ export default function ShortcutsPage() {
       />
 
       <div className="flex justify-end mb-8 print:hidden">
-        <button
-          type="button"
-          onClick={() => {
-            if (typeof window !== "undefined") window.print();
-          }}
-          className="rounded-full border border-white/[0.1] px-4 py-1.5 text-[12px] text-[var(--color-fg-dim)] hover:text-white hover:border-white/30 transition-colors"
-        >
-          Print cheatsheet
-        </button>
+        <PrintButton />
       </div>
 
       <section className="mb-12">

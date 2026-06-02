@@ -17,14 +17,14 @@ const SmoothScroll = dynamic(() => import("@/components/SmoothScroll"));
 
 export default function Page() {
   return (
-    <main className="relative">
-      {/* Structured data — SoftwareApplication + WebPage. Server-rendered
+    <main id="main-content" className="relative">
+      {/* Structured data: SoftwareApplication + WebPage. Server-rendered
           at the top of <main> so search-engine fetchers see it on first
           byte without waiting for hydration. */}
       <JsonLd data={softwareApplicationLd()} />
       <JsonLd
         data={webPageLd(
-          "Trove — Your Mac, finally tidy.",
+          "Trove: your Mac, finally tidy.",
           "33 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
           "https://gettrove.vercel.app",
         )}

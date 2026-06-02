@@ -1,7 +1,11 @@
 "use client";
 
 import { Github, Mail } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+
+const FOCUS_RING =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm";
 
 export default function Footer() {
   return (
@@ -20,7 +24,7 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-[13px] text-[var(--color-fg-dim)] max-w-sm leading-relaxed">
-            33 panes for clipboard, capture, system, files and storage — in a
+            33 panes for clipboard, capture, system, files and storage, in a
             single ~14 MB native macOS app. Scriptable from Shortcuts.
             Installable via Homebrew. Local-only.
           </p>
@@ -33,6 +37,7 @@ export default function Footer() {
             { label: "Compare", href: "/compare" },
             { label: "Changelog", href: "/changelog" },
             { label: "Roadmap", href: "/roadmap" },
+            { label: "Download", href: "/download" },
           ]}
         />
 
@@ -40,6 +45,7 @@ export default function Footer() {
           title="Resources"
           links={[
             { label: "Guides", href: "/guides" },
+            { label: "FAQ", href: "/faq" },
             { label: "Updates", href: "/updates" },
             { label: "Shortcuts", href: "/shortcuts" },
             { label: "Shortcuts gallery", href: "/shortcuts-gallery" },
@@ -89,23 +95,25 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-[12px] text-[var(--color-fg-mute)]">
             <span>
-              © {new Date().getFullYear()} Trove. macOS, Apple Silicon and the
-              Apple logo are trademarks of Apple Inc.
+              {"©"} {new Date().getFullYear()} Trove. macOS, Apple Silicon
+              and the Apple logo are trademarks of Apple Inc.
             </span>
           </div>
           <div className="flex items-center gap-4">
             <LatestReleaseBadge />
             <a
               href="https://github.com/ArnavGoel03/trove"
-              aria-label="GitHub"
-              className="text-[var(--color-fg-mute)] hover:text-white transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Trove on GitHub"
+              className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
             >
               <Github size={16} />
             </a>
             <a
               href="mailto:support@trove.app"
-              aria-label="Email"
-              className="text-[var(--color-fg-mute)] hover:text-white transition-colors"
+              aria-label="Email support"
+              className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
             >
               <Mail size={16} />
             </a>
@@ -116,19 +124,20 @@ export default function Footer() {
   );
 }
 
-/// Pulls the latest release tag from the GitHub Releases API at component
-/// mount and renders a discreet `v1.2.3 · release notes` link. Falls back to
-/// "Releases" if the fetch fails (rate limit, offline, repo private) so the
-/// footer never shows a broken or stale version string. Cached client-side
-/// for the page lifetime — one network request per page load, no polling.
+/**
+ * Pulls the latest release tag from the GitHub Releases API at component
+ * mount and renders a discreet `v1.2.3 release notes` link. Falls back to
+ * "Releases" if the fetch fails (rate limit, offline, repo private) so the
+ * footer never shows a broken or stale version string. Cached client-side
+ * for the page lifetime: one network request per page load, no polling.
+ */
 function LatestReleaseBadge() {
   const [tag, setTag] = useState<string | null>(null);
   useEffect(() => {
     let aborted = false;
-    fetch(
-      "https://api.github.com/repos/ArnavGoel03/trove/releases/latest",
-      { headers: { Accept: "application/vnd.github+json" } }
-    )
+    fetch("https://api.github.com/repos/ArnavGoel03/trove/releases/latest", {
+      headers: { Accept: "application/vnd.github+json" },
+    })
       .then((r) => (r.ok ? r.json() : null))
       .then((j) => {
         if (aborted) return;
@@ -138,7 +147,7 @@ function LatestReleaseBadge() {
         }
       })
       .catch(() => {
-        /* swallow — footer just shows "Releases" */
+        /* swallow: footer just shows "Releases" */
       });
     return () => {
       aborted = true;
@@ -147,13 +156,14 @@ function LatestReleaseBadge() {
   return (
     <a
       href="https://github.com/ArnavGoel03/trove/releases"
-      className="inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors font-medium"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Latest release notes on GitHub"
+      className={`inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors font-medium ${FOCUS_RING}`}
     >
       <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
-      <span className="font-mono tabular-nums">
-        {tag ?? "Releases"}
-      </span>
-      <span className="text-[var(--color-fg-dim)]">·</span>
+      <span className="font-mono tabular-nums">{tag ?? "Releases"}</span>
+      <span className="text-[var(--color-fg-dim)]">&middot;</span>
       <span>release notes</span>
     </a>
   );
@@ -174,15 +184,23 @@ function FooterCol({
       <ul className="space-y-2.5">
         {links.map((l) => (
           <li key={l.label}>
-            <a
-              href={l.href}
-              {...(l.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="text-[13.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors"
-            >
-              {l.label}
-            </a>
+            {l.external ? (
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-[13.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors ${FOCUS_RING}`}
+              >
+                {l.label}
+              </a>
+            ) : (
+              <Link
+                href={l.href}
+                className={`text-[13.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors ${FOCUS_RING}`}
+              >
+                {l.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

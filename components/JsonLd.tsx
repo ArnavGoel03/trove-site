@@ -29,23 +29,55 @@ export function softwareApplicationLd() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: "Trove",
+    alternateName: "Trove for Mac",
     applicationCategory: "UtilitiesApplication",
-    operatingSystem: "macOS 13+",
+    operatingSystem: "macOS 13.0 or later (Ventura+), Apple Silicon and Intel",
     url: "https://gettrove.vercel.app",
     downloadUrl: "https://github.com/ArnavGoel03/trove/releases/latest",
-    softwareVersion: "1.1.0",
+    softwareVersion: "1.5",
+    fileSize: "14 MB",
+    description:
+      "Trove is a $10/year, 100% local macOS utility app that bundles 33 panes plus 60+ inline actions: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, hashing and more. No telemetry, no uploads, no account required. Cold-launches in under 500 ms.",
+    featureList: [
+      "Clipboard history with regex search and dedup",
+      "Multi-clipboard staging (Stage)",
+      "Text snippets",
+      "Screen recorder with system audio, mic, webcam PIP, click ripples and keystroke overlay (no watermark)",
+      "Screenshot capture with delay timer",
+      "On-device OCR with optional translation",
+      "PDF merge, split, compress, rotate, OCR and watermark",
+      "Batch image convert, resize and compress (HEIC, PNG, JPEG, WebP)",
+      "MD5 / SHA-1 / SHA-256 / SHA-512 hashing and SHA256SUMS verification",
+      "CPU, memory, GPU, VRAM and per-process network monitors",
+      "Disk usage overview, treemap, dev-cache cleanup and disk speed benchmark",
+      "Window tiling and switcher",
+      "macOS Shortcuts intents and trove:// URL scheme automation",
+    ],
     offers: {
       "@type": "Offer",
+      name: "Trove yearly license (per year)",
+      description: "Annual license, billed once per year.",
       price: "10",
       priceCurrency: "USD",
-      category: "Annual subscription",
+      availability: "https://schema.org/InStock",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      ratingCount: "48",
-    },
+    license: "https://github.com/ArnavGoel03/trove",
     publisher: ORG,
+  };
+}
+
+export function faqPageLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((it) => ({
+      "@type": "Question",
+      name: it.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: it.answer,
+      },
+    })),
   };
 }
 

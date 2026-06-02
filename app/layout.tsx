@@ -1,17 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Trove — Your Mac, finally tidy.",
+  title: "Trove: your Mac, finally tidy.",
   description:
-    "33 panes for clipboard, capture, system, files and storage — in a single ~14 MB native macOS app. Scriptable from Shortcuts. Local-only. No telemetry.",
+    "33 panes for clipboard, capture, system, files and storage, in a single ~14 MB native macOS app. Scriptable from Shortcuts. Local-only. No telemetry.",
   metadataBase: new URL("https://gettrove.vercel.app"),
   alternates: {
     canonical: "https://gettrove.vercel.app",
   },
+  applicationName: "Trove",
   openGraph: {
-    title: "Trove — Your Mac, finally tidy.",
+    title: "Trove: your Mac, finally tidy.",
     description:
       "33 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
     type: "website",
@@ -22,13 +24,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Trove — Your Mac, finally tidy.",
+        alt: "Trove: your Mac, finally tidy.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trove — Your Mac, finally tidy.",
+    title: "Trove: your Mac, finally tidy.",
     description:
       "33 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
     images: ["/opengraph-image"],
@@ -57,7 +59,7 @@ export default function RootLayout({
         {/* Speculation Rules: prerender same-origin links on hover so
             the homepage → /features jump (and every legal page link)
             paints instantly. Chrome ignores this header silently on
-            Safari / Firefox — pure progressive enhancement. */}
+            Safari / Firefox, pure progressive enhancement. */}
         <script
           type="speculationrules"
           dangerouslySetInnerHTML={{
@@ -74,8 +76,12 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <div className="grain" aria-hidden="true" />
         {children}
+        <ScrollToTop />
         <Toaster
           position="bottom-right"
           theme="dark"

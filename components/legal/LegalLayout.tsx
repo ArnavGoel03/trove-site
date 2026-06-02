@@ -14,7 +14,7 @@ export default function LegalLayout({
   children: ReactNode;
 }) {
   return (
-    <main className="relative">
+    <main id="main-content" className="relative">
       <Nav />
       <article className="relative max-w-3xl mx-auto px-6 pt-32 pb-24">
         <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
