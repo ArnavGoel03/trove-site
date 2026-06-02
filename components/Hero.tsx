@@ -148,7 +148,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-5 text-[12.5px] text-[var(--color-fg-dim)]"
         >
-          Apple Silicon &amp; Intel · macOS 13+ · Open source on GitHub
+          Apple Silicon &amp; Intel · macOS 13+ · Source on GitHub
         </motion.div>
       </motion.div>
 

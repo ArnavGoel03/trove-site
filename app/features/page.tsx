@@ -11,14 +11,14 @@ const CapabilityList = dynamic(
 const FeaturesCta = dynamic(() => import("@/components/features/FeaturesCta"));
 
 export const metadata: Metadata = {
-  title: "Features — every pane in Trove 1.1.0",
+  title: "Features: every pane in Trove 1.1.0",
   description:
-    "All 33 panes in Trove 1.1.0 — Clipboard, Compute, Capture, Files, System, Storage. Plus Shortcuts integration, URL scheme verbs, SHA256SUMS verification, saved Text Tools recipes, Homebrew cask, and the sub-500ms cold launch.",
+    "All 33 panes in Trove 1.1.0: Clipboard, Compute, Capture, Files, System, Storage. Plus Shortcuts integration, URL scheme verbs, SHA256SUMS verification, saved Text Tools recipes, Homebrew cask, and the sub-500ms cold launch.",
   alternates: {
     canonical: "https://gettrove.vercel.app/features",
   },
   openGraph: {
-    title: "Features — every pane in Trove 1.1.0",
+    title: "Features: every pane in Trove 1.1.0",
     description:
       "All 33 panes plus Shortcuts, URL scheme, SHA256SUMS verify, saved recipes, Homebrew cask.",
     url: "https://gettrove.vercel.app/features",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function FeaturesPage() {
   return (
-    <main className="relative">
+    <main id="main-content" className="relative">
       <Nav />
       <FeaturesHero />
       <PaneGrid />

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const action = ACTIONS_BY_SLUG[slug];
   if (!action) return { title: "Not found" };
-  const title = `${action.title} on Mac — local, no upload | Trove`;
+  const title = `${action.title} on Mac, local, no upload | Trove`;
   const description = action.tagline;
   const url = `https://gettrove.vercel.app/action/${action.slug}`;
   return {
@@ -221,7 +221,7 @@ export default async function ActionPage({ params }: PageProps) {
           <p className="mt-2 text-[13.5px] text-[var(--color-fg-dim)]">
             Trove ships an API tester (Postman-class), local LLM chat, hash
             verifier, OCR, screen recorder, hosts file editor, password
-            generator + HIBP, treemap, and more. Local-first, free, MIT.
+            generator + HIBP, treemap, and more. Local-first, $10/yr.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link

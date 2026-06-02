@@ -33,14 +33,14 @@ html {
   scroll-behavior: smooth;
   /* Account for the sticky nav so anchor jumps don't slide content under it. */
   scroll-padding-top: 88px;
-  /* Force the document root onto the compositor — eliminates the 1-frame
+  /* Force the document root onto the compositor: eliminates the 1-frame
      stutter Safari shows when the FeatureReel sticky sections first scroll
      into view on long pages. */
   transform: translateZ(0);
 }
 
 /* Heavy off-screen content (FeatureReel blocks) doesn't paint or
-   composite until it's near the viewport — buys 50-80 ms per scroll
+   composite until it's near the viewport: buys 50-80 ms per scroll
    event on a long page. `contain-intrinsic-size` reserves the layout
    slot so the scroll position doesn't jump when the browser starts
    painting a previously-skipped block. */
@@ -64,6 +64,40 @@ html {
 ::selection {
   background: rgba(255, 122, 69, 0.35);
   color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+ * Global focus-visible. Keyboard users get a clear orange ring on any
+ * interactive element that doesn't already define its own ring; mouse
+ * clicks stay clean (focus-visible only). Components that want a custom
+ * offset/ring still override locally. */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip-to-content link: visually hidden until focused, then pinned to the
+ * top-left so keyboard users can jump past the fixed nav. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transform: translateY(-120%);
+  margin: 8px;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  background: #ff6a2a;
+  color: #1a0d05;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px -10px rgba(255, 122, 69, 0.55);
+  transition: transform 0.15s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: none;
 }
 
 /* Subtle grain overlay */
@@ -145,7 +179,7 @@ html {
  * Markdown body styles
  * Used by /changelog (live-sourced from macos/CHANGELOG.md) and a few
  * inline render sites. The escaper in lib/changelog.ts only emits the
- * subset of HTML below — anything else is text-encoded — so this is a
+ * subset of HTML below (anything else is text-encoded) so this is a
  * tight, opinionated style sheet, not a generic prose reset.
  * =========================================================================*/
 .md-body {
@@ -175,7 +209,7 @@ html {
   margin: 0 0 8px 0;
 }
 .md-body .md-ul > li::before {
-  content: "—";
+  content: "-";
   position: absolute;
   left: 0;
   color: var(--color-fg-mute);

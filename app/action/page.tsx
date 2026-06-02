@@ -6,14 +6,14 @@ import { ACTIONS, ACTION_CATEGORIES } from "@/lib/actions";
 
 export const metadata: Metadata = {
   title:
-    "Inline ⌘K actions — base64, sha256, JWT, JSON, URL encode, color, time | Trove",
+    "Inline ⌘K actions: base64, sha256, JWT, JSON, URL encode, color, time | Trove",
   description:
     "Trove's ⌘K palette runs 60+ inline transforms: base64, hex, URL encode/decode, MD5/SHA-1/SHA-256/SHA-512, HMAC, JWT decode, JSON format, color conversion, Unix time, UUID, and more. Local, no upload.",
   alternates: { canonical: "https://gettrove.vercel.app/action" },
   openGraph: {
-    title: "Trove ⌘K — 60+ inline dev transforms on Mac",
+    title: "Trove ⌘K: 60+ inline dev transforms on Mac",
     description:
-      "One palette. Zero uploads. Every transform — base64, JWT decode, SHA-256, UUID, JSON pretty, URL encode, color conversion, …",
+      "One palette. Zero uploads. Every transform: base64, JWT decode, SHA-256, UUID, JSON pretty, URL encode, color conversion, …",
     url: "https://gettrove.vercel.app/action",
   },
 };
@@ -59,7 +59,7 @@ export default function ActionsIndex() {
                       {a.tagline}
                     </div>
                     <div className="mt-2 text-[11px] font-mono text-[var(--color-fg-dim)] truncate">
-                      ⌘K — {a.triggers[0]}
+                      ⌘K {a.triggers[0]}
                     </div>
                   </Link>
                 ))}

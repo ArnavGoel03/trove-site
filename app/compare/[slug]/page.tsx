@@ -19,11 +19,11 @@ const COMPARISONS: Record<string, Comparison> = {
   postman: {
     slug: "postman",
     competitor: "Postman",
-    metaTitle: "Trove vs Postman — local, free, Postman-class API tester for Mac",
+    metaTitle: "Trove vs Postman: local, $10/yr Postman-class API tester for Mac",
     metaDescription:
-      "Postman went paid + cloud-only. Trove ships a local, MIT-licensed API tester for Mac with environments, OAuth 2.0, AWS Sig V4, JS pre-request / tests, Postman v2.1 import. No account.",
+      "Postman went paid + cloud-only. Trove ships a local API tester for Mac with environments, OAuth 2.0, AWS Sig V4, JS pre-request / tests, Postman v2.1 import. No account.",
     intro:
-      "Postman went paid-and-cloud-only. Trove ships a local, free, MIT API tester for Mac. Import your existing Postman v2.1 collections — including the event scripts — and keep working without an account.",
+      "Postman went paid-and-cloud-only. Trove ships a local API tester for Mac. Import your existing Postman v2.1 collections, including the event scripts, and keep working without an account.",
     highlights: [
       {
         trove: "Local-first; no account, no cloud sync of collections",
@@ -59,7 +59,7 @@ const COMPARISONS: Record<string, Comparison> = {
           "Code export: curl / fetch / axios / Python requests / Swift",
         them: "Code export to many languages",
       },
-      { trove: "Free, MIT-licensed", them: "$14-$49/user/month for teams" },
+      { trove: "$10/yr, local-first", them: "$14-$49/user/month for teams" },
     ],
     callouts: [
       {
@@ -78,16 +78,16 @@ const COMPARISONS: Record<string, Comparison> = {
   raycast: {
     slug: "raycast",
     competitor: "Raycast",
-    metaTitle: "Trove vs Raycast — local productivity panes vs launcher",
+    metaTitle: "Trove vs Raycast: local productivity panes vs launcher",
     metaDescription:
       "Raycast is a launcher with extensions. Trove is a panel-based productivity app with 40+ in-app panes + 60+ ⌘K inline actions. Both have a ⌘K palette; the philosophy and integrations differ.",
     intro:
-      "Raycast is a great launcher with a third-party extension marketplace. Trove is panel-based — every action lives as a first-class pane, plus 60+ inline transforms in ⌘K. The two coexist on most pro Mac desktops; this page is about when Trove fits better.",
+      "Raycast is a great launcher with a third-party extension marketplace. Trove is panel-based: every action lives as a first-class pane, plus 60+ inline transforms in ⌘K. The two coexist on most pro Mac desktops; this page is about when Trove fits better.",
     highlights: [
       { trove: "Local-first, no account", them: "Account-gated cloud features" },
       {
         trove:
-          "First-class panes for Recorder, OCR, PDF tools, Hash, API Tester, Speedtest, LLM chat, Hosts editor, Password gen — not third-party extensions",
+          "First-class panes for Recorder, OCR, PDF tools, Hash, API Tester, Speedtest, LLM chat, Hosts editor, Password gen, not third-party extensions",
         them: "Extension store; quality varies",
       },
       {
@@ -95,13 +95,13 @@ const COMPARISONS: Record<string, Comparison> = {
           "Inline ⌘K palette runs 60+ pure transforms (base64, JWT decode, hex, SHA-256, JSON pretty, UUID, color, …)",
         them: "Snippets + commands + extension search",
       },
-      { trove: "Free, MIT", them: "Free for individuals, paid for Pro/teams" },
+      { trove: "$10/yr, local-first", them: "Free for individuals, paid for Pro/teams" },
     ],
     callouts: [
       {
         title: "When Raycast wins",
         body:
-          "If your day is dominated by launching apps, searching files, calculator, and snippet expansion — Raycast's launcher mechanics are excellent.",
+          "If your day is dominated by launching apps, searching files, calculator, and snippet expansion, Raycast's launcher mechanics are excellent.",
       },
       {
         title: "When Trove wins",
@@ -114,13 +114,13 @@ const COMPARISONS: Record<string, Comparison> = {
   cleanmymac: {
     slug: "cleanmymac",
     competitor: "CleanMyMac",
-    metaTitle: "Trove vs CleanMyMac — free local Mac cleanup",
+    metaTitle: "Trove vs CleanMyMac: $10/yr local Mac cleanup",
     metaDescription:
-      "CleanMyMac is paid. Trove's Clean, Sweep, Treemap, and Storage panes do the same disk-hygiene work for free, local, no telemetry.",
+      "CleanMyMac is paid. Trove's Clean, Sweep, Treemap, and Storage panes do the same disk-hygiene work locally, no telemetry, for $10/yr.",
     intro:
-      "Trove's storage suite — Clean, Sweep, Treemap, Overview, Disk Speed — covers the same disk-hygiene jobs CleanMyMac sells, without the subscription. Local, no telemetry.",
+      "Trove's storage suite (Clean, Sweep, Treemap, Overview, Disk Speed) covers the same disk-hygiene jobs CleanMyMac sells, for $10/yr instead of their subscription. Local, no telemetry.",
     highlights: [
-      { trove: "Free, MIT", them: "$40-$90/year subscription" },
+      { trove: "$10/yr, local-first", them: "$40-$90/year subscription" },
       {
         trove: "Treemap viz of every folder with click-to-drill",
         them: "Space Lens (similar)",
@@ -148,9 +148,9 @@ const COMPARISONS: Record<string, Comparison> = {
   boop: {
     slug: "boop",
     competitor: "Boop",
-    metaTitle: "Trove vs Boop — text transforms with more surface",
+    metaTitle: "Trove vs Boop: text transforms with more surface",
     metaDescription:
-      "Boop is a fantastic open-source text-transform app. Trove has 60+ ⌘K inline transforms AND 40+ panes — Boop+Hash+OCR+API tester+more, in one app.",
+      "Boop is a fantastic open-source text-transform app. Trove has 60+ ⌘K inline transforms AND 40+ panes (Boop+Hash+OCR+API tester+more) in one app.",
     intro:
       "Boop is a beloved, focused open-source text transformer. Trove's ⌘K palette covers the same transforms (base64, JWT, hashes, JSON pretty, case conversion, leet) AND adds 40+ panes for everything else. If Boop is the only thing you use it for, Boop is great. If you also want OCR, hash verify, API testing, screen recording, etc., Trove wraps it all in one app.",
     highlights: [
@@ -159,7 +159,7 @@ const COMPARISONS: Record<string, Comparison> = {
         them: "60+ Boop scripts, similar coverage",
       },
       { trove: "40+ panes for everything else", them: "Text transforms only" },
-      { trove: "Free, MIT", them: "Free, MIT" },
+      { trove: "$10/yr, local-first", them: "Free, open-source (MIT)" },
     ],
     callouts: [
       {
@@ -173,13 +173,13 @@ const COMPARISONS: Record<string, Comparison> = {
   devutils: {
     slug: "devutils",
     competitor: "DevUtils",
-    metaTitle: "Trove vs DevUtils — broader dev toolkit for Mac",
+    metaTitle: "Trove vs DevUtils: broader dev toolkit for Mac",
     metaDescription:
-      "DevUtils nails offline dev transforms. Trove covers the same set + screen recording, OCR, API tester, hosts editor, LLM chat, all free + MIT.",
+      "DevUtils nails offline dev transforms. Trove covers the same set + screen recording, OCR, API tester, hosts editor, LLM chat, for $10/yr.",
     intro:
-      "DevUtils is a focused, paid offline dev toolkit. Trove covers the same transform set (base64, JWT, JSON, hashes, UUID, JSONPath, color) plus 40+ additional panes (Recorder, OCR, Hash verify, API Tester, Hosts editor, LLM chat), and is free + MIT.",
+      "DevUtils is a focused, paid offline dev toolkit. Trove covers the same transform set (base64, JWT, JSON, hashes, UUID, JSONPath, color) plus 40+ additional panes (Recorder, OCR, Hash verify, API Tester, Hosts editor, LLM chat), for $10/yr.",
     highlights: [
-      { trove: "Free, MIT", them: "$30 one-time / $40 lifetime" },
+      { trove: "$10/yr, local-first", them: "$30 one-time / $40 lifetime" },
       {
         trove: "60+ inline ⌘K actions covering DevUtils' surface",
         them: "Dedicated UI per tool",
@@ -193,7 +193,7 @@ const COMPARISONS: Record<string, Comparison> = {
       {
         title: "Different UX philosophy",
         body:
-          "DevUtils has a dedicated pane per tool — discoverable by browsing. Trove blends inline ⌘K transforms with full panes — discoverable by typing.",
+          "DevUtils has a dedicated pane per tool, discoverable by browsing. Trove blends inline ⌘K transforms with full panes, discoverable by typing.",
       },
     ],
     cta: "Try Trove",

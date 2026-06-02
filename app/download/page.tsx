@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import DownloadCard from "./DownloadCard";
 
 export const metadata: Metadata = {
-  title: "Download Trove — Mac and Windows",
+  title: "Download Trove: Mac and Windows",
   description:
     "Native, local-only Trove for macOS 13+ and Windows 10/11. Single-file install on both. No account, no telemetry.",
 };
@@ -99,7 +99,7 @@ export default async function DownloadPage() {
               "Around 55% feature parity with macOS; growing each release. The Mac column on /compare lists the full picture.",
             ]}
             release={win}
-            fallbackTag="v1.5.2-win"
+            fallbackTag="v0.3.0-win"
             fallbackAsset="Trove-win-x64.zip"
           />
         </div>
@@ -110,8 +110,8 @@ export default async function DownloadPage() {
             body="No account, no telemetry, no upload. Everything runs on the device."
           />
           <Highlight
-            title="Open source"
-            body={`Source at github.com/${REPO}. MIT licensed, signed releases.`}
+            title="Source on GitHub"
+            body={`Source viewable at github.com/${REPO}. Signed releases.`}
           />
           <Highlight
             title="Auto-update"
