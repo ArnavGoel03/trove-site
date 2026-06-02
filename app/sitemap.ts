@@ -172,6 +172,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  const comparisonSlugs = ["postman", "raycast", "cleanmymac", "boop", "devutils"];
+  const comparisonPages: MetadataRoute.Sitemap = comparisonSlugs.map((s) => ({
+    url: `${BASE}/compare/${s}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
+
   return [
     ...core,
     ...panes,
@@ -179,5 +187,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...updatePosts,
     ...actionsIndex,
     ...actionPages,
+    ...comparisonPages,
   ];
 }

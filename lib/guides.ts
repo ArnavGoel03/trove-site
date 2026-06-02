@@ -172,6 +172,118 @@ export const GUIDES: Guide[] = [
     outro:
       "Errored steps explain themselves in the chip's right-click menu — no silent skipping. Skipped steps (e.g. JSON pretty on non-JSON input) say why they were skipped so the chain stays debuggable.",
   },
+  // ── v1.5.32 SEO long-tail guides ───────────────────────────────────────
+  // Each targets a specific high-volume "how do I X on my Mac" search and
+  // resolves to a Trove answer in 30 seconds.
+  {
+    slug: "decode-jwt-on-mac",
+    title: "Decode a JWT on Mac (without uploading the token)",
+    eyebrow: "JWT",
+    lede:
+      "Most JWT decoders are web tools that upload your token. Trove decodes it locally in ⌘K — three keystrokes, never leaves the Mac.",
+    estimate: "30 sec",
+    panes: ["Stage", "Snippets"],
+    steps: [
+      {
+        name: "Open ⌘K (the Trove Quick Switcher)",
+        text:
+          "Press your Trove hotkey from anywhere. Default is ⌘ K.",
+      },
+      {
+        name: "Type 'jwt decode' followed by the token",
+        text:
+          "Trove splits the eyJ.eyJ.sig payload, base64url-decodes the payload segment, and pretty-prints the JSON. Signature is NOT verified — use HMAC-SHA256 or the Passwords pane if you need that.",
+      },
+      {
+        name: "Hit Return — the decoded payload is on your clipboard",
+        text:
+          "Paste anywhere. The token never touches the network. Trove has no telemetry.",
+      },
+    ],
+    outro:
+      "Why local matters: a JWT payload often contains user IDs, scopes, and email addresses. Pasting it into a web decoder hands that data to whoever owns the site. Trove keeps it on the Mac.",
+  },
+  {
+    slug: "find-local-ip-on-mac",
+    title: "Find your local IP address on Mac (the fast way)",
+    eyebrow: "Network",
+    lede:
+      "Instead of System Settings → Network → Wi-Fi → Details, type two letters in ⌘K and get a clean list of every interface and its IPv4.",
+    estimate: "5 sec",
+    panes: ["Network"],
+    steps: [
+      {
+        name: "Press your Trove hotkey",
+        text: "⌘K opens the Quick Switcher.",
+      },
+      {
+        name: "Type 'ip'",
+        text:
+          "Trove enumerates the non-loopback IPv4 addresses per interface (e.g. `en0: 192.168.1.42, awdl0: 169.254.x.x`). Link-local 169.254 ranges are filtered out by default.",
+      },
+      {
+        name: "⏎ to copy",
+        text:
+          "Result lands on your clipboard. Paste into a terminal, a chat, a config file. Done.",
+      },
+    ],
+  },
+  {
+    slug: "verify-sha256-of-download-mac",
+    title: "Verify the SHA-256 of a download on Mac",
+    eyebrow: "Hash",
+    lede:
+      "Project publishes a SHA-256 next to its download link? Trove verifies the file you downloaded matches, then writes a SHA256SUMS file if you want to share.",
+    estimate: "20 sec",
+    panes: ["Hash"],
+    steps: [
+      {
+        name: "Drop the file into the Hash pane",
+        text:
+          "Trove hashes MD5 + SHA-1 + SHA-256 in a single streaming pass — works on multi-GB files.",
+      },
+      {
+        name: "Paste the expected hash",
+        text:
+          "Paste the value from the publisher's page into Compare Against. A green check appears next to the matching algorithm.",
+      },
+      {
+        name: "Optional: export SHA256SUMS",
+        text:
+          "Toolbar → Export… picks the format. The file is the standard `<hash>  <filename>` shape that `shasum -c` consumes.",
+      },
+    ],
+    outro:
+      "Trove also offers an auto-copy SHA256 toggle in the Hash toolbar — handy when you're verifying a queue of downloads.",
+  },
+  {
+    slug: "flush-dns-cache-mac",
+    title: "Flush the DNS cache on Mac (without remembering the command)",
+    eyebrow: "Hosts",
+    lede:
+      "Changing /etc/hosts on macOS doesn't take effect until you flush the DNS cache and HUP mDNSResponder. Trove's Hosts editor does both for you, behind one authentication prompt.",
+    estimate: "30 sec",
+    panes: ["Hosts"],
+    steps: [
+      {
+        name: "Open the Hosts pane",
+        text:
+          "Sidebar → Hosts (under System).",
+      },
+      {
+        name: "Edit your rule packs and hit Apply",
+        text:
+          "Trove writes /etc/hosts via one `osascript with administrator privileges` call. The same call then runs `dscacheutil -flushcache && killall -HUP mDNSResponder` — the official combo.",
+      },
+      {
+        name: "Done",
+        text:
+          "No need to remember the incantation; no Terminal window required.",
+      },
+    ],
+    outro:
+      "If you only want to flush without editing: open Hosts, hit Apply with no rule packs changed.",
+  },
 ];
 
 export function guideBySlug(slug: string): Guide | undefined {
