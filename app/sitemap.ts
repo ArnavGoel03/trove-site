@@ -3,6 +3,7 @@ import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
 import { GUIDES } from "@/lib/guides";
 import { listUpdates } from "@/lib/updates";
+import { ACTIONS } from "@/lib/actions";
 
 const BASE = "https://gettrove.vercel.app";
 
@@ -149,5 +150,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...core, ...panes, ...guides, ...updatePosts];
+  const actionsIndex: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE}/action`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${BASE}/download`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+  ];
+
+  const actionPages: MetadataRoute.Sitemap = ACTIONS.map((a) => ({
+    url: `${BASE}/action/${a.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [
+    ...core,
+    ...panes,
+    ...guides,
+    ...updatePosts,
+    ...actionsIndex,
+    ...actionPages,
+  ];
 }
