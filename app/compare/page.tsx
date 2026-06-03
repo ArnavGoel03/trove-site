@@ -33,9 +33,49 @@ const COMPETITORS = [
   { key: "textsniper", name: "TextSniper" },
   { key: "alfred", name: "Alfred" },
   { key: "soulver", name: "Soulver" },
+  { key: "clop", name: "Clop" },
+  { key: "dropover", name: "Dropover" },
+  { key: "numi", name: "Numi" },
+  { key: "commandx", name: "Command X" },
+  { key: "handmirror", name: "Hand Mirror" },
 ] as const;
 
 const ROWS: Row[] = [
+  {
+    group: "Files",
+    feature: "Image / video / PDF compression from one drop",
+    trove: "yes",
+    marks: { clop: "yes", cleanshot: "partial" },
+    note: "Replaces Clop: Trove compresses images, video (ffmpeg) and PDFs, plus a lossless PDF optimize mode that keeps selectable text.",
+  },
+  {
+    group: "Files",
+    feature: "Drag-and-drop file shelf / staging area",
+    trove: "yes",
+    marks: { dropover: "yes" },
+    note: "Replaces Dropover: the Stage pane holds files and text mid-task and feeds every other tool.",
+  },
+  {
+    group: "Files",
+    feature: "Cut & paste files in Finder",
+    trove: "yes",
+    marks: { commandx: "yes" },
+    note: "Replaces Command X: the Move Files pane does true cut/paste relocation.",
+  },
+  {
+    group: "System",
+    feature: "Quick webcam / appearance check",
+    trove: "yes",
+    marks: { handmirror: "yes" },
+    note: "Replaces Hand Mirror: the Mirror pane is a flip-capable webcam preview with an opt-in menu-bar toggle.",
+  },
+  {
+    group: "Text + clipboard",
+    feature: "Natural-language calculator",
+    trove: "yes",
+    marks: { numi: "yes", soulver: "yes", raycast: "partial" },
+    note: "Replaces Numi: the Calc pane parses natural-language math plus unit/currency/base conversions.",
+  },
   // Capture
   {
     group: "Capture",
@@ -773,7 +813,7 @@ export default function ComparePage() {
                     </td>
                     {COMPETITORS.map((c) => (
                       <td key={c.key} className="px-3 py-3 text-center">
-                        <Mark value={r.marks[c.key]} />
+                        <Mark value={r.marks[c.key] ?? "no"} />
                       </td>
                     ))}
                   </tr>
