@@ -13,7 +13,7 @@ export default function FeaturesCta() {
       await navigator.clipboard.writeText(BREW_CMD);
       toast.success("Homebrew command copied", {
         description:
-          "Paste in Terminal — the cask installs Trove from the GitHub release.",
+          "Paste in Terminal: the cask installs Trove from the GitHub release.",
       });
     } catch {
       toast.error("Couldn't copy", {
@@ -41,7 +41,7 @@ export default function FeaturesCta() {
         />
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] max-w-2xl">
-          Try the 1.1.0 release.
+          Try the 1.11.2 release.
           <br />
           <span className="text-[var(--color-fg-dim)]">
             Two ways to install.
@@ -113,7 +113,7 @@ export default function FeaturesCta() {
             rel="noopener noreferrer"
             className="hover:text-white transition-colors"
           >
-            Full 1.1.0 changelog
+            Full 1.11.2 changelog
           </a>
         </div>
       </motion.div>

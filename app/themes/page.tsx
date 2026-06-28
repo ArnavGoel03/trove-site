@@ -4,9 +4,9 @@ import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Settings, Palette } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Themes — Trove",
+  title: "Themes: Trove",
   description:
-    "Dark, Light, Linear, and Cron themes ship in Trove. Pick one in Settings → Theme and the entire app — every pane, every chrome element — follows.",
+    "Dark, Light, Linear, and Cron themes ship in Trove. Pick one in Settings → Theme and the entire app, every pane, every chrome element, follows.",
   alternates: { canonical: "https://gettrove.vercel.app/themes" },
 };
 
@@ -32,7 +32,7 @@ const THEMES: ThemeSpec[] = [
     name: "Dark",
     tagline: "The default.",
     description:
-      "Near-black background with orange accents — the in-app default. Holds up across long sessions and OLED panels.",
+      "Near-black background with orange accents: the in-app default. Holds up across long sessions and OLED panels.",
     surface: "#08080b",
     panel: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015))",
     border: "rgba(255,255,255,0.08)",
@@ -100,7 +100,7 @@ export default function ThemesPage() {
       title="Themes"
       lede={
         <>
-          Four themes ship in 1.1.0 — Dark, Light, Linear, Cron. Pick one in
+          Four themes ship in 1.11.2: Dark, Light, Linear, Cron. Pick one in
           Settings &rarr; Theme and the entire app follows: sidebar, chrome,
           panes, even the menubar overlay. Custom palettes ship in 1.2.0.
         </>
@@ -132,7 +132,7 @@ export default function ThemesPage() {
           <p className="text-[13.5px] leading-[1.7] text-[var(--color-fg-dim)]">
             Open Trove, hit <kbd className="md-inline">⌘,</kbd> for Settings,
             choose <span className="text-white">Theme</span> in the sidebar,
-            and pick one of the four palettes. The switch is live — no relaunch,
+            and pick one of the four palettes. The switch is live: no relaunch,
             no flicker. The selection persists per-Mac in your local
             preferences plist.
           </p>
@@ -158,7 +158,7 @@ export default function ThemesPage() {
                 className="ml-3 text-[11px] font-medium tracking-tight"
                 style={{ color: t.textDim }}
               >
-                Trove — {t.name}
+                Trove: {t.name}
               </span>
               <span
                 className="ml-auto text-[10px] uppercase tracking-[0.18em] px-2 py-0.5 rounded-full"
@@ -319,7 +319,7 @@ export default function ThemesPage() {
         </span>
         <div>
           <div className="text-[14px] font-medium text-white mb-1">
-            Coming in 1.2.0 — custom palettes
+            Coming in 1.2.0: custom palettes
           </div>
           <p className="text-[13.5px] leading-[1.7] text-[var(--color-fg-dim)]">
             Per-token customization (surface, accent, border, text) with a live

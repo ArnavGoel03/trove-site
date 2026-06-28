@@ -1,4 +1,4 @@
-// Single source of truth for the 33 panes Trove ships in v1.1.0.
+// Single source of truth for the 53 panes Trove ships in v1.11.2.
 //
 // Mirrors `enum Pane` in `macos/main.swift` line-for-line: same rawValue,
 // same icon name (SF Symbol, mapped here to a Lucide equivalent for the
@@ -11,38 +11,56 @@
 import {
   Activity,
   ArrowDownToLine,
+  ArrowLeftRight,
+  BatteryFull,
+  Bluetooth,
   BookOpen,
+  Braces,
+  Brain,
   Calculator,
+  CalendarClock,
   Clipboard,
   ClipboardList,
   Coffee,
   Cpu,
+  Crop,
   Disc3,
   Eye,
   FileDigit,
   FileEdit,
+  FileSearch,
   FileText,
   Folder,
   Gauge,
+  GitBranch,
+  Globe,
   HardDrive,
   Hash as HashIcon,
+  Heading,
   History,
   Image as ImageIcon,
   KeyboardMusic,
+  KeyRound,
+  Layers,
   LayoutGrid,
+  ListTree,
   type LucideIcon,
   Network,
   Palette,
   Pipette,
   PlugZap,
   QrCode,
+  Regex,
+  Ruler,
   ScanLine,
   ScanSearch,
   Scissors,
   ScrollText,
+  Settings2,
   ShieldCheck,
   Sparkles,
   StickyNote,
+  Terminal,
   Thermometer,
   Trash2,
   Type,
@@ -84,7 +102,7 @@ export const PANES: Pane[] = [
     icon: Clipboard,
     sfSymbol: "tray.full.fill",
     blurb:
-      "Multi-clipboard staging — drop, paste, screenshot, copy all at once.",
+      "Multi-clipboard staging: drop, paste, screenshot, copy all at once.",
     accent: "#ff7a45",
   },
   {
@@ -129,7 +147,87 @@ export const PANES: Pane[] = [
     icon: Wand2,
     sfSymbol: "wand.and.stars",
     blurb:
-      "Chainable text pipeline — Base64, JSON, JWT, regex, 40+ ops, saved recipes.",
+      "Chainable text pipeline: Base64, JSON, JWT, regex, 40+ ops, saved recipes.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "JSON / XML",
+    section: "Compute",
+    icon: Braces,
+    sfSymbol: "curlybraces",
+    blurb:
+      "JSON, YAML and XML format, validate, sort keys, minify. Replaces jsonformatter.org.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "Regex",
+    section: "Compute",
+    icon: Regex,
+    sfSymbol: "slash.circle",
+    blurb:
+      "Regex playground with live match highlighting, capture groups, and 10 common-pattern presets.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "Date Calc",
+    section: "Compute",
+    icon: CalendarClock,
+    sfSymbol: "calendar.badge.clock",
+    blurb: "Date calculator: business days, time zones, Unix to ISO 8601.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "Units",
+    section: "Compute",
+    icon: Ruler,
+    sfSymbol: "ruler",
+    blurb:
+      "Unit converter: length, mass, temperature, data, speed, volume, area, time, energy, power.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "API Tester",
+    section: "Compute",
+    icon: Globe,
+    sfSymbol: "globe.americas",
+    blurb:
+      "HTTP API client: method, URL, headers, body, auth (including OAuth PKCE). Response with status, headers and pretty JSON. Saved collections, history, and Postman import.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "Passwords",
+    section: "Compute",
+    icon: KeyRound,
+    sfSymbol: "key.fill",
+    blurb:
+      "Strong password generator (random or memorable) plus a Have I Been Pwned breach checker. Only the first 5 hex characters of the SHA-1 ever leave the Mac (k-anonymity).",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "Local AI",
+    section: "Compute",
+    icon: Brain,
+    sfSymbol: "brain",
+    blurb:
+      "Local LLM chat through Ollama on localhost. Pick any model you have pulled. Streaming replies, system prompt, temperature, multi-turn. Nothing leaves the Mac.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "Terminal",
+    section: "Compute",
+    icon: Terminal,
+    sfSymbol: "terminal",
+    blurb:
+      "Embedded command runner: zsh with a persistent working directory, command history, and ANSI color. A quick runner, not a full TTY.",
+    accent: "#4cb8ff",
+  },
+  {
+    name: "Markdown",
+    section: "Compute",
+    icon: Heading,
+    sfSymbol: "text.justify.left",
+    blurb:
+      "Markdown editor with a live, natively rendered preview (no WebView). Split or focus modes, open and save .md, export or copy HTML, live word count.",
     accent: "#4cb8ff",
   },
 
@@ -182,7 +280,16 @@ export const PANES: Pane[] = [
     icon: Eye,
     sfSymbol: "video",
     blurb:
-      "Webcam preview with horizontal flip + opt-in menu bar item. Local-only — no recording.",
+      "Webcam preview with horizontal flip + opt-in menu bar item. Local-only, no recording.",
+    accent: "#b27cff",
+  },
+  {
+    name: "Image Editor",
+    section: "Capture",
+    icon: Crop,
+    sfSymbol: "wand.and.stars.inverse",
+    blurb:
+      "Photos-class image editor: crop, rotate, perspective, 13 adjustments, 9 filters, auto-enhance, red-eye removal, multi-format export.",
     accent: "#b27cff",
   },
 
@@ -201,7 +308,7 @@ export const PANES: Pane[] = [
     icon: FileText,
     sfSymbol: "doc.richtext",
     blurb:
-      "Merge (reorderable), split, compress, rotate, OCR, watermark — all local.",
+      "Merge (reorderable), split, compress, rotate, OCR, watermark, all local.",
     accent: "#5be3a4",
   },
   {
@@ -219,7 +326,25 @@ export const PANES: Pane[] = [
     icon: FileEdit,
     sfSymbol: "textformat.alt",
     blurb:
-      "Mass file rename — find/replace, regex, sequence, date prefix, EXIF date.",
+      "Mass file rename: find/replace, regex, sequence, date prefix, EXIF date.",
+    accent: "#5be3a4",
+  },
+  {
+    name: "Inspector",
+    section: "Files",
+    icon: FileSearch,
+    sfSymbol: "doc.text.magnifyingglass",
+    blurb:
+      "Drop any file to see EXIF, GPS, PDF info, video tracks, hashes, xattr, Spotlight metadata. Strip metadata. Compare two files.",
+    accent: "#5be3a4",
+  },
+  {
+    name: "Converter",
+    section: "Files",
+    icon: ArrowLeftRight,
+    sfSymbol: "arrow.up.arrow.down.square",
+    blurb:
+      "Universal file converter: HEIC to JPG, MOV to MP4, AAC to MP3, DOCX to PDF, anything ffmpeg, LibreOffice and sips can handle. Drag in, pick a target, run.",
     accent: "#5be3a4",
   },
 
@@ -253,7 +378,7 @@ export const PANES: Pane[] = [
     section: "System",
     icon: Folder,
     sfSymbol: "macwindow.and.cursorarrow",
-    blurb: "Show extensions, path bar, hidden files — Finder tweaks bundled.",
+    blurb: "Show extensions, path bar, hidden files: Finder tweaks bundled.",
     accent: "#ffd166",
   },
   {
@@ -306,6 +431,69 @@ export const PANES: Pane[] = [
     blurb: "Per-process network throughput (Little Snitch read-only).",
     accent: "#ffd166",
   },
+  {
+    name: "Modes",
+    section: "System",
+    icon: Layers,
+    sfSymbol: "rectangle.3.group",
+    blurb:
+      "Save apps and window layout as a named workspace. Restore with a hotkey.",
+    accent: "#ffd166",
+  },
+  {
+    name: "Workflows",
+    section: "System",
+    icon: GitBranch,
+    sfSymbol: "arrow.triangle.branch",
+    blurb:
+      "Chain pane outputs into pane inputs. Capture to OCR to AI to Clipboard, all as one keybind.",
+    accent: "#ffd166",
+  },
+  {
+    name: "Battery",
+    section: "System",
+    icon: BatteryFull,
+    sfSymbol: "battery.100",
+    blurb:
+      "Battery cycles, capacity vs design, condition, top energy users, temperature, voltage, amperage.",
+    accent: "#ffd166",
+  },
+  {
+    name: "Speedtest",
+    section: "System",
+    icon: Gauge,
+    sfSymbol: "speedometer",
+    blurb:
+      "Internet download, upload, ping and jitter via Cloudflare. No third-party service. History of recent runs.",
+    accent: "#ffd166",
+  },
+  {
+    name: "Devices",
+    section: "System",
+    icon: Bluetooth,
+    sfSymbol: "antenna.radiowaves.left.and.right",
+    blurb:
+      "Connected Bluetooth and USB devices with battery levels (AirPods, Magic Mouse, and more).",
+    accent: "#ffd166",
+  },
+  {
+    name: "Services",
+    section: "System",
+    icon: Settings2,
+    sfSymbol: "gearshape.2",
+    blurb:
+      "LaunchAgents and LaunchDaemons: enumerate, start, stop, and reveal the plist.",
+    accent: "#ffd166",
+  },
+  {
+    name: "Hosts",
+    section: "System",
+    icon: ListTree,
+    sfSymbol: "list.bullet.indent",
+    blurb:
+      "/etc/hosts editor. Group rules into named packs (block social, dev redirects), toggle whole packs on or off, commit with one auth prompt.",
+    accent: "#ffd166",
+  },
 
   // Storage
   {
@@ -349,6 +537,15 @@ export const PANES: Pane[] = [
     blurb: "Sequential + random read/write benchmark per volume.",
     accent: "#ff5d8f",
   },
+  {
+    name: "Treemap",
+    section: "Storage",
+    icon: LayoutGrid,
+    sfSymbol: "square.grid.3x3.fill",
+    blurb:
+      "Folder size as a squarified treemap. Double-click any tile to drill in.",
+    accent: "#ff5d8f",
+  },
 
   // App
   {
@@ -357,7 +554,7 @@ export const PANES: Pane[] = [
     icon: BookOpen,
     sfSymbol: "books.vertical",
     blurb:
-      "Recoverable cache of everything Trove has produced — re-open, re-edit, send to Stage.",
+      "Recoverable cache of everything Trove has produced: re-open, re-edit, send to Stage.",
     accent: "#c4b5fd",
   },
 
@@ -416,7 +613,7 @@ export const SECTIONS: { name: PaneSection; tagline: string; accent: string }[] 
     },
   ];
 
-// Headline / power-user capabilities introduced in v1.1.0.
+// Headline / power-user capabilities introduced in v1.11.2.
 export type Capability = {
   eyebrow: string;
   title: string;
@@ -485,7 +682,7 @@ export const CAPABILITIES: Capability[] = [
     body: "Drag a `SHA256SUMS` / `.sha256` / `.md5sums` / `.sha512sum` alongside the files it covers. Trove parses the sums file, streams each target through the 4-in-1 hashing pipeline, and renders ✓ / ✗ / missing per line. Algorithm auto-detected by hex length; mixed files show the modal algorithm.",
     bullets: [
       "MD5 · SHA-1 · SHA-256 · SHA-512 auto-detected by hex length",
-      "Path-traversal hardened — refuses absolute paths and `..`",
+      "Path-traversal hardened: refuses absolute paths and `..`",
       "Mixed-algorithm sums files supported",
       "Same 4-in-1 streaming pipeline as single-file hashing",
     ],
@@ -534,7 +731,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Homebrew",
     title: "brew install --cask trove",
-    body: "There's a Homebrew Cask formula at `Casks/trove.rb`. Once the tap publishes, install and upgrade ride the same `brew upgrade --cask` path as every other cask on your machine — no extra updater to babysit.",
+    body: "There's a Homebrew Cask formula at `Casks/trove.rb`. Once the tap publishes, install and upgrade ride the same `brew upgrade --cask` path as every other cask on your machine, no extra updater to babysit.",
     bullets: [
       "`brew tap arnavgoel/trove && brew install --cask trove`",
       "`livecheck` against the GitHub Releases page",
@@ -547,7 +744,7 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "XDG Config Home",
     title: "$TROVE_CONFIG_HOME, then XDG, then native",
-    body: "Park Trove's config under `~/.config/trove/` if that's where your other tools live. Lookup order: `$TROVE_CONFIG_HOME` > `$XDG_CONFIG_HOME/trove` > `~/.config/trove` > native App Support. All 11 storage-touching panes route through one resolver, and there's no silent migration — existing installs stay where they were.",
+    body: "Park Trove's config under `~/.config/trove/` if that's where your other tools live. Lookup order: `$TROVE_CONFIG_HOME` > `$XDG_CONFIG_HOME/trove` > `~/.config/trove` > native App Support. All 11 storage-touching panes route through one resolver, and there's no silent migration, existing installs stay where they were.",
     bullets: [
       "Single resolver, 11 panes",
       "Per-user override via `$TROVE_CONFIG_HOME`",
@@ -573,16 +770,16 @@ export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "Crash Discipline",
     title: "Zero try! / fatalError in production",
-    body: "DEVELOP_RULES §1 enforced: no `try!`, no `fatalError`, no `main.sync`, no bare `.waitUntilExit`, no `.first!` in the production tree. The lint-trove pass runs clean across 45 files. Every error path surfaces as a Sonner-style flash toast — `alert()` and silent failure are not options.",
+    body: "DEVELOP_RULES §1 enforced: no `try!`, no `fatalError`, no `main.sync`, no bare `.waitUntilExit`, no `.first!` in the production tree. The lint-trove pass runs clean across 45 files. Every error path surfaces as a Sonner-style flash toast. `alert()` and silent failure are not options.",
     bullets: [
       "lint-trove clean across the production Swift tree",
       "Sonner-grade flash() toasts everywhere",
       "Quarantine-on-corrupt for every JSON-backed store",
-      "Test suite: 233/233 PASS at 1.1.0",
+      "Test suite: 233/233 PASS at 1.11.2",
     ],
     icon: ShieldCheck,
     accent: "#ff5d8f",
   },
 ];
 
-export const PANE_COUNT = PANES.length; // 33
+export const PANE_COUNT = PANES.length; // 53

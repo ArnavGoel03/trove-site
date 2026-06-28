@@ -7,7 +7,7 @@ import AppMockup from "./AppMockup";
 
 export default function Hero() {
   // The mouse-tracked gradient is driven via a single rAF-throttled
-  // direct DOM write to CSS variables — zero React re-renders per
+  // direct DOM write to CSS variables, zero React re-renders per
   // mousemove, zero motion-value subscriptions firing per frame.
   const gradientRef = useRef<HTMLDivElement | null>(null);
   const reduced = useReducedMotion();
@@ -29,7 +29,7 @@ export default function Hero() {
     let pending = false;
 
     function loop() {
-      // Cheap spring-ish lerp toward the target — runs at most once
+      // Cheap spring-ish lerp toward the target, runs at most once
       // per frame regardless of how many mousemove events fired.
       currentX += (targetX - currentX) * 0.08;
       currentY += (targetY - currentY) * 0.08;
@@ -67,7 +67,7 @@ export default function Hero() {
       id="top"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 overflow-hidden"
     >
-      {/* Mouse-responsive gradient — driven via CSS vars, GPU-composited */}
+      {/* Mouse-responsive gradient: driven via CSS vars, GPU-composited */}
       <div
         ref={gradientRef}
         aria-hidden
@@ -106,7 +106,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur px-3 py-1 text-[12px] text-[var(--color-fg-dim)] mb-7"
         >
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.7)]" />
-          v1.1.0 · 33 panes · 11 Shortcuts intents · ~14 MB
+          v1.11.2 · 53 panes · 11 Shortcuts intents · ~14 MB
         </motion.div>
 
         <h1 className="text-[44px] sm:text-[64px] md:text-[84px] leading-[0.96] font-semibold tracking-[-0.04em] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
@@ -121,7 +121,7 @@ export default function Hero() {
           className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl mx-auto leading-relaxed"
         >
           Clipboard manager, window snapper, system monitor, OCR, PDF kit, disk
-          cleaner, 27 more — one native macOS app, ~14 MB, scriptable from
+          cleaner, 27 more, one native macOS app, ~14 MB, scriptable from
           Shortcuts, installable via Homebrew, cold-launches in under half a
           second.
         </motion.p>
@@ -138,7 +138,7 @@ export default function Hero() {
             href="/features"
             className="btn-ghost inline-flex items-center gap-2 rounded-full font-medium px-5 py-3 text-[14px] transition-all hover:translate-y-[-1px]"
           >
-            See all 33 panes
+            See all 53 panes
           </a>
         </motion.div>
 

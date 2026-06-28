@@ -3,8 +3,8 @@
 import { motion } from "motion/react";
 import { PANES, SECTIONS, type Pane } from "@/lib/panes";
 
-// 33 panes, grouped by sidebar section. Identical to the in-app Customize
-// panel — same names, same one-liners, same section labels.
+// 53 panes, grouped by sidebar section. Identical to the in-app Customize
+// panel: same names, same one-liners, same section labels.
 export default function PaneGrid() {
   return (
     <section id="panes" className="relative px-6 py-20 max-w-7xl mx-auto">
@@ -19,14 +19,14 @@ export default function PaneGrid() {
           The full set
         </div>
         <h2 className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02]">
-          33 panes, grouped the way{" "}
+          53 panes, grouped the way{" "}
           <span className="text-[var(--color-fg-dim)]">
             the app groups them.
           </span>
         </h2>
         <p className="mt-5 text-[15px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
           Hide any pane you don&rsquo;t use from Trove → Settings → Customize
-          (Stage is the only one that stays — it&rsquo;s where everything else
+          (Stage is the only one that stays, it&rsquo;s where everything else
           drops). The list below mirrors that panel exactly.
         </p>
       </motion.div>

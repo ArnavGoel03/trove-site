@@ -12,7 +12,7 @@ type Params = { slug: string };
 
 /**
  * Pre-render every pane page at build time so /pane/<slug> is just a CDN
- * hit. The 33-entry list is small enough that the build cost is trivial.
+ * hit. The 53-entry list is small enough that the build cost is trivial.
  */
 export function generateStaticParams(): Params[] {
   return PANES.map((p) => ({ slug: slugifyPane(p.name) }));
@@ -26,7 +26,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const pane = PANES.find((p) => slugifyPane(p.name) === slug);
   if (!pane) return {};
-  const title = `${pane.name} — Trove pane`;
+  const title = `${pane.name}: Trove pane`;
   const description = pane.blurb;
   return {
     title,
@@ -68,7 +68,7 @@ export default async function PanePage({
       lede={pane.blurb}
     >
       <JsonLd
-        data={webPageLd(`${pane.name} — Trove pane`, pane.blurb, url)}
+        data={webPageLd(`${pane.name}: Trove pane`, pane.blurb, url)}
       />
       <JsonLd
         data={breadcrumbLd([

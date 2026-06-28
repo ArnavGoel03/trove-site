@@ -25,7 +25,7 @@ export default function Page() {
       <JsonLd
         data={webPageLd(
           "Trove: your Mac, finally tidy.",
-          "33 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
+          "53 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
           "https://gettrove.vercel.app",
         )}
       />

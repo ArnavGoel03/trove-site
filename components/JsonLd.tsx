@@ -1,7 +1,7 @@
 /**
  * Renders a `<script type="application/ld+json">` block server-side so
  * Googlebot / Bingbot get the structured data on first byte (no JS run
- * needed). Stringify is intentional — JSON.stringify escapes < > & for
+ * needed). Stringify is intentional: JSON.stringify escapes < > & for
  * us; the resulting payload is plain ASCII JSON inside the script tag.
  *
  * Pass any valid schema.org graph. The common builders are exported
@@ -37,7 +37,7 @@ export function softwareApplicationLd() {
     softwareVersion: "1.5",
     fileSize: "14 MB",
     description:
-      "Trove is a $10/year, 100% local macOS utility app that bundles 33 panes plus 60+ inline actions: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, hashing and more. No telemetry, no uploads, no account required. Cold-launches in under 500 ms.",
+      "Trove is a $10/year, 100% local macOS utility app that bundles 53 panes plus 60+ inline actions: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, hashing and more. No telemetry, no uploads, no account required. Cold-launches in under 500 ms.",
     featureList: [
       "Clipboard history with regex search and dedup",
       "Multi-clipboard staging (Stage)",

@@ -1,6 +1,6 @@
 // Per-pane deep-dive content for /pane/[slug]. Kept here so each of the
-// 33 pages stays a tiny route file that just consumes a typed bag. Each
-// entry mirrors what the in-app pane actually does as of v1.1.0 — no
+// 53 pages stays a tiny route file that just consumes a typed bag. Each
+// entry mirrors what the in-app pane actually does as of v1.11.2, no
 // roadmap aspirations, only shipped capabilities.
 
 export type PaneURL = { example: string; note: string };
@@ -15,11 +15,11 @@ export type PaneDetail = {
 
 const GENERIC: PaneDetail = {
   overview:
-    "Part of Trove's 33-pane native macOS workspace. Open it from the sidebar, ⌘K Quick Switcher, or the `trove://pane/open` URL scheme.",
+    "Part of Trove's 53-pane native macOS workspace. Open it from the sidebar, ⌘K Quick Switcher, or the `trove://pane/open` URL scheme.",
   capabilities: [
     "Built into Trove, no separate install",
     "Persists state per-user under XDG / Application Support",
-    "Local-only — never makes network calls",
+    "Local-only: never makes network calls",
     "Scriptable via macOS Shortcuts and the trove:// URL scheme where it makes sense",
   ],
 };
@@ -29,11 +29,11 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
     overview:
       "Stage is Trove's multi-clipboard staging surface. Drop files, paste text, capture screenshots, and drag images into a single tray, then copy everything out as files, as text, or save it to disk in one shot. It's the default first-launch pane and the destination for almost every cross-pane Continue action.",
     capabilities: [
-      "Mixed drop target — text, files, screenshots, in-memory images",
+      "Mixed drop target: text, files, screenshots, in-memory images",
       "Copy all as files / as text in one action",
       "Save all to a chosen folder",
       "Quick Look any item with Space",
-      "Cross-pane Continue editing — receives PDF / OCR / Snip / Record outputs",
+      "Cross-pane Continue editing: receives PDF / OCR / Snip / Record outputs",
       "Per-recording metadata banner (duration, source, codec, fps)",
     ],
     urlScheme: [
@@ -65,7 +65,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
       "Soft-tint ×N badge for repeated payloads (dedup)",
       "Pin any entry to keep it at the top",
       "Recover deleted entries from quarantine",
-      "Global HUD via ⌃⇧⌘V — type-to-filter, ↩ to paste",
+      "Global HUD via ⌃⇧⌘V: type-to-filter, ↩ to paste",
       "Search by content kind (text / image / file)",
     ],
     urlScheme: [
@@ -83,12 +83,12 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   Snippets: {
     overview:
-      "Reusable text templates — signatures, common replies, addresses, code blocks — copy with one click. Snippets render as a rich entity picker inside the macOS Shortcuts editor with name + body preview.",
+      "Reusable text templates: signatures, common replies, addresses, code blocks, copy with one click. Snippets render as a rich entity picker inside the macOS Shortcuts editor with name + body preview.",
     capabilities: [
       "Name + body, plain text or markdown",
       "One-click copy or stage from the sidebar",
       "Shortcuts pickers: by name, by ID, list all, count",
-      "Tolerant Codable persistence — future fields don't break old files",
+      "Tolerant Codable persistence: future fields don't break old files",
       "Cross-launch ordering by usage frequency",
     ],
     urlScheme: [
@@ -104,25 +104,25 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   Notes: {
     overview:
-      "Five colored tabs of always-on markdown scratchpad. The Notes pane is your in-app stage for quick thinking — auto-saved per-tab, no cloud sync, never overwritten.",
+      "Five colored tabs of always-on markdown scratchpad. The Notes pane is your in-app stage for quick thinking, auto-saved per-tab, no cloud sync, never overwritten.",
     capabilities: [
       "Five color-coded tabs",
       "Markdown rendering (bold, italic, links, lists, code)",
       "Auto-save per tab on every keystroke",
       "⌘B / ⌘I / ⌘K formatting",
-      "Quarantine-on-corrupt — never silently loses content",
+      "Quarantine-on-corrupt: never silently loses content",
     ],
     privacy:
-      "Notes live in plain `.md` files under XDG / Application Support. You can rsync or git them — they're yours.",
+      "Notes live in plain `.md` files under XDG / Application Support. You can rsync or git them: they're yours.",
   },
   Calculator: {
     overview:
       "Soulver-style tape calculator with variables, unit conversions, live currency, and smart percent. Type expressions line-by-line; previous results are recallable via ↑ or the `ans` keyword.",
     capabilities: [
-      "Variables — `x = 100`, then use `x * 1.09`",
-      "Unit conversions — `12 inches in cm`, `2 GB / 1024`",
-      "Live currency — `100 usd in eur` (cached)",
-      "Smart percent — `1200 + 18%`",
+      "Variables: `x = 100`, then use `x * 1.09`",
+      "Unit conversions: `12 inches in cm`, `2 GB / 1024`",
+      "Live currency: `100 usd in eur` (cached)",
+      "Smart percent: `1200 + 18%`",
       "History tape with ⌘C to copy last result",
       "Tab to insert `ans` (previous result)",
     ],
@@ -139,11 +139,11 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   "Text Tools": {
     overview:
-      "Chainable text pipeline with 40+ ops — Base64, JSON, JWT, regex, hashing, casing, encoding. Save the chain as a named recipe and replay tomorrow.",
+      "Chainable text pipeline with 40+ ops: Base64, JSON, JWT, regex, hashing, casing, encoding. Save the chain as a named recipe and replay tomorrow.",
     capabilities: [
       "40+ ops covering encoding, formatting, parsing, hashing, regex",
-      "Pipeline chips — right-click to copy step / send to Stage / inspect",
-      "Saved Recipes — name and replay any pipeline",
+      "Pipeline chips: right-click to copy step / send to Stage / inspect",
+      "Saved Recipes: name and replay any pipeline",
       "Errored steps explain themselves inline",
       "Tolerant Codable on `recipes.json` so upgrades don't drop data",
       "Cross-pane Continue receives OCR / PDF outputs as input",
@@ -151,10 +151,10 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   Color: {
     overview:
-      "Pick a color from any pixel on screen, extract a palette from an image, and check WCAG AA / AAA contrast — all in one pane.",
+      "Pick a color from any pixel on screen, extract a palette from an image, and check WCAG AA / AAA contrast, all in one pane.",
     capabilities: [
-      "Eyedropper picker — magnifier + hex / rgb / hsl readout",
-      "Palette from image — N-color median-cut quantizer",
+      "Eyedropper picker: magnifier + hex / rgb / hsl readout",
+      "Palette from image: N-color median-cut quantizer",
       "WCAG contrast checker (AA / AAA, normal + large text)",
       "Copy as hex / rgb / hsl / Swift Color / SwiftUI Color / CSS var",
       "Recent picks history",
@@ -162,7 +162,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   QR: {
     overview:
-      "Generate QR codes from any text — URL, Wi-Fi credential, vCard — with live preview at 1024×1024 PNG. Drag the result out, or copy / save it.",
+      "Generate QR codes from any text: URL, Wi-Fi credential, vCard, with live preview at 1024×1024 PNG. Drag the result out, or copy / save it.",
     capabilities: [
       "1024×1024 PNG output",
       "Error-correction level toggle (L / M / Q / H)",
@@ -179,13 +179,13 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   OCR: {
     overview:
-      "Capture a region of the screen, recognize text on-device with Vision, optionally translate, send anywhere. Fully local — no cloud OCR.",
+      "Capture a region of the screen, recognize text on-device with Vision, optionally translate, send anywhere. Fully local: no cloud OCR.",
     capabilities: [
       "Region capture via ⌘⇧N",
-      "On-device Vision recognition — 19 languages",
+      "On-device Vision recognition: 19 languages",
       "Optional translation (Apple Translate)",
       "Send to Stage / Text Tools / clipboard",
-      "Preview surface — see what was recognized before committing",
+      "Preview surface: see what was recognized before committing",
     ],
     privacy:
       "OCR runs entirely on-device via Apple's Vision framework. Images and recognized text never leave your Mac.",
@@ -194,8 +194,8 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
     overview:
       "Screen recording with system audio + mic via ScreenCaptureKit. Webcam PIP, keystroke overlay, click ripple, floating Stop button, global ⌘⇧. hotkey, mic gain, voice-activity auto-pause, countdown, filename tokens, MOV with separate audio tracks. Auto-routes to Stage with metadata banner.",
     capabilities: [
-      "ScreenCaptureKit pipeline — display, window, or area capture",
-      "Webcam PIP — parallel `.webcam.mov` alongside screen",
+      "ScreenCaptureKit pipeline: display, window, or area capture",
+      "Webcam PIP: parallel `.webcam.mov` alongside screen",
       "Webcam-only mode (bypasses SCStream entirely)",
       "Keystroke overlay (CGEventTap + bottom-center HUD)",
       "Click ripple animation",
@@ -203,7 +203,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
       "Global stop hotkey ⌘⇧. (Carbon registration)",
       "Quality slider (Smallest / Balanced / Best)",
       "Mic gain slider + clipping indicator",
-      "Filename tokens — `{date} {datetime} {codec} {fps} {counter}`",
+      "Filename tokens: `{date} {datetime} {codec} {fps} {counter}`",
       "Auto-trim silence at finalize",
       "Countdown (Off / 3 / 5 / 10s)",
       "Voice-activity auto-pause (-45 dBFS, 2.5s sustained)",
@@ -212,11 +212,11 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
       "MOV export with separate audio tracks (NLE-friendly)",
     ],
     privacy:
-      "Recordings save to your chosen folder. Trove never uploads, transcodes, or tracks recordings — they're files on disk you own outright.",
+      "Recordings save to your chosen folder. Trove never uploads, transcodes, or tracks recordings, they're files on disk you own outright.",
   },
   Snip: {
     overview:
-      "Screenshot pane with a delay timer and multi-destination routing — Stage, clipboard, file, or all three. Ships with cross-pane Continue so the shot is one click from OCR / Stage.",
+      "Screenshot pane with a delay timer and multi-destination routing, Stage, clipboard, file, or all three. Ships with cross-pane Continue so the shot is one click from OCR / Stage.",
     capabilities: [
       "Delay timer (Off / 3 / 5 / 10s)",
       "Multi-destination: Stage + Clipboard + File",
@@ -227,7 +227,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   Mirror: {
     overview:
-      "Front-facing webcam preview with horizontal flip and an opt-in menu bar item. Mirror is a passive viewer — it never records. Use it to check yourself before a call without launching Photo Booth.",
+      "Front-facing webcam preview with horizontal flip and an opt-in menu bar item. Mirror is a passive viewer: it never records. Use it to check yourself before a call without launching Photo Booth.",
     capabilities: [
       "Horizontal flip toggle (mirror ↔ true)",
       "Opt-in menu bar item with mini preview",
@@ -239,13 +239,13 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   "Image Tools": {
     overview:
-      "Batch convert, resize, and compress images across HEIC, PNG, JPEG, and WebP. Drop a folder, pick the target format and dimensions, hit go — all local, no upload.",
+      "Batch convert, resize, and compress images across HEIC, PNG, JPEG, and WebP. Drop a folder, pick the target format and dimensions, hit go, all local, no upload.",
     capabilities: [
       "Convert between HEIC / PNG / JPEG / WebP",
       "Resize by max dimension or exact pixels",
       "Compress with quality slider + estimated output size",
       "Batch on folder drop",
-      "Preview before write — never overwrite without confirmation",
+      "Preview before write: never overwrite without confirmation",
       "EXIF metadata preserve / strip toggle",
     ],
   },
@@ -253,38 +253,38 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
     overview:
       "Merge, split, compress, rotate, OCR, and watermark PDFs locally. Reorderable merge, full preview surfaces, and cross-pane Continue so every output is traceable back into another pane.",
     capabilities: [
-      "Merge — reorderable with thumbnail preview",
+      "Merge: reorderable with thumbnail preview",
       "Split by range, by every N pages, or extract pages",
       "Compress with size estimate",
       "Rotate any subset of pages",
       "OCR (Vision-backed) → searchable PDF",
-      "Watermark — text or image, position + opacity",
-      "Cross-pane Continue — every output is reusable as input",
+      "Watermark: text or image, position + opacity",
+      "Cross-pane Continue: every output is reusable as input",
     ],
   },
   Hash: {
     overview:
-      "MD5, SHA-1, SHA-256, and SHA-512 in a single streaming pass — drop a file and get all four hashes simultaneously without re-reading the file. Verify a `SHA256SUMS` / `.sha512sum` file by dropping it alongside the files it covers.",
+      "MD5, SHA-1, SHA-256, and SHA-512 in a single streaming pass, drop a file and get all four hashes simultaneously without re-reading the file. Verify a `SHA256SUMS` / `.sha512sum` file by dropping it alongside the files it covers.",
     capabilities: [
-      "4-in-1 streaming pipeline — one read, four hashes",
+      "4-in-1 streaming pipeline: one read, four hashes",
       "Drop a SUMS file → per-line ✓ / ✗ / missing verification",
       "Algorithm auto-detected by hex length (MD5/SHA-1/SHA-256/SHA-512)",
-      "Path-traversal hardened — refuses absolute paths and `..`",
+      "Path-traversal hardened: refuses absolute paths and `..`",
       "Copy any hash with ⌘C on the focused row",
       "Drop a folder to hash every file inside",
     ],
     privacy:
-      "Files are hashed locally. Trove never uploads bytes anywhere — even for SUMS verification the comparison happens in memory.",
+      "Files are hashed locally. Trove never uploads bytes anywhere: even for SUMS verification the comparison happens in memory.",
   },
   Rename: {
     overview:
       "Mass file renamer with find/replace, regex, sequence numbers, date prefix, and EXIF date extraction. Live preview every change before committing.",
     capabilities: [
-      "Find / replace — plain or regex",
+      "Find / replace: plain or regex",
       "Sequence numbering with custom start + padding",
       "Date prefix from file mtime",
       "EXIF date prefix for photos",
-      "Live diff before commit — no silent overwrites",
+      "Live diff before commit: no silent overwrites",
       "Undo last batch",
     ],
   },
@@ -312,18 +312,18 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   "Move Files": {
     overview:
-      "Makes ⌘X / ⌘V in Finder actually move files — the way Windows has done it for decades, instead of macOS's quirky copy-only ⌘C / ⌘V flow.",
+      "Makes ⌘X / ⌘V in Finder actually move files, the way Windows has done it for decades, instead of macOS's quirky copy-only ⌘C / ⌘V flow.",
     capabilities: [
       "⌘X marks selected Finder files as cut (subtle dim)",
       "⌘V at destination moves them",
       "⌘Z undoes the move",
       "Cross-volume copies + deletes the original",
-      "Conflict handling — rename / replace / skip",
+      "Conflict handling: rename / replace / skip",
     ],
   },
   Finder: {
     overview:
-      "Bundle of Finder tweaks — show file extensions, path bar, hidden files, status bar — one click each. Reverts to default with the same click.",
+      "Bundle of Finder tweaks: show file extensions, path bar, hidden files, status bar, one click each. Reverts to default with the same click.",
     capabilities: [
       "Show all file extensions",
       "Show path bar in every Finder window",
@@ -347,10 +347,10 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   Awake: {
     overview:
-      "Prevent display and system sleep with conditional rules — while a specific app is frontmost, during a time window, while on AC power, or while a Trove recording is active.",
+      "Prevent display and system sleep with conditional rules, while a specific app is frontmost, during a time window, while on AC power, or while a Trove recording is active.",
     capabilities: [
       "Toggle from the menu bar item or the pane",
-      "Conditional rules — per app, per time, per power source",
+      "Conditional rules: per app, per time, per power source",
       "Auto-disable when condition no longer matches",
       "Visual feedback in the menu bar (filled cup ↔ empty cup)",
       "Backed by `IOPMAssertion`",
@@ -366,7 +366,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
       "Refreshes on focus so toggles flip without a re-launch",
     ],
     privacy:
-      "Trove only requests the permissions you actively use. Screen Recording is asked only when you first open Record / Snip / OCR — never on launch.",
+      "Trove only requests the permissions you actively use. Screen Recording is asked only when you first open Record / Snip / OCR, never on launch.",
   },
   Log: {
     overview:
@@ -381,18 +381,18 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   GPU: {
     overview:
-      "GPU utilization, thermal pressure, VRAM usage, and battery temperature — honest readouts from public-where-possible IOKit sources. On Apple Silicon, battery temperature comes from AppleSmartBattery to keep the SEP-honest pact.",
+      "GPU utilization, thermal pressure, VRAM usage, and battery temperature, honest readouts from public-where-possible IOKit sources. On Apple Silicon, battery temperature comes from AppleSmartBattery to keep the SEP-honest pact.",
     capabilities: [
       "GPU % utilization sparkline",
       "Thermal pressure level (nominal / fair / serious / critical / heavy)",
       "VRAM in use / allocated",
       "Battery temperature via AppleSmartBattery (Apple Silicon)",
-      "Apple Silicon SEP-honest — no private SMC keys",
+      "Apple Silicon SEP-honest: no private SMC keys",
     ],
   },
   Network: {
     overview:
-      "Per-process network throughput (read-only). Like a Little Snitch monitor without the firewall — see who's uploading, who's downloading, in real time.",
+      "Per-process network throughput (read-only). Like a Little Snitch monitor without the firewall, see who's uploading, who's downloading, in real time.",
     capabilities: [
       "Per-process up / down throughput",
       "Lifetime sent / received counters per process",
@@ -401,11 +401,11 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
       "Sparkline per process",
     ],
     privacy:
-      "Network is read-only — Trove never modifies routes, intercepts traffic, or proxies anything. It's a viewer.",
+      "Network is read-only: Trove never modifies routes, intercepts traffic, or proxies anything. It's a viewer.",
   },
   Overview: {
     overview:
-      "Disk usage at a glance — total / used / free per volume, top folders by size, and the biggest single files. The Storage section's home screen.",
+      "Disk usage at a glance: total / used / free per volume, top folders by size, and the biggest single files. The Storage section's home screen.",
     capabilities: [
       "Per-volume capacity bars",
       "Top 10 folders by size",
@@ -427,18 +427,18 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
   },
   Clean: {
     overview:
-      "One-click cleanup of developer caches — npm, pnpm, yarn, brew, Xcode DerivedData, Carthage, Bun, Deno, pip, Cargo. Per-cache size, per-cache toggle, dry-run preview before delete.",
+      "One-click cleanup of developer caches: npm, pnpm, yarn, brew, Xcode DerivedData, Carthage, Bun, Deno, pip, Cargo. Per-cache size, per-cache toggle, dry-run preview before delete.",
     capabilities: [
       "Targets npm / pnpm / yarn / brew / Xcode DerivedData / Carthage / Bun / Deno / pip / Cargo",
       "Per-cache size + last-modified",
-      "Per-cache toggle — clean what you want, skip what you need",
+      "Per-cache toggle: clean what you want, skip what you need",
       "Dry-run preview before delete",
-      "Move-to-Trash, not unlink — undoable",
+      "Move-to-Trash, not unlink, undoable",
     ],
   },
   Sweep: {
     overview:
-      "Auto-organize ~/Downloads by age and type. Files older than N days move to Year/Month subfolders, optionally by type — Images / Docs / Archives / Installers — so the top level stays scannable.",
+      "Auto-organize ~/Downloads by age and type. Files older than N days move to Year/Month subfolders, optionally by type, Images / Docs / Archives / Installers, so the top level stays scannable.",
     capabilities: [
       "Age threshold slider (7 / 14 / 30 / 90 days)",
       "Group by year/month and/or type",
@@ -455,12 +455,12 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
       "Random 4K IOPS",
       "Configurable test file size (256 MB / 1 GB / 4 GB)",
       "Per-volume picker",
-      "History — see how a drive's numbers drift over time",
+      "History: see how a drive's numbers drift over time",
     ],
   },
   Library: {
     overview:
-      "Recoverable cache of every artifact Trove has produced — merged PDFs, OCR outputs, recordings, hashes, QR codes. Re-open in the pane that made them, or send back to Stage.",
+      "Recoverable cache of every artifact Trove has produced, merged PDFs, OCR outputs, recordings, hashes, QR codes. Re-open in the pane that made them, or send back to Stage.",
     capabilities: [
       "Every output tagged with source pane + timestamp",
       "Search by name, kind, source pane",
@@ -473,7 +473,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
     overview:
       "Sign in with Apple, view system identity, manage preferences. Account is where Trove surfaces the (very few) things it knows about you.",
     capabilities: [
-      "Sign in with Apple — privacy-relay friendly",
+      "Sign in with Apple: privacy-relay friendly",
       "macOS user identity readout",
       "Preferences shortcut",
       "License status (active / lapsed / trial)",
@@ -481,6 +481,267 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
     ],
     privacy:
       "Trove only stores your Apple ID's verified email (or relay address) if you sign in. Sign-out clears it. Nothing else identifying is collected.",
+  },
+  Modes: {
+    overview:
+      "Save your running apps and their window layout as a named workspace, then snap the whole set back with one hotkey. Modes is a focus-mode and workspace switcher in one: a Writing mode, a Design mode, a Meeting mode, each restoring exactly the apps and window positions you set.",
+    capabilities: [
+      "Capture the current apps and window layout as a named workspace preset",
+      "Restore a mode with a hotkey (option-shift-cmd-1 through 9)",
+      "Use modes as focus modes: launch the apps a task needs, nothing else",
+      "Window positions and sizes restored per display",
+      "Edit, rename, or delete saved modes from the pane",
+    ],
+    privacy:
+      "Modes are stored locally under XDG / Application Support. The app list and layout never leave your Mac.",
+  },
+  Workflows: {
+    overview:
+      "Chain one pane's output straight into the next pane's input and fire the whole sequence from a single keybind. Capture a region, send it to OCR, pass the text to Local AI, drop the answer on the Clipboard, all in one press. Workflows turns Trove's panes into a local automation runner, with no Automator or Shortcuts detour required.",
+    capabilities: [
+      "Chain pane outputs into pane inputs as one sequence",
+      "Bind a whole chain to a single keybind",
+      "Example chain: Capture to OCR to AI to Clipboard",
+      "Reuse any pane that produces an artifact as a step",
+      "Run multi-step macros without leaving Trove",
+    ],
+    privacy:
+      "Workflows run entirely on-device, step to step, with nothing uploaded between stages.",
+  },
+  "Image Editor": {
+    overview:
+      "A Photos-class image editor built into Trove. Crop, rotate, and correct perspective, then apply 13 adjustments and 9 filters, auto-enhance, and remove red-eye, before exporting to PNG, JPEG, HEIC, or WebP. It covers the everyday edits you would otherwise open Preview, Photos, or a web editor for.",
+    capabilities: [
+      "Crop, rotate, and perspective correction",
+      "13 adjustments (brightness, contrast, saturation, and more)",
+      "9 filters plus one-tap auto-enhance",
+      "Red-eye removal",
+      "Export to PNG, JPEG, HEIC, or WebP",
+      "Cross-pane Continue: arrives from Snip or Stage",
+    ],
+    privacy:
+      "Every edit runs locally. Images are never uploaded or sent to a cloud editor.",
+  },
+  Inspector: {
+    overview:
+      "Drop any file to read everything macOS knows about it: EXIF, GPS coordinates, PDF info, video track details, hashes, extended attributes, and Spotlight metadata. Strip metadata before you share, or compare two files side by side. It replaces a stack of one-off metadata viewers and exiftool incantations.",
+    capabilities: [
+      "EXIF, GPS, PDF info, and video track readouts",
+      "File hashes and extended attributes (xattr)",
+      "Spotlight metadata for any file",
+      "Strip metadata before sharing",
+      "Compare two files side by side",
+      "Works on any file type you drop in",
+    ],
+    privacy:
+      "Inspection runs locally. Nothing about your files is uploaded, even when stripping metadata.",
+  },
+  Battery: {
+    overview:
+      "The battery health readout macOS keeps buried. See cycle count, current capacity versus design capacity, condition, temperature, voltage, and amperage, plus the top processes draining your battery right now. It answers what is killing my battery without coconutBattery or a trip into System Settings.",
+    capabilities: [
+      "Cycle count and condition",
+      "Current capacity versus design capacity",
+      "Top energy users ranked by drain",
+      "Temperature, voltage, and amperage readouts",
+      "Live updates whether plugged in or on battery",
+    ],
+    privacy:
+      "Battery data comes from local IOKit sources and never leaves your Mac.",
+  },
+  Speedtest: {
+    overview:
+      "Measure download, upload, ping, and jitter against Cloudflare's own endpoint, not a third-party speedtest service that logs your connection. Keep a history of recent runs to see how your link holds up over time.",
+    capabilities: [
+      "Download and upload throughput",
+      "Ping and jitter measurement",
+      "Runs against Cloudflare's endpoint, no third-party service",
+      "History of recent runs",
+      "One-tap re-run",
+    ],
+    privacy:
+      "Speedtest talks only to Cloudflare's measurement endpoint. There is no third-party speedtest service, no account, and no logging beyond your local run history.",
+  },
+  Devices: {
+    overview:
+      "Every connected Bluetooth and USB device in one list, with battery levels for the ones that report them. Check your AirPods, Magic Mouse, or Magic Keyboard charge at a glance, without digging through the Bluetooth menu.",
+    capabilities: [
+      "Connected Bluetooth devices with battery levels",
+      "AirPods, Magic Mouse, and Magic Keyboard charge",
+      "Connected USB devices",
+      "Live connect and disconnect updates",
+    ],
+    privacy:
+      "Device data is read locally from the system and never leaves your Mac.",
+  },
+  Services: {
+    overview:
+      "A front end for launchd. Enumerate every LaunchAgent and LaunchDaemon, start or stop them, and reveal the backing plist in Finder. It replaces hand-typed launchctl commands and gives you a clear view of what auto-starts on your Mac.",
+    capabilities: [
+      "Enumerate LaunchAgents and LaunchDaemons",
+      "Start or stop a service",
+      "Reveal the backing plist in Finder",
+      "See what auto-starts on login",
+      "Filter the service list by name",
+    ],
+    privacy:
+      "Services reads and controls launchd locally. No data is sent anywhere.",
+  },
+  Treemap: {
+    overview:
+      "See where your disk went as a squarified treemap: every folder sized by the space it occupies, so the biggest offenders are impossible to miss. Double-click any tile to drill in. It is the DaisyDisk-style visual sweep, built into the same app as your file hashing and cleanup.",
+    capabilities: [
+      "Squarified treemap of folder sizes",
+      "The biggest folders dominate the view at a glance",
+      "Double-click a tile to drill into it",
+      "Navigate back up the tree",
+      "Pairs with the Scan and Clean panes",
+    ],
+    privacy:
+      "The treemap is computed locally from your filesystem. Nothing is indexed in the cloud.",
+  },
+  Converter: {
+    overview:
+      "One universal file converter backed by ffmpeg, LibreOffice, and sips. HEIC to JPG, MOV to MP4, AAC to MP3, DOCX to PDF, and most things in between. Drag a file in, pick a target format, run. It replaces single-purpose tools like Permute and a pile of online converters.",
+    capabilities: [
+      "Images: HEIC to JPG, PDF to image, and more",
+      "Video: MOV to MP4, WebM to MP4",
+      "Audio: AAC to MP3",
+      "Documents: DOCX to PDF, Markdown to PDF, EPUB to PDF",
+      "Anything ffmpeg, LibreOffice, or sips can handle",
+      "Drag in, pick a target, run",
+    ],
+    privacy:
+      "All conversion runs locally on your Mac. Files are never uploaded to a conversion service.",
+  },
+  "JSON / XML": {
+    overview:
+      "Format, validate, sort keys, and minify JSON, YAML, and XML in one pane. It replaces pasting sensitive payloads into jsonformatter.org and other web tools, because everything stays on your Mac.",
+    capabilities: [
+      "Format and prettify JSON, YAML, and XML",
+      "Validate and surface parse errors",
+      "Sort object keys",
+      "Minify for transport",
+      "Convert between the supported formats",
+    ],
+    privacy:
+      "All parsing and formatting happens locally. It replaces pasting sensitive data into web formatters: nothing leaves your Mac.",
+  },
+  Regex: {
+    overview:
+      "A regex playground with live match highlighting, a capture-group breakdown, and 10 common-pattern presets. Build and debug a pattern against your own sample text without an online regex tester.",
+    capabilities: [
+      "Live match highlighting as you type",
+      "Capture-group breakdown",
+      "Find and replace with the pattern",
+      "10 common-pattern presets to start from",
+      "Test against your own pasted sample text",
+    ],
+    privacy:
+      "Patterns and sample text are evaluated locally and never uploaded.",
+  },
+  "Date Calc": {
+    overview:
+      "A date calculator for the questions a normal calculator cannot answer: business days between two dates, time-zone conversions, and Unix timestamp to ISO 8601. Useful whenever you are reasoning about logs, deadlines, or schedules.",
+    capabilities: [
+      "Days and business days between two dates",
+      "Add or subtract days from a date",
+      "Time-zone conversion",
+      "Unix timestamp to ISO 8601 and back",
+    ],
+    privacy:
+      "All date math runs locally. No clock or location data is sent anywhere.",
+  },
+  Units: {
+    overview:
+      "A fast unit converter spanning length, mass, temperature, data, speed, volume, area, time, energy, and power. Celsius to Fahrenheit, km to miles, kg to lbs, GB to MB, all in one place.",
+    capabilities: [
+      "Length, mass, and temperature",
+      "Data sizes, speed, and volume",
+      "Area, time, energy, and power",
+      "Common pairs like Celsius to Fahrenheit and km to miles",
+    ],
+    privacy:
+      "Conversions are computed locally with no network calls.",
+  },
+  "API Tester": {
+    overview:
+      "A built-in HTTP client for hitting APIs without leaving Trove. Set the method, URL, headers, body, and auth (including OAuth PKCE), then read the response with status, headers, and pretty-printed JSON. Saved collections, request history, and Postman import make it a local stand-in for Postman or Insomnia.",
+    capabilities: [
+      "Method, URL, headers, and body editor",
+      "Auth including OAuth PKCE",
+      "Response with status, headers, and pretty JSON",
+      "Saved collections and request history",
+      "Postman import",
+      "A GUI alternative to hand-typed curl",
+    ],
+    privacy:
+      "Requests go only to the endpoints you specify. Collections and history are stored locally on your Mac.",
+  },
+  Hosts: {
+    overview:
+      "An /etc/hosts editor that thinks in packs. Group rules into named sets (block social, dev redirects), toggle a whole pack on or off, and commit with a single auth prompt. It replaces Gas Mask and hand-editing the hosts file with sudo.",
+    capabilities: [
+      "Edit /etc/hosts with syntax-aware rows",
+      "Group rules into named packs",
+      "Toggle a whole pack on or off",
+      "Block sites or map dev hosts locally",
+      "Commit all changes with one auth prompt",
+    ],
+    privacy:
+      "Hosts edits stay on your Mac. The file is written locally with your authorization, and nothing is transmitted.",
+  },
+  Passwords: {
+    overview:
+      "A strong password generator (random or memorable) paired with a Have I Been Pwned breach checker. The breach check uses k-anonymity: only the first 5 hex characters of the password's SHA-1 hash ever leave your Mac, so the password itself is never exposed.",
+    capabilities: [
+      "Generate random passwords with length and character controls",
+      "Generate memorable passphrases",
+      "Check a password against Have I Been Pwned",
+      "k-anonymity: only the first 5 hex of the SHA-1 leave the device",
+      "Copy a generated password with one tap",
+    ],
+    privacy:
+      "Passwords are generated locally. For breach checks, only the first 5 hex characters of the SHA-1 hash are sent (k-anonymity); the full password never leaves your Mac.",
+  },
+  "Local AI": {
+    overview:
+      "Chat with a local large language model through Ollama on localhost. Pick any model you have pulled (Llama, Mistral, Qwen, Gemma), with streaming replies, a system prompt, temperature control, and multi-turn context. It is an offline ChatGPT that never sends a token off your machine.",
+    capabilities: [
+      "Chat with any Ollama model you have pulled",
+      "Streaming replies",
+      "System prompt and temperature controls",
+      "Multi-turn conversation context",
+      "Works fully offline once a model is pulled",
+    ],
+    privacy:
+      "Local AI talks only to Ollama on localhost:11434. Nothing leaves the Mac: your prompts and the model's replies never touch a cloud service.",
+  },
+  Terminal: {
+    overview:
+      "An embedded command runner for quick one-offs: zsh with a persistent working directory, command history, and ANSI color. It is a fast runner for the command you need right now, not a full TTY replacement for your terminal app.",
+    capabilities: [
+      "Run zsh commands inline",
+      "Persistent working directory across runs",
+      "Command history",
+      "ANSI color output",
+      "Built-in cd and clear",
+    ],
+    privacy:
+      "Commands run locally on your Mac under your own shell, with no remote execution.",
+  },
+  Markdown: {
+    overview:
+      "A Markdown editor with a live preview rendered natively, with no WebView. Write in split or focus mode, open and save .md files, export or copy the rendered HTML, and watch a live word count. It is a fast, local scratchpad for any Markdown you need to render or hand off.",
+    capabilities: [
+      "Live preview rendered natively (no WebView)",
+      "Split and focus editing modes",
+      "Open and save .md files",
+      "Export or copy rendered HTML",
+      "Live word count",
+    ],
+    privacy:
+      "Documents are edited and saved locally as plain .md files that you own.",
   },
 };
 

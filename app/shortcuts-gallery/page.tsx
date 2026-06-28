@@ -4,7 +4,7 @@ import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { INTENTS, type IntentCategory } from "@/lib/intents";
 
 export const metadata: Metadata = {
-  title: "Shortcuts gallery — Trove",
+  title: "Shortcuts gallery: Trove",
   description:
     "Every macOS Shortcuts AppIntent Trove ships. Browse the catalog before opening the Shortcuts editor.",
   alternates: { canonical: "https://gettrove.vercel.app/shortcuts-gallery" },
@@ -19,12 +19,12 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
     },
     {
       name: "Compute",
-      tagline: "Calculator, QR, hashing — all callable as Shortcut actions.",
+      tagline: "Calculator, QR, hashing, all callable as Shortcut actions.",
       accent: "#4cb8ff",
     },
     {
       name: "Snippets",
-      tagline: "Rich pickers — name + body preview right in the editor.",
+      tagline: "Rich pickers: name + body preview right in the editor.",
       accent: "#b27cff",
     },
     {
@@ -49,8 +49,8 @@ export default function ShortcutsGalleryPage() {
       title="Shortcuts gallery"
       lede={
         <>
-          {INTENTS.length} AppIntents shipped in Trove 1.1.0. Every entity
-          intent renders a rich picker in the Shortcuts editor — name + body
+          {INTENTS.length} AppIntents shipped in Trove 1.11.2. Every entity
+          intent renders a rich picker in the Shortcuts editor, name + body
           preview on snippets, kind + capture date on clipboard entries. Open
           Shortcuts.app and search for &ldquo;Trove&rdquo; to start chaining.
         </>

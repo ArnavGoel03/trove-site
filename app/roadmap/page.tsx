@@ -3,9 +3,9 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Roadmap — Trove",
+  title: "Roadmap: Trove",
   description:
-    "What's shipped in Trove 1.1.0, what's in active development, and what's deferred. The honest list — no aspirational vaporware.",
+    "What's shipped in Trove 1.11.2, what's in active development, and what's deferred. The honest list: no aspirational vaporware.",
   alternates: { canonical: "https://gettrove.vercel.app/roadmap" },
 };
 
@@ -19,7 +19,7 @@ type Item = {
 const SHIPPED: Item[] = [
   {
     id: "intents",
-    title: "macOS Shortcuts / AppIntents — 11 intents, 8 entity pickers",
+    title: "macOS Shortcuts / AppIntents: 11 intents, 8 entity pickers",
     body: "Snippets and clipboard history render as rich pickers in the Shortcuts editor with name + body / kind + capture-date previews.",
     size: "L",
   },
@@ -79,7 +79,7 @@ const SHIPPED: Item[] = [
   },
   {
     id: "recorder-pro",
-    title: "Recorder pro pass — 17 items",
+    title: "Recorder pro pass: 17 items",
     body: "Webcam PIP, keystroke overlay, click ripple, floating Stop, global stop hotkey ⌘⇧., quality slider, mic gain, filename tokens, auto-trim silence, countdown, menu-bar dot, preview sheet, voice-activity auto-pause, webcam-only mode, MOV with separate audio tracks.",
     size: "L",
   },
@@ -226,7 +226,7 @@ export default function RoadmapPage() {
       />
 
       <Bucket
-        title="Shipped — v1.1.0"
+        title="Shipped: v1.11.2"
         blurb="On the stable channel as of May 31, 2026. The changelog has the per-build breakdown."
         items={SHIPPED}
         tint="#5be3a4"
@@ -239,7 +239,7 @@ export default function RoadmapPage() {
       />
       <Bucket
         title="Deferred"
-        blurb="Worth doing, but worth doing properly. Each item needs its own week — none are slipping into the next point release."
+        blurb="Worth doing, but worth doing properly. Each item needs its own week: none are slipping into the next point release."
         items={DEFERRED}
         tint="#ffd166"
       />

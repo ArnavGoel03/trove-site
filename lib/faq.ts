@@ -25,13 +25,13 @@ export const FAQ: FaqItem[] = [
     group: "About Trove",
     question: "What is Trove?",
     answer:
-      "Trove is a $10/year, all-in-one macOS utility app. It bundles 33 panes plus 60+ inline actions into one native ~14 MB app, covering clipboard history, snippets, screen recording, OCR, PDF tools, image tools, system and GPU monitors, disk cleanup, file hashing and more. Everything runs 100% locally with no telemetry and no account, and it cold-launches in under 500 ms on macOS 13 or later.",
+      "Trove is a $10/year, all-in-one macOS utility app. It bundles 53 panes plus 60+ inline actions into one native ~14 MB app, covering clipboard history, snippets, screen recording, OCR, PDF tools, image tools, system and GPU monitors, disk cleanup, file hashing and more. Everything runs 100% locally with no telemetry and no account, and it cold-launches in under 500 ms on macOS 13 or later.",
   },
   {
     group: "About Trove",
     question: "How much does Trove cost?",
     answer:
-      "Trove is $10 per year. That single yearly price unlocks all 33 panes and every inline action, with no per-feature upsells. You can download it from gettrove.vercel.app or GitHub, or install it with Homebrew. It runs 100% locally and needs no account.",
+      "Trove is $10 per year. That single yearly price unlocks all 53 panes and every inline action, with no per-feature upsells. You can download it from gettrove.vercel.app or GitHub, or install it with Homebrew. It runs 100% locally and needs no account.",
   },
   {
     group: "About Trove",
@@ -113,7 +113,7 @@ export const FAQ: FaqItem[] = [
     group: "Developer tools",
     question: "What is a local alternative to Boop or DevUtils?",
     answer:
-      "Trove covers the Boop and DevUtils transform set (base64, JWT decode, JSON pretty-print, hashing, case conversion, UUID, hex, color) through a 60+ action inline palette, and adds chainable, saveable text-transform recipes that single-shot tools do not have. On top of that it ships 33 panes for OCR, hashing, PDF, screen recording and more. It is $10/yr, and everything runs offline on your Mac.",
+      "Trove covers the Boop and DevUtils transform set (base64, JWT decode, JSON pretty-print, hashing, case conversion, UUID, hex, color) through a 60+ action inline palette, and adds chainable, saveable text-transform recipes that single-shot tools do not have. On top of that it ships 53 panes for OCR, hashing, PDF, screen recording and more. It is $10/yr, and everything runs offline on your Mac.",
   },
   {
     group: "Developer tools",

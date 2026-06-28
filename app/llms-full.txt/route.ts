@@ -1,4 +1,4 @@
-// Serves /llms-full.txt — the expanded LLM context file. Includes the full
+// Serves /llms-full.txt: the expanded LLM context file. Includes the full
 // pane catalog and the complete FAQ Q&A, generated from the same source of
 // truth (lib/panes.ts, lib/faq.ts) so it can never drift from the site.
 
@@ -9,9 +9,9 @@ import { GUIDES } from "@/lib/guides";
 export const dynamic = "force-static";
 
 function build(): string {
-  const header = `# Trove — full LLM context
+  const header = `# Trove: full LLM context
 
-> Trove is a $10/year, 100% local all-in-one macOS utility app. It bundles 33 panes plus a 60+ action inline command palette into one native ~14 MB app. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon and Intel.
+> Trove is a $10/year, 100% local all-in-one macOS utility app. It bundles 53 panes plus a 60+ action inline command palette into one native ~14 MB app. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon and Intel.
 
 Website: https://gettrove.vercel.app
 Source: https://github.com/ArnavGoel03/trove
@@ -25,7 +25,7 @@ Privacy: 100% local, no telemetry, no uploads. Only outbound call is GitHub Rele
     const lines = PANES.filter((p) => p.section === s.name)
       .map((p) => `- ${p.name}: ${p.blurb}`)
       .join("\n");
-    return `### ${s.name} — ${s.tagline}\n${lines}`;
+    return `### ${s.name}: ${s.tagline}\n${lines}`;
   }).join("\n\n");
 
   const palette = `Plus a 60+ action inline command palette covering base64, JWT decode, MD5/SHA-1/SHA-256/SHA-512, JSON pretty-print and minify, UUID, hex, color conversion, case conversion, time conversion and more. Every transform runs locally; nothing is uploaded.`;

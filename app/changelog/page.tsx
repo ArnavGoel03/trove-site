@@ -6,13 +6,13 @@ import { fetchChangelog, renderMarkdown } from "@/lib/changelog";
 import { slugifyVersion } from "@/lib/slug";
 
 export const metadata: Metadata = {
-  title: "Changelog — Trove",
+  title: "Changelog: Trove",
   description:
     "Every shipped change in Trove, live-sourced from the canonical CHANGELOG.md. Stable releases, beta builds, and pre-release history.",
   alternates: { canonical: "https://gettrove.vercel.app/changelog" },
 };
 
-// Use ISR — the source markdown is fetched + parsed at build time and
+// Use ISR: the source markdown is fetched + parsed at build time and
 // revalidated every 6 hours (see lib/changelog.ts). Page itself is
 // static HTML between revalidations so visitors get the CDN-cached
 // version, not a cold function invocation.
@@ -48,7 +48,7 @@ export default async function ChangelogPage() {
         data={articleLd({
           headline: "Trove Changelog",
           description:
-            "Live-sourced release notes for Trove, the 33-pane native macOS utility.",
+            "Live-sourced release notes for Trove, the 53-pane native macOS utility.",
           url: "https://gettrove.vercel.app/changelog",
         })}
       />

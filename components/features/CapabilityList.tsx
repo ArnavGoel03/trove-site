@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { CAPABILITIES } from "@/lib/panes";
 
-// The 12 power-user capabilities introduced in v1.1.0 — Shortcuts,
+// The 12 power-user capabilities introduced in v1.11.2, Shortcuts,
 // URL scheme, chord HUD, cross-pane data flow, SHA256SUMS, saved
 // recipes, history regex+dedup, channels, Homebrew, XDG, perf,
 // crash discipline.
@@ -21,7 +21,7 @@ export default function CapabilityList() {
         className="max-w-3xl mb-14"
       >
         <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
-          Power-user surface · 1.1.0
+          Power-user surface · 1.11.2
         </div>
         <h2 className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02]">
           The headline upgrades{" "}

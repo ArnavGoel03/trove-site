@@ -4,7 +4,7 @@ import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Download } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Press kit — Trove",
+  title: "Press kit: Trove",
   description:
     "Pitch lines, key facts, screenshots, and brand assets for press, podcasts, and reviewers covering Trove.",
   alternates: { canonical: "https://gettrove.vercel.app/press" },
@@ -18,7 +18,7 @@ const FACTS: { label: string; value: string }[] = [
   { label: "Architecture", value: "Apple Silicon + Intel (universal)" },
   { label: "Binary size", value: "~14 MB" },
   { label: "Resident memory at rest", value: "< 30 MB" },
-  { label: "Panes shipped (v1.1.0)", value: "33" },
+  { label: "Panes shipped (v1.11.2)", value: "53" },
   { label: "macOS Shortcuts intents", value: "11" },
   { label: "Price", value: "$10 per year" },
   { label: "License", value: "Single-user, multi-device" },
@@ -31,7 +31,7 @@ const FACTS: { label: string; value: string }[] = [
 const PITCHES = [
   {
     angle: "The one-line",
-    body: "Trove is a single ~14 MB native Mac app that bundles 33 panes (clipboard, capture, system, files, storage) and replaces around a dozen menu-bar utilities. Scriptable from Shortcuts. Local-only. No telemetry.",
+    body: "Trove is a single ~14 MB native Mac app that bundles 53 panes (clipboard, capture, system, files, storage) and replaces around a dozen menu-bar utilities. Scriptable from Shortcuts. Local-only. No telemetry.",
   },
   {
     angle: "For the privacy-first reader",
@@ -156,8 +156,8 @@ export default function PressPage() {
           Community + discussions
         </h2>
         <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
-          Open conversations — feature ideas, pre-release feedback, pane
-          requests, weird bugs — happen on{" "}
+          Open conversations: feature ideas, pre-release feedback, pane
+          requests, weird bugs, happen on{" "}
           <a
             href="https://github.com/ArnavGoel03/trove/discussions"
             target="_blank"

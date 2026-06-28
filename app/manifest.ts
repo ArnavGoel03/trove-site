@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Trove",
     short_name: "Trove",
     description:
-      "33 panes for clipboard, capture, system, files and storage, in a single native macOS app.",
+      "53 panes for clipboard, capture, system, files and storage, in a single native macOS app.",
     start_url: "/",
     display: "standalone",
     background_color: "#08080b",

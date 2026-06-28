@@ -6,7 +6,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Trove: your Mac, finally tidy.",
   description:
-    "33 panes for clipboard, capture, system, files and storage, in a single ~14 MB native macOS app. Scriptable from Shortcuts. Local-only. No telemetry.",
+    "53 panes for clipboard, capture, system, files and storage, in a single ~14 MB native macOS app. Scriptable from Shortcuts. Local-only. No telemetry.",
   metadataBase: new URL("https://gettrove.vercel.app"),
   alternates: {
     canonical: "https://gettrove.vercel.app",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Trove: your Mac, finally tidy.",
     description:
-      "33 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
+      "53 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
     type: "website",
     url: "https://gettrove.vercel.app",
     siteName: "Trove",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Trove: your Mac, finally tidy.",
     description:
-      "33 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
+      "53 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
     images: ["/opengraph-image"],
   },
 };
