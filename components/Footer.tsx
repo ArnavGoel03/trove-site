@@ -99,6 +99,14 @@ export default function Footer() {
               {"©"} {new Date().getFullYear()} {STUDIO.name}. macOS, Apple Silicon
               and the Apple logo are trademarks of Apple Inc.
             </span>
+            <a
+              href={STUDIO.makerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`hover:text-white transition-colors ${FOCUS_RING}`}
+            >
+              Made by {STUDIO.maker}
+            </a>
           </div>
           <div className="flex items-center gap-4">
             <LatestReleaseBadge />

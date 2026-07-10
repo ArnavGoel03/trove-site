@@ -30,6 +30,9 @@ export const STUDIO = {
   /** When true, the site presents as a studio/suite; until then, Trove-only. */
   live: true,
   domain: "https://gettrove.vercel.app",
+  /** The maker, links the studio to the personal portfolio (bidirectional). */
+  maker: "Arnav Goel",
+  makerUrl: "https://arnavgoel.dev",
 } as const;
 
 /** Every app in the suite. Rename any app by editing its `name` here. */
