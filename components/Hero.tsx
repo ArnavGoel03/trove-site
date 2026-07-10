@@ -10,6 +10,7 @@ import {
 import { useEffect, useRef } from "react";
 import DownloadButton from "./DownloadButton";
 import AppMockup from "./AppMockup";
+import { STUDIO, APPS } from "@/lib/brand";
 
 export default function Hero() {
   // The mouse-tracked gradient is driven via a single rAF-throttled
@@ -138,8 +139,8 @@ export default function Hero() {
         </motion.div>
 
         <h1 className="text-[44px] sm:text-[64px] md:text-[84px] leading-[0.96] font-semibold tracking-[-0.04em] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
-          One app instead
-          <br className="hidden sm:block" /> of a dozen.
+          Three native apps.
+          <br className="hidden sm:block" /> One subscription.
         </h1>
 
         <motion.p
@@ -148,10 +149,11 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl mx-auto leading-relaxed"
         >
-          Clipboard manager, window manager, system monitor, OCR, PDF kit, API
-          client, disk cleaner, and 30+ more, in one fast, private, native Mac
-          app. It replaces hundreds of dollars of separate utilities, and none
-          of your data ever leaves your Mac.
+          {STUDIO.name} is a studio of fast, private Mac apps. {APPS.trove.name}{" "}
+          replaces 40+ menu-bar utilities, {APPS.relay.name} is a local-first
+          API client, and {APPS.tend.name} runs your tasks and calendar entirely
+          on-device. One subscription unlocks all three, and nothing you do ever
+          leaves your Mac.
         </motion.p>
 
         <motion.div

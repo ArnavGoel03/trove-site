@@ -71,7 +71,7 @@ export default function Nav() {
           className="flex items-center gap-2.5 group rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           aria-label={`${HOME_BRAND} home`}
         >
-          <Logomark name={HOME_BRAND} size={36} />
+          <Logomark name={HOME_BRAND} size={40} />
           <span className="text-[16px] font-semibold tracking-tight">
             {HOME_BRAND}
           </span>
