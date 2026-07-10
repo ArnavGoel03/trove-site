@@ -1,7 +1,13 @@
 import dynamic from "next/dynamic";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import JsonLd, { softwareApplicationLd, webPageLd } from "@/components/JsonLd";
+import JsonLd, {
+  softwareApplicationLd,
+  webPageLd,
+  organizationLd,
+  suiteItemListLd,
+} from "@/components/JsonLd";
+import { STUDIO } from "@/lib/brand";
 
 // Below-the-fold sections are loaded as separate chunks so the
 // initial JS to interactive on Hero is as small as possible.
@@ -30,6 +36,14 @@ export default function Page() {
           "https://gettrove.vercel.app",
         )}
       />
+      {/* Studio-level schema: search engines should see one studio (STUDIO)
+          publishing three apps, not just the Trove flagship. */}
+      {STUDIO.live ? (
+        <>
+          <JsonLd data={organizationLd()} />
+          <JsonLd data={suiteItemListLd()} />
+        </>
+      ) : null}
       <SmoothScroll />
       <Nav />
       <Hero />

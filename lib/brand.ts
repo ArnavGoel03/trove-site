@@ -5,9 +5,9 @@
 // suite direction so renaming any app, or the studio itself, is a one-file
 // edit instead of a 66-file find-and-replace.
 //
-// NOTE: the studio brand is scaffolded but NOT yet surfaced in the live site
-// chrome, the visible site is still Trove-branded until a studio name is
-// chosen. Flip `STUDIO.live` to true (and wire it into Nav) when ready.
+// NOTE: the studio brand is surfaced in the live site chrome (STUDIO.live is
+// true): the nav wordmark, footer copyright, and Organization schema all
+// present as the studio. The Trove homepage itself stays flagship-focused.
 
 export type AppStatus = "live" | "soon";
 
@@ -28,7 +28,7 @@ export const STUDIO = {
   name: "Quiver",
   tagline: "Private, native Mac apps. One subscription.",
   /** When true, the site presents as a studio/suite; until then, Trove-only. */
-  live: false,
+  live: true,
   domain: "https://gettrove.vercel.app",
 } as const;
 

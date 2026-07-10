@@ -3,7 +3,7 @@
 import { Github, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { TROVE } from "@/lib/brand";
+import { STUDIO, TROVE } from "@/lib/brand";
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm";
@@ -96,7 +96,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-[12px] text-[var(--color-fg-mute)]">
             <span>
-              {"©"} {new Date().getFullYear()} {TROVE.name}. macOS, Apple Silicon
+              {"©"} {new Date().getFullYear()} {STUDIO.name}. macOS, Apple Silicon
               and the Apple logo are trademarks of Apple Inc.
             </span>
           </div>

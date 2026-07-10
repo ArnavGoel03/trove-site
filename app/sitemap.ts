@@ -4,6 +4,7 @@ import { slugifyPane } from "@/lib/slug";
 import { GUIDES } from "@/lib/guides";
 import { listUpdates } from "@/lib/updates";
 import { ACTIONS } from "@/lib/actions";
+import { APPS } from "@/lib/brand";
 
 const BASE = "https://gettrove.vercel.app";
 
@@ -131,6 +132,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.65,
+    },
+    {
+      url: `${BASE}${APPS.relay.href}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE}${APPS.tend.href}`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
   ];
 

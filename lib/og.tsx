@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/og";
+import { STUDIO, TROVE } from "@/lib/brand";
 
 // Shared OG card factory. Each route's opengraph-image.tsx imports
 // `troveOg` and passes a title + (optional) eyebrow + (optional) tagline.
-// We render a 1200×630 PNG with the Trove wordmark, an accent gradient,
-// and the route-specific copy — same dark surface, same typography.
+// We render a 1200x630 PNG with a wordmark, an accent gradient, and the
+// route-specific copy, same dark surface, same typography. The wordmark
+// defaults to Trove (the flagship) but any suite page can pass `markLabel`
+// (e.g. the studio name) to show a different mark in that small top row.
 
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
@@ -14,9 +17,18 @@ export type OgInput = {
   title: string;
   eyebrow?: string;
   tagline?: string;
+  /** Wordmark shown in the small top row. Defaults to the Trove name. */
+  markLabel?: string;
 };
 
-export function troveOg({ title, eyebrow, tagline }: OgInput): ImageResponse {
+export function troveOg({
+  title,
+  eyebrow,
+  tagline,
+  markLabel,
+}: OgInput): ImageResponse {
+  const mark = markLabel ?? TROVE.name;
+  const host = STUDIO.domain.replace(/^https?:\/\//, "");
   return new ImageResponse(
     (
       <div
@@ -40,7 +52,7 @@ export function troveOg({ title, eyebrow, tagline }: OgInput): ImageResponse {
               "radial-gradient(55% 55% at 18% 22%, rgba(255,122,69,0.22) 0%, transparent 60%), radial-gradient(45% 55% at 88% 78%, rgba(178,124,255,0.18) 0%, transparent 60%)",
           }}
         />
-        {/* Top row — wordmark */}
+        {/* Top row: wordmark */}
         <div
           style={{
             display: "flex",
@@ -62,7 +74,7 @@ export function troveOg({ title, eyebrow, tagline }: OgInput): ImageResponse {
             }}
           >
             <span style={{ color: "white", fontSize: 28, fontWeight: 700 }}>
-              T
+              {mark[0]}
             </span>
           </div>
           <span
@@ -73,7 +85,7 @@ export function troveOg({ title, eyebrow, tagline }: OgInput): ImageResponse {
               letterSpacing: "-0.02em",
             }}
           >
-            Trove
+            {mark}
           </span>
         </div>
 
@@ -155,8 +167,8 @@ export function troveOg({ title, eyebrow, tagline }: OgInput): ImageResponse {
             zIndex: 2,
           }}
         >
-          <span>gettrove.vercel.app</span>
-          <span>Local-only · No telemetry</span>
+          <span>{host}</span>
+          <span>Local-only, no telemetry</span>
         </div>
       </div>
     ),

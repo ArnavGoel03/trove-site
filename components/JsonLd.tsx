@@ -1,4 +1,4 @@
-import { TROVE, STUDIO, SEO_DESCRIPTION } from "@/lib/brand";
+import { APPS, TROVE, STUDIO, SEO_DESCRIPTION, type AppBrand } from "@/lib/brand";
 /**
  * Renders a `<script type="application/ld+json">` block server-side so
  * Googlebot / Bingbot get the structured data on first byte (no JS run
@@ -20,7 +20,7 @@ export default function JsonLd({ data }: { data: unknown }) {
 
 const ORG = {
   "@type": "Organization",
-  name: TROVE.name,
+  name: STUDIO.name,
   url: STUDIO.domain,
   logo: `${STUDIO.domain}/opengraph-image`,
 } as const;
@@ -61,6 +61,71 @@ export function softwareApplicationLd() {
     },
     license: "https://github.com/ArnavGoel03/trove",
     publisher: ORG,
+  };
+}
+
+const APP_CATEGORY: Record<keyof typeof APPS, string> = {
+  trove: "UtilitiesApplication",
+  relay: "DeveloperApplication",
+  tend: "ProductivityApplication",
+};
+
+/**
+ * Generic SoftwareApplication structured data for any suite app, driven
+ * entirely by lib/brand.ts. Apps still awaiting release (`status === "soon"`)
+ * get a PreOrder offer instead of an InStock price claim, since there is
+ * nothing to buy yet.
+ */
+export function softwareApplicationLdFor(appKey: keyof typeof APPS) {
+  const app: AppBrand = APPS[appKey];
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: app.name,
+    applicationCategory: APP_CATEGORY[appKey],
+    operatingSystem: "macOS 13.0 or later",
+    url: `${STUDIO.domain}${app.href}`,
+    description: app.blurb,
+    offers: {
+      "@type": "Offer",
+      name: `${app.name} subscription`,
+      ...(app.status === "soon"
+        ? { availability: "https://schema.org/PreOrder" }
+        : {
+            description: "14-day free trial, then a subscription.",
+            availability: "https://schema.org/InStock",
+          }),
+    },
+    publisher: ORG,
+  };
+}
+
+/** Organization JSON-LD for the studio itself (used on the homepage). */
+export function organizationLd() {
+  return {
+    "@context": "https://schema.org",
+    ...ORG,
+  };
+}
+
+/** ItemList of every app in the suite, so search engines see the studio
+ *  publishes three products, not one. */
+export function suiteItemListLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${STUDIO.name} Suite`,
+    itemListElement: (Object.keys(APPS) as (keyof typeof APPS)[]).map(
+      (key, i) => {
+        const app = APPS[key];
+        return {
+          "@type": "ListItem",
+          position: i + 1,
+          name: app.name,
+          url: `${STUDIO.domain}${app.href}`,
+        };
+      },
+    ),
   };
 }
 
