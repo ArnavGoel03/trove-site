@@ -23,15 +23,20 @@ const PANES = ALL_PANES.map((p) => ({
   group: SECTION_TO_GROUP[p.section],
 }));
 
+// Uniform subtle red tint drawn from the central accent token (no rainbow
+// category colors, no red/blue clash): cohesive and on-brand. `accent` is the
+// Tailwind color from --color-accent in globals.css, itself mirroring
+// suite.config.json brand.accent, so this tracks the one red everywhere.
+const TILE_TINT = "from-accent/15 to-transparent";
 const GROUP_COLORS: Record<string, string> = {
-  clip: "from-[#E10600]/30 to-[#E10600]/0",
-  compute: "from-[#4cb8ff]/30 to-[#4cb8ff]/0",
-  capture: "from-[#E10600]/30 to-[#E10600]/0",
-  files: "from-[#5be3a4]/30 to-[#5be3a4]/0",
-  sys: "from-[#ffd166]/30 to-[#ffd166]/0",
-  storage: "from-[#ff5d8f]/30 to-[#ff5d8f]/0",
-  app: "from-[#E10600]/30 to-[#E10600]/0",
-  profile: "from-[#9ca3af]/30 to-[#9ca3af]/0",
+  clip: TILE_TINT,
+  compute: TILE_TINT,
+  capture: TILE_TINT,
+  files: TILE_TINT,
+  sys: TILE_TINT,
+  storage: TILE_TINT,
+  app: TILE_TINT,
+  profile: TILE_TINT,
 };
 
 export default function AppMockup({
@@ -159,7 +164,7 @@ export default function AppMockup({
         className="absolute -inset-20 -z-10 opacity-60 blur-3xl pointer-events-none"
         style={{
           background:
-            "radial-gradient(50% 50% at 50% 30%, rgba(225,6,0,0.25), transparent 70%), radial-gradient(50% 50% at 70% 70%, rgba(225,6,0,0.22), transparent 70%)",
+            "radial-gradient(50% 50% at 50% 30%, rgb(var(--color-accent-rgb)/0.25), transparent 70%), radial-gradient(50% 50% at 70% 70%, rgb(var(--color-accent-rgb)/0.22), transparent 70%)",
         }}
       />
     </div>

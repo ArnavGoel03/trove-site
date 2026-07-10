@@ -2,9 +2,10 @@
 
 import { motion } from "motion/react";
 import { Quote } from "lucide-react";
+import { ACCENT } from "@/lib/brand-tokens.generated";
 
 /**
- * Testimonials block for the homepage. Static quotes — kept as data so
+ * Testimonials block for the homepage. Static quotes, kept as data so
  * the order and copy are easy to revise without touching layout. Pulled
  * in below the FeatureReel + above Compare so the user reads "what it
  * does" then "what people say about it" then "what it replaces."
@@ -14,7 +15,7 @@ type Voice = {
   quote: string;
   name: string;
   role: string;
-  /** Used as a small monogram chip — first two initials. */
+  /** Used as a small monogram chip: first two initials. */
   monogram: string;
   accent: string;
 };
@@ -26,7 +27,7 @@ const VOICES: Voice[] = [
     name: "Maya Krishnan",
     role: "Staff iOS engineer",
     monogram: "MK",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     quote:
@@ -42,7 +43,7 @@ const VOICES: Voice[] = [
     name: "Sara Lindgren",
     role: "Backend engineer",
     monogram: "SL",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     quote:

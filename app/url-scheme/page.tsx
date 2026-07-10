@@ -3,9 +3,9 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "trove:// URL scheme — Trove",
+  title: "trove:// URL scheme: Trove",
   description:
-    "Full reference for Trove's URL scheme — pane navigation, Stage operations, calculator, snippet copy, history paste, QR generation. Frontmost-gated where it counts.",
+    "Full reference for Trove's URL scheme: pane navigation, Stage operations, calculator, snippet copy, history paste, QR generation. Frontmost-gated where it counts.",
   alternates: { canonical: "https://gettrove.vercel.app/url-scheme" },
 };
 
@@ -29,7 +29,7 @@ const VERBS: Verb[] = [
     verb: "pane",
     example: "trove://pane/open?pane=PDF",
     description:
-      "Switches to the named pane. Honors the user's hidden-pane choices — a drive-by URL can't pop a pane the user has hidden.",
+      "Switches to the named pane. Honors the user's hidden-pane choices: a drive-by URL can't pop a pane the user has hidden.",
     frontmost: false,
     params: [
       {
@@ -54,7 +54,7 @@ const VERBS: Verb[] = [
     verb: "copy / copy-text",
     example: "trove://copy-text",
     description:
-      "Copies all Stage items as text (or as files for `copy`). Frontmost-gated — clipboard hijack from a drive-by URL would otherwise be a footgun.",
+      "Copies all Stage items as text (or as files for `copy`). Frontmost-gated: clipboard hijack from a drive-by URL would otherwise be a footgun.",
     frontmost: true,
   },
   {
@@ -142,7 +142,7 @@ export default function URLSchemePage() {
       eyebrow="Reference"
       title="trove:// URL scheme"
       lede={
-        "Anything that can open a URL can drive Trove — the address bar, a Keyboard Maestro macro, an Alfred workflow, a launchd job. Every verb mirrors a Tools-menu or AppIntents action so behavior is identical across all three entry points. State-changing verbs check that Trove is frontmost before they fire, so a drive-by <a href=\"trove://…\"> from a website is refused."
+        "Anything that can open a URL can drive Trove: the address bar, a Keyboard Maestro macro, an Alfred workflow, a launchd job. Every verb mirrors a Tools-menu or AppIntents action so behavior is identical across all three entry points. State-changing verbs check that Trove is frontmost before they fire, so a drive-by <a href=\"trove://…\"> from a website is refused."
       }
     >
       <JsonLd
@@ -176,7 +176,7 @@ export default function URLSchemePage() {
           drive-by <code className="md-inline">{`<a href="trove://…">`}</code>{" "}
           links on the web. The gate uses{" "}
           <code className="md-inline">NSWorkspace.frontmostApplication</code>{" "}
-          with a bundle-identifier check — not a window-focus heuristic.
+          with a bundle-identifier check, not a window-focus heuristic.
         </p>
       </section>
 
@@ -187,7 +187,7 @@ export default function URLSchemePage() {
             className="pane rounded-xl p-6"
             style={
               v.frontmost
-                ? { borderColor: "rgba(225,6,0,0.25)" }
+                ? { borderColor: "rgb(var(--color-accent-rgb) / 0.25)" }
                 : undefined
             }
           >

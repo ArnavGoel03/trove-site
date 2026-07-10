@@ -68,6 +68,7 @@ import {
   Video,
   Wand2,
 } from "lucide-react";
+import { ACCENT } from "@/lib/brand-tokens.generated";
 
 export type PaneSection =
   | "Clipboard"
@@ -103,7 +104,7 @@ export const PANES: Pane[] = [
     sfSymbol: "tray.full.fill",
     blurb:
       "Multi-clipboard staging: drop, paste, screenshot, copy all at once.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "History",
@@ -112,7 +113,7 @@ export const PANES: Pane[] = [
     sfSymbol: "clock.arrow.circlepath",
     blurb:
       "Persistent clipboard history with regex search, pin, dedup, and recovery.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "Snippets",
@@ -120,7 +121,7 @@ export const PANES: Pane[] = [
     icon: ClipboardList,
     sfSymbol: "text.append",
     blurb: "Reusable text templates, copy with one click.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "Notes",
@@ -128,7 +129,7 @@ export const PANES: Pane[] = [
     icon: StickyNote,
     sfSymbol: "note.text",
     blurb: "Five colored tabs of always-on markdown scratchpad.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
 
   // Compute
@@ -238,7 +239,7 @@ export const PANES: Pane[] = [
     icon: Pipette,
     sfSymbol: "eyedropper.halffull",
     blurb: "Pick from screen, palette from image, WCAG contrast checker.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "QR",
@@ -246,7 +247,7 @@ export const PANES: Pane[] = [
     icon: QrCode,
     sfSymbol: "qrcode",
     blurb: "Generate QR codes from any text. Live preview.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "OCR",
@@ -255,7 +256,7 @@ export const PANES: Pane[] = [
     sfSymbol: "doc.viewfinder",
     blurb:
       "Capture region → recognize text → optional translate, all local.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "Record",
@@ -263,7 +264,7 @@ export const PANES: Pane[] = [
     icon: Video,
     sfSymbol: "record.circle",
     blurb: "Screen recording with system audio + mic. ScreenCaptureKit.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "Snip",
@@ -272,7 +273,7 @@ export const PANES: Pane[] = [
     sfSymbol: "rectangle.dashed.badge.record",
     blurb:
       "Screenshot with delay timer + multi-destination (Stage / Clipboard / file).",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "Mirror",
@@ -281,7 +282,7 @@ export const PANES: Pane[] = [
     sfSymbol: "video",
     blurb:
       "Webcam preview with horizontal flip + opt-in menu bar item. Local-only, no recording.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     name: "Image Editor",
@@ -290,7 +291,7 @@ export const PANES: Pane[] = [
     sfSymbol: "wand.and.stars.inverse",
     blurb:
       "Photos-class image editor: crop, rotate, perspective, 13 adjustments, 9 filters, auto-enhance, red-eye removal, multi-format export.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
 
   // Files
@@ -555,7 +556,7 @@ export const PANES: Pane[] = [
     sfSymbol: "books.vertical",
     blurb:
       "Recoverable cache of everything Trove has produced: re-open, re-edit, send to Stage.",
-    accent: "#E10600",
+    accent: ACCENT,
   },
 
   // Profile
@@ -574,7 +575,7 @@ export const SECTIONS: { name: PaneSection; tagline: string; accent: string }[] 
     {
       name: "Clipboard",
       tagline: "Four panes for everything you copy.",
-      accent: "#E10600",
+      accent: ACCENT,
     },
     {
       name: "Compute",
@@ -584,7 +585,7 @@ export const SECTIONS: { name: PaneSection; tagline: string; accent: string }[] 
     {
       name: "Capture",
       tagline: "Pixels, screens, and recordings. Local.",
-      accent: "#E10600",
+      accent: ACCENT,
     },
     {
       name: "Files",
@@ -604,7 +605,7 @@ export const SECTIONS: { name: PaneSection; tagline: string; accent: string }[] 
     {
       name: "App",
       tagline: "A cache of what Trove has produced for you.",
-      accent: "#E10600",
+      accent: ACCENT,
     },
     {
       name: "Profile",
@@ -635,7 +636,7 @@ export const CAPABILITIES: Capability[] = [
       "Friendly errors via CustomLocalizedStringResourceConvertible",
     ],
     icon: KeyboardMusic,
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     eyebrow: "URL Scheme",
@@ -661,7 +662,7 @@ export const CAPABILITIES: Capability[] = [
       "One registry, zero drift between code and HUD",
     ],
     icon: KeyboardMusic,
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     eyebrow: "Cross-pane Data Flow",
@@ -713,7 +714,7 @@ export const CAPABILITIES: Capability[] = [
       "Pin, recover, search across persisted history",
     ],
     icon: History,
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     eyebrow: "Stable / Beta Channels",
@@ -739,7 +740,7 @@ export const CAPABILITIES: Capability[] = [
       "`zap` cleans App Support, prefs, and caches on uninstall",
     ],
     icon: PlugZap,
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     eyebrow: "XDG Config Home",

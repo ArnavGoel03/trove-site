@@ -8,6 +8,7 @@ import {
   MotionValue,
 } from "motion/react";
 import { useRef } from "react";
+import { ACCENT } from "@/lib/brand-tokens.generated";
 import ThermalsVisual from "./visuals/ThermalsVisual";
 import StageVisual from "./visuals/StageVisual";
 import PdfVisual from "./visuals/PdfVisual";
@@ -46,7 +47,7 @@ const FEATURES: Feature[] = [
       "Manual iCloud Drive backup of preferences + snippets + notes (plain JSON, no clipboard history)",
     ],
     Visual: StageVisual,
-    accent: "#E10600",
+    accent: ACCENT,
   },
   {
     eyebrow: "Files / PDF",
@@ -82,7 +83,7 @@ const FEATURES: Feature[] = [
       "Saves both original and translation",
     ],
     Visual: OcrVisual,
-    accent: "#E10600",
+    accent: ACCENT,
   },
 ];
 

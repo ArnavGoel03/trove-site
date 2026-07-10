@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { INTENTS, type IntentCategory } from "@/lib/intents";
+import { ACCENT } from "@/lib/brand-tokens.generated";
 
 export const metadata: Metadata = {
   title: "Shortcuts gallery: Trove",
@@ -15,7 +16,7 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
     {
       name: "Stage",
       tagline: "Drive Trove's multi-clipboard surface from a Shortcut.",
-      accent: "#E10600",
+      accent: ACCENT,
     },
     {
       name: "Compute",
@@ -25,7 +26,7 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
     {
       name: "Snippets",
       tagline: "Rich pickers: name + body preview right in the editor.",
-      accent: "#E10600",
+      accent: ACCENT,
     },
     {
       name: "Clipboard history",
@@ -37,7 +38,7 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
 
 const KIND_TINT: Record<string, string> = {
   Action: "#ffd166",
-  "Entity picker": "#E10600",
+  "Entity picker": ACCENT,
   Query: "#4cb8ff",
 };
 

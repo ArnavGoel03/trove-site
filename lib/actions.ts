@@ -7,6 +7,8 @@
 // Adding a new action: append one record here. The route, sitemap, and
 // cross-link mesh pick it up automatically.
 
+import { ACCENT } from "@/lib/brand-tokens.generated";
+
 export type ActionCategory =
   | "encoding"
   | "hash"
@@ -27,7 +29,7 @@ export interface InlineAction {
   slug: string;
   /** Human title for the page <h1> and breadcrumbs. */
   title: string;
-  /** Short one-liner — used as the meta description fallback. */
+  /** Short one-liner, used as the meta description fallback. */
   tagline: string;
   /** ⌘K query string the user types to trigger this. */
   triggers: string[];
@@ -50,7 +52,7 @@ export const ACTIONS: InlineAction[] = [
     triggers: ["base64 encode hello world", "b64 enc hello world"],
     example: { input: "hello world", output: "aGVsbG8gd29ybGQ=" },
     body:
-      "Trove encodes any string to Base64 inline from ⌘K. Press the Trove hotkey, type 'base64 encode' followed by your payload, hit Return, and the result is on your clipboard. Nothing leaves the Mac — no upload, no logging, no ad-tracked online tool tab to close. The shorthand 'b64 enc' works too. Built into the same palette as 60+ other dev transforms, so you don't tab-switch.",
+      "Trove encodes any string to Base64 inline from ⌘K. Press the Trove hotkey, type 'base64 encode' followed by your payload, hit Return, and the result is on your clipboard. Nothing leaves the Mac: no upload, no logging, no ad-tracked online tool tab to close. The shorthand 'b64 enc' works too. Built into the same palette as 60+ other dev transforms, so you don't tab-switch.",
     searchTerms: [
       "base64 encoder mac",
       "encode base64 online",
@@ -64,11 +66,11 @@ export const ACTIONS: InlineAction[] = [
     slug: "base64-decode",
     title: "Base64 decode",
     tagline:
-      "Decode Base64 strings on Mac instantly. Paste the encoded value, get plain text — locally, never uploaded.",
+      "Decode Base64 strings on Mac instantly. Paste the encoded value, get plain text, locally, never uploaded.",
     triggers: ["base64 decode aGVsbG8=", "b64 dec aGVsbG8="],
     example: { input: "aGVsbG8gd29ybGQ=", output: "hello world" },
     body:
-      "Open Trove (⌘ + space, then \"trove\" — or whatever hotkey you bound), type 'base64 decode' followed by the encoded value, Return. The decoded text is on your clipboard. Same pattern for the entire encoding suite (URL, hex, HTML, ROT13). Works on values up to a few MB without lag.",
+      "Open Trove (⌘ + space, then \"trove\", or whatever hotkey you bound), type 'base64 decode' followed by the encoded value, Return. The decoded text is on your clipboard. Same pattern for the entire encoding suite (URL, hex, HTML, ROT13). Works on values up to a few MB without lag.",
     searchTerms: ["base64 decoder mac", "decode base64", "base64 to text mac"],
     category: "encoding",
   },
@@ -80,7 +82,7 @@ export const ACTIONS: InlineAction[] = [
     triggers: ["url encode hello world?id=42"],
     example: { input: "a b&c=1", output: "a%20b%26c%3D1" },
     body:
-      "URL-encodes a string using RFC 3986 character classes — what you need for query parameters or path components. Triggers: 'url encode', 'urlencode', 'percent encode', 'enc url'. Trove also ships an URL-decode action and a built-in API Tester that does this for you on every request.",
+      "URL-encodes a string using RFC 3986 character classes: what you need for query parameters or path components. Triggers: 'url encode', 'urlencode', 'percent encode', 'enc url'. Trove also ships an URL-decode action and a built-in API Tester that does this for you on every request.",
     searchTerms: [
       "url encoder mac",
       "percent encode mac",
@@ -137,7 +139,7 @@ export const ACTIONS: InlineAction[] = [
     triggers: ["rot13 hello world"],
     example: { input: "hello", output: "uryyb" },
     body:
-      "Applies a 13-position Caesar shift. ROT13 is its own inverse — apply twice to get the original.",
+      "Applies a 13-position Caesar shift. ROT13 is its own inverse: apply twice to get the original.",
     searchTerms: ["rot13 encoder mac", "caesar cipher"],
     category: "encoding",
   },
@@ -150,7 +152,7 @@ export const ACTIONS: InlineAction[] = [
     triggers: ["md5 hello"],
     example: { input: "hello", output: "5d41402abc4b2a76b9719d911017c592" },
     body:
-      "MD5 of the UTF-8 bytes. Not collision-resistant — use for non-security checksums only.",
+      "MD5 of the UTF-8 bytes. Not collision-resistant: use for non-security checksums only.",
     searchTerms: ["md5 generator mac", "md5 hash online private"],
     category: "hash",
   },
@@ -224,7 +226,7 @@ export const ACTIONS: InlineAction[] = [
     triggers: ["snake case Some Title"],
     example: { input: "FirstName lastName", output: "first_name_last_name" },
     body:
-      "Splits the input on camelCase boundaries, spaces, hyphens, underscores — then lowercases and joins with underscores.",
+      "Splits the input on camelCase boundaries, spaces, hyphens, underscores, then lowercases and joins with underscores.",
     searchTerms: ["snake case converter mac"],
     category: "case",
   },
@@ -371,7 +373,7 @@ export const ACTIONS: InlineAction[] = [
     tagline: "Convert raw byte counts to KB/MB/GB/TB.",
     triggers: ["bytes 1048576"],
     example: { input: "1048576", output: "1 MB" },
-    body: "Uses ByteCountFormatter — produces Apple's standard size strings.",
+    body: "Uses ByteCountFormatter: produces Apple's standard size strings.",
     searchTerms: ["bytes to mb mac", "byte size formatter"],
     category: "number",
   },
@@ -401,8 +403,8 @@ export const ACTIONS: InlineAction[] = [
     slug: "hex-to-rgb",
     title: "Hex → RGB color",
     tagline: "Convert a hex color string to its rgb(r, g, b) form.",
-    triggers: ["hex to rgb #E10600"],
-    example: { input: "#E10600", output: "rgb(255, 106, 42)" },
+    triggers: [`hex to rgb ${ACCENT}`],
+    example: { input: ACCENT, output: "rgb(255, 106, 42)" },
     body:
       "Accepts # prefix, 3 or 6 digits. Trove also ships a Color picker pane with a full HEX / RGB / HSL / OKLCH inspector.",
     searchTerms: ["hex to rgb converter", "color picker mac"],
@@ -413,7 +415,7 @@ export const ACTIONS: InlineAction[] = [
     title: "RGB → hex color",
     tagline: "Convert rgb(r, g, b) to a hex string.",
     triggers: ["rgb to hex 255, 106, 42"],
-    example: { input: "255, 106, 42", output: "#E10600" },
+    example: { input: "255, 106, 42", output: ACCENT },
     body: "Accepts space- or comma-separated triplets, with or without 'rgb('.",
     searchTerms: ["rgb to hex converter"],
     category: "color",

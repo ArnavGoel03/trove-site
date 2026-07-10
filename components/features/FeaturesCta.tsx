@@ -29,14 +29,14 @@ export default function FeaturesCta() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 0.6 }}
-        className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-[#E10600]/25 bg-gradient-to-br from-[#E10600]/8 via-transparent to-[#E10600]/8"
+        className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-accent/25 bg-gradient-to-br from-accent/8 via-transparent to-accent/8"
       >
         <div
           aria-hidden
           className="absolute -inset-32 -z-10 opacity-50 blur-3xl"
           style={{
             background:
-              "radial-gradient(50% 50% at 30% 0%, rgba(225,6,0,0.35), transparent 70%), radial-gradient(50% 50% at 80% 100%, rgba(225,6,0,0.3), transparent 70%)",
+              "radial-gradient(50% 50% at 30% 0%, rgb(var(--color-accent-rgb)/0.35), transparent 70%), radial-gradient(50% 50% at 80% 100%, rgb(var(--color-accent-rgb)/0.3), transparent 70%)",
           }}
         />
 

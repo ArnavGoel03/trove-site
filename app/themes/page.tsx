@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Settings, Palette } from "lucide-react";
+import { ACCENT } from "@/lib/brand-tokens.generated";
 
 export const metadata: Metadata = {
   title: "Themes: Trove",
@@ -38,10 +39,10 @@ const THEMES: ThemeSpec[] = [
     border: "rgba(255,255,255,0.08)",
     text: "#f5f5f7",
     textDim: "#a1a1aa",
-    accent: "#E10600",
-    accent2: "#E10600",
+    accent: ACCENT,
+    accent2: ACCENT,
     badge: "Default",
-    swatch: ["#08080b", "#E10600", "#E10600", "#f5f5f7"],
+    swatch: ["#08080b", ACCENT, ACCENT, "#f5f5f7"],
   },
   {
     id: "light",
@@ -54,10 +55,10 @@ const THEMES: ThemeSpec[] = [
     border: "rgba(0,0,0,0.08)",
     text: "#0a0a0c",
     textDim: "#52525b",
-    accent: "#E10600",
+    accent: ACCENT,
     accent2: "#7a4cd6",
     badge: "Auto",
-    swatch: ["#f6f6f7", "#E10600", "#7a4cd6", "#0a0a0c"],
+    swatch: ["#f6f6f7", ACCENT, "#7a4cd6", "#0a0a0c"],
   },
   {
     id: "linear",
@@ -122,7 +123,7 @@ export default function ThemesPage() {
       />
 
       <div className="pane rounded-xl p-5 mb-10 flex items-start gap-3">
-        <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-[rgba(225,6,0,0.12)] text-[var(--color-accent)] shrink-0">
+        <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-accent/12 text-[var(--color-accent)] shrink-0">
           <Settings size={16} strokeWidth={1.75} />
         </span>
         <div>
@@ -314,7 +315,7 @@ export default function ThemesPage() {
       </div>
 
       <div className="mt-12 pane rounded-xl p-6 flex items-start gap-3">
-        <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-[rgba(225,6,0,0.12)] text-[var(--color-accent-2)] shrink-0">
+        <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-accent/12 text-[var(--color-accent-2)] shrink-0">
           <Palette size={16} strokeWidth={1.75} />
         </span>
         <div>

@@ -1,6 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/og";
 import { STUDIO, TROVE } from "@/lib/brand";
+import { ACCENT, ACCENT_RGB } from "@/lib/brand-tokens.generated";
+
+// Satori (next/og) does not resolve CSS variables, so every gradient/shadow
+// below is derived from the ACCENT/ACCENT_RGB constants instead of a
+// hardcoded hex or rgb triplet.
+const accentRgba = (alpha: number) =>
+  `rgba(${ACCENT_RGB.split(" ").join(", ")}, ${alpha})`;
 
 // Shared OG card factory. Each route's opengraph-image.tsx imports
 // `troveOg` and passes a title + (optional) eyebrow + (optional) tagline.
@@ -48,8 +55,7 @@ export function troveOg({
           style={{
             position: "absolute",
             inset: 0,
-            background:
-              "radial-gradient(55% 55% at 18% 22%, rgba(225,6,0,0.22) 0%, transparent 60%), radial-gradient(45% 55% at 88% 78%, rgba(225,6,0,0.18) 0%, transparent 60%)",
+            background: `radial-gradient(55% 55% at 18% 22%, ${accentRgba(0.22)} 0%, transparent 60%), radial-gradient(45% 55% at 88% 78%, ${accentRgba(0.18)} 0%, transparent 60%)`,
           }}
         />
         {/* Top row: wordmark */}
@@ -68,8 +74,8 @@ export function troveOg({
               width: 56,
               height: 56,
               borderRadius: 14,
-              background: "linear-gradient(135deg, #E10600, #E10600, #E10600)",
-              boxShadow: "0 8px 24px -8px rgba(225,6,0,0.55)",
+              background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT}, ${ACCENT})`,
+              boxShadow: `0 8px 24px -8px ${accentRgba(0.55)}`,
             }}
           >
             <span style={{ color: "white", fontSize: 28, fontWeight: 700 }}>
@@ -99,7 +105,7 @@ export function troveOg({
           {eyebrow ? (
             <div
               style={{
-                color: "#E10600",
+                color: ACCENT,
                 fontSize: 22,
                 fontWeight: 600,
                 letterSpacing: "0.22em",
@@ -147,8 +153,7 @@ export function troveOg({
             bottom: 56,
             height: 3,
             borderRadius: 2,
-            background:
-              "linear-gradient(90deg, #E10600, #E10600 40%, #E10600 100%)",
+            background: `linear-gradient(90deg, ${ACCENT}, ${ACCENT} 40%, ${ACCENT} 100%)`,
           }}
         />
         <div

@@ -87,7 +87,7 @@ export default async function ChangelogPage() {
                     href={`#${slugifyVersion(e.version)}`}
                     className={`inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-3 py-1 text-[12px] hover:border-white/20 transition-colors ${
                       e.isStable
-                        ? "bg-[rgba(225,6,0,0.10)] text-white"
+                        ? "bg-accent/10 text-white"
                         : "text-[var(--color-fg-dim)]"
                     }`}
                   >

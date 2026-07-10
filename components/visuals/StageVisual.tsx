@@ -8,15 +8,15 @@ const items = [
     kind: "text",
     icon: FileText,
     title: "Customer interview notes",
-    preview: "Q3 plan – the main blocker on the rollout is...",
-    tint: "from-[#E10600]/15 to-transparent",
+    preview: "Q3 plan, the main blocker on the rollout is...",
+    tint: "from-accent/15 to-transparent",
   },
   {
     kind: "image",
     icon: ImageIcon,
     title: "Screenshot 2026-05-12 at 10.24.41.png",
     preview: "1440 × 900 · PNG",
-    tint: "from-[#E10600]/15 to-transparent",
+    tint: "from-accent/15 to-transparent",
   },
   {
     kind: "link",
@@ -75,7 +75,7 @@ export default function StageVisual() {
       </div>
 
       <div className="text-[11.5px] text-[var(--color-fg-mute)]">
-        Pin anything to the Stage — survives reboots, syncs across spaces.
+        Pin anything to the Stage: survives reboots, syncs across spaces.
       </div>
     </div>
   );

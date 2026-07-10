@@ -22,7 +22,7 @@ export async function generateMetadata({
   const guide = guideBySlug(slug);
   if (!guide) return {};
   return {
-    title: `${guide.title} — Trove guide`,
+    title: `${guide.title}: Trove guide`,
     description: guide.lede,
     alternates: {
       canonical: `https://gettrove.vercel.app/guides/${slug}`,
@@ -74,7 +74,7 @@ export default async function GuidePage({
             key={i}
             className="pane rounded-xl p-5 flex gap-4"
           >
-            <span className="shrink-0 inline-flex w-8 h-8 rounded-full items-center justify-center bg-[rgba(225,6,0,0.12)] text-[var(--color-accent)] font-mono text-[13px]">
+            <span className="shrink-0 inline-flex w-8 h-8 rounded-full items-center justify-center bg-accent/12 text-[var(--color-accent)] font-mono text-[13px]">
               {i + 1}
             </span>
             <div>

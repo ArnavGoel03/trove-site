@@ -33,7 +33,7 @@ export default function Logomark({
   return (
     <span
       aria-hidden
-      className={`relative inline-flex shrink-0 items-center justify-center bg-[#E10600] ring-1 ring-white/[0.16] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.28),inset_0_-1px_0_0_rgba(0,0,0,0.3),0_8px_20px_-8px_rgba(225,6,0,0.6)] ${className}`}
+      className={`relative inline-flex shrink-0 items-center justify-center bg-accent ring-1 ring-white/[0.16] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.28),inset_0_-1px_0_0_rgba(0,0,0,0.3),0_8px_20px_-8px_rgb(var(--color-accent-rgb)/0.6)] ${className}`}
       style={{ width: size, height: size, borderRadius: radius }}
     >
       <span

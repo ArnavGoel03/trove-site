@@ -1,8 +1,15 @@
 import { ImageResponse } from "next/og";
+import { ACCENT, ACCENT_RGB } from "@/lib/brand-tokens.generated";
 
 export const alt = "Trove: one app instead of a dozen.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+// Satori (next/og) does not resolve CSS variables, so this file derives
+// its gradients from the ACCENT/ACCENT_RGB constants instead of hardcoding
+// hex or rgb triplets directly.
+const accentRgba = (alpha: number) =>
+  `rgba(${ACCENT_RGB.split(" ").join(", ")}, ${alpha})`;
 
 export default function OgImage() {
   return new ImageResponse(
@@ -27,8 +34,7 @@ export default function OgImage() {
             left: 0,
             right: 0,
             bottom: 0,
-            background:
-              "radial-gradient(60% 60% at 30% 40%, rgba(225,6,0,0.18) 0%, transparent 60%), radial-gradient(50% 50% at 75% 65%, rgba(225,6,0,0.16) 0%, transparent 60%)",
+            background: `radial-gradient(60% 60% at 30% 40%, ${accentRgba(0.18)} 0%, transparent 60%), radial-gradient(50% 50% at 75% 65%, ${accentRgba(0.16)} 0%, transparent 60%)`,
           }}
         />
         {/* App icon placeholder */}
@@ -40,7 +46,7 @@ export default function OgImage() {
             width: 80,
             height: 80,
             borderRadius: 20,
-            background: "linear-gradient(135deg, #E10600, #E10600, #E10600)",
+            background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT}, ${ACCENT})`,
             marginBottom: 28,
           }}
         >
