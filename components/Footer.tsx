@@ -3,7 +3,8 @@
 import { Github, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { STUDIO, TROVE } from "@/lib/brand";
+import { STUDIO, TROVE, APPS } from "@/lib/brand";
+import Logomark from "./Logomark";
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm";
@@ -11,28 +12,32 @@ const FOCUS_RING =
 export default function Footer() {
   return (
     <footer className="relative border-t border-white/[0.05] mt-20">
-      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] gap-10">
+      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(5,1fr)] gap-10">
         <div>
           <div className="flex items-center gap-2.5 mb-4">
-            <span className="relative inline-flex w-7 h-7 rounded-[8px] bg-gradient-to-br from-[#ff8b5a] via-[#ff6a2a] to-[#b27cff] items-center justify-center shadow-[0_4px_12px_-2px_rgba(255,122,69,0.5)]">
-              <span className="absolute inset-0.5 rounded-[6px] bg-black/20" />
-              <span className="relative text-[11px] font-bold text-white">
-                {TROVE.name[0]}
-              </span>
-            </span>
+            <Logomark name={STUDIO.name} size={30} />
             <span className="text-[15px] font-semibold tracking-tight">
-              {TROVE.name}
+              {STUDIO.name}
             </span>
           </div>
           <p className="text-[13px] text-[var(--color-fg-dim)] max-w-sm leading-relaxed">
-            40+ tools for clipboard, capture, system, files and storage, in a
-            single ~14 MB native macOS app. Scriptable from Shortcuts.
-            Installable via Homebrew. Local-only.
+            {STUDIO.tagline} Private, native Mac apps that never phone home. No
+            account, no telemetry, nothing leaves your Mac. One subscription
+            unlocks {APPS.trove.name}, {APPS.relay.name}, and {APPS.tend.name}.
           </p>
         </div>
 
         <FooterCol
-          title="Product"
+          title="Apps"
+          links={[
+            { label: APPS.trove.name, href: APPS.trove.href },
+            { label: APPS.relay.name, href: APPS.relay.href },
+            { label: APPS.tend.name, href: APPS.tend.href },
+          ]}
+        />
+
+        <FooterCol
+          title={APPS.trove.name}
           links={[
             { label: "Features", href: "/features" },
             { label: "Compare", href: "/compare" },

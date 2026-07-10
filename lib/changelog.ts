@@ -1,13 +1,12 @@
-// Live-source the macos/CHANGELOG.md from the canonical Trove repo and
-// parse it into a structured shape the /changelog page can render. The
-// raw markdown lives in a separate repo (`ArnavGoel03/trove`) from this
-// website (`ArnavGoel03/trove-site`), so we can't read it off disk —
-// instead we fetch it from GitHub's raw.githubusercontent.com endpoint
-// at build time and revalidate every 6 hours so the page tracks shipped
-// changelog edits within one CDN cycle of a push.
-
-export const CHANGELOG_SOURCE_URL =
-  "https://raw.githubusercontent.com/ArnavGoel03/trove/main/macos/CHANGELOG.md";
+// Source the changelog from a committed snapshot of macos/CHANGELOG.md that
+// ships inside this repo at content/CHANGELOG.md. The Trove source repo is
+// PRIVATE (binary-only distribution: nothing to fork), so the site cannot
+// fetch the markdown from GitHub at build time. Instead the release script
+// copies CHANGELOG.md into content/ (see scripts/sync-changelog.mjs) and we
+// read it straight off disk at build. Zero network, zero auth, and it works
+// whether or not the source repo is ever made public.
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 export type ChangelogEntry = {
   version: string;
@@ -21,9 +20,12 @@ export type ChangelogEntry = {
   body: string;
 };
 
-const HEADING_RE = /^## \[([^\]]+)\]\s*—\s*(.+)$/;
+// Heading form: `## [1.12.7] - 2026-07-08`. The separator is an ASCII hyphen
+// in the authored file; also accept en/e-m dash (via \u escapes, so no dash
+// bytes live in this source) in case an editor ever substitutes one.
+const HEADING_RE = /^## \[([^\]]+)\]\s*[-\u2013\u2014]\s*(.+)$/;
 
-/** Split the changelog into `## [version] — date` sections. */
+/** Split the changelog into `## [version] - date` sections. */
 export function parseChangelog(markdown: string): ChangelogEntry[] {
   const lines = markdown.split("\n");
   const entries: ChangelogEntry[] = [];
@@ -60,21 +62,19 @@ export function parseChangelog(markdown: string): ChangelogEntry[] {
 }
 
 /**
- * Fetch + parse the changelog from GitHub's raw endpoint. Revalidates
- * every 6h, so pushing a CHANGELOG edit on `main` rolls out to the
- * marketing site within that window. Errors fall back to an empty list
- * so the page still renders chrome instead of crashing.
+ * Read + parse the committed changelog snapshot at content/CHANGELOG.md.
+ * Read at build time (the /changelog page is statically generated), so the
+ * file is baked into the deploy with no runtime I/O. A missing or unreadable
+ * file falls back to an empty list so the page still renders its chrome
+ * instead of crashing.
  */
 export async function fetchChangelog(): Promise<ChangelogEntry[]> {
   try {
-    const res = await fetch(CHANGELOG_SOURCE_URL, {
-      // Vercel-native ISR. 6h ≈ marketing freshness without crushing
-      // raw.githubusercontent.com on every visitor.
-      next: { revalidate: 60 * 60 * 6 },
-    });
-    if (!res.ok) return [];
-    const text = await res.text();
-    return parseChangelog(text);
+    const md = readFileSync(
+      join(process.cwd(), "content", "CHANGELOG.md"),
+      "utf8",
+    );
+    return parseChangelog(md);
   } catch {
     return [];
   }
@@ -83,7 +83,7 @@ export async function fetchChangelog(): Promise<ChangelogEntry[]> {
 /** Lightweight markdown → React-safe HTML escaper. Handles the subset of
  *  syntax that actually shows up in the changelog: bullets, bold, code,
  *  inline links, `### Subsection` headings, and code fences. Deliberately
- *  not a full markdown engine — keeps the bundle tiny and the output
+ *  not a full markdown engine, which keeps the bundle tiny and the output
  *  predictable. */
 export function renderMarkdown(md: string): string {
   const lines = md.split("\n");

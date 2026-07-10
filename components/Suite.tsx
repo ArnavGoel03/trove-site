@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
 import { APPS, SUITE, STUDIO } from "@/lib/brand";
 
 // The suite listing: all apps the studio makes, unlocked by ONE subscription
@@ -5,14 +8,24 @@ import { APPS, SUITE, STUDIO } from "@/lib/brand";
 // updates. Order is deliberate: the live flagship first, then what's next.
 const ORDER = ["trove", "relay", "tend"] as const;
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 export default function Suite() {
+  const reduced = useReducedMotion();
+
   return (
     <section
       id="suite"
       className="relative px-6 py-24 sm:py-28 border-t border-white/[0.06]"
     >
       <div className="max-w-5xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto">
+        <motion.div
+          initial={reduced ? { opacity: 1 } : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-20%" }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="text-center max-w-2xl mx-auto"
+        >
           <p className="text-[12.5px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)] mb-3">
             One subscription
           </p>
@@ -24,16 +37,27 @@ export default function Suite() {
             A single subscription is one license key that unlocks all of them,
             on every Mac you own. {SUITE.trial}, no account required.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-3">
-          {ORDER.map((k) => {
+        <div
+          className="mt-14 grid gap-4 sm:grid-cols-3"
+          style={{ perspective: "1400px" }}
+        >
+          {ORDER.map((k, i) => {
             const a = APPS[k];
             const live = a.status === "live";
             return (
-              <article
+              <motion.article
                 key={a.key}
-                className="relative flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-colors hover:border-white/[0.14]"
+                initial={
+                  reduced
+                    ? { opacity: 1 }
+                    : { opacity: 0, y: 28, rotateX: 10 }
+                }
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
+                className="relative flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-[border-color,transform] duration-300 hover:border-white/[0.14] hover:-translate-y-1"
               >
                 <span
                   className={`inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ${
@@ -77,7 +101,7 @@ export default function Suite() {
                     </a>
                   )}
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>

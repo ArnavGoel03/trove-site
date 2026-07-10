@@ -27,7 +27,7 @@ const FEATURES: Feature[] = [
   {
     eyebrow: "System / GPU & Thermals",
     title: "See your GPU temp.\nFor real.",
-    body: "Trove reads the same private HID sensors Apple uses internally — no kexts, no admin password. CPU, GPU, fan speed, throttle state, all in one pane.",
+    body: "Trove reads the same private HID sensors Apple uses internally, no kexts, no admin password. CPU, GPU, fan speed, throttle state, all in one pane.",
     bullets: [
       "Live GPU/CPU/SOC temperatures",
       "Fan RPM and per-core throttle",
@@ -39,11 +39,11 @@ const FEATURES: Feature[] = [
   {
     eyebrow: "Clipboard / Stage",
     title: "Pin clipboard items\nthat won't disappear.",
-    body: "The Stage is a small, always-available shelf for clipboard items you want to keep around. Pin a link, a screenshot, a paragraph — paste back with one keystroke.",
+    body: "The Stage is a small, always-available shelf for clipboard items you want to keep around. Pin a link, a screenshot, a paragraph: paste back with one keystroke.",
     bullets: [
       "Survives reboots and logouts",
       "Per-item hotkeys (⌥1 … ⌥9)",
-      "Manual iCloud Drive backup of preferences + snippets + notes — plain JSON, no clipboard history",
+      "Manual iCloud Drive backup of preferences + snippets + notes (plain JSON, no clipboard history)",
     ],
     Visual: StageVisual,
     accent: "#ff7a45",
@@ -51,7 +51,7 @@ const FEATURES: Feature[] = [
   {
     eyebrow: "Files / PDF",
     title: "A full PDF kit\nwith no upload step.",
-    body: "Merge, split, rotate, redact, encrypt and compress PDFs entirely on-device. Drag in a folder, get a single file back — without sending your documents to a stranger's server.",
+    body: "Merge, split, rotate, redact, encrypt and compress PDFs entirely on-device. Drag in a folder, get a single file back without sending your documents to a stranger's server.",
     bullets: [
       "Merge, split, rotate, redact, OCR",
       "AES-256 encrypt with one click",
@@ -75,7 +75,7 @@ const FEATURES: Feature[] = [
   {
     eyebrow: "Capture / OCR + Translate",
     title: "Snip text, even from\na language you can't read.",
-    body: "Hit a shortcut, drag a rectangle, get accurate text in your clipboard — translated to your language on the way through. Works on Japanese train signs, German PDFs, French menus, all on-device.",
+    body: "Hit a shortcut, drag a rectangle, get accurate text in your clipboard, translated to your language on the way through. Works on Japanese train signs, German PDFs, French menus, all on-device.",
     bullets: [
       "On-device OCR (Vision framework)",
       "Auto-translate to your locale",
@@ -133,7 +133,7 @@ function FeatureBlock({
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
 
-  // One useScroll per block — motion's scroll listener uses a single
+  // One useScroll per block: motion's scroll listener uses a single
   // shared rAF and only ticks when the target is on/near screen.
   // With `position: sticky` only one block is ever in-view at once.
   const { scrollYProgress } = useScroll({
@@ -141,20 +141,37 @@ function FeatureBlock({
     offset: ["start start", "end end"],
   });
 
-  // Single fade/scale signal drives both the visual AND text — we
-  // re-use the same MotionValue chain across child motion elements
-  // so we don't allocate redundant transforms.
+  // Fade/scale/3D-tilt windows were previously [0, 0.15, 0.85, 1] on a
+  // 220vh block: 30% of the track (66vh, more than half a screen) sat
+  // at near-zero opacity while the section was pinned, which read as a
+  // blank black gap between features. Tightened to [0, 0.08, 0.92, 1]
+  // on a shorter 170vh block so content is at full opacity for ~84% of
+  // the scroll instead of ~70%, and the remaining transition is framed
+  // as an intentional 3D swing (rotateX/z) rather than a flat fade.
   const visualOpacity = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.85, 1],
+    [0, 0.08, 0.92, 1],
     [0, 1, 1, 0],
   );
   const visualScale = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.85, 1],
-    [0.94, 1, 1, 0.96],
+    [0, 0.08, 0.92, 1],
+    [0.97, 1, 1, 0.98],
   );
-  const visualY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const visualY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  // 3D perspective reveal: the visual pane swings in out of depth
+  // (rotated + pushed back on Z) instead of just fading, so the block
+  // transition itself carries the "wow" instead of dead air.
+  const visualRotateX = useTransform(
+    scrollYProgress,
+    [0, 0.08, 0.92, 1],
+    [12, 0, 0, -10],
+  );
+  const visualZ = useTransform(
+    scrollYProgress,
+    [0, 0.08, 0.92, 1],
+    [-160, 0, 0, -120],
+  );
 
   const Visual = feature.Visual;
 
@@ -162,10 +179,10 @@ function FeatureBlock({
     <div
       ref={ref}
       className="relative feature-block"
-      style={{ height: "220vh" }}
+      style={{ height: "170vh" }}
     >
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden feature-block-sticky">
-        {/* Background accent glow per feature — static, no animation */}
+        {/* Background accent glow per feature, static, no animation */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 opacity-50 pointer-events-none"
@@ -174,8 +191,11 @@ function FeatureBlock({
           }}
         />
 
-        <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Text column — order swaps for visual rhythm */}
+        <div
+          className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
+          style={{ perspective: "1600px" }}
+        >
+          {/* Text column, order swaps for visual rhythm */}
           <FeatureCopy
             feature={feature}
             progress={scrollYProgress}
@@ -192,6 +212,9 @@ function FeatureBlock({
                     opacity: visualOpacity,
                     scale: visualScale,
                     y: visualY,
+                    rotateX: visualRotateX,
+                    z: visualZ,
+                    transformStyle: "preserve-3d",
                     willChange: "transform, opacity",
                   }
             }
@@ -219,19 +242,25 @@ function FeatureCopy({
   className?: string;
 }) {
   // Collapse 4 separate parallax MotionValues into 1 driver + scalar
-  // multipliers — motion still applies them via the same shared rAF,
+  // multipliers; motion still applies them via the same shared rAF,
   // but the JS work per scroll tick is now just one useTransform
   // sample instead of four.
   const drive = useTransform(progress, [0, 1], [1, -1]);
-  const fadeIn = useTransform(progress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+  // Widened to match the visual column's tightened window (was
+  // [0, 0.15, 0.85, 1]): the copy now reaches full opacity for the
+  // same ~84% of the block instead of fading out early into the gap.
+  const fadeIn = useTransform(progress, [0, 0.08, 0.92, 1], [0, 1, 1, 0]);
+  // Subtle depth push on enter/exit so the copy column reads as part
+  // of the same 3D reveal as the visual, not a separate flat fade.
+  const copyZ = useTransform(progress, [0, 0.08, 0.92, 1], [-40, 0, 0, -30]);
 
-  // Per-row Y stagger was the bug — any non-zero delta between the
+  // Per-row Y stagger was the bug: any non-zero delta between the
   // title's and body's Y transforms creates a chance of overlap on
   // scroll. The previous "tight" range (60/55/50/45) still allowed
   // ~5px gap collapse per adjacency, which at the extreme of a
   // long-form recap with leading-relaxed body text was enough to
   // visually touch. The fix is structural: every row in the copy
-  // column shares one Y transform, so they move as a rigid block —
+  // column shares one Y transform, so they move as a rigid block,
   // never relative to each other. The column-level `fadeIn` opacity
   // still provides the scroll-in feel.
   const sharedY = useTransform(drive, (v) => v * 50);
@@ -240,11 +269,11 @@ function FeatureCopy({
   const bodyY = sharedY;
   const bulletY = sharedY;
 
-  const styleOpacity = reduced ? undefined : { opacity: fadeIn };
+  const style = reduced ? undefined : { opacity: fadeIn, z: copyZ };
 
   return (
     <motion.div
-      style={styleOpacity}
+      style={style}
       className={className}
     >
       <motion.div

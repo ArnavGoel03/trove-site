@@ -1,4 +1,10 @@
 import Link from "next/link";
+import Logomark from "@/components/Logomark";
+import { STUDIO, TROVE } from "@/lib/brand";
+
+// Same rule as Nav.tsx: the studio name once the studio brand is
+// live, the flagship app name otherwise. Never a hardcoded literal.
+const HOME_BRAND = STUDIO.live ? STUDIO.name : TROVE.name;
 
 export default function NotFound() {
   return (
@@ -9,16 +15,11 @@ export default function NotFound() {
           <Link
             href="/"
             className="flex items-center gap-2.5"
-            aria-label="Trove"
+            aria-label={`${HOME_BRAND} home`}
           >
-            <span className="relative inline-flex w-7 h-7 rounded-[8px] bg-gradient-to-br from-[#ff8b5a] via-[#ff6a2a] to-[#b27cff] items-center justify-center shadow-[0_4px_12px_-2px_rgba(255,122,69,0.5)]">
-              <span className="absolute inset-0.5 rounded-[6px] bg-black/20" />
-              <span className="relative text-[11px] font-bold tracking-tight text-white">
-                T
-              </span>
-            </span>
-            <span className="text-[15px] font-semibold tracking-tight text-white">
-              Trove
+            <Logomark name={HOME_BRAND} size={36} />
+            <span className="text-[16px] font-semibold tracking-tight text-white">
+              {HOME_BRAND}
             </span>
           </Link>
         </div>

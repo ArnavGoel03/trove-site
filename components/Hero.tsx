@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "motion/react";
 import { useEffect, useRef } from "react";
 import DownloadButton from "./DownloadButton";
 import AppMockup from "./AppMockup";
@@ -10,7 +16,28 @@ export default function Hero() {
   // direct DOM write to CSS variables, zero React re-renders per
   // mousemove, zero motion-value subscriptions firing per frame.
   const gradientRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const reduced = useReducedMotion();
+
+  // Scroll-linked 3D depth: as the user scrolls the mockup out of the
+  // hero, it tilts back and recedes into Z-space instead of just
+  // sliding up flat. motion's useScroll is rAF-batched (no raw
+  // scroll listener, no per-frame React re-render) and drives the
+  // transform via motion values, same discipline as the mousemove
+  // loop above. useSpring smooths the raw scroll signal so fast
+  // trackpad flicks don't snap the tilt.
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const heroProgressSmooth = useSpring(heroProgress, {
+    stiffness: 300,
+    damping: 40,
+    mass: 0.5,
+  });
+  const mockupRotateX = useTransform(heroProgressSmooth, [0, 1], [0, 10]);
+  const mockupZ = useTransform(heroProgressSmooth, [0, 1], [0, -140]);
+  const mockupFade = useTransform(heroProgressSmooth, [0, 1], [1, 0.45]);
 
   useEffect(() => {
     if (reduced) return;
@@ -64,6 +91,7 @@ export default function Hero() {
 
   return (
     <section
+      ref={sectionRef}
       id="top"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 overflow-hidden"
     >
@@ -157,9 +185,27 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-full max-w-5xl mx-auto mt-16 sm:mt-20"
-        style={{ willChange: "transform, opacity" }}
+        style={{ willChange: "transform, opacity", perspective: "1200px" }}
       >
-        <AppMockup />
+        {/* Nested wrapper: entrance (opacity/y/scale above) and
+            scroll-depth (rotateX/z/opacity below) are separate motion
+            values on separate elements so they never fight over the
+            same key. The entrance plays once on mount, the depth
+            tilt tracks scroll continuously afterward. */}
+        <motion.div
+          style={
+            reduced
+              ? undefined
+              : {
+                  rotateX: mockupRotateX,
+                  z: mockupZ,
+                  opacity: mockupFade,
+                  transformStyle: "preserve-3d",
+                }
+          }
+        >
+          <AppMockup />
+        </motion.div>
       </motion.div>
     </section>
   );
