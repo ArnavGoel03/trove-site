@@ -43,7 +43,7 @@ export default function AppMockup({
   const reduced = useReducedMotion();
 
   // Parallax tilt: single rAF-throttled mousemove handler that writes
-  // the transform directly to the element — no motion-value chain,
+  // the transform directly to the element, no motion-value chain,
   // no springs sampling per frame, no React state.
   useEffect(() => {
     if (reduced) return;
