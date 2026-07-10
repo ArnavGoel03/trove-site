@@ -14,9 +14,9 @@
      rgb(var(--color-accent-rgb) / a)), never a hardcoded hex, so the whole
      brand changes from one value. accent-2 is the same red; accent-3 is a
      neutral graphite so the palette stays monochrome + one red. */
-  --color-accent: #e10600;
-  --color-accent-rgb: 225 6 0;
-  --color-accent-2: #e10600;
+  --color-accent: #b00600;
+  --color-accent-rgb: 176 6 0;
+  --color-accent-2: #b00600;
   --color-accent-3: #3f3f46;
 
   --font-sans:
