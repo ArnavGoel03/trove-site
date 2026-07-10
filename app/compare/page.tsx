@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Check, Minus, X } from "lucide-react";
+import { PRODUCT } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Compare Trove vs CleanShot X, Loom, iStat, Boop, CleanMyMac, asitop, Raycast, Maccy, Rectangle, DaisyDisk, TextSniper, Alfred, Soulver",
@@ -714,7 +715,7 @@ const ROWS: Row[] = [
       alfred: "partial",
       soulver: "partial",
     },
-    note: "Trove: $10/yr. CleanShot $29 one-time. Loom Business $150/yr. iStat $12 one-time. Boop free. CleanMyMac $45/yr. asitop free. Raycast Pro $96/yr. Maccy free. Rectangle free. DaisyDisk $10 one-time. TextSniper $7 one-time. Alfred Powerpack about $40 one-time. Soulver $35 one-time.",
+    note: `Trove: ${PRODUCT.priceAdjective}. CleanShot $29 one-time. Loom Business $150/yr. iStat $12 one-time. Boop free. CleanMyMac $45/yr. asitop free. Raycast Pro $96/yr. Maccy free. Rectangle free. DaisyDisk $10 one-time. TextSniper $7 one-time. Alfred Powerpack about $40 one-time. Soulver $35 one-time.`,
   },
 ];
 

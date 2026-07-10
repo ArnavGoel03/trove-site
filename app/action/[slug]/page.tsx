@@ -4,6 +4,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { ACTIONS, ACTIONS_BY_SLUG, relatedActions } from "@/lib/actions";
+import { PRODUCT } from "@/lib/brand";
 
 // Pre-render every action page at build time for snappy SEO + Lighthouse.
 export async function generateStaticParams() {
@@ -125,7 +126,7 @@ export default async function ActionPage({ params }: PageProps) {
               </code>
             </li>
             <li>
-              <strong>3.</strong> Hit <kbd className="px-1.5 py-0.5 rounded bg-black/40 border border-white/10 text-[12px]">↩</kbd> — the result is on your clipboard.
+              <strong>3.</strong> Hit <kbd className="px-1.5 py-0.5 rounded bg-black/40 border border-white/10 text-[12px]">↩</kbd>, the result is on your clipboard.
             </li>
           </ol>
         </section>
@@ -221,7 +222,7 @@ export default async function ActionPage({ params }: PageProps) {
           <p className="mt-2 text-[13.5px] text-[var(--color-fg-dim)]">
             Trove ships an API tester (Postman-class), local LLM chat, hash
             verifier, OCR, screen recorder, hosts file editor, password
-            generator + HIBP, treemap, and more. Local-first, $10/yr.
+            generator + HIBP, treemap, and more. Local-first. {PRODUCT.pricing}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link

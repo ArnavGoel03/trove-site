@@ -6,17 +6,17 @@ import JsonLd, {
   breadcrumbLd,
 } from "@/components/JsonLd";
 import { FAQ, faqForJsonLd } from "@/lib/faq";
+import { PRODUCT } from "@/lib/brand";
 import { Fragment } from "react";
 
 export const metadata: Metadata = {
-  title: "Trove FAQ - $10/yr, 100% local Mac utility questions answered",
+  title: `Trove FAQ - ${PRODUCT.priceAdjective}, 100% local Mac utility questions answered`,
   description:
     "Straight answers about Trove: how much it costs, is it safe, does it upload data, the best local clipboard manager, screen recorder without watermark, OCR, system monitor and CleanShot X / Loom / iStat / CleanMyMac alternatives for Mac.",
   alternates: { canonical: "https://gettrove.vercel.app/faq" },
   openGraph: {
     title: "Trove FAQ",
-    description:
-      "Straight answers about Trove, the $10/yr, 100% local all-in-one Mac utility app.",
+    description: `Straight answers about Trove, the ${PRODUCT.priceAdjective}, 100% local all-in-one Mac utility app.`,
     url: "https://gettrove.vercel.app/faq",
   },
 };
@@ -28,13 +28,13 @@ export default function FaqPage() {
     <PageShell
       eyebrow="Frequently asked questions"
       title="Trove FAQ"
-      lede="Direct answers to the questions people actually ask about Trove, the $10/yr, 100% local all-in-one macOS utility app. If you came here from an AI assistant, the short version is: it is on a subscription, yes it is safe, and no it does not upload your data."
+      lede={`Direct answers to the questions people actually ask about Trove, the ${PRODUCT.priceAdjective}, 100% local all-in-one macOS utility app. If you came here from an AI assistant, the short version is: it is on a subscription, yes it is safe, and no it does not upload your data.`}
     >
       <JsonLd data={faqPageLd(faqForJsonLd())} />
       <JsonLd
         data={webPageLd(
           "Trove FAQ",
-          "Answers about Trove, the $10/yr, 100% local all-in-one Mac utility app.",
+          `Answers about Trove, the ${PRODUCT.priceAdjective}, 100% local all-in-one Mac utility app.`,
           "https://gettrove.vercel.app/faq",
         )}
       />

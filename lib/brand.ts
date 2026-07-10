@@ -9,6 +9,8 @@
 // true): the nav wordmark, footer copyright, and Organization schema all
 // present as the studio. The Trove homepage itself stays flagship-focused.
 
+import { VERSIONS } from "./versions.generated";
+
 export type AppStatus = "live" | "soon";
 
 export interface AppBrand {
@@ -49,8 +51,8 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
       "Clipboard, window manager, system monitor, OCR, PDF kit, disk cleaner, and 30+ more, in one private, native Mac app.",
     status: "live",
     href: "/",
-    version: "1.12.7",
-    releaseDate: "2026-07-08",
+    version: VERSIONS.trove.version,
+    releaseDate: VERSIONS.trove.releaseDate,
   },
   relay: {
     key: "relay",
@@ -60,8 +62,8 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
       "Requests, environments, auth, and scripting. Your keys stay in your Keychain, no account, no cloud.",
     status: "soon",
     href: "/relay",
-    version: "0.1.0",
-    releaseDate: "2026-07-10",
+    version: VERSIONS.relay.version,
+    releaseDate: VERSIONS.relay.releaseDate,
   },
   tend: {
     key: "tend",
@@ -70,8 +72,8 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     blurb: "A calm, local-first task and calendar app.",
     status: "soon",
     href: "/tend",
-    version: "0.11.0",
-    releaseDate: "2026-07-10",
+    version: VERSIONS.tend.version,
+    releaseDate: VERSIONS.tend.releaseDate,
   },
 };
 
@@ -94,4 +96,10 @@ export const PRODUCT = {
   toolCount: "40+",
   trial: SUITE.trial,           // "14-day free trial"
   pricing: "Free trial, then one simple subscription.",
+  /** Inline adjective form for prose, e.g. "Trove is a <priceAdjective>
+   * screen recorder." Pricing is intentionally vague site-wide, so this
+   * never resolves to a dollar figure: change it here, not at each call site. */
+  priceAdjective: "subscription-based",
+  /** Short noun-phrase form for stat displays / callouts. */
+  priceLabel: "One subscription",
 } as const;

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { PRODUCT } from "@/lib/brand";
 
 interface Comparison {
   slug: string;
@@ -19,7 +20,7 @@ const COMPARISONS: Record<string, Comparison> = {
   postman: {
     slug: "postman",
     competitor: "Postman",
-    metaTitle: "Trove vs Postman: local, $10/yr Postman-class API tester for Mac",
+    metaTitle: `Trove vs Postman: local, ${PRODUCT.priceAdjective} Postman-class API tester for Mac`,
     metaDescription:
       "Postman went paid + cloud-only. Trove ships a local API tester for Mac with environments, OAuth 2.0, AWS Sig V4, JS pre-request / tests, Postman v2.1 import. No account.",
     intro:
@@ -59,7 +60,10 @@ const COMPARISONS: Record<string, Comparison> = {
           "Code export: curl / fetch / axios / Python requests / Swift",
         them: "Code export to many languages",
       },
-      { trove: "$10/yr, local-first", them: "$14-$49/user/month for teams" },
+      {
+        trove: `${PRODUCT.priceAdjective}, local-first`,
+        them: "$14-$49/user/month for teams",
+      },
     ],
     callouts: [
       {
@@ -95,7 +99,10 @@ const COMPARISONS: Record<string, Comparison> = {
           "Inline ⌘K palette runs 60+ pure transforms (base64, JWT decode, hex, SHA-256, JSON pretty, UUID, color, …)",
         them: "Snippets + commands + extension search",
       },
-      { trove: "$10/yr, local-first", them: "Free for individuals, paid for Pro/teams" },
+      {
+        trove: `${PRODUCT.priceAdjective}, local-first`,
+        them: "Free for individuals, paid for Pro/teams",
+      },
     ],
     callouts: [
       {
@@ -114,13 +121,16 @@ const COMPARISONS: Record<string, Comparison> = {
   cleanmymac: {
     slug: "cleanmymac",
     competitor: "CleanMyMac",
-    metaTitle: "Trove vs CleanMyMac: $10/yr local Mac cleanup",
+    metaTitle: `Trove vs CleanMyMac: ${PRODUCT.priceAdjective} local Mac cleanup`,
     metaDescription:
-      "CleanMyMac is paid. Trove's Clean, Sweep, Treemap, and Storage panes do the same disk-hygiene work locally, no telemetry, for $10/yr.",
+      "CleanMyMac is paid. Trove's Clean, Sweep, Treemap, and Storage panes do the same disk-hygiene work locally, no telemetry.",
     intro:
-      "Trove's storage suite (Clean, Sweep, Treemap, Overview, Disk Speed) covers the same disk-hygiene jobs CleanMyMac sells, for $10/yr instead of their subscription. Local, no telemetry.",
+      "Trove's storage suite (Clean, Sweep, Treemap, Overview, Disk Speed) covers the same disk-hygiene jobs CleanMyMac sells, locally and with no telemetry.",
     highlights: [
-      { trove: "$10/yr, local-first", them: "$40-$90/year subscription" },
+      {
+        trove: `${PRODUCT.priceAdjective}, local-first`,
+        them: "$40-$90/year subscription",
+      },
       {
         trove: "Treemap viz of every folder with click-to-drill",
         them: "Space Lens (similar)",
@@ -159,7 +169,10 @@ const COMPARISONS: Record<string, Comparison> = {
         them: "60+ Boop scripts, similar coverage",
       },
       { trove: "40+ panes for everything else", them: "Text transforms only" },
-      { trove: "$10/yr, local-first", them: "Free, open-source (MIT)" },
+      {
+        trove: `${PRODUCT.priceAdjective}, local-first`,
+        them: "Free, open-source (MIT)",
+      },
     ],
     callouts: [
       {
@@ -175,11 +188,14 @@ const COMPARISONS: Record<string, Comparison> = {
     competitor: "DevUtils",
     metaTitle: "Trove vs DevUtils: broader dev toolkit for Mac",
     metaDescription:
-      "DevUtils nails offline dev transforms. Trove covers the same set + screen recording, OCR, API tester, hosts editor, LLM chat, for $10/yr.",
+      "DevUtils nails offline dev transforms. Trove covers the same set + screen recording, OCR, API tester, hosts editor, LLM chat.",
     intro:
-      "DevUtils is a focused, paid offline dev toolkit. Trove covers the same transform set (base64, JWT, JSON, hashes, UUID, JSONPath, color) plus 40+ additional panes (Recorder, OCR, Hash verify, API Tester, Hosts editor, LLM chat), for $10/yr.",
+      "DevUtils is a focused, paid offline dev toolkit. Trove covers the same transform set (base64, JWT, JSON, hashes, UUID, JSONPath, color) plus 40+ additional panes (Recorder, OCR, Hash verify, API Tester, Hosts editor, LLM chat).",
     highlights: [
-      { trove: "$10/yr, local-first", them: "$30 one-time / $40 lifetime" },
+      {
+        trove: `${PRODUCT.priceAdjective}, local-first`,
+        them: "$30 one-time / $40 lifetime",
+      },
       {
         trove: "60+ inline ⌘K actions covering DevUtils' surface",
         them: "Dedicated UI per tool",

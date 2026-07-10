@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { SEO_TITLE, SEO_DESCRIPTION, TROVE, STUDIO } from "@/lib/brand";
 import "./globals.css";
 
@@ -81,6 +82,7 @@ export default function RootLayout({
         <div className="grain" aria-hidden="true" />
         {children}
         <ScrollToTop />
+        <ServiceWorkerRegister />
         <Toaster
           position="bottom-right"
           theme="dark"

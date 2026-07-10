@@ -10,6 +10,7 @@ const SECURITY_HEADERS = [
       "img-src 'self' data: blob:",
       "font-src 'self'",
       "connect-src 'self' https://api.github.com",
+      "worker-src 'self'",
       "media-src 'none'",
       "object-src 'none'",
       "frame-ancestors 'none'",

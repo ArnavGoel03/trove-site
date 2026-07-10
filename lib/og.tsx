@@ -58,7 +58,6 @@ export function troveOg({
             display: "flex",
             alignItems: "center",
             gap: 14,
-            zIndex: 2,
           }}
         >
           <div
@@ -95,7 +94,6 @@ export function troveOg({
             marginTop: "auto",
             display: "flex",
             flexDirection: "column",
-            zIndex: 2,
           }}
         >
           {eyebrow ? (
@@ -151,7 +149,6 @@ export function troveOg({
             borderRadius: 2,
             background:
               "linear-gradient(90deg, #ff8b5a, #ff6a2a 40%, #b27cff 100%)",
-            zIndex: 2,
           }}
         />
         <div
@@ -164,7 +161,6 @@ export function troveOg({
             justifyContent: "space-between",
             color: "#71717a",
             fontSize: 18,
-            zIndex: 2,
           }}
         >
           <span>{host}</span>

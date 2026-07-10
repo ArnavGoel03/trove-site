@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { Check, X } from "lucide-react";
+import { PRODUCT } from "@/lib/brand";
 
 const BUNDLE = [
   { name: "Raycast Pro", price: "$96", role: "Launcher + clipboard" },
@@ -152,14 +153,7 @@ export default function Compare() {
             <div className="text-[13px] text-[var(--color-fg-dim)]">
               You pay
             </div>
-            <div className="text-3xl font-semibold tabular-nums">
-              <span className="text-[var(--color-fg-mute)] mr-1">$</span>
-              10
-              <span className="text-base text-[var(--color-fg-dim)] font-normal">
-                {" "}
-                /yr
-              </span>
-            </div>
+            <div className="text-2xl font-semibold">{PRODUCT.priceLabel}</div>
           </div>
 
           <div className="mt-5 grid gap-1.5">
@@ -177,7 +171,7 @@ export default function Compare() {
       </div>
 
       <div className="mt-6 text-[11.5px] text-[var(--color-fg-mute)] max-w-3xl">
-        Prices listed are public, at time of writing. None of this is a dunk —
+        Prices listed are public, at time of writing. None of this is a dunk:
         most of those apps are great at the one thing they do. Trove just does
         a lot of them in one place, on your machine.
       </div>
