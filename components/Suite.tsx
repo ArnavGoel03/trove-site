@@ -69,9 +69,12 @@ export default function Suite() {
                       Learn more &rarr;
                     </a>
                   ) : (
-                    <span className="text-[var(--color-fg-mute)]">
-                      Included in your subscription
-                    </span>
+                    <a
+                      href={a.href}
+                      className="inline-flex items-center gap-1 font-medium text-[var(--color-fg-dim)] hover:text-white transition-colors"
+                    >
+                      Preview &rarr;
+                    </a>
                   )}
                 </div>
               </article>
