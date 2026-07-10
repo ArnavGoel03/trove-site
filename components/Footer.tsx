@@ -25,7 +25,7 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-[13px] text-[var(--color-fg-dim)] max-w-sm leading-relaxed">
-            53 panes for clipboard, capture, system, files and storage, in a
+            40+ tools for clipboard, capture, system, files and storage, in a
             single ~14 MB native macOS app. Scriptable from Shortcuts.
             Installable via Homebrew. Local-only.
           </p>

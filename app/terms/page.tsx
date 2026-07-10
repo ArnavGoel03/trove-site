@@ -23,7 +23,7 @@ export default function TermsPage() {
       <Section title="1. License grant">
         <p>
           Subject to your compliance with these Terms and payment of the
-          applicable subscription fee (currently US$10 / year), we grant you a
+          applicable subscription fee (currently USwith a free trial), we grant you a
           personal, non-exclusive, non-transferable, revocable license to
           install and use Trove on your Mac.
         </p>

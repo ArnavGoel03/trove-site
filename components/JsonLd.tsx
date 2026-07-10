@@ -56,9 +56,7 @@ export function softwareApplicationLd() {
     offers: {
       "@type": "Offer",
       name: `${TROVE.name} subscription`,
-      description: "Annual license, billed once per year.",
-      price: "10",
-      priceCurrency: "USD",
+      description: "14-day free trial, then a subscription.",
       availability: "https://schema.org/InStock",
     },
     license: "https://github.com/ArnavGoel03/trove",

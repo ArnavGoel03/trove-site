@@ -15,7 +15,7 @@ export type PaneDetail = {
 
 const GENERIC: PaneDetail = {
   overview:
-    "Part of Trove's 53-pane native macOS workspace. Open it from the sidebar, ⌘K Quick Switcher, or the `trove://pane/open` URL scheme.",
+    "Part of Trove's 40+ tool native macOS workspace. Open it from the sidebar, ⌘K Quick Switcher, or the `trove://pane/open` URL scheme.",
   capabilities: [
     "Built into Trove, no separate install",
     "Persists state per-user under XDG / Application Support",

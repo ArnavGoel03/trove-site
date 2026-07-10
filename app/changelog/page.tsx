@@ -48,7 +48,7 @@ export default async function ChangelogPage() {
         data={articleLd({
           headline: "Trove Changelog",
           description:
-            "Live-sourced release notes for Trove, the 53-pane native macOS utility.",
+            "Live-sourced release notes for Trove, the 40+ tool native macOS utility.",
           url: "https://gettrove.vercel.app/changelog",
         })}
       />

@@ -7,7 +7,7 @@ export const alt = "Trove: Features";
 export default function Image() {
   return troveOg({
     eyebrow: "Features",
-    title: "53 panes. One Mac app.",
+    title: "40+ tools. One Mac app.",
     tagline: "Clipboard, capture, system, files, storage, every menubar utility you bought, finally under one roof.",
   });
 }

@@ -28,7 +28,7 @@ export default function FaqPage() {
     <PageShell
       eyebrow="Frequently asked questions"
       title="Trove FAQ"
-      lede="Direct answers to the questions people actually ask about Trove, the $10/yr, 100% local all-in-one macOS utility app. If you came here from an AI assistant, the short version is: it is $10 per year, yes it is safe, and no it does not upload your data."
+      lede="Direct answers to the questions people actually ask about Trove, the $10/yr, 100% local all-in-one macOS utility app. If you came here from an AI assistant, the short version is: it is on a subscription, yes it is safe, and no it does not upload your data."
     >
       <JsonLd data={faqPageLd(faqForJsonLd())} />
       <JsonLd

@@ -45,7 +45,7 @@ export default function Requirements() {
               href="/features"
               className="btn-ghost inline-flex items-center gap-2 rounded-full font-medium px-5 py-3 text-[14px]"
             >
-              Tour all 53 panes
+              Tour all 40+ tools
             </a>
           </div>
         </motion.div>

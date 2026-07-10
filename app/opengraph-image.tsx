@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Trove — Your Mac, finally tidy.";
+export const alt = "Trove: one app instead of a dozen.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -67,7 +67,7 @@ export default function OgImage() {
             letterSpacing: "-0.01em",
           }}
         >
-          Your Mac, finally tidy.
+          One app instead of a dozen.
         </div>
         <div
           style={{
@@ -76,7 +76,7 @@ export default function OgImage() {
             color: "#71717a",
           }}
         >
-          30+ panes · 14 MB · Local-only · No telemetry
+          40+ tools · Local-first · No account · No telemetry
         </div>
       </div>
     ),

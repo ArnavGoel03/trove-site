@@ -75,3 +75,10 @@ export const TROVE = APPS.trove;
 /** SEO title used in <title> and Open Graph. */
 export const SEO_TITLE = `${TROVE.name}: ${TROVE.tagline}`;
 export const SEO_DESCRIPTION = TROVE.blurb;
+
+/** Current product facts (route stale "40+ tools / $10" strings through here). */
+export const PRODUCT = {
+  toolCount: "40+",
+  trial: SUITE.trial,           // "14-day free trial"
+  pricing: "Free trial, then one simple subscription.",
+} as const;

@@ -62,7 +62,7 @@ const VOICES: Voice[] = [
   },
   {
     quote:
-      "Cancelled CleanShot, iStat, and TextSniper the week I installed Trove. The $10/year was paid for by month two.",
+      "Cancelled CleanShot, iStat, and TextSniper the week I installed Trove. The with a free trial was paid for by month two.",
     name: "Liam O'Reilly",
     role: "Senior SWE",
     monogram: "LO",

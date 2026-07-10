@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { PANES, SECTIONS, type Pane } from "@/lib/panes";
 
-// 53 panes, grouped by sidebar section. Identical to the in-app Customize
+// 40+ tools, grouped by sidebar section. Identical to the in-app Customize
 // panel: same names, same one-liners, same section labels.
 export default function PaneGrid() {
   return (
@@ -19,7 +19,7 @@ export default function PaneGrid() {
           The full set
         </div>
         <h2 className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02]">
-          53 panes, grouped the way{" "}
+          40+ tools, grouped the way{" "}
           <span className="text-[var(--color-fg-dim)]">
             the app groups them.
           </span>

@@ -1,4 +1,4 @@
-// Single source of truth for the 53 panes Trove ships in v1.11.2.
+// Single source of truth for the 40+ tools Trove ships in v1.11.2.
 //
 // Mirrors `enum Pane` in `macos/main.swift` line-for-line: same rawValue,
 // same icon name (SF Symbol, mapped here to a Lucide equivalent for the

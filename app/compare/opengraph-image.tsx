@@ -8,6 +8,6 @@ export default function Image() {
   return troveOg({
     eyebrow: "Compare",
     title: "Replaces a dozen menubar apps.",
-    tagline: "Raycast Pro + iStat + CleanMyMac + Bartender + TextSniper, in one ~14 MB native app at $10/year.",
+    tagline: "Raycast Pro + iStat + CleanMyMac + Bartender + TextSniper, in one ~14 MB native app at with a free trial.",
   });
 }
