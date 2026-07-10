@@ -106,12 +106,12 @@ export default function Hero() {
           className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur px-3 py-1 text-[12px] text-[var(--color-fg-dim)] mb-7"
         >
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.7)]" />
-          v1.11.2 · 53 panes · 11 Shortcuts intents · ~14 MB
+          Local-first · No account · Nothing leaves your Mac
         </motion.div>
 
         <h1 className="text-[44px] sm:text-[64px] md:text-[84px] leading-[0.96] font-semibold tracking-[-0.04em] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
-          Your Mac,
-          <br className="hidden sm:block" /> finally tidy.
+          One app instead
+          <br className="hidden sm:block" /> of a dozen.
         </h1>
 
         <motion.p
@@ -120,10 +120,10 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl mx-auto leading-relaxed"
         >
-          Clipboard manager, window snapper, system monitor, OCR, PDF kit, disk
-          cleaner, 27 more, one native macOS app, ~14 MB, scriptable from
-          Shortcuts, installable via Homebrew, cold-launches in under half a
-          second.
+          Clipboard manager, window manager, system monitor, OCR, PDF kit, API
+          client, disk cleaner, and 30+ more, in one fast, private, native Mac
+          app. It replaces hundreds of dollars of separate utilities, and none
+          of your data ever leaves your Mac.
         </motion.p>
 
         <motion.div
@@ -138,7 +138,7 @@ export default function Hero() {
             href="/features"
             className="btn-ghost inline-flex items-center gap-2 rounded-full font-medium px-5 py-3 text-[14px] transition-all hover:translate-y-[-1px]"
           >
-            See all 53 panes
+            See everything it does
           </a>
         </motion.div>
 
@@ -148,7 +148,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-5 text-[12.5px] text-[var(--color-fg-dim)]"
         >
-          Apple Silicon &amp; Intel · macOS 13+ · Source on GitHub
+          14-day free trial · No account · Apple Silicon &amp; Intel · macOS 13+
         </motion.div>
       </motion.div>
 

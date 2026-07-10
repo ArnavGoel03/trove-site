@@ -8,6 +8,7 @@ import JsonLd, { softwareApplicationLd, webPageLd } from "@/components/JsonLd";
 // They're still server-rendered (no `ssr: false`) so the HTML
 // shows up immediately for SEO and no layout jump.
 const FeatureReel = dynamic(() => import("@/components/FeatureReel"));
+const Suite = dynamic(() => import("@/components/Suite"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
 const Compare = dynamic(() => import("@/components/Compare"));
 const Privacy = dynamic(() => import("@/components/Privacy"));
@@ -33,6 +34,7 @@ export default function Page() {
       <Nav />
       <Hero />
       <FeatureReel />
+      <Suite />
       <Testimonials />
       <Compare />
       <Privacy />

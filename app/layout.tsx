@@ -1,38 +1,37 @@
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
+import { SEO_TITLE, SEO_DESCRIPTION, TROVE, STUDIO } from "@/lib/brand";
 import "./globals.css";
 
+// All naming routes through lib/brand.ts, change a name there, not here.
 export const metadata: Metadata = {
-  title: "Trove: your Mac, finally tidy.",
-  description:
-    "53 panes for clipboard, capture, system, files and storage, in a single ~14 MB native macOS app. Scriptable from Shortcuts. Local-only. No telemetry.",
-  metadataBase: new URL("https://gettrove.vercel.app"),
+  title: SEO_TITLE,
+  description: SEO_DESCRIPTION,
+  metadataBase: new URL(STUDIO.domain),
   alternates: {
-    canonical: "https://gettrove.vercel.app",
+    canonical: STUDIO.domain,
   },
-  applicationName: "Trove",
+  applicationName: TROVE.name,
   openGraph: {
-    title: "Trove: your Mac, finally tidy.",
-    description:
-      "53 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
+    title: SEO_TITLE,
+    description: SEO_DESCRIPTION,
     type: "website",
-    url: "https://gettrove.vercel.app",
-    siteName: "Trove",
+    url: STUDIO.domain,
+    siteName: TROVE.name,
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Trove: your Mac, finally tidy.",
+        alt: SEO_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trove: your Mac, finally tidy.",
-    description:
-      "53 panes in one ~14 MB native Mac app. Replaces a dozen menubar utilities.",
+    title: SEO_TITLE,
+    description: SEO_DESCRIPTION,
     images: ["/opengraph-image"],
   },
 };

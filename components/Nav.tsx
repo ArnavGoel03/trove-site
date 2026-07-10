@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Github, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { TROVE } from "@/lib/brand";
 import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
@@ -61,16 +62,16 @@ export default function Nav() {
         <Link
           href="/"
           className="flex items-center gap-2.5 group rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-          aria-label="Trove home"
+          aria-label={`${TROVE.name} home`}
         >
           <span className="relative inline-flex w-7 h-7 rounded-[8px] bg-gradient-to-br from-[#ff8b5a] via-[#ff6a2a] to-[#b27cff] items-center justify-center shadow-[0_4px_12px_-2px_rgba(255,122,69,0.5)]">
             <span className="absolute inset-0.5 rounded-[6px] bg-black/20 backdrop-blur-sm" />
             <span className="relative text-[11px] font-bold tracking-tight text-white">
-              T
+              {TROVE.name[0]}
             </span>
           </span>
           <span className="text-[15px] font-semibold tracking-tight">
-            Trove
+            {TROVE.name}
           </span>
         </Link>
 
@@ -100,7 +101,7 @@ export default function Nav() {
             href="https://github.com/ArnavGoel03/trove"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Trove on GitHub"
+            aria-label={`${TROVE.name} on GitHub`}
             title="Source code on GitHub"
             className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-[var(--color-fg-dim)] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >

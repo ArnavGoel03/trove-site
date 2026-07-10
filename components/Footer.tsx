@@ -3,6 +3,7 @@
 import { Github, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { TROVE } from "@/lib/brand";
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm";
@@ -16,11 +17,11 @@ export default function Footer() {
             <span className="relative inline-flex w-7 h-7 rounded-[8px] bg-gradient-to-br from-[#ff8b5a] via-[#ff6a2a] to-[#b27cff] items-center justify-center shadow-[0_4px_12px_-2px_rgba(255,122,69,0.5)]">
               <span className="absolute inset-0.5 rounded-[6px] bg-black/20" />
               <span className="relative text-[11px] font-bold text-white">
-                T
+                {TROVE.name[0]}
               </span>
             </span>
             <span className="text-[15px] font-semibold tracking-tight">
-              Trove
+              {TROVE.name}
             </span>
           </div>
           <p className="text-[13px] text-[var(--color-fg-dim)] max-w-sm leading-relaxed">
@@ -95,7 +96,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-[12px] text-[var(--color-fg-mute)]">
             <span>
-              {"©"} {new Date().getFullYear()} Trove. macOS, Apple Silicon
+              {"©"} {new Date().getFullYear()} {TROVE.name}. macOS, Apple Silicon
               and the Apple logo are trademarks of Apple Inc.
             </span>
           </div>
@@ -105,7 +106,7 @@ export default function Footer() {
               href="https://github.com/ArnavGoel03/trove"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Trove on GitHub"
+              aria-label={`${TROVE.name} on GitHub`}
               className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
             >
               <Github size={16} />

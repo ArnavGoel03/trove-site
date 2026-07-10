@@ -1,3 +1,4 @@
+import { TROVE, STUDIO, SEO_DESCRIPTION } from "@/lib/brand";
 /**
  * Renders a `<script type="application/ld+json">` block server-side so
  * Googlebot / Bingbot get the structured data on first byte (no JS run
@@ -19,25 +20,24 @@ export default function JsonLd({ data }: { data: unknown }) {
 
 const ORG = {
   "@type": "Organization",
-  name: "Trove",
-  url: "https://gettrove.vercel.app",
-  logo: "https://gettrove.vercel.app/opengraph-image",
+  name: TROVE.name,
+  url: STUDIO.domain,
+  logo: `${STUDIO.domain}/opengraph-image`,
 } as const;
 
 export function softwareApplicationLd() {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Trove",
-    alternateName: "Trove for Mac",
+    name: TROVE.name,
+    alternateName: `${TROVE.name} for Mac`,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "macOS 13.0 or later (Ventura+), Apple Silicon and Intel",
-    url: "https://gettrove.vercel.app",
+    url: STUDIO.domain,
     downloadUrl: "https://github.com/ArnavGoel03/trove/releases/latest",
     softwareVersion: "1.5",
     fileSize: "14 MB",
-    description:
-      "Trove is a $10/year, 100% local macOS utility app that bundles 53 panes plus 60+ inline actions: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, hashing and more. No telemetry, no uploads, no account required. Cold-launches in under 500 ms.",
+    description: SEO_DESCRIPTION,
     featureList: [
       "Clipboard history with regex search and dedup",
       "Multi-clipboard staging (Stage)",
@@ -55,7 +55,7 @@ export function softwareApplicationLd() {
     ],
     offers: {
       "@type": "Offer",
-      name: "Trove yearly license (per year)",
+      name: `${TROVE.name} subscription`,
       description: "Annual license, billed once per year.",
       price: "10",
       priceCurrency: "USD",
@@ -90,8 +90,8 @@ export function webPageLd(name: string, description: string, url: string) {
     url,
     isPartOf: {
       "@type": "WebSite",
-      name: "Trove",
-      url: "https://gettrove.vercel.app",
+      name: TROVE.name,
+      url: STUDIO.domain,
     },
     publisher: ORG,
   };
@@ -117,7 +117,7 @@ export function howToLd(opts: {
       name: s.name,
       text: s.text,
     })),
-    tool: { "@type": "HowToTool", name: "Trove" },
+    tool: { "@type": "HowToTool", name: TROVE.name },
   };
 }
 
