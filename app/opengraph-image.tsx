@@ -28,7 +28,7 @@ export default function OgImage() {
             right: 0,
             bottom: 0,
             background:
-              "radial-gradient(60% 60% at 30% 40%, rgba(255,122,69,0.18) 0%, transparent 60%), radial-gradient(50% 50% at 75% 65%, rgba(178,124,255,0.16) 0%, transparent 60%)",
+              "radial-gradient(60% 60% at 30% 40%, rgba(225,6,0,0.18) 0%, transparent 60%), radial-gradient(50% 50% at 75% 65%, rgba(225,6,0,0.16) 0%, transparent 60%)",
           }}
         />
         {/* App icon placeholder */}
@@ -40,7 +40,7 @@ export default function OgImage() {
             width: 80,
             height: 80,
             borderRadius: 20,
-            background: "linear-gradient(135deg, #ff8b5a, #ff6a2a, #b27cff)",
+            background: "linear-gradient(135deg, #E10600, #E10600, #E10600)",
             marginBottom: 28,
           }}
         >

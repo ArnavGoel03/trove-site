@@ -96,7 +96,7 @@ export default function DownloadCard({
             className={
               "size-10 rounded-2xl inline-flex items-center justify-center " +
               (platform === "mac"
-                ? "bg-gradient-to-br from-[#ff8b5a] via-[#ff6a2a] to-[#b27cff]"
+                ? "bg-gradient-to-br from-[#E10600] via-[#E10600] to-[#E10600]"
                 : "bg-gradient-to-br from-[#5a9bff] via-[#3b7fdc] to-[#2a55b2]")
             }
           >

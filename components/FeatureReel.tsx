@@ -46,7 +46,7 @@ const FEATURES: Feature[] = [
       "Manual iCloud Drive backup of preferences + snippets + notes (plain JSON, no clipboard history)",
     ],
     Visual: StageVisual,
-    accent: "#ff7a45",
+    accent: "#E10600",
   },
   {
     eyebrow: "Files / PDF",
@@ -82,7 +82,7 @@ const FEATURES: Feature[] = [
       "Saves both original and translation",
     ],
     Visual: OcrVisual,
-    accent: "#b27cff",
+    accent: "#E10600",
   },
 ];
 

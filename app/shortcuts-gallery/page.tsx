@@ -15,7 +15,7 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
     {
       name: "Stage",
       tagline: "Drive Trove's multi-clipboard surface from a Shortcut.",
-      accent: "#ff7a45",
+      accent: "#E10600",
     },
     {
       name: "Compute",
@@ -25,7 +25,7 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
     {
       name: "Snippets",
       tagline: "Rich pickers: name + body preview right in the editor.",
-      accent: "#b27cff",
+      accent: "#E10600",
     },
     {
       name: "Clipboard history",
@@ -37,7 +37,7 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
 
 const KIND_TINT: Record<string, string> = {
   Action: "#ffd166",
-  "Entity picker": "#b27cff",
+  "Entity picker": "#E10600",
   Query: "#4cb8ff",
 };
 

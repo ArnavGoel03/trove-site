@@ -59,7 +59,7 @@ const SECTIONS: Sec[] = [
       "Body text: --color-fg (#f5f5f7) on --color-bg (#08080b) — 18.9:1",
       "Dimmed text: --color-fg-dim (#a1a1aa) on --color-bg — 8.4:1",
       "Muted text: --color-fg-mute (#71717a) on --color-bg — 4.7:1 (used only on metadata, never on actionable text)",
-      "Accent orange (#ff7a45) is used on background, not on long-form text — when it is used as text (links, eyebrow labels), it's at 14px+ and against the dark surface, 4.8:1",
+      "Accent orange (#E10600) is used on background, not on long-form text — when it is used as text (links, eyebrow labels), it's at 14px+ and against the dark surface, 4.8:1",
       "Light theme parallels: dimmed text holds 7.1:1, muted holds 4.6:1",
     ],
   },
@@ -132,7 +132,7 @@ export default function AccessibilityPage() {
           return (
             <article key={s.title} className="pane rounded-xl p-6">
               <header className="flex items-center gap-3 mb-4">
-                <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-[rgba(255,122,69,0.12)] text-[var(--color-accent)]">
+                <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-[rgba(225,6,0,0.12)] text-[var(--color-accent)]">
                   <Icon size={20} strokeWidth={1.5} />
                 </span>
                 <h2 className="text-[20px] font-semibold tracking-tight text-white">

@@ -103,9 +103,8 @@ export default function Hero() {
         className="absolute inset-0 -z-10 opacity-90"
         style={{
           background: `
-            radial-gradient(40% 50% at calc(var(--mx, 50) * 1%) calc(var(--my, 30) * 1%), rgba(255, 122, 69, 0.18), transparent 60%),
-            radial-gradient(50% 60% at calc((100 - var(--mx, 50)) * 1%) calc((100 - var(--my, 30)) * 1%), rgba(178, 124, 255, 0.16), transparent 60%),
-            radial-gradient(60% 60% at 50% 100%, rgba(76, 184, 255, 0.08), transparent 60%)
+            radial-gradient(45% 55% at calc(var(--mx, 50) * 1%) calc(var(--my, 30) * 1%), rgba(225,6,0,0.13), transparent 62%),
+            radial-gradient(70% 50% at 50% 0%, rgba(225,6,0,0.05), transparent 60%)
           `,
           willChange: "background-position",
         }}

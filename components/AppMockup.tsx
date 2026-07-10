@@ -24,13 +24,13 @@ const PANES = ALL_PANES.map((p) => ({
 }));
 
 const GROUP_COLORS: Record<string, string> = {
-  clip: "from-[#ff7a45]/30 to-[#ff7a45]/0",
+  clip: "from-[#E10600]/30 to-[#E10600]/0",
   compute: "from-[#4cb8ff]/30 to-[#4cb8ff]/0",
-  capture: "from-[#b27cff]/30 to-[#b27cff]/0",
+  capture: "from-[#E10600]/30 to-[#E10600]/0",
   files: "from-[#5be3a4]/30 to-[#5be3a4]/0",
   sys: "from-[#ffd166]/30 to-[#ffd166]/0",
   storage: "from-[#ff5d8f]/30 to-[#ff5d8f]/0",
-  app: "from-[#c4b5fd]/30 to-[#c4b5fd]/0",
+  app: "from-[#E10600]/30 to-[#E10600]/0",
   profile: "from-[#9ca3af]/30 to-[#9ca3af]/0",
 };
 
@@ -159,7 +159,7 @@ export default function AppMockup({
         className="absolute -inset-20 -z-10 opacity-60 blur-3xl pointer-events-none"
         style={{
           background:
-            "radial-gradient(50% 50% at 50% 30%, rgba(255,122,69,0.25), transparent 70%), radial-gradient(50% 50% at 70% 70%, rgba(178,124,255,0.22), transparent 70%)",
+            "radial-gradient(50% 50% at 50% 30%, rgba(225,6,0,0.25), transparent 70%), radial-gradient(50% 50% at 70% 70%, rgba(225,6,0,0.22), transparent 70%)",
         }}
       />
     </div>

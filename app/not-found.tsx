@@ -33,7 +33,7 @@ export default function NotFound() {
           className="absolute inset-0 -z-10 opacity-60 pointer-events-none"
           style={{
             background:
-              "radial-gradient(50% 50% at 50% 40%, rgba(255,122,69,0.12) 0%, transparent 60%)",
+              "radial-gradient(50% 50% at 50% 40%, rgba(225,6,0,0.12) 0%, transparent 60%)",
           }}
         />
 

@@ -11,7 +11,7 @@ export default function FeaturesHero() {
         className="absolute inset-0 -z-10 opacity-80"
         style={{
           background:
-            "radial-gradient(40% 50% at 20% 0%, rgba(255,122,69,0.18), transparent 60%), radial-gradient(50% 50% at 80% 30%, rgba(178,124,255,0.14), transparent 60%), radial-gradient(50% 50% at 50% 100%, rgba(76,184,255,0.08), transparent 60%)",
+            "radial-gradient(40% 50% at 20% 0%, rgba(225,6,0,0.18), transparent 60%), radial-gradient(50% 50% at 80% 30%, rgba(225,6,0,0.14), transparent 60%), radial-gradient(50% 50% at 50% 100%, rgba(76,184,255,0.08), transparent 60%)",
         }}
       />
 

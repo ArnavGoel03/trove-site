@@ -49,7 +49,7 @@ export function troveOg({
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(55% 55% at 18% 22%, rgba(255,122,69,0.22) 0%, transparent 60%), radial-gradient(45% 55% at 88% 78%, rgba(178,124,255,0.18) 0%, transparent 60%)",
+              "radial-gradient(55% 55% at 18% 22%, rgba(225,6,0,0.22) 0%, transparent 60%), radial-gradient(45% 55% at 88% 78%, rgba(225,6,0,0.18) 0%, transparent 60%)",
           }}
         />
         {/* Top row: wordmark */}
@@ -68,8 +68,8 @@ export function troveOg({
               width: 56,
               height: 56,
               borderRadius: 14,
-              background: "linear-gradient(135deg, #ff8b5a, #ff6a2a, #b27cff)",
-              boxShadow: "0 8px 24px -8px rgba(255,122,69,0.55)",
+              background: "linear-gradient(135deg, #E10600, #E10600, #E10600)",
+              boxShadow: "0 8px 24px -8px rgba(225,6,0,0.55)",
             }}
           >
             <span style={{ color: "white", fontSize: 28, fontWeight: 700 }}>
@@ -99,7 +99,7 @@ export function troveOg({
           {eyebrow ? (
             <div
               style={{
-                color: "#ff7a45",
+                color: "#E10600",
                 fontSize: 22,
                 fontWeight: 600,
                 letterSpacing: "0.22em",
@@ -148,7 +148,7 @@ export function troveOg({
             height: 3,
             borderRadius: 2,
             background:
-              "linear-gradient(90deg, #ff8b5a, #ff6a2a 40%, #b27cff 100%)",
+              "linear-gradient(90deg, #E10600, #E10600 40%, #E10600 100%)",
           }}
         />
         <div

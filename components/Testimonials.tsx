@@ -26,7 +26,7 @@ const VOICES: Voice[] = [
     name: "Maya Krishnan",
     role: "Staff iOS engineer",
     monogram: "MK",
-    accent: "#ff7a45",
+    accent: "#E10600",
   },
   {
     quote:
@@ -42,7 +42,7 @@ const VOICES: Voice[] = [
     name: "Sara Lindgren",
     role: "Backend engineer",
     monogram: "SL",
-    accent: "#b27cff",
+    accent: "#E10600",
   },
   {
     quote:

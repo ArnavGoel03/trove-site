@@ -7,9 +7,13 @@
   --color-fg-dim: #a1a1aa;
   --color-fg-mute: #71717a;
   --color-line: #1f1f24;
-  --color-accent: #ff7a45;
-  --color-accent-2: #b27cff;
-  --color-accent-3: #4cb8ff;
+  /* Ferrari / Rosso Corsa racing red. Mirrors brand.accent in
+     macos/suite.config.json (the cross-surface source of truth). accent-2 is
+     a deeper shade for two-tone depth; accent-3 is a neutral graphite so the
+     palette stays monochrome + one red, no second vivid hue. */
+  --color-accent: #E10600;
+  --color-accent-2: #a80400;
+  --color-accent-3: #3f3f46;
 
   --font-sans:
     ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display",
@@ -66,7 +70,7 @@ html {
 }
 
 ::selection {
-  background: rgba(255, 122, 69, 0.35);
+  background: rgba(225, 6, 0, 0.35);
   color: #fff;
 }
 
@@ -92,11 +96,11 @@ html {
   margin: 8px;
   padding: 10px 16px;
   border-radius: 9999px;
-  background: #ff6a2a;
-  color: #1a0d05;
+  background: #E10600;
+  color: #fff;
   font-size: 13px;
   font-weight: 600;
-  box-shadow: 0 10px 30px -10px rgba(255, 122, 69, 0.55);
+  box-shadow: 0 10px 30px -10px rgba(225, 6, 0, 0.55);
   transition: transform 0.15s ease;
 }
 .skip-link:focus {
@@ -128,12 +132,12 @@ html {
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, #ff8b5a 0%, #ff6a2a 100%);
-  color: #1a0d05;
+  background: linear-gradient(180deg, #f5231a 0%, #e10600 100%);
+  color: #fff;
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.35) inset,
-    0 -1px 0 0 rgba(0, 0, 0, 0.25) inset,
-    0 10px 30px -10px rgba(255, 122, 69, 0.55);
+    0 1px 0 0 rgba(255, 255, 255, 0.22) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.28) inset,
+    0 10px 30px -10px rgba(225, 6, 0, 0.55);
 }
 
 .btn-primary:hover {

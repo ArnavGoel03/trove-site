@@ -116,7 +116,7 @@ export default function SecurityPage() {
           return (
             <article key={s.title} className="pane rounded-xl p-6">
               <header className="flex items-center gap-3 mb-4">
-                <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-[rgba(255,122,69,0.12)] text-[var(--color-accent)]">
+                <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-[rgba(225,6,0,0.12)] text-[var(--color-accent)]">
                   <Icon size={20} strokeWidth={1.5} />
                 </span>
                 <h2 className="text-[20px] font-semibold tracking-tight text-white">

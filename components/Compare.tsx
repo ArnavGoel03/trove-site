@@ -118,14 +118,14 @@ export default function Compare() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: 0.6, delay: 0.08 }}
-          className="relative rounded-2xl p-7 sm:p-9 overflow-hidden border border-[#ff7a45]/30 bg-gradient-to-br from-[#ff7a45]/8 via-transparent to-[#b27cff]/8"
+          className="relative rounded-2xl p-7 sm:p-9 overflow-hidden border border-[#E10600]/30 bg-gradient-to-br from-[#E10600]/8 via-transparent to-[#E10600]/8"
         >
           <div
             aria-hidden
             className="absolute -inset-32 -z-10 opacity-50 blur-3xl"
             style={{
               background:
-                "radial-gradient(50% 50% at 30% 0%, rgba(255,122,69,0.35), transparent 70%), radial-gradient(50% 50% at 80% 100%, rgba(178,124,255,0.3), transparent 70%)",
+                "radial-gradient(50% 50% at 30% 0%, rgba(225,6,0,0.35), transparent 70%), radial-gradient(50% 50% at 80% 100%, rgba(225,6,0,0.3), transparent 70%)",
             }}
           />
 
@@ -162,7 +162,7 @@ export default function Compare() {
                 key={row}
                 className="text-[11.5px] text-[var(--color-fg-dim)] flex items-start gap-1.5"
               >
-                <Check size={12} className="text-[#ff7a45] mt-0.5 shrink-0" />
+                <Check size={12} className="text-[#E10600] mt-0.5 shrink-0" />
                 {row}
               </div>
             ))}

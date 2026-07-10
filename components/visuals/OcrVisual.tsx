@@ -5,7 +5,7 @@ import { ScanLine, Languages, ArrowRight } from "lucide-react";
 
 export default function OcrVisual() {
   return (
-    <div className="w-full h-full p-6 sm:p-10 flex flex-col gap-5 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(178,124,255,0.12),transparent_60%)]">
+    <div className="w-full h-full p-6 sm:p-10 flex flex-col gap-5 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(225,6,0,0.12),transparent_60%)]">
       <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
         OCR + Translate
       </div>
@@ -38,7 +38,7 @@ export default function OcrVisual() {
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: false, amount: 0.4 }}
                   transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
-                  className="absolute -inset-x-1 inset-y-0 origin-left bg-[#b27cff]/15 border-y border-[#b27cff]/40 rounded-sm -z-10"
+                  className="absolute -inset-x-1 inset-y-0 origin-left bg-[#E10600]/15 border-y border-[#E10600]/40 rounded-sm -z-10"
                 />
               </motion.div>
             ))}
@@ -54,7 +54,7 @@ export default function OcrVisual() {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute left-3 right-3 h-px bg-gradient-to-r from-transparent via-[#b27cff] to-transparent"
+            className="absolute left-3 right-3 h-px bg-gradient-to-r from-transparent via-[#E10600] to-transparent"
           />
         </div>
 

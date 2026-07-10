@@ -187,7 +187,7 @@ export default function URLSchemePage() {
             className="pane rounded-xl p-6"
             style={
               v.frontmost
-                ? { borderColor: "rgba(255,122,69,0.25)" }
+                ? { borderColor: "rgba(225,6,0,0.25)" }
                 : undefined
             }
           >

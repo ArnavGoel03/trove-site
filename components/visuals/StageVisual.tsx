@@ -9,14 +9,14 @@ const items = [
     icon: FileText,
     title: "Customer interview notes",
     preview: "Q3 plan – the main blocker on the rollout is...",
-    tint: "from-[#ff7a45]/15 to-transparent",
+    tint: "from-[#E10600]/15 to-transparent",
   },
   {
     kind: "image",
     icon: ImageIcon,
     title: "Screenshot 2026-05-12 at 10.24.41.png",
     preview: "1440 × 900 · PNG",
-    tint: "from-[#b27cff]/15 to-transparent",
+    tint: "from-[#E10600]/15 to-transparent",
   },
   {
     kind: "link",
