@@ -58,11 +58,12 @@ export default function AppMockup({
     let pending = false;
 
     function applyTransform() {
-      // Same math as the original useTransform ranges:
-      // rotX: [0,1] -> [6,-6]   rotY: [0,1] -> [-8, 8]
-      const rotX = 6 + (curY - 0) * (-12);
-      const rotY = -8 + (curX - 0) * 16;
-      el!.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
+      // curX / curY are clamped to [0,1] in onMove, so the tilt stays in a
+      // subtle, premium range no matter where the cursor is on the page.
+      // rotX: [0,1] -> [4,-4]   rotY: [0,1] -> [-5, 5]
+      const rotX = 4 + curY * -8;
+      const rotY = -5 + curX * 10;
+      el!.style.transform = `perspective(1400px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
     }
 
     function loop() {

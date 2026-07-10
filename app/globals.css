@@ -33,10 +33,11 @@ html {
   scroll-behavior: smooth;
   /* Account for the sticky nav so anchor jumps don't slide content under it. */
   scroll-padding-top: 88px;
-  /* Force the document root onto the compositor: eliminates the 1-frame
-     stutter Safari shows when the FeatureReel sticky sections first scroll
-     into view on long pages. */
-  transform: translateZ(0);
+  /* NOTE: never put a `transform` (or filter/perspective) on html or body.
+     It makes every position:fixed descendant (nav, skip-link, grain) resolve
+     against the full-height document instead of the viewport, which un-pins
+     the nav and lets you scroll into dead space above it. The FeatureReel
+     sticky blocks get their own compositor layer via .feature-block-sticky. */
 }
 
 /* Heavy off-screen content (FeatureReel blocks) doesn't paint or
