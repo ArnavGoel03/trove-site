@@ -21,6 +21,10 @@ export interface AppBrand {
   status: AppStatus;
   /** Product page path. */
   href: string;
+  /** Current shipping version, e.g. "1.12.7". */
+  version: string;
+  /** Release date of `version`, ISO YYYY-MM-DD. */
+  releaseDate: string;
 }
 
 /** The parent studio. Name is a WORKING PLACEHOLDER, change it here only. */
@@ -45,6 +49,8 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
       "Clipboard, window manager, system monitor, OCR, PDF kit, disk cleaner, and 30+ more, in one private, native Mac app.",
     status: "live",
     href: "/",
+    version: "1.12.7",
+    releaseDate: "2026-07-08",
   },
   relay: {
     key: "relay",
@@ -54,6 +60,8 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
       "Requests, environments, auth, and scripting. Your keys stay in your Keychain, no account, no cloud.",
     status: "soon",
     href: "/relay",
+    version: "0.1.0",
+    releaseDate: "2026-07-10",
   },
   tend: {
     key: "tend",
@@ -62,6 +70,8 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     blurb: "A calm, local-first task and calendar app.",
     status: "soon",
     href: "/tend",
+    version: "0.11.0",
+    releaseDate: "2026-07-10",
   },
 };
 

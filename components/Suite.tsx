@@ -10,6 +10,16 @@ const ORDER = ["trove", "relay", "tend"] as const;
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+// Deterministic date format (no locale, hydration-safe): "Jul 8, 2026".
+function fmtDate(iso: string): string {
+  const [y, m, d] = iso.split("-").map(Number);
+  const months = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  ];
+  return `${months[(m ?? 1) - 1]} ${d}, ${y}`;
+}
+
 export default function Suite() {
   const reduced = useReducedMotion();
 
@@ -82,6 +92,10 @@ export default function Suite() {
                 </p>
                 <p className="mt-3 text-[13.5px] text-[var(--color-fg-dim)] leading-relaxed flex-1">
                   {a.blurb}
+                </p>
+
+                <p className="mt-4 text-[11.5px] text-[var(--color-fg-mute)] font-mono tabular-nums">
+                  v{a.version} &middot; {fmtDate(a.releaseDate)}
                 </p>
 
                 <div className="mt-5 text-[13px]">
