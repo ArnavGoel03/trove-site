@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 // hits the live API client-side for a final freshness pass.
 export const revalidate = 3600;
 
-const REPO = "ArnavGoel03/trove";
+import {
+  RELEASE_REPO,
+  BUILT_IN_MAC_TAG,
+  BUILT_IN_WIN_TAG,
+} from "@/lib/releases";
 
 type LatestRelease = {
   tag_name: string;
@@ -31,7 +35,7 @@ async function fetchLatestReleases(): Promise<{
 }> {
   try {
     const res = await fetch(
-      `https://api.github.com/repos/${REPO}/releases?per_page=20`,
+      `https://api.github.com/repos/${RELEASE_REPO}/releases?per_page=20`,
       { next: { revalidate: 3600 } }
     );
     if (!res.ok) return { mac: null, win: null };
@@ -74,7 +78,6 @@ export default async function DownloadPage() {
             platform="mac"
             title="macOS"
             tagline="Universal binary, macOS 13 Ventura or newer. Apple Silicon and Intel."
-            assetName="Trove.zip"
             instructionsTitle="First launch"
             instructions={[
               "Unzip Trove.zip; the app appears as Trove.app.",
@@ -83,14 +86,12 @@ export default async function DownloadPage() {
               "Update channel and feature toggles live in Settings (⌘,).",
             ]}
             release={mac}
-            fallbackTag="v1.5.2"
-            fallbackAsset="Trove.zip"
+            fallbackTag={BUILT_IN_MAC_TAG}
           />
           <DownloadCard
             platform="windows"
             title="Windows"
             tagline="Self-contained single-file build. Windows 10 19041 and newer, x64."
-            assetName="Trove-win-x64.zip"
             instructionsTitle="First launch"
             instructions={[
               "Unzip Trove-win-x64.zip anywhere you like (no installer required).",
@@ -99,8 +100,7 @@ export default async function DownloadPage() {
               "Around 55% feature parity with macOS; growing each release. The Mac column on /compare lists the full picture.",
             ]}
             release={win}
-            fallbackTag="v0.3.0-win"
-            fallbackAsset="Trove-win-x64.zip"
+            fallbackTag={BUILT_IN_WIN_TAG}
           />
         </div>
 
@@ -110,8 +110,8 @@ export default async function DownloadPage() {
             body="No account, no telemetry, no upload. Everything runs on the device."
           />
           <Highlight
-            title="Source on GitHub"
-            body={`Source viewable at github.com/${REPO}. Signed releases.`}
+            title="Every build, kept"
+            body={`Past and current releases stay published at github.com/${RELEASE_REPO}.`}
           />
           <Highlight
             title="Auto-update"
@@ -122,7 +122,7 @@ export default async function DownloadPage() {
         <section className="mt-12 grid sm:grid-cols-2 gap-6 text-[13.5px]">
           <LinkCard
             title="Want every release?"
-            href={`https://github.com/${REPO}/releases`}
+            href={`https://github.com/${RELEASE_REPO}/releases`}
             external
           >
             Browse every Mac and Windows tag on GitHub Releases, including past

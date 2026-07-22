@@ -69,7 +69,7 @@ export default function Footer() {
             },
             {
               label: "Releases",
-              href: "https://github.com/ArnavGoel03/trove/releases",
+              href: "https://github.com/ArnavGoel03/trove-releases/releases",
               external: true,
             },
           ]}
@@ -149,13 +149,13 @@ function LatestReleaseBadge() {
   const [tag, setTag] = useState<string | null>(null);
   useEffect(() => {
     let aborted = false;
-    fetch("https://api.github.com/repos/ArnavGoel03/trove/releases/latest", {
-      headers: { Accept: "application/vnd.github+json" },
-    })
+    // Goes through our own cached route rather than GitHub directly, so the
+    // footer costs a visitor nothing against GitHub's 60/hour anonymous limit.
+    fetch("/api/releases")
       .then((r) => (r.ok ? r.json() : null))
       .then((j) => {
         if (aborted) return;
-        const t: unknown = j?.tag_name;
+        const t: unknown = j?.mac;
         if (typeof t === "string" && t.length > 0 && t.length < 32) {
           setTag(t);
         }
@@ -169,7 +169,7 @@ function LatestReleaseBadge() {
   }, []);
   return (
     <a
-      href="https://github.com/ArnavGoel03/trove/releases"
+      href="https://github.com/ArnavGoel03/trove-releases/releases"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Latest release notes on GitHub"

@@ -6,43 +6,16 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useMacDetect } from "@/lib/useMacDetect";
 
-// Single repo ArnavGoel03/trove holds both Mac and Windows releases:
-//   - Mac: `vX.Y.Z` tag with `Trove.zip` asset (e.g. v1.5.2).
-//   - Windows: `vX.Y.Z-win` tag with `Trove-win-x64.zip` asset (e.g. v1.5.2-win).
-// We resolve the latest of each at mount via the GitHub API so the buttons
-// always point at the freshest tag without a redeploy.
-const REPO = "ArnavGoel03/trove";
-const FALLBACK_MAC_TAG = "v1.5.2";
-const FALLBACK_WIN_TAG = "v1.5.2-win";
+import { FALLBACK_TAGS, downloadURL, type ResolvedTags } from "@/lib/releases";
 
-function macDownloadURL(tag: string) {
-  return `https://github.com/${REPO}/releases/download/${tag}/Trove.zip`;
-}
-function winDownloadURL(tag: string) {
-  return `https://github.com/${REPO}/releases/download/${tag}/Trove-win-x64.zip`;
-}
-
-type LatestTags = { mac: string; win: string };
-
-async function fetchLatestTags(): Promise<LatestTags> {
-  const res = await fetch(
-    `https://api.github.com/repos/${REPO}/releases?per_page=20`,
-    { cache: "no-store" }
-  );
-  if (!res.ok) return { mac: FALLBACK_MAC_TAG, win: FALLBACK_WIN_TAG };
-  const list: { tag_name: string; draft: boolean; prerelease: boolean }[] =
-    await res.json();
-  let mac = FALLBACK_MAC_TAG;
-  let win = FALLBACK_WIN_TAG;
-  for (const r of list) {
-    if (r.draft) continue;
-    if (r.tag_name.endsWith("-win")) {
-      if (win === FALLBACK_WIN_TAG) win = r.tag_name;
-    } else if (mac === FALLBACK_MAC_TAG) {
-      mac = r.tag_name;
-    }
-  }
-  return { mac, win };
+// Tags come from /api/releases, which makes the GitHub call server-side and
+// caches it. The initial state is the build-time floor derived from
+// macos/VERSION, so the first paint already shows a real, downloadable tag
+// rather than a hand-typed placeholder that may be months stale.
+async function fetchLatestTags(): Promise<ResolvedTags> {
+  const res = await fetch("/api/releases");
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return (await res.json()) as ResolvedTags;
 }
 
 export default function DownloadButton({
@@ -51,10 +24,7 @@ export default function DownloadButton({
   size?: "lg" | "md";
 }) {
   const platform = useMacDetect();
-  const [tags, setTags] = useState<LatestTags>({
-    mac: FALLBACK_MAC_TAG,
-    win: FALLBACK_WIN_TAG,
-  });
+  const [tags, setTags] = useState<ResolvedTags>(FALLBACK_TAGS);
 
   useEffect(() => {
     fetchLatestTags()
@@ -62,8 +32,8 @@ export default function DownloadButton({
       .catch(() => {});
   }, []);
 
-  const macHref = macDownloadURL(tags.mac);
-  const winHref = winDownloadURL(tags.win);
+  const macHref = downloadURL("mac", tags.mac);
+  const winHref = downloadURL("windows", tags.win);
 
   const sizeCls =
     size === "lg" ? "px-6 py-3.5 text-[15px]" : "px-4 py-2 text-[13px]";
@@ -159,7 +129,7 @@ export default function DownloadButton({
     );
   }
 
-  // Linux / ChromeOS / mobile — copy-link path for both targets.
+  // Linux / ChromeOS / mobile - copy-link path for both targets.
   return (
     <div className="inline-flex flex-col items-start gap-2.5">
       <button

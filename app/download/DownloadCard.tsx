@@ -4,7 +4,12 @@ import { Apple, MonitorDown, Download, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 
-const REPO = "ArnavGoel03/trove";
+import {
+  ASSET_NAMES,
+  downloadURL,
+  releasePageURL,
+  type Platform,
+} from "@/lib/releases";
 
 type Release = {
   tag_name: string;
@@ -18,32 +23,26 @@ export default function DownloadCard({
   platform,
   title,
   tagline,
-  assetName,
   instructionsTitle,
   instructions,
   release,
   fallbackTag,
-  fallbackAsset,
 }: {
-  platform: "mac" | "windows";
+  platform: Platform;
   title: string;
   tagline: string;
-  assetName: string;
   instructionsTitle: string;
   instructions: string[];
   release: Release | null;
   fallbackTag: string;
-  fallbackAsset: string;
 }) {
   const tag = release?.tag_name ?? fallbackTag;
-  const asset = release?.assets.find((a) => a.name === assetName);
-  const href =
-    asset?.browser_download_url ??
-    `https://github.com/${REPO}/releases/download/${tag}/${fallbackAsset}`;
+  const asset = release?.assets.find((a) => a.name === ASSET_NAMES[platform]);
+  const href = asset?.browser_download_url ?? downloadURL(platform, tag);
   const sizeMb = asset ? (asset.size / (1024 * 1024)).toFixed(1) : null;
   const publishedISO = release?.published_at;
   const releasePage =
-    release?.html_url ?? `https://github.com/${REPO}/releases/tag/${tag}`;
+    release?.html_url ?? releasePageURL(tag);
 
   const Icon = platform === "mac" ? Apple : MonitorDown;
 
