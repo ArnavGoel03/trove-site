@@ -18,6 +18,7 @@ import {
   RELEASE_REPO,
   BUILT_IN_MAC_TAG,
   BUILT_IN_WIN_TAG,
+  ASSET_NAMES,
 } from "@/lib/releases";
 
 type LatestRelease = {
@@ -80,7 +81,7 @@ export default async function DownloadPage() {
             tagline="Universal binary, macOS 13 Ventura or newer. Apple Silicon and Intel."
             instructionsTitle="First launch"
             instructions={[
-              "Unzip Trove.zip; the app appears as Trove.app.",
+              `Unzip ${ASSET_NAMES.mac}; the app appears as Trove.app.`,
               'Move it to /Applications (drag from Downloads).',
               "First launch: right-click → Open. Gatekeeper bypass for the ad-hoc-signed build (Developer ID notarization is on the roadmap).",
               "Update channel and feature toggles live in Settings (⌘,).",
@@ -94,7 +95,7 @@ export default async function DownloadPage() {
             tagline="Self-contained single-file build. Windows 10 19041 and newer, x64."
             instructionsTitle="First launch"
             instructions={[
-              "Unzip Trove-win-x64.zip anywhere you like (no installer required).",
+              `Unzip ${ASSET_NAMES.windows} anywhere you like (no installer required).`,
               "Double-click Trove.exe to launch.",
               "Windows SmartScreen may prompt: click 'More info' → 'Run anyway' (the build is not yet code-signed).",
               "Around 55% feature parity with macOS; growing each release. The Mac column on /compare lists the full picture.",

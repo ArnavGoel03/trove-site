@@ -3,18 +3,19 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { ACTIONS, ACTION_CATEGORIES } from "@/lib/actions";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title:
     "Inline ⌘K actions: base64, sha256, JWT, JSON, URL encode, color, time | Trove",
   description:
     "Trove's ⌘K palette runs 60+ inline transforms: base64, hex, URL encode/decode, MD5/SHA-1/SHA-256/SHA-512, HMAC, JWT decode, JSON format, color conversion, Unix time, UUID, and more. Local, no upload.",
-  alternates: { canonical: "https://gettrove.vercel.app/action" },
+  alternates: { canonical: `${STUDIO.domain}/action` },
   openGraph: {
     title: "Trove ⌘K: 60+ inline dev transforms on Mac",
     description:
       "One palette. Zero uploads. Every transform: base64, JWT decode, SHA-256, UUID, JSON pretty, URL encode, color conversion, …",
-    url: "https://gettrove.vercel.app/action",
+    url: `${STUDIO.domain}/action`,
   },
 };
 

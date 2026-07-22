@@ -9,12 +9,13 @@ import {
   AlertTriangle,
   Wrench,
 } from "lucide-react";
+import { STUDIO, STUDIO_HOST } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Security: Trove",
   description:
     "Trove's security posture: local-only by default, ad-hoc signed today, frontmost-gated URL scheme, red-teamed core surfaces, responsible disclosure program.",
-  alternates: { canonical: "https://gettrove.vercel.app/security" },
+  alternates: { canonical: `${STUDIO.domain}/security` },
 };
 
 type Sec = {
@@ -82,7 +83,7 @@ const SECTIONS: Sec[] = [
     title: "Responsible disclosure",
     body: "Found a security bug? Email yashgoel0304@gmail.com with `[SECURITY] Trove` in the subject. Please don't open a public GitHub issue for vulnerabilities, let us patch first, then publicly credit you in the changelog. We aim to triage within 48 hours and ship a fix in the next beta build.",
     bullets: [
-      "Scope: the Trove macOS app and the gettrove.vercel.app marketing site",
+      `Scope: the Trove macOS app and the ${STUDIO_HOST} marketing site`,
       "Out of scope: third-party dependencies (report upstream)",
       "PGP key on request",
     ],
@@ -100,13 +101,13 @@ export default function SecurityPage() {
         data={webPageLd(
           "Trove Security",
           "How Trove handles local-only operation, URL-scheme hardening, signing, and responsible disclosure.",
-          "https://gettrove.vercel.app/security",
+          `${STUDIO.domain}/security`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Security", url: "https://gettrove.vercel.app/security" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Security", url: `${STUDIO.domain}/security` },
         ])}
       />
 

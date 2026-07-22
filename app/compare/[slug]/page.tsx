@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { PRODUCT } from "@/lib/brand";
+import { PRODUCT, STUDIO } from "@/lib/brand";
 
 interface Comparison {
   slug: string;
@@ -233,11 +233,11 @@ export async function generateMetadata({
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: { canonical: `https://gettrove.vercel.app/compare/${c.slug}` },
+    alternates: { canonical: `${STUDIO.domain}/compare/${c.slug}` },
     openGraph: {
       title: c.metaTitle,
       description: c.metaDescription,
-      url: `https://gettrove.vercel.app/compare/${c.slug}`,
+      url: `${STUDIO.domain}/compare/${c.slug}`,
     },
   };
 }

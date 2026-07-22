@@ -4,6 +4,7 @@ import { Github, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { STUDIO, TROVE, APPS } from "@/lib/brand";
+import { releasePageURL } from "@/lib/releases";
 import Logomark from "./Logomark";
 
 const FOCUS_RING =
@@ -69,7 +70,7 @@ export default function Footer() {
             },
             {
               label: "Releases",
-              href: "https://github.com/ArnavGoel03/trove-releases/releases",
+              href: releasePageURL(),
               external: true,
             },
           ]}
@@ -169,7 +170,7 @@ function LatestReleaseBadge() {
   }, []);
   return (
     <a
-      href="https://github.com/ArnavGoel03/trove-releases/releases"
+      href={releasePageURL()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Latest release notes on GitHub"

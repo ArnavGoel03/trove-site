@@ -33,7 +33,7 @@ export default function Page() {
         data={webPageLd(
           "Trove: your Mac, finally tidy.",
           "40+ private tools in one native Mac app. Replaces a dozen paid utilities. 14-day free trial.",
-          "https://gettrove.vercel.app",
+          STUDIO.domain,
         )}
       />
       {/* Studio-level schema: search engines should see one studio (STUDIO)

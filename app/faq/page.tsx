@@ -6,18 +6,18 @@ import JsonLd, {
   breadcrumbLd,
 } from "@/components/JsonLd";
 import { FAQ, faqForJsonLd } from "@/lib/faq";
-import { PRODUCT } from "@/lib/brand";
+import { PRODUCT, STUDIO } from "@/lib/brand";
 import { Fragment } from "react";
 
 export const metadata: Metadata = {
   title: `Trove FAQ - ${PRODUCT.priceAdjective}, 100% local Mac utility questions answered`,
   description:
     "Straight answers about Trove: how much it costs, is it safe, does it upload data, the best local clipboard manager, screen recorder without watermark, OCR, system monitor and CleanShot X / Loom / iStat / CleanMyMac alternatives for Mac.",
-  alternates: { canonical: "https://gettrove.vercel.app/faq" },
+  alternates: { canonical: `${STUDIO.domain}/faq` },
   openGraph: {
     title: "Trove FAQ",
     description: `Straight answers about Trove, the ${PRODUCT.priceAdjective}, 100% local all-in-one Mac utility app.`,
-    url: "https://gettrove.vercel.app/faq",
+    url: `${STUDIO.domain}/faq`,
   },
 };
 
@@ -35,13 +35,13 @@ export default function FaqPage() {
         data={webPageLd(
           "Trove FAQ",
           `Answers about Trove, the ${PRODUCT.priceAdjective}, 100% local all-in-one Mac utility app.`,
-          "https://gettrove.vercel.app/faq",
+          `${STUDIO.domain}/faq`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "FAQ", url: "https://gettrove.vercel.app/faq" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "FAQ", url: `${STUDIO.domain}/faq` },
         ])}
       />
 

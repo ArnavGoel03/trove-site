@@ -3,12 +3,13 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { INTENTS, type IntentCategory } from "@/lib/intents";
 import { ACCENT } from "@/lib/brand-tokens.generated";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Shortcuts gallery: Trove",
   description:
     "Every macOS Shortcuts AppIntent Trove ships. Browse the catalog before opening the Shortcuts editor.",
-  alternates: { canonical: "https://gettrove.vercel.app/shortcuts-gallery" },
+  alternates: { canonical: `${STUDIO.domain}/shortcuts-gallery` },
 };
 
 const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
@@ -61,15 +62,15 @@ export default function ShortcutsGalleryPage() {
         data={webPageLd(
           "Trove Shortcuts Gallery",
           "Catalog of every Trove AppIntent for macOS Shortcuts.",
-          "https://gettrove.vercel.app/shortcuts-gallery",
+          `${STUDIO.domain}/shortcuts-gallery`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
+          { name: "Home", url: STUDIO.domain },
           {
             name: "Shortcuts gallery",
-            url: "https://gettrove.vercel.app/shortcuts-gallery",
+            url: `${STUDIO.domain}/shortcuts-gallery`,
           },
         ])}
       />

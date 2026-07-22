@@ -4,12 +4,13 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { articleLd, breadcrumbLd } from "@/components/JsonLd";
 import { fetchChangelog, renderMarkdown } from "@/lib/changelog";
 import { slugifyVersion } from "@/lib/slug";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Changelog: Trove",
   description:
     "Every shipped change in Trove, live-sourced from the canonical CHANGELOG.md. Stable releases, beta builds, and pre-release history.",
-  alternates: { canonical: "https://gettrove.vercel.app/changelog" },
+  alternates: { canonical: `${STUDIO.domain}/changelog` },
 };
 
 // Use ISR: the source markdown is fetched + parsed at build time and
@@ -49,13 +50,13 @@ export default async function ChangelogPage() {
           headline: "Trove Changelog",
           description:
             "Live-sourced release notes for Trove, the 40+ tool native macOS utility.",
-          url: "https://gettrove.vercel.app/changelog",
+          url: `${STUDIO.domain}/changelog`,
         })}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Changelog", url: "https://gettrove.vercel.app/changelog" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Changelog", url: `${STUDIO.domain}/changelog` },
         ])}
       />
 

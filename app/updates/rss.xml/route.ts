@@ -1,11 +1,12 @@
 import { listUpdates } from "@/lib/updates";
+import { STUDIO } from "@/lib/brand";
 
 // Static RSS 2.0 feed for /updates. Revalidates on the same 6h cycle as
 // the rest of the marketing surface so a new post in content/updates/
 // rolls out within one CDN cycle of a deploy.
 export const revalidate = 21600;
 
-const SITE = "https://gettrove.vercel.app";
+const SITE = STUDIO.domain;
 
 function escapeXml(s: string): string {
   return s

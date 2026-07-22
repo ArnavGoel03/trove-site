@@ -3,12 +3,13 @@ import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { listUpdates } from "@/lib/updates";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Updates — Trove",
   description:
     "Release deep-dives, devlogs, and behind-the-scenes notes from the Trove project.",
-  alternates: { canonical: "https://gettrove.vercel.app/updates" },
+  alternates: { canonical: `${STUDIO.domain}/updates` },
 };
 
 export const revalidate = 21600;
@@ -25,13 +26,13 @@ export default async function UpdatesPage() {
         data={webPageLd(
           "Trove Updates",
           "Release deep-dives and devlogs for Trove.",
-          "https://gettrove.vercel.app/updates",
+          `${STUDIO.domain}/updates`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Updates", url: "https://gettrove.vercel.app/updates" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Updates", url: `${STUDIO.domain}/updates` },
         ])}
       />
 

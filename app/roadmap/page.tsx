@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Roadmap: Trove",
   description:
     "What's shipped in Trove 1.11.2, what's in active development, and what's deferred. The honest list: no aspirational vaporware.",
-  alternates: { canonical: "https://gettrove.vercel.app/roadmap" },
+  alternates: { canonical: `${STUDIO.domain}/roadmap` },
 };
 
 type Item = {
@@ -215,13 +216,13 @@ export default function RoadmapPage() {
         data={webPageLd(
           "Trove Roadmap",
           "Shipped, in-progress, and deferred items for Trove.",
-          "https://gettrove.vercel.app/roadmap",
+          `${STUDIO.domain}/roadmap`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Roadmap", url: "https://gettrove.vercel.app/roadmap" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Roadmap", url: `${STUDIO.domain}/roadmap` },
         ])}
       />
 

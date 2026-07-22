@@ -4,7 +4,7 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { ACTIONS, ACTIONS_BY_SLUG, relatedActions } from "@/lib/actions";
-import { PRODUCT } from "@/lib/brand";
+import { PRODUCT, STUDIO } from "@/lib/brand";
 
 // Pre-render every action page at build time for snappy SEO + Lighthouse.
 export async function generateStaticParams() {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!action) return { title: "Not found" };
   const title = `${action.title} on Mac, local, no upload | Trove`;
   const description = action.tagline;
-  const url = `https://gettrove.vercel.app/action/${action.slug}`;
+  const url = `${STUDIO.domain}/action/${action.slug}`;
   return {
     title,
     description,

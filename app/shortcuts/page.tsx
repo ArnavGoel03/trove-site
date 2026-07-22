@@ -6,12 +6,13 @@ import { GLOBAL_CHORDS, PANE_CHORDS } from "@/lib/chords";
 import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
 import PrintButton from "@/components/PrintButton";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Shortcuts cheatsheet — Trove",
   description:
     "Every Trove keyboard chord, app-wide and per-pane. Printable cheatsheet sourced from the in-app ChordRegistry.",
-  alternates: { canonical: "https://gettrove.vercel.app/shortcuts" },
+  alternates: { canonical: `${STUDIO.domain}/shortcuts` },
 };
 
 function ChordRow({ keys, label }: { keys: string; label: string }) {
@@ -49,13 +50,13 @@ export default function ShortcutsPage() {
         data={webPageLd(
           "Trove Shortcuts",
           "Cheatsheet of every keyboard shortcut Trove ships.",
-          "https://gettrove.vercel.app/shortcuts",
+          `${STUDIO.domain}/shortcuts`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Shortcuts", url: "https://gettrove.vercel.app/shortcuts" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Shortcuts", url: `${STUDIO.domain}/shortcuts` },
         ])}
       />
 

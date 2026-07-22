@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { STUDIO } from "@/lib/brand";
 
 // Explicitly welcome AI answer-engine crawlers in addition to the usual
 // search bots. Naming each agent (rather than relying on the wildcard) is
@@ -38,7 +39,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "*", allow: "/" },
       ...AI_AGENTS.map((userAgent) => ({ userAgent, allow: "/" })),
     ],
-    sitemap: "https://gettrove.vercel.app/sitemap.xml",
-    host: "https://gettrove.vercel.app",
+    sitemap: `${STUDIO.domain}/sitemap.xml`,
+    host: STUDIO.domain,
   };
 }

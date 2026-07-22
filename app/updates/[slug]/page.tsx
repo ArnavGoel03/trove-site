@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import PageShell from "@/components/PageShell";
 import JsonLd, { articleLd, breadcrumbLd } from "@/components/JsonLd";
 import { listUpdates, getUpdate, renderMarkdown } from "@/lib/updates";
+import { STUDIO } from "@/lib/brand";
 
 type Params = { slug: string };
 
@@ -23,12 +24,12 @@ export async function generateMetadata({
   return {
     title: `${post.title} — Trove`,
     description: post.excerpt,
-    alternates: { canonical: `https://gettrove.vercel.app/updates/${slug}` },
+    alternates: { canonical: `${STUDIO.domain}/updates/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
-      url: `https://gettrove.vercel.app/updates/${slug}`,
+      url: `${STUDIO.domain}/updates/${slug}`,
     },
   };
 }
@@ -48,17 +49,17 @@ export default async function UpdatePostPage({
         data={articleLd({
           headline: post.title,
           description: post.excerpt,
-          url: `https://gettrove.vercel.app/updates/${slug}`,
+          url: `${STUDIO.domain}/updates/${slug}`,
           datePublished: post.date,
         })}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Updates", url: "https://gettrove.vercel.app/updates" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Updates", url: `${STUDIO.domain}/updates` },
           {
             name: post.title,
-            url: `https://gettrove.vercel.app/updates/${slug}`,
+            url: `${STUDIO.domain}/updates/${slug}`,
           },
         ])}
       />

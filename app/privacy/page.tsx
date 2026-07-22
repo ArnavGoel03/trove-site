@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
+import { STUDIO_HOST } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Trove",
@@ -25,7 +26,7 @@ export default function PrivacyPage() {
           Trove (&ldquo;Trove,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) is an
           independently developed macOS productivity app. This Privacy Policy
           covers both the Trove desktop app and the marketing website at{" "}
-          <span className="text-white">gettrove.vercel.app</span>.
+          <span className="text-white">{STUDIO_HOST}</span>.
         </p>
       </Section>
 

@@ -35,11 +35,17 @@ export const STUDIO = {
   tagline: "Private, native Mac apps. One subscription.",
   /** When true, the site presents as a studio/suite; until then, Trove-only. */
   live: true,
-  domain: "https://gettrove.vercel.app",
+  domain: "https://trove.arnavgoel.dev",
   /** The maker, links the studio to the personal portfolio (bidirectional). */
   maker: "Arnav Goel",
   makerUrl: "https://arnavgoel.dev",
 } as const;
+
+/**
+ * The bare host, for places that DISPLAY the domain rather than link it.
+ * Derived so it can never drift from `STUDIO.domain`.
+ */
+export const STUDIO_HOST = STUDIO.domain.replace(/^https?:\/\//, "");
 
 /** Every app in the suite. Rename any app by editing its `name` here. */
 export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {

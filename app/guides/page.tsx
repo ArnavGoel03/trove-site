@@ -4,12 +4,13 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { GUIDES } from "@/lib/guides";
 import { ChevronRight } from "lucide-react";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Guides — Trove",
   description:
     "Long-form how-tos for Trove — recording, OCR, hashing, clipboard workflows, text-transform pipelines.",
-  alternates: { canonical: "https://gettrove.vercel.app/guides" },
+  alternates: { canonical: `${STUDIO.domain}/guides` },
 };
 
 export default function GuidesIndex() {
@@ -23,13 +24,13 @@ export default function GuidesIndex() {
         data={webPageLd(
           "Trove Guides",
           "Long-form how-tos for using Trove.",
-          "https://gettrove.vercel.app/guides",
+          `${STUDIO.domain}/guides`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Guides", url: "https://gettrove.vercel.app/guides" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Guides", url: `${STUDIO.domain}/guides` },
         ])}
       />
 

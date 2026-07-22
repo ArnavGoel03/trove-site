@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Download } from "lucide-react";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Press kit: Trove",
   description:
     "Pitch lines, key facts, screenshots, and brand assets for press, podcasts, and reviewers covering Trove.",
-  alternates: { canonical: "https://gettrove.vercel.app/press" },
+  alternates: { canonical: `${STUDIO.domain}/press` },
 };
 
 const FACTS: { label: string; value: string }[] = [
@@ -71,13 +72,13 @@ export default function PressPage() {
         data={webPageLd(
           "Trove Press Kit",
           "Pitch lines, key facts, screenshots, and brand assets for press covering Trove.",
-          "https://gettrove.vercel.app/press",
+          `${STUDIO.domain}/press`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Press", url: "https://gettrove.vercel.app/press" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Press", url: `${STUDIO.domain}/press` },
         ])}
       />
 

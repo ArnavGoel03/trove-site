@@ -7,6 +7,7 @@ import { PANES } from "@/lib/panes";
 import { chordsForPane } from "@/lib/chords";
 import { slugifyPane } from "@/lib/slug";
 import { paneDetail } from "@/lib/pane-detail";
+import { STUDIO } from "@/lib/brand";
 
 type Params = { slug: string };
 
@@ -32,12 +33,12 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `https://gettrove.vercel.app/pane/${slug}`,
+      canonical: `${STUDIO.domain}/pane/${slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `https://gettrove.vercel.app/pane/${slug}`,
+      url: `${STUDIO.domain}/pane/${slug}`,
     },
   };
 }
@@ -58,7 +59,7 @@ export default async function PanePage({
     (p) => p.section === pane.section && p.name !== pane.name,
   ).slice(0, 4);
 
-  const url = `https://gettrove.vercel.app/pane/${slug}`;
+  const url = `${STUDIO.domain}/pane/${slug}`;
 
   return (
     <PageShell
@@ -72,8 +73,8 @@ export default async function PanePage({
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Features", url: "https://gettrove.vercel.app/features" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Features", url: `${STUDIO.domain}/features` },
           { name: pane.name, url },
         ])}
       />

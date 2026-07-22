@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "check:hardcoded": "node scripts/check-hardcoded.mjs",
+    "prebuild": "node scripts/check-hardcoded.mjs",
     "build": "next build",
     "start": "next start"
   },

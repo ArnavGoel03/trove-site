@@ -12,12 +12,13 @@ import {
   Type,
 } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Accessibility: Trove",
   description:
     "How Trove supports VoiceOver, Reduced Motion, contrast tokens, keyboard navigation, and the full macOS accessibility surface.",
-  alternates: { canonical: "https://gettrove.vercel.app/accessibility" },
+  alternates: { canonical: `${STUDIO.domain}/accessibility` },
 };
 
 type Sec = {
@@ -114,15 +115,15 @@ export default function AccessibilityPage() {
         data={webPageLd(
           "Trove Accessibility",
           "VoiceOver support, Reduced Motion, contrast tokens, and keyboard navigation in Trove.",
-          "https://gettrove.vercel.app/accessibility",
+          `${STUDIO.domain}/accessibility`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
+          { name: "Home", url: STUDIO.domain },
           {
             name: "Accessibility",
-            url: "https://gettrove.vercel.app/accessibility",
+            url: `${STUDIO.domain}/accessibility`,
           },
         ])}
       />

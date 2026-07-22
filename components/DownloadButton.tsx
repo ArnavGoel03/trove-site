@@ -6,7 +6,12 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useMacDetect } from "@/lib/useMacDetect";
 
-import { FALLBACK_TAGS, downloadURL, type ResolvedTags } from "@/lib/releases";
+import {
+  ASSET_NAMES,
+  FALLBACK_TAGS,
+  downloadURL,
+  type ResolvedTags,
+} from "@/lib/releases";
 
 // Tags come from /api/releases, which makes the GitHub call server-side and
 // caches it. The initial state is the build-time floor derived from
@@ -62,7 +67,7 @@ export default function DownloadButton({
   function onWindowsDownload() {
     toast.success("Download starting", {
       description:
-        "Unzip Trove-win-x64.zip and run Trove.exe. Windows SmartScreen may warn: click 'More info' → 'Run anyway'.",
+        `Unzip ${ASSET_NAMES.windows} and run Trove.exe. Windows SmartScreen may warn: click 'More info' → 'Run anyway'.`,
       duration: 7000,
     });
   }

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Check, Minus, X } from "lucide-react";
-import { PRODUCT } from "@/lib/brand";
+import { PRODUCT, STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Compare Trove vs CleanShot X, Loom, iStat, Boop, CleanMyMac, asitop, Raycast, Maccy, Rectangle, DaisyDisk, TextSniper, Alfred, Soulver",
   description:
     "Honest side-by-side: where Trove overlaps with the popular Mac utilities, where it doesn't, and where each one is still the right call.",
-  alternates: { canonical: "https://gettrove.vercel.app/compare" },
+  alternates: { canonical: `${STUDIO.domain}/compare` },
 };
 
 type Row = {
@@ -754,13 +754,13 @@ export default function ComparePage() {
         data={webPageLd(
           "Compare Trove",
           "Side-by-side feature comparison: Trove vs CleanShot X, Loom, iStat Menus, Boop, CleanMyMac, asitop, Raycast, Maccy, Rectangle, DaisyDisk, TextSniper, Alfred, Soulver.",
-          "https://gettrove.vercel.app/compare",
+          `${STUDIO.domain}/compare`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Compare", url: "https://gettrove.vercel.app/compare" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Compare", url: `${STUDIO.domain}/compare` },
         ])}
       />
 

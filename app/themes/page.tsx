@@ -3,12 +3,13 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Settings, Palette } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Themes: Trove",
   description:
     "Dark, Light, Linear, and Cron themes ship in Trove. Pick one in Settings → Theme and the entire app, every pane, every chrome element, follows.",
-  alternates: { canonical: "https://gettrove.vercel.app/themes" },
+  alternates: { canonical: `${STUDIO.domain}/themes` },
 };
 
 type ThemeSpec = {
@@ -112,13 +113,13 @@ export default function ThemesPage() {
         data={webPageLd(
           "Trove Themes",
           "Dark, Light, Linear, and Cron themes for Trove.",
-          "https://gettrove.vercel.app/themes",
+          `${STUDIO.domain}/themes`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Themes", url: "https://gettrove.vercel.app/themes" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Themes", url: `${STUDIO.domain}/themes` },
         ])}
       />
 

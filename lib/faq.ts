@@ -12,7 +12,7 @@
 // the first sentence, then one or two supporting sentences. No marketing
 // fluff, no em dashes.
 
-import { PRODUCT } from "@/lib/brand";
+import { PRODUCT, STUDIO_HOST } from "@/lib/brand";
 
 export type FaqItem = {
   question: string;
@@ -32,7 +32,7 @@ export const FAQ: FaqItem[] = [
   {
     group: "About Trove",
     question: "How much does Trove cost?",
-    answer: `${PRODUCT.pricing} That unlocks all 40+ tools and every inline action, with no per-feature upsells. You can download it from gettrove.vercel.app or GitHub, or install it with Homebrew. It runs 100% locally and needs no account.`,
+    answer: `${PRODUCT.pricing} That unlocks all 40+ tools and every inline action, with no per-feature upsells. You can download it from ${STUDIO_HOST} or GitHub, or install it with Homebrew. It runs 100% locally and needs no account.`,
   },
   {
     group: "About Trove",
@@ -50,7 +50,7 @@ export const FAQ: FaqItem[] = [
     group: "About Trove",
     question: "How do I install Trove?",
     answer:
-      "Download the DMG from gettrove.vercel.app or the GitHub releases page and drag Trove to Applications, or install it with Homebrew using 'brew tap arnavgoel/trove && brew install --cask trove'. No account or sign-in is needed to use the app.",
+      `Download the zip from ${STUDIO_HOST} or the GitHub releases page and drag Trove to Applications, or install it with Homebrew using 'brew tap arnavgoel/trove && brew install --cask trove'. No account or sign-in is needed to use the app.`,
   },
 
   // Clipboard

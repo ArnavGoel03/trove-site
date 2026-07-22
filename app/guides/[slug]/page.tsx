@@ -6,6 +6,7 @@ import JsonLd, { howToLd, breadcrumbLd } from "@/components/JsonLd";
 import { GUIDES, guideBySlug } from "@/lib/guides";
 import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
+import { STUDIO } from "@/lib/brand";
 
 type Params = { slug: string };
 
@@ -25,7 +26,7 @@ export async function generateMetadata({
     title: `${guide.title}: Trove guide`,
     description: guide.lede,
     alternates: {
-      canonical: `https://gettrove.vercel.app/guides/${slug}`,
+      canonical: `${STUDIO.domain}/guides/${slug}`,
     },
   };
 }
@@ -43,7 +44,7 @@ export default async function GuidePage({
     .map((n) => PANES.find((p) => p.name === n))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
-  const url = `https://gettrove.vercel.app/guides/${slug}`;
+  const url = `${STUDIO.domain}/guides/${slug}`;
 
   return (
     <PageShell
@@ -62,8 +63,8 @@ export default async function GuidePage({
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
-          { name: "Guides", url: "https://gettrove.vercel.app/guides" },
+          { name: "Home", url: STUDIO.domain },
+          { name: "Guides", url: `${STUDIO.domain}/guides` },
           { name: guide.eyebrow, url },
         ])}
       />

@@ -1,3 +1,4 @@
+import { STUDIO } from "@/lib/brand";
 // Per-pane deep-dive content for /pane/[slug]. Kept here so each of the
 // 53 pages stays a tiny route file that just consumes a typed bag. Each
 // entry mirrors what the in-app pane actually does as of v1.11.2, no
@@ -172,7 +173,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
     ],
     urlScheme: [
       {
-        example: "trove://qr?text=https://gettrove.vercel.app",
+        example: "trove://qr?text=${STUDIO.domain}",
         note: "Generates the QR and adds the PNG to Stage.",
       },
     ],

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
+import { STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "trove:// URL scheme: Trove",
   description:
     "Full reference for Trove's URL scheme: pane navigation, Stage operations, calculator, snippet copy, history paste, QR generation. Frontmost-gated where it counts.",
-  alternates: { canonical: "https://gettrove.vercel.app/url-scheme" },
+  alternates: { canonical: `${STUDIO.domain}/url-scheme` },
 };
 
 type Verb = {
@@ -127,7 +128,7 @@ const VERBS: Verb[] = [
   },
   {
     verb: "qr",
-    example: "trove://qr?text=https://gettrove.vercel.app",
+    example: "trove://qr?text=${STUDIO.domain}",
     description:
       "Generates a 1024×1024 QR code, writes a temp PNG, and adds it to Stage.",
     frontmost: false,
@@ -149,15 +150,15 @@ export default function URLSchemePage() {
         data={webPageLd(
           "Trove URL Scheme",
           "Full reference for the trove:// URL scheme.",
-          "https://gettrove.vercel.app/url-scheme",
+          `${STUDIO.domain}/url-scheme`,
         )}
       />
       <JsonLd
         data={breadcrumbLd([
-          { name: "Home", url: "https://gettrove.vercel.app" },
+          { name: "Home", url: STUDIO.domain },
           {
             name: "URL scheme",
-            url: "https://gettrove.vercel.app/url-scheme",
+            url: `${STUDIO.domain}/url-scheme`,
           },
         ])}
       />

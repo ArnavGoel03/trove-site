@@ -4,9 +4,9 @@ import { slugifyPane } from "@/lib/slug";
 import { GUIDES } from "@/lib/guides";
 import { listUpdates } from "@/lib/updates";
 import { ACTIONS } from "@/lib/actions";
-import { APPS } from "@/lib/brand";
+import { APPS, STUDIO } from "@/lib/brand";
 
-const BASE = "https://gettrove.vercel.app";
+const BASE = STUDIO.domain;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
