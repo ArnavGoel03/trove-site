@@ -1,0 +1,58 @@
+name: Sync published version
+
+# The version rendered on this site must never name a release a visitor cannot
+# actually download.
+#
+# The download button was already safe: it resolves live through /api/releases.
+# But roughly ten pages render the version as static copy out of
+# lib/versions.generated.ts, and that file was only ever refreshed by a human
+# running scripts/sync-suite.mjs on a laptop that happened to have the sibling
+# macos/ checkout next to it. For v1.13.0 that step was simply forgotten, and
+# nothing anywhere reported the drift.
+#
+# This job removes the human. It asks the public release repo what is actually
+# published, rewrites the generated file when it disagrees, and pushes. Vercel
+# deploys from main, so the site follows on its own.
+#
+# Daily is the safety net. bin/mirror-release.sh in the macOS repo dispatches
+# this the moment a release goes public, so the normal propagation delay is a
+# minute rather than a day.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-version
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Resolve the newest published stable release
+        run: node scripts/sync-suite.mjs --from-releases
+
+      - name: Commit and push when the published version moved
+        run: |
+          if git diff --quiet -- lib/versions.generated.ts; then
+            echo "sync-version: already current, nothing to push"
+            exit 0
+          fi
+          ver="$(grep -A2 '"trove"' lib/versions.generated.ts | grep '"version"' | cut -d'"' -f4)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/versions.generated.ts
+          git commit -m "site: sync displayed version to v${ver}"
+          git push
+          echo "sync-version: pushed v${ver}"
