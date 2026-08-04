@@ -3,6 +3,7 @@
 import { Apple, MonitorDown, Download, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import { toast } from "sonner";
+import { SIGNING } from "@/lib/brand";
 
 import {
   ASSET_NAMES,
@@ -49,7 +50,7 @@ export default function DownloadCard({
   function onDownload() {
     if (platform === "mac") {
       toast.success("Mac download starting", {
-        description: "Right-click → Open on first launch (ad-hoc signed).",
+        description: SIGNING.firstLaunch,
         duration: 7000,
       });
     } else {

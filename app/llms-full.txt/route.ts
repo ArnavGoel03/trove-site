@@ -12,7 +12,7 @@ export const dynamic = "force-static";
 function build(): string {
   const header = `# Trove: full LLM context
 
-> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles 40+ tools plus a 60+ action inline command palette into one native ~14 MB app. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon and Intel.
+> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles 40+ tools plus a 60+ action inline command palette into one native ~14 MB app. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon only (no Intel build).
 
 Website: ${STUDIO.domain}
 Source: https://github.com/ArnavGoel03/trove

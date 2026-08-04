@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Check, X } from "lucide-react";
 import { PRODUCT } from "@/lib/brand";
+import { useReveal } from "@/lib/reveal";
 
 const BUNDLE = [
   { name: "Raycast Pro", price: "$96", role: "Launcher + clipboard" },
@@ -33,6 +34,7 @@ const COMPETITORS_MISS = [
 ];
 
 export default function Compare() {
+  const rise = useReveal();
   const total = BUNDLE.reduce((sum, b) => {
     if (b.price === "free") return sum;
     return sum + parseInt(b.price.replace(/[^0-9]/g, ""), 10);
@@ -41,10 +43,7 @@ export default function Compare() {
   return (
     <section id="compare" className="relative px-6 py-32 max-w-7xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-20%" }}
-        transition={{ duration: 0.6 }}
+        {...rise({ margin: "-20%" })}
         className="max-w-3xl mb-14"
       >
         <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
@@ -61,10 +60,7 @@ export default function Compare() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* The bundle */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-15%" }}
-          transition={{ duration: 0.6 }}
+          {...rise({ y: 24 })}
           className="pane rounded-2xl p-7 sm:p-9"
         >
           <div className="flex items-baseline justify-between mb-5">
@@ -114,10 +110,7 @@ export default function Compare() {
 
         {/* Trove */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-15%" }}
-          transition={{ duration: 0.6, delay: 0.08 }}
+          {...rise({ y: 24, delay: 0.08 })}
           className="relative rounded-2xl p-7 sm:p-9 overflow-hidden border border-accent/30 bg-gradient-to-br from-accent/8 via-transparent to-accent/8"
         >
           <div

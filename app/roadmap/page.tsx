@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
-import { STUDIO } from "@/lib/brand";
+import { STUDIO, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Roadmap: Trove",
   description:
-    "What's shipped in Trove 1.11.2, what's in active development, and what's deferred. The honest list: no aspirational vaporware.",
+    "What's shipped in the current Trove release, what's in active development, and what's deferred. The honest list: no aspirational vaporware.",
   alternates: { canonical: `${STUDIO.domain}/roadmap` },
 };
 
@@ -227,7 +227,7 @@ export default function RoadmapPage() {
       />
 
       <Bucket
-        title="Shipped: v1.11.2"
+        title={`Shipped: v${TROVE.version}`}
         blurb="On the stable channel as of May 31, 2026. The changelog has the per-build breakdown."
         items={SHIPPED}
         tint="#5be3a4"

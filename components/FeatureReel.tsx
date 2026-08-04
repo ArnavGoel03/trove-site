@@ -9,6 +9,7 @@ import {
 } from "motion/react";
 import { useRef } from "react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
+import { useReveal } from "@/lib/reveal";
 import ThermalsVisual from "./visuals/ThermalsVisual";
 import StageVisual from "./visuals/StageVisual";
 import PdfVisual from "./visuals/PdfVisual";
@@ -88,14 +89,12 @@ const FEATURES: Feature[] = [
 ];
 
 export default function FeatureReel() {
+  const rise = useReveal();
   return (
     <section id="features" className="relative">
       <div className="px-6 pt-32 pb-10 max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 0.6 }}
+          {...rise({ margin: "-20%" })}
           className="max-w-3xl"
         >
           <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-dim)] mb-4">

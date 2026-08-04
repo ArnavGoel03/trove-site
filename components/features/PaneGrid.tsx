@@ -2,17 +2,16 @@
 
 import { motion } from "motion/react";
 import { PANES, SECTIONS, type Pane } from "@/lib/panes";
+import { useReveal } from "@/lib/reveal";
 
 // 40+ tools, grouped by sidebar section. Identical to the in-app Customize
 // panel: same names, same one-liners, same section labels.
 export default function PaneGrid() {
+  const rise = useReveal();
   return (
     <section id="panes" className="relative px-6 py-20 max-w-7xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-15%" }}
-        transition={{ duration: 0.6 }}
+        {...rise()}
         className="max-w-3xl mb-14"
       >
         <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
@@ -61,13 +60,9 @@ function SectionBlock({
   accent: string;
   panes: Pane[];
 }) {
+  const rise = useReveal();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <motion.div {...rise({ y: 24, margin: "-10%", duration: 0.55 })}>
       <div className="flex items-baseline justify-between gap-6 mb-6">
         <div className="flex items-baseline gap-3">
           <span

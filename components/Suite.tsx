@@ -1,14 +1,13 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { APPS, SUITE, STUDIO } from "@/lib/brand";
+import { useReveal } from "@/lib/reveal";
 
 // The suite listing: all apps the studio makes, unlocked by ONE subscription
 // key. Everything renders from lib/brand.ts, rename an app there and this
 // updates. Order is deliberate: the live flagship first, then what's next.
 const ORDER = ["trove", "relay", "tend"] as const;
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 // Deterministic date format (no locale, hydration-safe): "Jul 8, 2026".
 function fmtDate(iso: string): string {
@@ -21,7 +20,7 @@ function fmtDate(iso: string): string {
 }
 
 export default function Suite() {
-  const reduced = useReducedMotion();
+  const rise = useReveal();
 
   return (
     <section
@@ -30,10 +29,7 @@ export default function Suite() {
     >
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={reduced ? { opacity: 1 } : { opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20%" }}
-          transition={{ duration: 0.6, ease: EASE }}
+          {...rise({ margin: "-20%" })}
           className="text-center max-w-2xl mx-auto"
         >
           <p className="text-[12.5px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)] mb-3">
@@ -49,24 +45,19 @@ export default function Suite() {
           </p>
         </motion.div>
 
-        <div
-          className="mt-14 grid gap-4 sm:grid-cols-3"
-          style={{ perspective: "1400px" }}
-        >
+        <div className="mt-14 grid gap-4 sm:grid-cols-3">
           {ORDER.map((k, i) => {
             const a = APPS[k];
             const live = a.status === "live";
             return (
               <motion.article
                 key={a.key}
-                initial={
-                  reduced
-                    ? { opacity: 1 }
-                    : { opacity: 0, y: 28, rotateX: 10 }
-                }
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
+                {...rise({
+                  y: 28,
+                  margin: "-10%",
+                  duration: 0.55,
+                  delay: i * 0.08,
+                })}
                 className="relative flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-[border-color,transform] duration-300 hover:border-white/[0.14] hover:-translate-y-1"
               >
                 <span

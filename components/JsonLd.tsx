@@ -1,4 +1,4 @@
-import { APPS, TROVE, STUDIO, SEO_DESCRIPTION, type AppBrand } from "@/lib/brand";
+import { APPS, TROVE, STUDIO, SEO_DESCRIPTION, PLATFORM, type AppBrand } from "@/lib/brand";
 /**
  * Renders a `<script type="application/ld+json">` block server-side so
  * Googlebot / Bingbot get the structured data on first byte (no JS run
@@ -32,10 +32,10 @@ export function softwareApplicationLd() {
     name: TROVE.name,
     alternateName: `${TROVE.name} for Mac`,
     applicationCategory: "UtilitiesApplication",
-    operatingSystem: "macOS 13.0 or later (Ventura+), Apple Silicon and Intel",
+    operatingSystem: `macOS 13.0 or later (Ventura+), ${PLATFORM.archLong}`,
     url: STUDIO.domain,
     downloadUrl: "https://github.com/ArnavGoel03/trove/releases/latest",
-    softwareVersion: "1.5",
+    softwareVersion: TROVE.version,
     fileSize: "14 MB",
     description: SEO_DESCRIPTION,
     featureList: [

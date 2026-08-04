@@ -9,12 +9,12 @@ import {
   AlertTriangle,
   Wrench,
 } from "lucide-react";
-import { STUDIO, STUDIO_HOST } from "@/lib/brand";
+import { STUDIO, STUDIO_HOST, SIGNING, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Security: Trove",
   description:
-    "Trove's security posture: local-only by default, ad-hoc signed today, frontmost-gated URL scheme, red-teamed core surfaces, responsible disclosure program.",
+    "Trove's security posture: local-only by default, code-signed with a hardened runtime, frontmost-gated URL scheme, red-teamed core surfaces, responsible disclosure program.",
   alternates: { canonical: `${STUDIO.domain}/security` },
 };
 
@@ -55,7 +55,7 @@ const SECTIONS: Sec[] = [
     bullets: [
       "lint-trove pass runs clean across 45 production files",
       "Errors surface as Sonner-grade flash toasts, never alert() or silent failure",
-      "Test suite: 233/233 PASS at 1.11.2",
+      `Test suite: 58/58 PASS at ${TROVE.version}`,
     ],
   },
   {
@@ -71,7 +71,7 @@ const SECTIONS: Sec[] = [
   {
     icon: FileSearch,
     title: "Signing + distribution",
-    body: "Builds today are ad-hoc signed (no developer ID, no notarization yet). Run with `xattr -d com.apple.quarantine /Applications/Trove.app` on first launch, or grant via System Settings → Privacy & Security. A signed + notarized channel is in progress, when it ships, the Cask formula will auto-flip to it.",
+    body: `${SIGNING.why} On first launch, right-click → Open, or clear the quarantine flag yourself with \`xattr -d com.apple.quarantine /Applications/Trove.app\`. When the notarized channel ships, the Cask formula flips to it automatically.`,
     bullets: [
       "GitHub Releases is the canonical distribution channel",
       "Homebrew Cask: `brew tap arnavgoel/trove && brew install --cask trove` (once tap is published)",

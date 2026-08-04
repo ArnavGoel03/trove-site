@@ -3,7 +3,7 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Settings, Palette } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
-import { STUDIO } from "@/lib/brand";
+import { STUDIO, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Themes: Trove",
@@ -102,7 +102,7 @@ export default function ThemesPage() {
       title="Themes"
       lede={
         <>
-          Four themes ship in 1.11.2: Dark, Light, Linear, Cron. Pick one in
+          Four themes ship in {TROVE.version}: Dark, Light, Linear, Cron. Pick one in
           Settings &rarr; Theme and the entire app follows: sidebar, chrome,
           panes, even the menubar overlay. Custom palettes ship in 1.2.0.
         </>

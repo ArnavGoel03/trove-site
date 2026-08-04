@@ -4,10 +4,13 @@ import { motion } from "motion/react";
 import { toast } from "sonner";
 import { Terminal, Github, Copy } from "lucide-react";
 import DownloadButton from "@/components/DownloadButton";
+import { PLATFORM, SIGNING, TROVE } from "@/lib/brand";
+import { useReveal } from "@/lib/reveal";
 
 const BREW_CMD = "brew install --cask trove";
 
 export default function FeaturesCta() {
+  const rise = useReveal();
   async function copyBrew() {
     try {
       await navigator.clipboard.writeText(BREW_CMD);
@@ -25,10 +28,7 @@ export default function FeaturesCta() {
   return (
     <section className="relative px-6 py-24 max-w-5xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-15%" }}
-        transition={{ duration: 0.6 }}
+        {...rise({ y: 24 })}
         className="relative rounded-3xl p-8 sm:p-12 overflow-hidden border border-accent/25 bg-gradient-to-br from-accent/8 via-transparent to-accent/8"
       >
         <div
@@ -41,7 +41,7 @@ export default function FeaturesCta() {
         />
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] max-w-2xl">
-          Try the 1.11.2 release.
+          Try the {TROVE.version} release.
           <br />
           <span className="text-[var(--color-fg-dim)]">
             Two ways to install.
@@ -54,9 +54,8 @@ export default function FeaturesCta() {
               Direct download
             </div>
             <p className="text-[13.5px] text-[var(--color-fg-dim)] mb-5 leading-relaxed">
-              The fastest path: grab the universal .zip from GitHub
-              Releases. First launch needs right-click → Open
-              (Gatekeeper bypass for the ad-hoc-signed build).
+              The fastest path: grab the .zip from GitHub Releases
+              ({PLATFORM.arch}, {PLATFORM.minMacOS}). {SIGNING.firstLaunch}
             </p>
             <DownloadButton size="md" />
           </div>
@@ -113,7 +112,7 @@ export default function FeaturesCta() {
             rel="noopener noreferrer"
             className="hover:text-white transition-colors"
           >
-            Full 1.11.2 changelog
+            Full {TROVE.version} changelog
           </a>
         </div>
       </motion.div>

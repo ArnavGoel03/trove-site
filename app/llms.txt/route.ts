@@ -10,7 +10,7 @@ export const dynamic = "force-static";
 
 const BODY = `# Trove
 
-> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles 40+ tools plus 60+ inline actions into one native ~14 MB app: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, file hashing and more. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon and Intel.
+> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles 40+ tools plus 60+ inline actions into one native ~14 MB app: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, file hashing and more. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon only (no Intel build).
 
 ## Key facts
 
@@ -20,7 +20,7 @@ const BODY = `# Trove
 - Privacy: 100% local. No telemetry, no analytics, no file/clipboard/screenshot uploads. Only network call is polling GitHub Releases for updates.
 - Size: ~14 MB on disk, under 30 MB memory at rest, single binary, no background helper processes
 - Launch time: under 500 ms cold launch on Apple Silicon
-- Requirements: macOS 13 Ventura or later; Apple Silicon and Intel
+- Requirements: macOS 13 Ventura or later; Apple Silicon only (no Intel build)
 - Website: ${STUDIO.domain}
 - Download: ${STUDIO.domain}/download
 - Homebrew: brew tap arnavgoel/trove && brew install --cask trove

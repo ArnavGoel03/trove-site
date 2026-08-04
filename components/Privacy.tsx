@@ -2,6 +2,8 @@
 
 import { motion } from "motion/react";
 import { Lock, WifiOff, FileBadge2, Cpu } from "lucide-react";
+import { SIGNING } from "@/lib/brand";
+import { useReveal } from "@/lib/reveal";
 
 const POINTS = [
   {
@@ -16,8 +18,8 @@ const POINTS = [
   },
   {
     icon: FileBadge2,
-    title: "Ad-hoc signed · hardened runtime",
-    body: "Currently signed ad-hoc with a hardened runtime. Apple notarization is on the near-term roadmap. The first launch requires right-click → Open to pass Gatekeeper.",
+    title: `${SIGNING.short} · hardened runtime`,
+    body: `Every release carries a full Apple certificate chain and the hardened runtime. ${SIGNING.why}`,
   },
   {
     icon: Cpu,
@@ -27,13 +29,11 @@ const POINTS = [
 ];
 
 export default function Privacy() {
+  const rise = useReveal();
   return (
     <section id="privacy" className="relative px-6 py-32 max-w-7xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-20%" }}
-        transition={{ duration: 0.6 }}
+        {...rise({ margin: "-20%" })}
         className="max-w-3xl mb-14"
       >
         <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-dim)] mb-4">
@@ -53,14 +53,12 @@ export default function Privacy() {
           return (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{
+              {...rise({
+                y: 24,
+                margin: "-10%",
                 duration: 0.5,
                 delay: i * 0.06,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+              })}
               className="pane rounded-2xl p-7 sm:p-8 hover:-translate-y-0.5 transition-transform"
             >
               <div className="w-10 h-10 rounded-xl border border-white/[0.08] bg-white/[0.03] flex items-center justify-center mb-5">

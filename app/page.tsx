@@ -15,7 +15,6 @@ import { STUDIO } from "@/lib/brand";
 // shows up immediately for SEO and no layout jump.
 const FeatureReel = dynamic(() => import("@/components/FeatureReel"));
 const Suite = dynamic(() => import("@/components/Suite"));
-const Testimonials = dynamic(() => import("@/components/Testimonials"));
 const Compare = dynamic(() => import("@/components/Compare"));
 const Privacy = dynamic(() => import("@/components/Privacy"));
 const Requirements = dynamic(() => import("@/components/Requirements"));
@@ -49,7 +48,6 @@ export default function Page() {
       <Hero />
       <FeatureReel />
       <Suite />
-      <Testimonials />
       <Compare />
       <Privacy />
       <Requirements />

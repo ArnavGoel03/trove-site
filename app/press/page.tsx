@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Download } from "lucide-react";
-import { STUDIO } from "@/lib/brand";
+import { STUDIO, PLATFORM, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Press kit: Trove",
@@ -15,11 +15,11 @@ const FACTS: { label: string; value: string }[] = [
   { label: "Name", value: "Trove" },
   { label: "Tagline", value: "Your Mac, finally tidy." },
   { label: "Category", value: "macOS productivity utility" },
-  { label: "Platform", value: "macOS 13 Ventura and later" },
-  { label: "Architecture", value: "Apple Silicon + Intel (universal)" },
+  { label: "Platform", value: PLATFORM.minMacOS },
+  { label: "Architecture", value: PLATFORM.archDetail },
   { label: "Binary size", value: "~14 MB" },
   { label: "Resident memory at rest", value: "< 30 MB" },
-  { label: "Panes shipped (v1.11.2)", value: "53" },
+  { label: `Panes shipped (v${TROVE.version})`, value: "53" },
   { label: "macOS Shortcuts intents", value: "11" },
   { label: "Price", value: "on a subscription" },
   { label: "License", value: "Single-user, multi-device" },

@@ -3,7 +3,7 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { INTENTS, type IntentCategory } from "@/lib/intents";
 import { ACCENT } from "@/lib/brand-tokens.generated";
-import { STUDIO } from "@/lib/brand";
+import { STUDIO, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Shortcuts gallery: Trove",
@@ -51,7 +51,7 @@ export default function ShortcutsGalleryPage() {
       title="Shortcuts gallery"
       lede={
         <>
-          {INTENTS.length} AppIntents shipped in Trove 1.11.2. Every entity
+          {INTENTS.length} AppIntents shipped in Trove {TROVE.version}. Every entity
           intent renders a rich picker in the Shortcuts editor, name + body
           preview on snippets, kind + capture date on clipboard entries. Open
           Shortcuts.app and search for &ldquo;Trove&rdquo; to start chaining.

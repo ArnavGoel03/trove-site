@@ -2,17 +2,20 @@
 
 import { motion } from "motion/react";
 import DownloadButton from "./DownloadButton";
+import { PLATFORM, SIGNING } from "@/lib/brand";
+import { useReveal } from "@/lib/reveal";
 
 const SPECS = [
-  { label: "macOS", value: "13 Ventura or later" },
-  { label: "Architecture", value: "Apple Silicon + Intel" },
+  { label: "macOS", value: PLATFORM.minMacOS.replace("macOS ", "") },
+  { label: "Architecture", value: PLATFORM.archDetail },
   { label: "Disk", value: "~14 MB" },
   { label: "Memory at rest", value: "< 30 MB" },
-  { label: "Distribution", value: "Direct download (.zip) · ad-hoc signed" },
+  { label: "Distribution", value: SIGNING.detail },
   { label: "Update channel", value: "GitHub Releases (in-app, every 6h)" },
 ];
 
 export default function Requirements() {
+  const rise = useReveal();
   return (
     <section
       id="requirements"
@@ -20,10 +23,7 @@ export default function Requirements() {
     >
       <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-start">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-15%" }}
-          transition={{ duration: 0.6 }}
+          {...rise()}
         >
           <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-dim)] mb-4">
             System requirements
@@ -51,10 +51,7 @@ export default function Requirements() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-15%" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          {...rise({ y: 24, delay: 0.1 })}
           className="pane rounded-2xl p-2"
         >
           <div className="rounded-xl bg-black/30 border border-white/[0.04] overflow-hidden">

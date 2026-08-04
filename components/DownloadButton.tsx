@@ -5,6 +5,7 @@ import { Apple, MonitorDown, Download } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useMacDetect } from "@/lib/useMacDetect";
+import { SIGNING } from "@/lib/brand";
 
 import {
   ASSET_NAMES,
@@ -59,7 +60,7 @@ export default function DownloadButton({
   function onMacDownload() {
     toast.success("Download starting", {
       description:
-        "Check ~/Downloads/Trove.zip. First launch: right-click → Open (the build is ad-hoc signed; Developer ID notarization is on the roadmap).",
+        `Check ~/Downloads/Trove.zip. First launch: ${SIGNING.firstLaunch}`,
       duration: 8000,
     });
   }

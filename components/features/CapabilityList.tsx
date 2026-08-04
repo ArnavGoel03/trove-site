@@ -2,26 +2,26 @@
 
 import { motion } from "motion/react";
 import { CAPABILITIES } from "@/lib/panes";
+import { TROVE } from "@/lib/brand";
+import { useReveal } from "@/lib/reveal";
 
 // The 12 power-user capabilities introduced in v1.11.2, Shortcuts,
 // URL scheme, chord HUD, cross-pane data flow, SHA256SUMS, saved
 // recipes, history regex+dedup, channels, Homebrew, XDG, perf,
 // crash discipline.
 export default function CapabilityList() {
+  const rise = useReveal();
   return (
     <section
       id="capabilities"
       className="relative px-6 py-24 max-w-7xl mx-auto"
     >
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-15%" }}
-        transition={{ duration: 0.6 }}
+        {...rise()}
         className="max-w-3xl mb-14"
       >
         <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
-          Power-user surface · 1.11.2
+          Power-user surface · {TROVE.version}
         </div>
         <h2 className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02]">
           The headline upgrades{" "}
@@ -42,14 +42,12 @@ export default function CapabilityList() {
           return (
             <motion.article
               key={cap.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{
+              {...rise({
+                y: 24,
+                margin: "-10%",
                 duration: 0.5,
                 delay: (i % 2) * 0.05,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+              })}
               className="pane rounded-2xl p-7 sm:p-8 relative overflow-hidden"
             >
               <div

@@ -109,3 +109,55 @@ export const PRODUCT = {
   /** Short noun-phrase form for stat displays / callouts. */
   priceLabel: "One subscription",
 } as const;
+
+/**
+ * What the downloadable binary actually runs on. Single source of truth: seven
+ * pages claimed "Apple Silicon and Intel" while CI shipped an arm64-only slice
+ * (`universal: "0"` in the release workflow), so every Intel visitor was being
+ * sold a build that cannot launch on their machine.
+ *
+ * To ship Intel again: set `universal: "1"` in the macOS repo's
+ * `.github/workflows/release.yml`, publish a release, then change the three
+ * strings below. Nothing else needs touching.
+ */
+export const PLATFORM = {
+  minMacOS: "macOS 13 Ventura or later",
+  /** Compact form for badges and stat rows. */
+  arch: "Apple Silicon",
+  /** Sentence form, for prose and structured data. */
+  archLong: "Apple Silicon (M1 or later)",
+  /** Requirements-table value, where the exclusion has to be explicit. */
+  archDetail: "Apple Silicon only (no Intel build)",
+} as const;
+
+/**
+ * How the binary is signed, and therefore what a first launch looks like.
+ *
+ * Six pages described this three different ways and all three were wrong: the
+ * shipped asset is NOT ad-hoc signed. It carries an Apple Development
+ * certificate, a full Apple Root CA chain, and the hardened runtime. What it
+ * lacks is a Developer ID Application certificate and notarization, which is
+ * a different cert from the same team and needs a paid Developer Program
+ * membership.
+ *
+ * That distinction is the entire user-visible difference. Gatekeeper rejects
+ * an Apple Development signature for distribution (`spctl --assess` returns
+ * `rejected`), so the first launch shows "cannot be verified" with only "Move
+ * to Bin" offered, and the user has to right-click Open to get past it. Saying
+ * "unsigned" undersells it; saying "signed" without the caveat leaves people
+ * stuck at a dialog that only offers to delete the app.
+ *
+ * When Developer ID + notarization land, change these four strings and the
+ * whole site follows.
+ */
+export const SIGNING = {
+  /** Compact form for badges and stat rows. */
+  short: "Signed, not yet notarized",
+  /** What a visitor has to actually do on first launch. */
+  firstLaunch:
+    "Right-click Trove.app and choose Open, then Open again. Double-clicking will not work the first time.",
+  /** One-sentence explanation of why, for prose. */
+  why: "Trove is code-signed with a hardened runtime but not yet notarized by Apple, which needs a paid Developer Program membership. After the first right-click Open it launches normally forever.",
+  /** Requirements-table / press-kit value. */
+  detail: "Direct download (.zip) · signed, not yet notarized",
+} as const;

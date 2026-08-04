@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { PANE_COUNT } from "@/lib/panes";
+import { TROVE } from "@/lib/brand";
 
 export default function FeaturesHero() {
   return (
@@ -24,7 +25,7 @@ export default function FeaturesHero() {
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur px-3 py-1 text-[12px] text-[var(--color-fg-dim)] mb-7">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.7)]" />
-            v1.11.2 · {PANE_COUNT} panes · 11 Shortcuts intents
+            v{TROVE.version} · {PANE_COUNT} panes · 11 Shortcuts intents
           </div>
 
           <h1 className="text-[44px] sm:text-[60px] md:text-[76px] leading-[0.98] font-semibold tracking-[-0.04em] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
@@ -33,7 +34,7 @@ export default function FeaturesHero() {
           </h1>
 
           <p className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
-            All {PANE_COUNT} panes in Trove 1.11.2, grouped by sidebar section:
+            All {PANE_COUNT} panes in Trove {TROVE.version}, grouped by sidebar section:
             Clipboard, Compute, Capture, Files, System, Storage. Plus the
             macOS Shortcuts integration, the URL scheme, SHA256SUMS hash
             verification, Text Tools saved recipes, the Homebrew cask, and

@@ -1,4 +1,4 @@
-// Single source of truth for the 40+ tools Trove ships in v1.11.2.
+// Single source of truth for the 40+ tools Trove ships.
 //
 // Mirrors `enum Pane` in `macos/main.swift` line-for-line: same rawValue,
 // same icon name (SF Symbol, mapped here to a Lucide equivalent for the
@@ -69,6 +69,7 @@ import {
   Wand2,
 } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
+import { TROVE } from "./brand";
 
 export type PaneSection =
   | "Clipboard"
@@ -776,7 +777,7 @@ export const CAPABILITIES: Capability[] = [
       "lint-trove clean across the production Swift tree",
       "Sonner-grade flash() toasts everywhere",
       "Quarantine-on-corrupt for every JSON-backed store",
-      "Test suite: 233/233 PASS at 1.11.2",
+      `Test suite: 58/58 PASS at ${TROVE.version}`,
     ],
     icon: ShieldCheck,
     accent: "#ff5d8f",

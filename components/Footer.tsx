@@ -22,9 +22,12 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-[13px] text-[var(--color-fg-dim)] max-w-sm leading-relaxed">
-            {STUDIO.tagline} Private, native Mac apps that never phone home. No
-            account, no telemetry, nothing leaves your Mac. One subscription
-            unlocks {APPS.trove.name}, {APPS.relay.name}, and {APPS.tend.name}.
+            {/* STUDIO.tagline is already "Private, native Mac apps. One
+                subscription.", so prefixing it here printed both halves twice.
+                Say it once, then add what the tagline doesn't cover. */}
+            {STUDIO.tagline} They never phone home: no account, no telemetry,
+            nothing leaves your Mac. One subscription unlocks{" "}
+            {APPS.trove.name}, {APPS.relay.name}, and {APPS.tend.name}.
           </p>
         </div>
 

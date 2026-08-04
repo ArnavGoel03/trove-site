@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import DownloadCard from "./DownloadCard";
+import { PLATFORM } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Download Trove: Mac and Windows",
@@ -78,12 +79,13 @@ export default async function DownloadPage() {
           <DownloadCard
             platform="mac"
             title="macOS"
-            tagline="Universal binary, macOS 13 Ventura or newer. Apple Silicon and Intel."
-            instructionsTitle="First launch"
+            tagline={`${PLATFORM.minMacOS}. ${PLATFORM.archDetail}.`}
+            instructionsTitle="First launch (please read)"
             instructions={[
               `Unzip ${ASSET_NAMES.mac}; the app appears as Trove.app.`,
               'Move it to /Applications (drag from Downloads).',
-              "First launch: right-click → Open. Gatekeeper bypass for the ad-hoc-signed build (Developer ID notarization is on the roadmap).",
+              "Right-click Trove.app and choose Open, then click Open again. Double-clicking will NOT work the first time: macOS says the developer cannot be verified and only offers Move to Bin.",
+              "Trove is code-signed, but not yet notarized by Apple (that needs a paid Developer Program membership). After the first right-click Open, it launches normally forever.",
               "Update channel and feature toggles live in Settings (⌘,).",
             ]}
             release={mac}

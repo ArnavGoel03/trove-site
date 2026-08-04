@@ -10,7 +10,7 @@ import {
 import { useEffect, useRef } from "react";
 import DownloadButton from "./DownloadButton";
 import AppMockup from "./AppMockup";
-import { STUDIO, APPS } from "@/lib/brand";
+import { APPS, PLATFORM } from "@/lib/brand";
 
 export default function Hero() {
   // The mouse-tracked gradient is driven via a single rAF-throttled
@@ -94,7 +94,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 overflow-hidden"
+      className="relative flex flex-col items-center justify-start px-6 pt-24 sm:pt-28 pb-20 overflow-hidden"
     >
       {/* Mouse-responsive gradient: driven via CSS vars, GPU-composited */}
       <div
@@ -124,43 +124,31 @@ export default function Hero() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 max-w-5xl mx-auto text-center"
+        className="relative z-10 max-w-4xl mx-auto text-center"
         style={{ willChange: "transform, opacity" }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur px-3 py-1 text-[12px] text-[var(--color-fg-dim)] mb-7"
-        >
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.7)]" />
-          Local-first · No account · Nothing leaves your Mac
-        </motion.div>
-
-        <h1 className="text-[44px] sm:text-[64px] md:text-[84px] leading-[0.96] font-semibold tracking-[-0.04em] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
-          Three native apps.
-          <br className="hidden sm:block" /> One subscription.
+        <h1 className="text-[42px] sm:text-[60px] md:text-[76px] leading-[0.95] font-semibold tracking-[-0.045em] text-white">
+          One app instead
+          <br className="hidden sm:block" /> of a dozen.
         </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl mx-auto leading-relaxed"
+          transition={{ duration: 0.5, delay: 0.12 }}
+          className="mt-6 text-[17px] sm:text-[19px] text-[var(--color-fg-dim)] max-w-xl mx-auto leading-[1.55]"
         >
-          {STUDIO.name} is a studio of fast, private Mac apps. {APPS.trove.name}{" "}
-          replaces 40+ menu-bar utilities, {APPS.relay.name} is a local-first
-          API client, and {APPS.tend.name} runs your tasks and calendar entirely
-          on-device. One subscription unlocks all three, and nothing you do ever
-          leaves your Mac.
+          {APPS.trove.name} puts clipboard history, screen capture, OCR, a PDF
+          kit, a video trimmer, window management, system monitors and 30-odd
+          more into one native Mac app. Everything runs on your machine.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           id="download"
-          className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <DownloadButton />
           <a
@@ -174,19 +162,19 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-5 text-[12.5px] text-[var(--color-fg-dim)]"
         >
-          14-day free trial · No account · Apple Silicon &amp; Intel · macOS 13+
+          14-day free trial · No account · {PLATFORM.arch} · macOS 13+
         </motion.div>
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.96 }}
+        initial={{ opacity: 0, y: 32, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-5xl mx-auto mt-16 sm:mt-20"
-        style={{ willChange: "transform, opacity", perspective: "1200px" }}
+        transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 w-full max-w-6xl mx-auto mt-12 sm:mt-14"
+        style={{ willChange: "transform, opacity", perspective: "1600px" }}
       >
         {/* Nested wrapper: entrance (opacity/y/scale above) and
             scroll-depth (rotateX/z/opacity below) are separate motion

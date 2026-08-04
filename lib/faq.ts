@@ -12,7 +12,7 @@
 // the first sentence, then one or two supporting sentences. No marketing
 // fluff, no em dashes.
 
-import { PRODUCT, STUDIO_HOST } from "@/lib/brand";
+import { PRODUCT, STUDIO_HOST, PLATFORM } from "@/lib/brand";
 
 export type FaqItem = {
   question: string;
@@ -44,7 +44,7 @@ export const FAQ: FaqItem[] = [
     group: "About Trove",
     question: "What are the system requirements for Trove?",
     answer:
-      "Trove requires macOS 13 Ventura or later and runs natively on both Apple Silicon and Intel Macs. The app is about 14 MB on disk, uses under 30 MB of memory at rest, and runs as a single binary with no background helper processes.",
+      `Trove requires ${PLATFORM.minMacOS} and runs natively on ${PLATFORM.archLong}. There is no Intel build. The app is about 14 MB on disk, uses under 30 MB of memory at rest, and runs as a single binary with no background helper processes.`,
   },
   {
     group: "About Trove",
