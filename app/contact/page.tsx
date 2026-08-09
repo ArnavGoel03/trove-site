@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
+import { ISSUES_URL, ISSUES_LABEL } from "@/lib/releases";
 
 export const metadata: Metadata = {
-  title: "Contact — Trove",
+  title: "Contact - Trove",
   description:
     "Get in touch with the Trove team. Support, bug reports, and security disclosures.",
 };
@@ -14,7 +15,7 @@ export default function ContactPage() {
       updated="May 15, 2026"
       intro={
         <>
-          Trove is a tiny operation — we read every message, but please be
+          Trove is a tiny operation - we read every message, but please be
           patient. Responses typically arrive within{" "}
           <span className="text-white">2 business days</span>.
         </>
@@ -43,12 +44,12 @@ export default function ContactPage() {
         </p>
         <p>
           <a
-            href="https://github.com/ArnavGoel03/trove/issues"
+            href={ISSUES_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:underline"
           >
-            github.com/ArnavGoel03/trove/issues
+            {ISSUES_LABEL}
           </a>
         </p>
       </Section>

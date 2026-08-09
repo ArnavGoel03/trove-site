@@ -36,6 +36,24 @@ const RULES = [
     use: "RELEASE_REPO from lib/releases.ts",
   },
   {
+    // The one that shipped: the source repo is private, so a link naming it
+    // 404s for every visitor. Six files did it. /contact sent bug reports to a
+    // 404, both changelog links 404d, /press called the source "public" and
+    // pointed at Discussions (not enabled on either repo), and the structured
+    // data handed Google a downloadUrl nobody could open. The rule against it
+    // was written at the top of lib/releases.ts and enforced by nothing.
+    name: "private source repo",
+    pattern: /ArnavGoel03\/trove(?!-releases|-win|-site)\b/,
+    allow: ["lib/releases.ts", "scripts/check-hardcoded.mjs"],
+    use: "ISSUES_URL / releasePageURL() from lib/releases.ts, or STUDIO.domain for a site link",
+    // Markdown too. A post cannot import a constant, which is exactly why the
+    // last two survivors were there: a released update told readers "PRs
+    // welcome on the public repo" and linked twice to a 404, and an archived
+    // changelog line pointed at a release tag on the private repo. The other
+    // rules stay code-only, since prose legitimately names the public repo.
+    alsoMarkdown: true,
+  },
+  {
     name: "release asset name",
     pattern: /Trove-win-x64\.zip|"Trove\.zip"/,
     allow: ["lib/releases.ts"],
@@ -63,18 +81,37 @@ function walk(dir, out = []) {
   return out;
 }
 
+/** Markdown under content/, which `walk` deliberately skips. */
+function walkMarkdown(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) walkMarkdown(full, out);
+    else if (entry.endsWith(".md")) out.push(full);
+  }
+  return out;
+}
+
 const failures = [];
-for (const file of walk(ROOT)) {
+function scan(file, rules) {
   const rel = relative(ROOT, file);
-  if (rel.startsWith("scripts/check-hardcoded")) continue;
+  if (rel.startsWith("scripts/check-hardcoded")) return;
   const lines = readFileSync(file, "utf8").split("\n");
-  for (const rule of RULES) {
+  for (const rule of rules) {
     if (rule.allow.includes(rel)) continue;
     lines.forEach((line, i) => {
       if (rule.pattern.test(line)) {
         failures.push({ rel, line: i + 1, rule, text: line.trim() });
       }
     });
+  }
+}
+
+for (const file of walk(ROOT)) scan(file, RULES);
+
+const MARKDOWN_RULES = RULES.filter((r) => r.alsoMarkdown);
+if (MARKDOWN_RULES.length) {
+  for (const file of walkMarkdown(join(ROOT, "content"))) {
+    scan(file, MARKDOWN_RULES);
   }
 }
 

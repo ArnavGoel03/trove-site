@@ -30,4 +30,4 @@ The Recorder pane was rebuilt from scratch with 17 pro-grade features in one pas
 
 1.1.1 ships the signed + notarized channel — the Cask formula auto-flips when it lands, no action from you. After that, the focus shifts to the Awake pane (auto-disable on lid close), Library reorganization (smart playlists by extension), and a global Settings → Themes panel that ties the visual customization across every pane.
 
-If you've been sitting on 1.0.x, install this one. `brew install --cask trove` once the tap publishes; until then, grab the zip from [GitHub Releases](https://github.com/ArnavGoel03/trove/releases).
+If you've been sitting on 1.0.x, install this one. `brew install --cask trove` once the tap publishes; until then, grab the zip from [GitHub Releases](https://github.com/ArnavGoel03/trove-releases/releases).

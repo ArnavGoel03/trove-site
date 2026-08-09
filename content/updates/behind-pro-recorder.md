@@ -41,4 +41,4 @@ The overlay window approach is fine for now, but a CoreAnimation layer pinned to
 
 The Record pane is in the Capture section of the sidebar. ⌘R focuses it from anywhere in the app. The pro features are in the gear popover — click ripple, keystroke overlay, voice-activity auto-pause are all one-tap toggles.
 
-Bug reports: [GitHub Issues](https://github.com/ArnavGoel03/trove/issues). PRs welcome on the [public repo](https://github.com/ArnavGoel03/trove).
+Bug reports: [GitHub Issues](https://github.com/ArnavGoel03/trove-releases/issues).

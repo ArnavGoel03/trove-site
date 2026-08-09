@@ -4,7 +4,7 @@ import { Github, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { STUDIO, TROVE, APPS } from "@/lib/brand";
-import { releasePageURL } from "@/lib/releases";
+import { releasePageURL, ISSUES_URL } from "@/lib/releases";
 import Logomark from "./Logomark";
 
 const FOCUS_RING =
@@ -62,13 +62,8 @@ export default function Footer() {
             { label: "URL scheme", href: "/url-scheme" },
             { label: "Themes", href: "/themes" },
             {
-              label: "Source code",
-              href: "https://github.com/ArnavGoel03/trove",
-              external: true,
-            },
-            {
-              label: "Discussions",
-              href: "https://github.com/ArnavGoel03/trove/discussions",
+              label: "Issue tracker",
+              href: ISSUES_URL,
               external: true,
             },
             {
@@ -120,10 +115,10 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <LatestReleaseBadge />
             <a
-              href="https://github.com/ArnavGoel03/trove"
+              href={releasePageURL()}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${TROVE.name} on GitHub`}
+              aria-label={`${TROVE.name} releases on GitHub`}
               className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
             >
               <Github size={16} />

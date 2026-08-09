@@ -34,7 +34,7 @@ export function softwareApplicationLd() {
     applicationCategory: "UtilitiesApplication",
     operatingSystem: `macOS 13.0 or later (Ventura+), ${PLATFORM.archLong}`,
     url: STUDIO.domain,
-    downloadUrl: "https://github.com/ArnavGoel03/trove/releases/latest",
+    downloadUrl: `${STUDIO.domain}/download`,
     softwareVersion: TROVE.version,
     fileSize: "14 MB",
     description: SEO_DESCRIPTION,
@@ -59,7 +59,7 @@ export function softwareApplicationLd() {
       description: "14-day free trial, then a subscription.",
       availability: "https://schema.org/InStock",
     },
-    license: "https://github.com/ArnavGoel03/trove",
+    license: `${STUDIO.domain}/eula`,
     publisher: ORG,
   };
 }

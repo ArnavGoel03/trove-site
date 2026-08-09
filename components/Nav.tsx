@@ -5,6 +5,7 @@ import { Github, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { APPS, STUDIO, TROVE } from "@/lib/brand";
+import { releasePageURL } from "@/lib/releases";
 import { useEffect, useState } from "react";
 import Logomark from "./Logomark";
 
@@ -100,11 +101,11 @@ export default function Nav() {
 
         <div className="flex items-center gap-2">
           <a
-            href="https://github.com/ArnavGoel03/trove"
+            href={releasePageURL()}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${TROVE.name} on GitHub`}
-            title="Source code on GitHub"
+            aria-label={`${TROVE.name} releases on GitHub`}
+            title="Releases on GitHub"
             className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-[var(--color-fg-dim)] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             <Github size={15} strokeWidth={1.75} />

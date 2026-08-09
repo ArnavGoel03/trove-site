@@ -6,6 +6,7 @@ import { Terminal, Github, Copy } from "lucide-react";
 import DownloadButton from "@/components/DownloadButton";
 import { PLATFORM, SIGNING, TROVE } from "@/lib/brand";
 import { useReveal } from "@/lib/reveal";
+import { ISSUES_URL, releasePageURL } from "@/lib/releases";
 
 const BREW_CMD = "brew install --cask trove";
 
@@ -89,16 +90,16 @@ export default function FeaturesCta() {
 
         <div className="mt-7 flex flex-wrap items-center gap-4 text-[12.5px] text-[var(--color-fg-dim)]">
           <a
-            href="https://github.com/ArnavGoel03/trove"
+            href={ISSUES_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
           >
-            <Github size={13} /> Source on GitHub
+            <Github size={13} /> Report an issue
           </a>
           <span className="text-[var(--color-fg-mute)]">·</span>
           <a
-            href="https://github.com/ArnavGoel03/trove/releases"
+            href={releasePageURL()}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors"
@@ -107,9 +108,7 @@ export default function FeaturesCta() {
           </a>
           <span className="text-[var(--color-fg-mute)]">·</span>
           <a
-            href="https://github.com/ArnavGoel03/trove/blob/main/macos/CHANGELOG.md"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/changelog"
             className="hover:text-white transition-colors"
           >
             Full {TROVE.version} changelog

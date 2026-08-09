@@ -22,6 +22,20 @@ import { VERSIONS } from "./versions.generated";
 /** PUBLIC release-binary repo. Never point this at the private source repo. */
 export const RELEASE_REPO = "ArnavGoel03/trove-releases";
 
+/**
+ * The public GitHub surface. Derived, because the source repo is private and
+ * every link that named it directly returned 404 to everyone who was not signed
+ * in as the author: the support link on /contact, both changelog links, the
+ * "public square" on /press, the `downloadUrl` Google reads out of our
+ * structured data, and the LLM context file. Issues are enabled on the public
+ * release repo; Discussions are not enabled anywhere, so nothing may link to
+ * them. Note that the comment at the top of this file already said no other
+ * file may hardcode a repo slug, and six of them did it anyway, which is why
+ * check-hardcoded.mjs now enforces it instead of asking.
+ */
+export const ISSUES_URL = `https://github.com/${RELEASE_REPO}/issues`;
+export const ISSUES_LABEL = `github.com/${RELEASE_REPO}/issues`;
+
 export const ASSET_NAMES = {
   mac: "Trove.zip",
   windows: "Trove-win-x64.zip",

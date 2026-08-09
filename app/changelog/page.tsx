@@ -5,6 +5,7 @@ import JsonLd, { articleLd, breadcrumbLd } from "@/components/JsonLd";
 import { fetchChangelog, renderMarkdown } from "@/lib/changelog";
 import { slugifyVersion } from "@/lib/slug";
 import { STUDIO } from "@/lib/brand";
+import { releasePageURL } from "@/lib/releases";
 
 export const metadata: Metadata = {
   title: "Changelog: Trove",
@@ -33,11 +34,11 @@ export default async function ChangelogPage() {
           Every shipped change in Trove, live-sourced from{" "}
           <a
             className="md-link"
-            href="https://github.com/ArnavGoel03/trove/blob/main/macos/CHANGELOG.md"
+            href={releasePageURL()}
             target="_blank"
             rel="noopener"
           >
-            macos/CHANGELOG.md
+            the published release notes
           </a>{" "}
           on the canonical repo. {stableCount} stable
           {stableCount === 1 ? " release" : " releases"} and {betaCount} beta
@@ -65,11 +66,11 @@ export default async function ChangelogPage() {
           Couldn&rsquo;t reach the source changelog right now.{" "}
           <a
             className="md-link"
-            href="https://github.com/ArnavGoel03/trove/blob/main/macos/CHANGELOG.md"
+            href={releasePageURL()}
             target="_blank"
             rel="noopener"
           >
-            Read it on GitHub →
+            Read the release notes on GitHub →
           </a>
         </div>
       ) : (

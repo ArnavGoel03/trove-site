@@ -14,6 +14,188 @@ will surface whatever's newest on the chosen channel.
 
 ---
 
+## [1.13.0] - 2026-08-04
+
+### Added
+
+- **Viewer pane (Files).** Trove already claimed every file type in
+  LaunchServices, so double-clicking a `.md` opened Trove and then showed
+  nothing. It now opens the file. Markdown renders natively (toggle to raw
+  source), text and code get a real editor view with a find bar and an optional
+  line-number gutter, images zoom, PDFs page, video and audio play, and
+  anything else falls back to Quick Look, so there is no file type that opens to
+  a blank pane.
+- Viewer file actions: copy contents (text, image or file reference), copy the
+  path, copy Markdown as HTML, save a copy, print, share, reveal in Finder,
+  Quick Look, add to Stage, and an Open With submenu of every other app that
+  claims the type. Drag and drop onto the pane opens too.
+- Viewer handoffs to the panes that edit rather than read: Edit in Markdown,
+  Open in PDF Tools, Open in Image Tools, Inspect Metadata.
+- Multi-file open walks a queue with previous/next, so selecting twelve files
+  and hitting Return gives one window you page through.
+- Recent documents, capped at 12, shown on the Viewer's empty state.
+
+### Changed
+
+- **Opening files from Finder now routes on intent, not just type.** One file
+  means "show me this", so any single file goes to the Viewer. Two or more of
+  the same kind means "process these", so 2+ PDFs still go to PDF Tools and 2+
+  images to Image Tools, which preserves the batch contract shipped in v1.2.8.
+  Previously a single text file was added to Stage with no pane switch, which
+  looked identical to nothing happening.
+- Text files opened from Finder no longer land silently in Stage. If the Viewer
+  pane is hidden they still go to Stage, but now with a toast saying so.
+- **Every pane can now be screenshotted, so every pane gets looked at before it
+  ships.** `--render-shots` builds its list from `Pane.allCases` instead of a
+  hand-written array, so a pane cannot exist in the app and be missing from the
+  review sheet. The old list held 5 of 39. Internal tooling; no user-visible
+  behaviour change, but it is the reason the fixes below were found at all.
+
+### Fixed
+
+- **Most of the app had never been visually reviewed.** Fourteen kinds of
+  AppKit-backed control fail under `ImageRenderer` rather than degrading: a
+  `ScrollView` renders completely empty and takes the whole pane with it,
+  `HSplitView` crashes the process outright, and twelve more (`TextField`,
+  `SecureField`, `TextEditor`, `ProgressView`, `DatePicker`, `ColorPicker`,
+  `Stepper`, switch `Toggle`, segmented `Picker`, `List`, `VideoPlayer`,
+  `NavigationSplitView`) stamp a prohibitory symbol over their whole subtree.
+  `.onDrop` does it too, which was hiding Stage, Color, Image Tools, Rename,
+  Viewer, PDF and File Inspector at once. Each now has a render-safe stand-in in
+  `core_design_metrics.swift` that is inert in the shipping app, so all 39 panes
+  render their real content. Measured, not guessed: `TROVE_RENDER_PROBES=1`
+  renders each bare control alone and the table is in `CLAUDE.md`.
+
+- Log export drained its subprocess in a busy-wait, spinning a CPU core for the
+  duration of the export whenever `log show` paused output (nightly MEDIUM-1).
+- `tmutil thinlocalsnapshots` ran its own `Process` + `Pipe` instead of the
+  canonical `runShellFull` helper (nightly LOW-2).
+- Removed a force-unwrapped `JSValue` in the API script header bridge (nightly
+  LOW-1).
+- **Video export silently failed on HEVC sources.** Auto silence-trim
+  hardcoded a passthrough preset into an `.mp4` container, and passthrough of
+  HEVC into `.mp4` fails. HEVC is the default recording codec on Apple
+  silicon, so the common path was the broken one. All four export sites
+  (silence trim, manual trim, the metadata-strip privacy wiper, and the helper
+  itself) now route through the one `VideoExport.preset(for:mode:fileType:)`
+  decision instead of hand-rolling it (nightly HIGH-1).
+- **GIF export reported nothing when it failed.** It returned a bare optional
+  and the caller had no else branch, so a failure was a button that did
+  nothing. It now returns a named reason per failure, caps duration at 60
+  seconds and says so rather than silently truncating, requires at least one
+  written frame, and deletes the partial file when finalize fails (nightly
+  MEDIUM-1 + LOW-1).
+- Log viewer NDJSON parsing moved off the main thread into a serial-queue
+  buffer, so a busy log stream no longer stutters the UI. Only finished rows
+  hop to the main actor (nightly MEDIUM-2).
+- `terminal_pane` gained an isolated `deinit`, the fix `log_viewer` and
+  `recorder` already had, and `storage_cache` now wraps its
+  `nonisolated(unsafe)` statics in `MainActor.assumeIsolated`.
+- Six more bare `@AppStorage` string keys registered in the `DefaultsKey`
+  registry. Literals were adopted byte-for-byte, because renaming a defaults
+  key is silent data loss for existing users.
+- Clean Sweep's bulk wipe reported a permission-failure count with no file
+  names, so there was no way to tell which entry blocked. Both failure
+  branches now name up to eight entries plus a tail.
+- **Passwords looked cramped in a wide window.** Its cards stretched to the
+  full window, so "Length" sat at the far left with its slider running a
+  thousand points away and the checkboxes huddled in the corner of an
+  otherwise empty card. The pane is now capped to a form column like Settings
+  and Date & Time, its row spacing is uniform, its label column matches the
+  rest of the app, and the breach-checker caption reads as a subtitle instead
+  of being squeezed opposite the heading.
+- **The Snippets sort control looked misaligned.** A menu Picker on macOS is
+  sized to its longest option, so choosing "Smart" left a short word pinned
+  against the left edge of a control wide enough for "Recently Created". It is
+  now a fixed icon menu with the choices checkmarked inside, matching the
+  other toolbar buttons and never changing width with the selection.
+
+### Security
+
+- **The in-app updater now pins the update's signing team.** A downloaded
+  update must be signed by team `KX9RM35JZG` or installation fails closed.
+  Previously it matched on an authority substring, which a foreign or ad-hoc
+  signature could satisfy.
+- **Update archives are verified against a publisher-supplied SHA-256.** The
+  digest comes from the same GitHub release JSON the updater already fetches,
+  so it describes the exact bytes being downloaded. The previous design put
+  the expected digest in a compiled-in constant, which can only ever describe a
+  release older than the binary holding it, so it was structurally unfillable
+  and every update installed unverified. URL and digest now come from a single
+  asset lookup so they cannot describe different files.
+
+## [1.12.8] - 2026-07-22
+
+### Changed
+
+- Lock this session's fixes behind lint rules so they cannot regress
+- Fix remaining nightly anchors: hotkeys, disk health, text, history, cutpaste
+- Close the nightly red-team loop: fix 20 reports' backlog, add a ledger
+- Deepen accent to #B00600 (config + regen + icons)
+- Icons: solid accent sourced from suite.config.json
+- New Ferrari-red app icons (shared squircle family)
+- Brand tokens in SuiteConfig; apply Ferrari-red accent (Trove)
+- Single source of truth: suite.config.json + Swift codegen
+- Battle-harden licensing + purge deleted API secrets
+- Provider-agnostic signed-entitlement licensing (suite + per-app keys)
+- Optimization #1: stop rebuilding DateFormatter per file in the batch renamer. Hoist the fixed EXIF parser to a static let, and cache the user-format formatter (lock-guarded, rebuilds only when the format string changes) instead of building one per file on every live-preview recompute over the whole folder. Behavior identical; 0/0 build, 58/58 tests
+- Safe optimization pass: cache regex compilation in CalcEvaluator (was recompiling 40+ NSRegularExpression per tape line on every keystroke; now one-time static lets, real hot-path win) + remove verified-dead code from 10 files (unused @State/stored props/funcs). Clean rebuild 0/0, 58/58 tests, guardrailed security/concurrency files untouched
+- Unified notarization-ready release pipeline (template for all 3 apps): real tiered signing (Developer ID -> stable -> ad-hoc) + hardened runtime everywhere, DMG packaging (drag-to-Applications), reusable release-reusable.yml (workflow_call) that imports a signing cert from secrets and notarizes+staples when creds exist, publishes both .zip and .dmg. release.yml now a thin caller. PIPELINE.md documents secrets + Relay/Tend replication. Verified: dmg builds+mounts, codesign OK, 58 tests, YAML valid
+- Split license into shareable core: TroveLicense + TroveIntegrity move to license_core.swift (no SwiftUI, suite-wide studio.license.* namespace so one key unlocks every app); license.swift keeps the SwiftUI LicenseCard. Trove green, 58 tests
+- API secrets: parameterize Keychain service namespace (was private let) so the spun-off Relay app uses its own namespace; Trove's default preserved
+- Zero Swift 6 warnings (was ~56): @MainActor on generic hub view-builders (storage_hub_pane) fixes 14 actor-isolation warnings; String(decoding:as:) replaces deprecated String(cString:) in core_usb_iokit. Confirmed PDF Optimizer is fully implemented (not a stub). Update Known debt in CLAUDE.md
+- Add use-case tool packs to Settings > Sidebar: re-run the onboarding thinking any time (tap 'Build & test APIs' to reveal its tools). Additive reveal(useCase:) - only shows tools, never hides current ones; each card shows how many are left to add and disables when all shown
+- Use-case based onboarding: replace abstract single-select personas with concrete multi-select jobs ('What do you want to do?' - Free up disk space, Build & test APIs, Capture my screen, ...). Sidebar becomes the union of chosen jobs + always-on core; live tool count updates as you pick. TroveUseCase model + apply(useCases:)
+- Finish the tool-chaining moat: surface it with a starter-template gallery (Screenshot->Text, Summarize Screenshot, Translate/Rephrase Clipboard, Screenshot->Snippet) shown on first open + as 'add another'; templates add as editable copies. Add per-workflow icon picker to round out customization (name/hotkey/step add-remove-reorder already existed)
+- Nightly suspected findings: guard QR CIFilter (M-4) and API JSContext (M-5) instead of force-unwrap; tighten SIWA token to WhenUnlocked (L-1); add ProcModel isolated deinit to release wake observer (L-2); retain pane-hotkey observer token (L-3); guard AXValueCreate in Modes restore (L-5). L-4 left as documented non-issue (encoding two UInt32s cannot throw)
+- Nightly H-2: fix JSContext data race in API script watchdog. Replace the background DispatchSource timer that touched ctx.exception/evaluateScript from another thread with JavaScriptCore's own JSContextGroupSetExecutionTimeLimit (abort callback runs on the execution thread; resolved via dlsym since it's SPI). No cross-thread context access.
+- Nightly H-4: move SyncEngine backup/restore off the main actor (Keychain + AES-GCM + disk/iCloud writes in a detached task); only Sendable Data/Bool cross the boundary; writeAtomic/localURL/icloudURL made nonisolated
+- Nightly C-1 (Critical): wire API credentials through the Keychain. redactedForDisk/resolvedFromDisk move authPass/authToken/apiKeyValue/oauthClientSecret/awsSecretKey/digestPass to Keychain (deterministic per-request ids, no leak); disk holds only trove-kc:// refs; legacy plaintext auto-migrates on next save; in-memory stays plaintext so sending is unchanged
+- Nightly debug fixes: clear terminal readabilityHandler in deinit to stop FD leak (M-1), add metaTable full-coverage test (H-9, 58 tests now)
+- Nightly debug fixes (batch 1/2): tighten iCloud sync key accessibility (C-2), stop webcam session so camera LED turns off (H-1), persist Modes/Workflows off main thread (H-3), surface 8 previously-swallowed save failures (H-5/H-6/H-7×3/H-8×3/M-2/M-3)
+- Helper hints readable: bump from caption2/tertiary (too small + faint) to footnote/secondary; one central change fixes every hint app-wide
+- Finish Raycast extension: add 512px icon (from app icns), verified npm install + tsc + ray build all pass (bundles cleanly)
+- Add Raycast extension: 'Open Trove Tool' lists all tools grouped by section and opens via the trove:// URL scheme (needs npm install + a 512px icon before publish)
+- Deepen ⌘K action palette: inline password generator ('password 24', 'passphrase 5') + route inline Calculate through the full Calc engine (units/currency/%, e.g. '5 mi to km', '100 usd in eur') instead of basic NSExpression
+- Add Alfred workflow: 'tr <tool>' opens any of the 38 tools from the Alfred bar via the trove:// URL scheme (bundle + generator + README)
+- License card in Settings: trial countdown + license-key activation + Buy CTA; makes the licensing foundation visible and completes the trial->value->purchase loop (buy URL wired once Lemon Squeezy exists)
+- Value tally: ToolValueLedger records tools used and surfaces 'what Trove replaces' (~$total + comparable-app chips) in Settings; conversion lever for the subscription, leans on loss aversion
+- Consistency pass: File Hash + Converter rows now show the standard TroveFilePreview thumbnail (click to expand, Space for Quick Look) instead of a generic doc icon
+- PDF Merge declutter: one file representation instead of two (remove redundant plain list + empty Options card for merge; add remove control to the rich preview tiles)
+- Add standard TroveFileRow (thumbnail + name + size + accessible) as the one 'uploaded file' component for every file tool to adopt
+- Inspector: show a real QuickLook thumbnail preview (click to expand, Space for Quick Look) via new reusable TroveFilePreview
+- Global hotkey to any tool: assign a system-wide chord to jump to any of the 39 tools from anywhere
+- Centralize design metrics: TroveMetrics tokens (card/sheet/control/chip/badge radii); migrate all card + sheet corner radii app-wide to the tokens for one source of truth
+- Add 'trove' CLI: drive the app from the terminal/scripts via the URL scheme (open tool, stage files, paste, capture)
+- Onboarding: 'What brings you here?' persona picker curates the sidebar on first run (biggest activation lever); lead with local-first + 39-tools value
+- Timezone search understands cities/states/countries/offsets ('california'->Los Angeles, 'india'->Kolkata) + proper empty-results state in SearchablePicker
+- Fix broken build: remove duplicate TroveEmptyState (the standard already lives in stage.swift); adopt it instead
+- Curation pass: reusable TroveEmptyState component (full-height, teaching, consistent) as the standard for every pane's empty state
+- Video Editor empty state: full curated drop zone + inline explanation of Keep/Delete/Split (was a small card in a void); licensing: Lemon Squeezy validation + code-signature anti-tamper check (soft until Developer ID)
+- Licensing foundation: TroveLicense (14-day trial + Keychain license key + entitlement state), provider-agnostic, no hard gates yet
+- Menu bar: pin any tool as a quick-open favorite (MenuBarFavorites + Settings picker) + 'Open a Tool' submenu covering every visible tool
+- Date Calc: type-to-filter timezone picker (SearchablePicker, reusable) + live Unix converter with Now button + helper hints
+- Video Editor: real timeline (draggable playhead + In/Out handles, shaded selection, play/pause) replaces abstract sliders
+- Helper hints: global 'Show helper explanations' toggle (default on) + explanations on Recorder codec/fps/quality/countdown
+- Date Calc timezone menu: region submenus of Buttons (a Picker nested in Menu rendered an empty dropdown on macOS 27); bump VERSION to 1.12.7 so the footer reflects the build
+- CHANGELOG 1.12.7: consolidation hubs, video editor, spotlight, temperatures, disk-speed fixes
+- Speedtest sparklines: smoothed curves + gradient fill + glow + baseline grid (high-tech readout feel)
+- Spotlight: donate every pane as an individually searchable item + wire tap routing
+- Menu bar: Generate Password quick action (saved recipe + on-the-go length picker, copies to clipboard)
+- Add simple Video Editor pane: trim / chop / split / export via AVFoundation
+- Disk Speed: time-box random passes (5s budget) so slow USB drives finish in seconds, not minutes
+- Consolidate File Tools hub (Hash/Inspector/Converter) + Windows hub (Snap/Switcher/Modes)
+- Consolidate 3 more groups into hubs: Clipboard (Stage/History/Snippets/Notes), Monitors (Processes/GPU/Network/Battery), Capture (Record/Snip/Mirror)
+- Disclose Stage / History / Snippets purpose: purpose-forward subtitles + Snippets true-empty explainer
+- Settings: category navigation (left rail) replaces the ~20-card single scroll
+- Deep Scan declutter: collapse disk-hog grid + Time Machine block behind one disclosure so the pane opens calm
+- Storage + Drives hubs (8 panes -> 2, tabs, legacy aliases), LIVE die temperatures (HID field off-by-one), Disk Speed comparison benchmarks + history retention
+- USB truth from IOKit: Devices + Cables panes work on macOS 27 beta; Bluetooth parser handles new list shape
+- Design sweep phase 1: consolidate PDF Optimizer into the PDF pane; Recorder gets explanations + progressive disclosure
+- Drive names in Drive Health, treemap double-click opens files, Disk Speed hides empty rows, PDF Optimizer before/after storage bar
+- Battery pane truth: health units (percent-vs-mAh), Live amperage/temp parsing, energy list names + ordering
+- Field-fix batch: @Sendable sweep kills remaining isolation-trap crashers; PDF Optimizer pane implemented; Quick Save; converter previews; Date Calc TZ pickers; Account centering; Mirror flip geometry
+
 ## [1.12.7] - 2026-07-08
 
 ### Added
@@ -2876,4 +3058,4 @@ perspective and a security/correctness lens. Compile + lint + 218/218 tests pass
 ## [1.0.7] - 2026-05-17
 
 Last public Stable release before the polish-and-robustness pass.
-See <https://github.com/ArnavGoel03/trove/releases/tag/v1.0.7>.
+See <https://github.com/ArnavGoel03/trove-releases/releases/tag/v1.0.7>.

@@ -3,6 +3,7 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Download } from "lucide-react";
 import { STUDIO, PLATFORM, TROVE } from "@/lib/brand";
+import { ISSUES_URL, releasePageURL } from "@/lib/releases";
 
 export const metadata: Metadata = {
   title: "Press kit: Trove",
@@ -157,15 +158,15 @@ export default function PressPage() {
           Community + discussions
         </h2>
         <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
-          Open conversations: feature ideas, pre-release feedback, pane
-          requests, weird bugs, happen on{" "}
+          Feature ideas, pre-release feedback, pane requests and weird bugs all
+          go to{" "}
           <a
-            href="https://github.com/ArnavGoel03/trove/discussions"
+            href={ISSUES_URL}
             target="_blank"
             rel="noopener"
             className="md-link"
           >
-            GitHub Discussions
+            the public issue tracker
           </a>
           . That&rsquo;s the public square. Reviewers are welcome to lurk for
           quotes; please credit the original poster if you cite a thread.
@@ -177,10 +178,10 @@ export default function PressPage() {
           Who built this
         </h2>
         <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
-          Trove is built by Arnav Goel, an independent macOS developer. The
-          source code is public on{" "}
+          Trove is built by Arnav Goel, an independent macOS developer. Every
+          build is published on{" "}
           <a
-            href="https://github.com/ArnavGoel03/trove"
+            href={releasePageURL()}
             target="_blank"
             rel="noopener"
             className="md-link"
