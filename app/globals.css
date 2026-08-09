@@ -19,11 +19,90 @@
   --color-accent-2: #b00600;
   --color-accent-3: #3f3f46;
 
+  /* Surfaces. Every glass panel, card and inset used to write its own
+     rgba(255,255,255,0.04) by hand; there were four slightly different
+     values of "the same" surface on one page. Tokens instead, so a lift in
+     contrast is one edit rather than a search. */
+  --color-surface-1: rgb(255 255 255 / 0.035);
+  --color-surface-2: rgb(255 255 255 / 0.06);
+  --color-surface-3: rgb(255 255 255 / 0.09);
+  --color-line-soft: rgb(255 255 255 / 0.06);
+  --color-line-strong: rgb(255 255 255 / 0.12);
+
+  /* Type scale.
+     The three display sizes are fluid: a 72px headline that is right on a
+     laptop is a wall of text on a phone, and the alternative is four
+     breakpoint overrides at every call site. Tracking tightens as size
+     grows, which is what stops big type reading as loose. */
+  --text-hero: clamp(2.5rem, 1.2rem + 5.6vw, 5.25rem);
+  --text-hero--line-height: 0.98;
+  --text-hero--letter-spacing: -0.035em;
+
+  --text-display: clamp(2rem, 1.1rem + 3.6vw, 3.5rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-title: clamp(1.5rem, 1.1rem + 1.6vw, 2.125rem);
+  --text-title--line-height: 1.15;
+  --text-title--letter-spacing: -0.022em;
+
+  --text-lead: 1.1875rem;
+  --text-lead--line-height: 1.65;
+  --text-lead--letter-spacing: -0.014em;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.55;
+
+  /* Eyebrows and legends. Small, wide-tracked, never below 11px: below that
+     it stops being read and starts being texture. */
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.4;
+  --text-micro--letter-spacing: 0.18em;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 30px;
+
+  /* Neutral shadows only. A coloured glow under the accent read tacky, and
+     that judgement is now a token rather than a comment on one button. */
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 30px -18px rgb(0 0 0 / 0.8);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.35), 0 24px 60px -28px rgb(0 0 0 / 0.9);
+  --shadow-inset: inset 0 1px 0 0 rgb(255 255 255 / 0.07);
+
+  /* Motion. Durations are short on purpose: a marketing site that makes you
+     wait for its own chrome is arguing against its own product. The long
+     one is for the scroll scene, where the reader controls the clock. */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 420ms;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Fonts.
+     Body stays SF-first. This site sells a native Mac app, and on the Mac
+     that is reading it, SF is the product's own typeface: swapping it for a
+     webfont would make the page look less native than the thing it is
+     selling. Geist is loaded by next/font (self-hosted at build time, no
+     runtime request to any font host, which the CSP forbids anyway) and used
+     for display type and for everything a non-Mac visitor sees. */
   --font-sans:
-    ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display",
-    "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-geist),
+    system-ui, "Helvetica Neue", sans-serif;
+  /* Display leads with Geist everywhere, including on the Mac, so headlines
+     look the same in a screenshot as they do in the browser. Body is where
+     nativeness matters; a headline is a logo with words in it. */
+  --font-display:
+    var(--font-geist), -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    system-ui, sans-serif;
   --font-mono:
-    "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    var(--font-geist-mono), "SF Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
 }
 
 html,
@@ -79,14 +158,14 @@ html {
 }
 
 /* ---------------------------------------------------------------------------
- * Global focus-visible. Keyboard users get a clear orange ring on any
+ * Global focus-visible. Keyboard users get a clear accent ring on any
  * interactive element that doesn't already define its own ring; mouse
  * clicks stay clean (focus-visible only). Components that want a custom
  * offset/ring still override locally. */
 :where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
 /* Skip-to-content link: visually hidden until focused, then pinned to the
@@ -123,14 +202,15 @@ html {
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* Pane card glassy surface */
+/* Pane card glassy surface. Reads the surface tokens so a contrast lift is
+   one edit rather than a hunt through four near-identical rgba values. */
 .pane {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.015) 100%
+    var(--color-surface-1) 0%,
+    rgb(255 255 255 / 0.012) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--color-line-soft);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -140,10 +220,14 @@ html {
      No gradient, no colored glow: the glow read tacky. */
   background: var(--color-accent);
   color: #fff;
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.14) inset,
-    0 1px 2px 0 rgba(0, 0, 0, 0.35),
-    0 6px 20px -12px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-inset), var(--shadow-card);
+  transition:
+    filter var(--duration-fast) var(--ease-out-quart),
+    transform var(--duration-fast) var(--ease-out-quart);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
 }
 
 .btn-primary:hover {
@@ -151,13 +235,14 @@ html {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-line-strong);
   color: var(--color-fg);
+  transition: background var(--duration-fast) var(--ease-out-quart);
 }
 
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-surface-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -182,11 +267,11 @@ html {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: var(--color-surface-3);
 }
 
 /* ===========================================================================
@@ -229,9 +314,9 @@ html {
   color: var(--color-fg-mute);
 }
 .md-body .md-pre {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-line-soft);
+  border-radius: var(--radius-sm);
   padding: 12px 14px;
   font-family: var(--font-mono);
   font-size: 12.5px;
@@ -248,16 +333,16 @@ html {
 }
 .md-body .md-hr {
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--color-line-soft);
   margin: 24px 0;
 }
 .md-inline,
 .md-body code.md-inline {
   font-family: var(--font-mono);
   font-size: 0.88em;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 5px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line-soft);
+  border-radius: var(--radius-xs);
   padding: 1px 6px;
   color: var(--color-fg);
 }
@@ -294,4 +379,63 @@ html {
     color: #111 !important;
     border-color: #ccc !important;
   }
+}
+
+
+/* ===========================================================================
+ * The scroll stage
+ *
+ * A tall track scrolls; one sticky viewport-sized frame inside it does not.
+ * Everything the reader sees is painted into that frame as a function of how
+ * far through the track they are. The track's height comes from TRACK_VH in
+ * lib/timeline.ts via an inline custom property, never from a number typed
+ * here, so a change to the stage weights moves the boundaries and the track
+ * together instead of quietly desyncing them.
+ * =========================================================================*/
+.stage-track {
+  position: relative;
+  height: calc(var(--track-vh) * 1vh);
+}
+
+.stage-frame {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: clip;
+  /* Its own compositor layer: the scene repaints every frame while scrolling
+     and must not drag the rest of the document into that work. */
+  transform: translateZ(0);
+}
+
+/* The WebGL canvas and the static poster occupy the same box. The poster is
+   what paints first and what a reader without WebGL keeps. */
+.stage-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* DOM copy anchored to a projected 3D point. Left/top come from the
+   projection each frame; the translate keeps the anchor at the element's
+   centre rather than its corner. */
+.stage-anchor {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+/* The reader controls the clock, so nothing here has a transition: a CSS
+   transition would fight the scroll position and lag behind it on the way
+   back up. Opacity and transform are set directly per frame. */
+.stage-copy {
+  max-width: 34rem;
+}
+
+/* Reduced motion and no-WebGL readers get the same nine beats stacked as
+   ordinary sections. Not a degraded page: the same words, laid out to be
+   read rather than scrubbed. */
+.stage-fallback-beat {
+  min-height: 60svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

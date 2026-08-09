@@ -1,9 +1,32 @@
 import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { SEO_TITLE, SEO_DESCRIPTION, TROVE, STUDIO } from "@/lib/brand";
 import "./globals.css";
+
+/**
+ * Both faces are fetched at build time and served from our own origin. The CSP
+ * lists no external font host and is not going to gain one: a webfont from a
+ * third party is a render-blocking request to a machine we do not control, on a
+ * page whose entire argument is that this software does not phone anywhere.
+ *
+ * Variable axes, so weight 400 and weight 700 are the same file rather than two
+ * downloads. `display: swap` because a headline that is invisible for 300ms is
+ * worse than a headline that reflows once.
+ */
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
 
 // All naming routes through lib/brand.ts, change a name there, not here.
 export const metadata: Metadata = {
@@ -45,7 +68,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geist.variable} ${geistMono.variable}`}>
       <head>
         {/* Preconnect to the only external origin we hit on any page so
             the latest-release fetch in Footer / DownloadButton lands
