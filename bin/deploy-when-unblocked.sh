@@ -48,10 +48,28 @@ if [[ "$WANT" == "$HAVE" ]]; then
   # this repo tries not to accumulate.
   launchctl bootout "gui/$(id -u)/${AGENT}" 2>/dev/null || true
   rm -f "$HOME/Library/LaunchAgents/${AGENT}.plist"
+  rm -f "${TMPDIR:-/tmp}/trove-site-deploy-retry.count"
   exit 0
 fi
 
-log "production is behind, firing the deploy hook"
+# Hard cap, because the exit condition depends on Vercel reporting a commit sha
+# for a hook-triggered deployment. If it ever reports none, the comparison above
+# never matches, and a retry that cannot recognise its own success turns into a
+# build every thirty minutes forever. Builds are metered money, so the loop gets
+# a ceiling rather than trust: 48 attempts is a full day at this interval, which
+# is far longer than any daily cap takes to reset.
+STATE="${TMPDIR:-/tmp}/trove-site-deploy-retry.count"
+COUNT="$(cat "$STATE" 2>/dev/null || echo 0)"
+if (( COUNT >= 48 )); then
+  log "gave up after $COUNT attempts without production catching up."
+  log "something other than the rate limit is wrong. Check the build log at"
+  log "https://vercel.com/arnavgoel03s-projects/trove-site and remove"
+  log "~/Library/LaunchAgents/${AGENT}.plist once resolved."
+  exit 0
+fi
+echo $((COUNT + 1)) > "$STATE"
+
+log "production is behind, firing the deploy hook (attempt $((COUNT + 1))/48)"
 RESP="$(curl -fsS --max-time 30 -X POST "$HOOK" || true)"
 log "hook response: ${RESP:-<none>}"
 # A queued job is not a build. If the limit is still in force the job is dropped
