@@ -26,6 +26,40 @@ AUTH="$HOME/Library/Application Support/com.vercel.cli/auth.json"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
 
+# `--arm` installs the launchd agent that runs this every 30 minutes. It lives
+# here rather than in a checked-in plist because the success path deletes the
+# plist, and a recovery tool whose instructions say "hand-write the property
+# list again" is the same trap as a script referenced by three files and
+# committed to none.
+if [[ "${1:-}" == "--arm" ]]; then
+  PLIST="$HOME/Library/LaunchAgents/${AGENT}.plist"
+  mkdir -p "$(dirname "$PLIST")"
+  cat > "$PLIST" <<PLISTEOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>${AGENT}</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-lc</string>
+    <string>\$HOME/dev/trove/site/bin/deploy-when-unblocked.sh</string>
+  </array>
+  <key>StartInterval</key><integer>1800</integer>
+  <key>RunAtLoad</key><true/>
+  <key>StandardOutPath</key><string>/tmp/trove-site-deploy-retry.log</string>
+  <key>StandardErrorPath</key><string>/tmp/trove-site-deploy-retry.log</string>
+</dict>
+</plist>
+PLISTEOF
+  rm -f "${TMPDIR:-/tmp}/trove-site-deploy-retry.count"
+  launchctl bootout "gui/$(id -u)/${AGENT}" 2>/dev/null || true
+  launchctl bootstrap "gui/$(id -u)" "$PLIST"
+  log "armed: retrying every 30 minutes, logging to /tmp/trove-site-deploy-retry.log"
+  exit 0
+fi
+
 if [[ ! -f "$AUTH" ]]; then
   log "no Vercel CLI auth at $AUTH, cannot check deployment state"
   exit 1
