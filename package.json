@@ -2,12 +2,16 @@
   "name": "toolbox-site",
   "version": "0.1.0",
   "private": true,
+  "//type": "Every config here is .mjs or .ts, so there is no CommonJS to break. Without this Node reparses each .ts test as ESM after failing to read it as CJS, and warns on every run.",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "check:hardcoded": "node scripts/check-hardcoded.mjs",
+    "test": "node --test --experimental-strip-types \"test/*.test.ts\"",
     "prebuild": "node scripts/check-hardcoded.mjs",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "check": "pnpm check:hardcoded && pnpm test && pnpm build"
   },
   "dependencies": {
     "lucide-react": "^0.460.0",

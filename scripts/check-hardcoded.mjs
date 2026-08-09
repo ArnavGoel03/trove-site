@@ -59,6 +59,33 @@ const RULES = [
     allow: ["lib/releases.ts"],
     use: "ASSET_NAMES from lib/releases.ts",
   },
+  {
+    // The site named no price for its whole life, so there was nothing to drift.
+    // Now that there is a real number, a second copy of it is a page quoting a
+    // price we no longer charge, which is the one mistake a buyer notices.
+    //
+    // Two or more digits, or a digit with cents. A bare `$1` is a regex
+    // backreference in a .replace() call, not money, and matching it would make
+    // this rule cry wolf until someone deleted it.
+    name: "currency literal",
+    pattern: /\$(\d{2,}|\d+\.\d)/,
+    allow: [
+      "lib/pricing.ts",
+      // Vendor prices, each carrying its source URL and the date it was read.
+      // These are quoted evidence, not our price, and `asShown` exists
+      // precisely to record the number the way its own vendor writes it.
+      "lib/rivals.ts",
+      // Asserts the exact rendered strings. That is the test.
+      "test/pricing.test.ts",
+      // DEBT, remove each line as Phase 3 rebuilds that route. Every one of
+      // these is an uncited rival price typed by hand, which is what
+      // lib/rivals.ts replaces.
+      "app/compare/page.tsx",
+      "app/compare/[slug]/page.tsx",
+      "components/Compare.tsx",
+    ],
+    use: "formatUSD() over PRICING from lib/pricing.ts, or a cited entry in lib/rivals.ts",
+  },
 ];
 
 const SKIP_DIRS = new Set([

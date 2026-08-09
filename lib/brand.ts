@@ -9,6 +9,12 @@
 // true): the nav wordmark, footer copyright, and Organization schema all
 // present as the studio. The Trove homepage itself stays flagship-focused.
 
+import {
+  PRICE_ADJECTIVE,
+  PRICE_LABEL,
+  PRICE_SENTENCE,
+  TRIAL_LABEL,
+} from "./pricing";
 import { VERSIONS } from "./versions.generated";
 
 export type AppStatus = "live" | "soon";
@@ -87,7 +93,7 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
 export const SUITE = {
   name: `${STUDIO.name} Suite`,
   pitch: "One subscription unlocks every app.",
-  trial: "14-day free trial",
+  trial: TRIAL_LABEL,
 } as const;
 
 /** The flagship app this site currently leads with. */
@@ -97,17 +103,20 @@ export const TROVE = APPS.trove;
 export const SEO_TITLE = `${TROVE.name}: ${TROVE.tagline}`;
 export const SEO_DESCRIPTION = TROVE.blurb;
 
-/** Current product facts (route stale "40+ tools / $10" strings through here). */
+/**
+ * Current product facts. The price fields are re-exports, not definitions:
+ * lib/pricing.ts owns every currency value and check-hardcoded.mjs fails the
+ * build on a dollar figure written anywhere else. They stay reachable under
+ * PRODUCT so the thirty-odd existing call sites keep working untouched.
+ */
 export const PRODUCT = {
   toolCount: "40+",
-  trial: SUITE.trial,           // "14-day free trial"
-  pricing: "Free trial, then one simple subscription.",
-  /** Inline adjective form for prose, e.g. "Trove is a <priceAdjective>
-   * screen recorder." Pricing is intentionally vague site-wide, so this
-   * never resolves to a dollar figure: change it here, not at each call site. */
-  priceAdjective: "subscription-based",
-  /** Short noun-phrase form for stat displays / callouts. */
-  priceLabel: "One subscription",
+  trial: TRIAL_LABEL,
+  pricing: PRICE_SENTENCE,
+  /** Inline adjective, e.g. "Trove is a <priceAdjective> screen recorder." */
+  priceAdjective: PRICE_ADJECTIVE,
+  /** Short noun-phrase form for stat displays and callouts. */
+  priceLabel: PRICE_LABEL,
 } as const;
 
 /**
