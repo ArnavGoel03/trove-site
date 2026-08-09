@@ -14,8 +14,8 @@ import {
   PRICE_LABEL,
   PRICE_SENTENCE,
   TRIAL_LABEL,
-} from "./pricing";
-import { VERSIONS } from "./versions.generated";
+} from "./pricing.ts";
+import { VERSIONS } from "./versions.generated.ts";
 
 export type AppStatus = "live" | "soon";
 

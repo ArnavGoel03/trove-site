@@ -17,7 +17,7 @@
 //      code used the fallback string as both, so `mac === FALLBACK` was true
 //      for a real release that happened to match and the loop stopped early.
 
-import { VERSIONS } from "./versions.generated";
+import { VERSIONS } from "./versions.generated.ts";
 
 /** PUBLIC release-binary repo. Never point this at the private source repo. */
 export const RELEASE_REPO = "ArnavGoel03/trove-releases";
@@ -96,6 +96,110 @@ function isWindows(tag: string): boolean {
   return tag.includes("-win");
 }
 
+// ---------------------------------------------------------------------------
+// Per-app resolution
+//
+// One repo now serves three apps, so a tag has to say which app it belongs to
+// or the wrong binary gets handed to the wrong updater. The failure is exactly
+// the one the `-win` comment above describes, and it already happened once:
+// GitHub's "latest" is repo-wide, so a Relay release published as stable would
+// have become the newest stable tag and `resolveTags` would have returned it as
+// `mac`, i.e. the Trove updater would offer Relay as a Trove update.
+//
+// Trove keeps bare `vX.Y.Z` tags because they are already published and the
+// shipped app's updater parses them. The two new apps carry a prefix.
+// ---------------------------------------------------------------------------
+
+export type AppKey = "trove" | "relay" | "tend";
+
+/** Tag prefix per app. Trove's is empty for backwards compatibility. */
+export const APP_TAG_PREFIX: Record<AppKey, string> = {
+  trove: "",
+  relay: "relay-",
+  tend: "tend-",
+};
+
+/**
+ * macOS asset filename per app. These are a contract with the release scripts:
+ * whatever publishes a Relay build must name the zip exactly this, or the site
+ * shows "Get notified" next to a release that exists.
+ */
+export const APP_MAC_ASSET: Record<AppKey, string> = {
+  trove: ASSET_NAMES.mac,
+  relay: "Relay.zip",
+  tend: "Tend.zip",
+};
+
+/** True when a tag belongs to an app other than Trove. */
+function isOtherApp(tag: string): boolean {
+  return (["relay", "tend"] as const).some((k) =>
+    tag.startsWith(APP_TAG_PREFIX[k]),
+  );
+}
+
+export type ReleaseState =
+  | {
+      state: "ready";
+      /** Direct asset URL. Safe to render as a download link. */
+      url: string;
+      /** Human version, prefix and leading v stripped. */
+      version: string;
+      bytes: number;
+      /** Release page, for "what changed" links. */
+      page: string;
+      prerelease: boolean;
+    }
+  /**
+   * No published asset. Every call site must render something other than a
+   * download: "Get notified", pointing at contact. This is why the site can
+   * sell three apps today and needs no edit on the day two of them ship.
+   */
+  | { state: "pending" };
+
+/**
+ * Pure: given the release list, what can a visitor actually download.
+ *
+ * Matches on the asset filename rather than the tag, because the asset is the
+ * thing being linked. A tag with no matching asset is a release that exists but
+ * has nothing to give, and offering it would be the dead download all over
+ * again, just with a fresher-looking version number.
+ */
+export function releaseIn(list: GitHubRelease[], app: AppKey): ReleaseState {
+  const wanted = APP_MAC_ASSET[app];
+  for (const r of list) {
+    if (r.draft) continue;
+    if (isWindows(r.tag_name)) continue;
+    // A bare tag is Trove's; a prefixed tag is somebody else's.
+    if (app === "trove" ? isOtherApp(r.tag_name) : !r.tag_name.startsWith(APP_TAG_PREFIX[app])) {
+      continue;
+    }
+    const asset = r.assets.find((a) => a.name === wanted);
+    if (!asset) continue;
+    return {
+      state: "ready",
+      url: asset.browser_download_url,
+      version: r.tag_name.slice(APP_TAG_PREFIX[app].length).replace(/^v/, ""),
+      bytes: asset.size,
+      page: r.html_url,
+      prerelease: r.prerelease,
+    };
+  }
+  return { state: "pending" };
+}
+
+/**
+ * Never throws. A GitHub outage or a rate limit must degrade to "Get notified",
+ * not to a 500 on the download page, and certainly not to a link built from a
+ * guessed tag: that is precisely the bug documented at the top of this file.
+ */
+export async function releaseFor(app: AppKey): Promise<ReleaseState> {
+  try {
+    return releaseIn(await fetchReleases(), app);
+  } catch {
+    return { state: "pending" };
+  }
+}
+
 /**
  * Classify by GitHub's own `prerelease` flag, matching what the macOS app's
  * updater does (`updater.includePrereleases`), so a tag can never be stable on
@@ -111,6 +215,9 @@ export function resolveTags(list: GitHubRelease[]): ResolvedTags {
 
   for (const r of list) {
     if (r.draft) continue;
+    // Relay and Tend live in this repo too. Without this line the newest stable
+    // release repo-wide wins, and the Trove updater is offered a Relay build.
+    if (isOtherApp(r.tag_name)) continue;
     if (isWindows(r.tag_name)) {
       win ??= r.tag_name;
     } else if (r.prerelease) {
