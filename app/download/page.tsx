@@ -94,13 +94,14 @@ export default async function DownloadPage() {
           <DownloadCard
             platform="windows"
             title="Windows"
-            tagline="Self-contained single-file build. Windows 10 19041 and newer, x64."
+            tagline="Self-contained build, no runtime to install first. Windows 10 build 17763 and newer, x64."
             instructionsTitle="First launch"
             instructions={[
               `Unzip ${ASSET_NAMES.windows} anywhere you like (no installer required).`,
               "Double-click Trove.exe to launch.",
               "Windows SmartScreen may prompt: click 'More info' → 'Run anyway' (the build is not yet code-signed).",
-              "Around 55% feature parity with macOS; growing each release. The Mac column on /compare lists the full picture.",
+              "25 of the Mac app's 38 panes have a Windows surface, growing each release. The Mac column on /compare lists the full picture.",
+              "Not code-signed, and built on macOS rather than smoke-tested on Windows hardware. Treat it as a beta.",
             ]}
             release={win}
             fallbackTag={BUILT_IN_WIN_TAG}

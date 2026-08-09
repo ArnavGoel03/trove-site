@@ -38,11 +38,16 @@ export type Channel = "stable" | "beta";
 export const BUILT_IN_MAC_TAG = `v${VERSIONS.trove.version}`;
 
 /**
- * Windows has never had a stable release. `v0.3.0-win` is flagged as a
- * pre-release on GitHub and the port is a stub, so the download page presents
- * it as beta. Windows resolution therefore ignores the channel split below.
+ * Windows has never had a stable release. Every `-win` tag is flagged as a
+ * pre-release on GitHub, so the download page presents it as beta, and Windows
+ * resolution ignores the channel split below.
+ *
+ * The pre-release flag is load-bearing, not cosmetic: one repo holds both
+ * platforms, and GitHub's /releases/latest returns the newest non-pre-release
+ * repo-wide. A Windows tag published as stable would become "latest" for the
+ * Mac app too. See win/bin/mirror-win-release.sh, which enforces this.
  */
-export const BUILT_IN_WIN_TAG = "v0.3.0-win";
+export const BUILT_IN_WIN_TAG = "v0.4.0-win";
 
 export function downloadURL(platform: Platform, tag: string): string {
   return `https://github.com/${RELEASE_REPO}/releases/download/${tag}/${ASSET_NAMES[platform]}`;
