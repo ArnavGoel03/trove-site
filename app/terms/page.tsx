@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
 import { CONTACT, pageTitle } from "@/lib/brand";
+import { PRICING, formatUSD } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: pageTitle("Terms of Service"),
@@ -69,9 +70,11 @@ export default function TermsPage() {
 
       <Section title="4. Subscriptions and payment">
         <p>
-          Trove is offered as an annual subscription. Subscriptions renew
-          automatically unless cancelled before the renewal date. Refunds are
-          governed by our{" "}
+          Trove is offered as a subscription, billed either yearly at{" "}
+          {formatUSD(PRICING.yearly)} or monthly at {formatUSD(PRICING.monthly)}
+          . Both renew automatically unless cancelled before the renewal date.
+          One licence covers every app in the suite. Refunds are governed by
+          our{" "}
           <a href="/refund" className="text-fg hover:underline">
             Refund Policy
           </a>

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
 import { CONTACT, pageTitle } from "@/lib/brand";
+import { PRICING, REFUND_LABEL } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: pageTitle("Refund Policy"),
   description:
-    "Trove offers a 14-day no-questions-asked refund. Here's how it works.",
+    `Trove offers a ${PRICING.refundDays}-day no-questions-asked refund. Here is how it works.`,
 };
 
 export default function RefundPage() {
@@ -21,11 +22,11 @@ export default function RefundPage() {
         </>
       }
     >
-      <Section title="1. 14-day refund window">
+      <Section title={`1. ${PRICING.refundDays}-day refund window`}>
         <p>
           You may request a full refund within{" "}
-          <span className="text-fg">14 calendar days</span> of your initial
-          purchase, for any reason. No questions asked.
+          <span className="text-fg">{PRICING.refundDays} calendar days</span> of
+          your initial purchase, for any reason. No questions asked.
         </p>
       </Section>
 
@@ -46,8 +47,9 @@ export default function RefundPage() {
 
       <Section title="3. Subscriptions cancelled mid-term">
         <p>
-          If you cancel an annual subscription after the 14-day window but
-          before renewal, you keep access for the remainder of the paid term.
+          If you cancel a subscription after the {PRICING.refundDays}-day window
+          but before renewal, you keep access for the remainder of the paid
+          term.
           If a cancellation is requested because of a significant defect we
           cannot resolve, we will pro-rate a refund for the unused portion of
           the term at our discretion.
@@ -59,7 +61,7 @@ export default function RefundPage() {
           Renewal charges are not automatically refundable simply because the
           renewal occurred. To avoid a renewal charge, cancel before the
           renewal date. If a renewal was unexpected and you contact us within
-          14 days of the renewal charge without having used the new term in a
+          {REFUND_LABEL} of the renewal charge without having used the new term in a
           meaningful way, we will generally honor a refund as a courtesy.
         </p>
       </Section>
@@ -67,7 +69,9 @@ export default function RefundPage() {
       <Section title="5. Exclusions">
         <p>We do not offer refunds for:</p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Purchases made more than 14 days ago, except as noted above;</li>
+          <li>
+            Purchases made more than {REFUND_LABEL} ago, except as noted above;
+          </li>
           <li>
             Fraudulent purchases or chargebacks initiated without first
             contacting us;

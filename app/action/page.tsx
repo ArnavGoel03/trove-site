@@ -30,7 +30,10 @@ export default function ActionsIndex() {
             ⌘K inline actions
           </h1>
           <p className="mt-4 text-body text-fg-dim leading-relaxed">
-            {ACTIONS.length}+ instant transforms that run on your Mac
+            {/* No "+" after a derived count. The number below is the exact
+                length of the catalog on this page, so a "+" would promise
+                actions the page does not list. */}
+            {ACTIONS.length} instant transforms that run on your Mac
             without leaving the keyboard. Open Trove (or hit your bound
             hotkey), type the trigger and your input, hit Return. The
             result is on your clipboard. No upload, no telemetry, no

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Settings, Palette } from "lucide-react";
@@ -107,7 +108,8 @@ export default function ThemesPage() {
         <>
           Four themes ship in {TROVE.version}: Dark, Light, Linear, Cron. Pick one in
           Settings &rarr; Theme and the entire app follows: sidebar, chrome,
-          panes, even the menubar overlay. Custom palettes ship in 1.2.0.
+          panes, even the menubar overlay. Custom palettes are deferred, not
+          scheduled.
         </>
       }
       wide
@@ -324,12 +326,20 @@ export default function ThemesPage() {
         </span>
         <div>
           <div className="text-caption font-medium text-fg mb-1">
-            Coming in 1.2.0: custom palettes
+            Deferred: custom palettes
           </div>
           <p className="text-caption leading-[1.7] text-fg-dim">
             Per-token customization (surface, accent, border, text) with a live
-            preview pane. Export as a .trovetheme file, share via Discussions,
-            import with a double-click.
+            preview pane, exported as a .trovetheme file and imported with a
+            double-click. It sits in the deferred bucket on the{" "}
+            <Link
+              href="/roadmap"
+              className="text-fg underline underline-offset-2 decoration-line-strong hover:decoration-fg"
+            >
+              roadmap
+            </Link>
+            , which means worth doing and not currently being worked on. This
+            page will name a version when there is one to name.
           </p>
         </div>
       </div>

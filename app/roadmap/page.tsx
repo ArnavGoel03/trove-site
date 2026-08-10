@@ -141,6 +141,12 @@ const DEFERRED: Item[] = [
     size: "L",
   },
   {
+    id: "custom-palettes",
+    title: "Custom theme palettes",
+    body: "Per-token customization (surface, accent, border, text) with a live preview pane, saved as a .trovetheme file the app can import on double-click. The four built-in themes cover the common cases, so this waits behind work that unblocks people.",
+    size: "M",
+  },
+  {
     id: "scrolling-capture",
     title: "Scrolling capture",
     body: "Scroll wheel emulator while capturing via SCStream, stitch overlapping frames at finalize via feature matching.",

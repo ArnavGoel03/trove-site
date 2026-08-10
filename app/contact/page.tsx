@@ -61,14 +61,17 @@ export default function ContactPage() {
           <a href="/security" className="text-fg hover:underline">
             Security
           </a>{" "}
-          page. The dedicated address is{" "}
+          page. Write to{" "}
           <a
             href={CONTACT.security}
             className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>
-          .
+          , the same inbox as support. This link tags the subject
+          {" "}<code className="text-fg-dim">[Security]</code>, which is what
+          sorts it ahead of everything else. Trove is one person, so an inbox
+          that is honestly one inbox beats an alias that forwards to it anyway.
         </p>
       </Section>
 
