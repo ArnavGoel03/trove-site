@@ -174,7 +174,7 @@ export const PANE_DETAIL: Record<string, PaneDetail> = {
     ],
     urlScheme: [
       {
-        example: "trove://qr?text=${STUDIO.domain}",
+        example: `trove://qr?text=${STUDIO.domain}`,
         note: "Generates the QR and adds the PNG to Stage.",
       },
     ],

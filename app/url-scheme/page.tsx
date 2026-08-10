@@ -128,7 +128,7 @@ const VERBS: Verb[] = [
   },
   {
     verb: "qr",
-    example: "trove://qr?text=${STUDIO.domain}",
+    example: `trove://qr?text=${STUDIO.domain}`,
     description:
       "Generates a 1024×1024 QR code, writes a temp PNG, and adds it to Stage.",
     frontmost: false,

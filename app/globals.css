@@ -459,8 +459,14 @@ html {
   /* Narrow enough that the measure ends before the widest shot's subject
      starts. The collapse frames the hero across the right 55% of the viewport,
      so a 34rem measure put the last two words of every paragraph on top of the
-     app's own sidebar. */
-  max-width: 32rem;
+     app's own sidebar.
+
+     32rem was still 38px too wide at 1600: the beat is capped at 68rem and
+     centred, so on a wide screen the copy starts at x=256 rather than at the
+     padding, and the measure ran to x=768 against a subject whose left edge is
+     at x=730. The words "manager" and "once" sat on top of the app's Storage
+     and System rows in the opening frame of the site. */
+  max-width: 29rem;
 }
 
 /* The canvas is scenery. Every clickable thing on this page is DOM, and a
@@ -485,11 +491,28 @@ html {
    thing the scene ever puts behind it, which is the collapse. */
 .stage-scrim {
   pointer-events: none;
+  /* Five stops, not four. The three-stop ramp cleared by 52%, but the collapse
+     brings the app's sidebar as far left as x=615 on a 1600px viewport, and the
+     copy column ends at x=720: the word "System" was legible straight through
+     the body paragraph. The extra stop at 44% holds the veil dense across the
+     measure and then drops it just as fast, so the shot on the right keeps the
+     contrast it is there for.
+
+     The density across that first 44% is set by the proof beats, not by the
+     collapse. The camera pushes into the window for clipboard / text / capture /
+     system, so the same sidebar that is 11px tall at the collapse is 30px tall
+     here, and a veil that reduced it to a ghost at the small size left it
+     plainly readable at the large one: "Capture" and "Files" sat inside the body
+     paragraph of beat 06. One veil has to hold at the closest framing on the
+     track, which is why these numbers are tuned there and merely comfortable
+     everywhere else. The clear-out stops are unchanged, so the hero keeps the
+     contrast it had. */
   background: linear-gradient(
     to right,
-    color-mix(in oklab, var(--color-bg) 95%, transparent) 0%,
-    color-mix(in oklab, var(--color-bg) 90%, transparent) 30%,
-    color-mix(in oklab, var(--color-bg) 58%, transparent) 52%,
+    color-mix(in oklab, var(--color-bg) 97%, transparent) 0%,
+    color-mix(in oklab, var(--color-bg) 95%, transparent) 30%,
+    color-mix(in oklab, var(--color-bg) 90%, transparent) 44%,
+    color-mix(in oklab, var(--color-bg) 38%, transparent) 58%,
     transparent 70%
   );
 }
@@ -521,6 +544,52 @@ html {
   .stage-beats {
     align-items: end;
     padding-block-end: 3.5rem;
+  }
+
+  /* The veil travels with the beat, because the halves are not really halves.
+     A beat with no demo is about 320px tall and does sit in the lower half, so
+     the scrim above covers it. A beat with a demo card is 660px, and since the
+     beats are bottom-anchored it grows upward: at 393x852 the "Capture the
+     screen, then read it." headline landed at y=225, inside the window, and the
+     app's own sidebar read straight through it. Raising the scrim's dense band
+     high enough to cover that would bury the shot on every other beat.
+
+     So each beat carries its own veil, sized to itself. It is uniform rather
+     than a fade, because the headline sits at the TOP of the box, not the
+     bottom, and it fades out over the last 18% only so the upper edge is not a
+     visible line. It rides the beat's own opacity, so it is gone the moment the
+     words are. */
+  /* The gutter moves from the container to the beat so the veil can reach the
+     edges. `.stage-beat` is `width: 100%`, so a negative margin only slid the
+     box sideways and left a 20px strip on each side where the app window came
+     through at full brightness: a vertical seam down the right of the shot.
+     Same gutter, one level lower, and the text is inset exactly as before. */
+  .stage-beats {
+    padding-inline: 0;
+  }
+
+  .stage-beat {
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+    /* The fade is a fixed 3.5rem and the padding above the text is the same
+       3.5rem, so the fade always happens in empty space no matter how tall the
+       beat is. Stated as a percentage it was 18% of the box, which on the tall
+       proof beats worked out to 110px and swallowed the eyebrow: "06 / PROOF"
+       came through at about 40% veil, tangled in the window's title bar and its
+       traffic lights. A percentage cannot know where the first line of text is;
+       a length that matches the padding can. */
+    padding-block-start: 3.5rem;
+    background: linear-gradient(
+      to top,
+      color-mix(in oklab, var(--color-bg) 82%, transparent) 0,
+      color-mix(in oklab, var(--color-bg) 82%, transparent) calc(100% - 3.5rem),
+      transparent 100%
+    );
+  }
+
+  /* Stacked mode paints the beats over the page, not over a moving picture, so
+     the veil there is just a grey block behind every paragraph. */
+  .stage-track[data-live="0"] .stage-beat {
+    background: none;
   }
 }
 
@@ -572,6 +641,27 @@ html {
 .demo-input:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 1px;
+}
+
+/* Slims the scrollbar on the platforms that draw one at all. It is not the
+   affordance: macOS and iOS use overlay scrollbars and keep using them even
+   when `scrollbar-color` is set (Chrome reserves no gutter, measured), so at
+   rest there is still nothing to see. The bottom fade below is what actually
+   tells a phone reader the pane continues; this is the desktop tidy-up. */
+.demo-input,
+.demo-output,
+.demo-shell {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+
+/* Set by components/demos/Shell.tsx, on exactly the panes that have more
+   content below the fold right now. The JSON demo at 393px cut both panes
+   through the middle of a line and read as a rendering fault rather than as
+   something you could scroll. */
+.demo-input[data-overflow="1"],
+.demo-output[data-overflow="1"] {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.75rem), transparent 100%);
 }
 
 .demo-output {

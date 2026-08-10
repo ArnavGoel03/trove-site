@@ -219,10 +219,19 @@ export interface Envelope {
  *
  * Pure, so a reverse scrub reproduces it exactly, and total, so a NaN frame
  * fades to nothing rather than throwing mid-render.
+ *
+ * `fadeIn` exists for the beat the reader lands on. Every other beat is
+ * arrived at, so it earns its fade; the first one is simply there when the
+ * page opens. With the fade applied to it the site's opening frame was a dim
+ * app window and no words at all: the headline only appeared once you scrolled,
+ * which is the wrong order for the one screen that has to make the argument.
+ * The stylesheet already says so for the pre-JS frame
+ * (`.stage-beat:first-child { opacity: 1 }`); this is the same rule for the
+ * frame after JS takes over.
  */
-export function copyEnvelope(local: number): Envelope {
+export function copyEnvelope(local: number, fadeIn = true): Envelope {
   const l = Number.isFinite(local) ? clamp01(local) : 0;
-  const arriving = span(l, 0, COPY_IN);
+  const arriving = fadeIn ? span(l, 0, COPY_IN) : 1;
   const leaving = span(l, 1 - COPY_OUT, 1);
   return {
     opacity: Math.min(easeOutCubic(arriving), 1 - easeOutCubic(leaving)),

@@ -60,8 +60,12 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     key: "trove",
     name: "Trove",
     tagline: "One app instead of a dozen.",
+    // No count in this sentence. `lib/panes.ts` imports this file, so this file
+    // can never import TOOL_COUNT back, and a number typed here by hand is a
+    // number that goes stale the next time a pane ships. The "30+" that used to
+    // sit here was already understating the catalog by seventeen.
     blurb:
-      "Clipboard, window manager, system monitor, OCR, PDF kit, disk cleaner, and 30+ more, in one private, native Mac app.",
+      "Clipboard, window manager, system monitor, OCR, PDF kit, disk cleaner, and dozens more, in one private, native Mac app.",
     status: "live",
     href: "/",
     version: VERSIONS.trove.version,

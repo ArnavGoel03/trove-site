@@ -10,6 +10,13 @@ import Receipt from "./Receipt";
 
 interface Props {
   readonly id: StageId;
+  /**
+   * True for the landing beat only, which renders its headline as the page's
+   * `h1`. The homepage had twelve `h2`s and no `h1` at all: the document that
+   * has to rank for "mac utility app" was handing crawlers and screen readers
+   * a heading outline with no root.
+   */
+  readonly lead: boolean;
   readonly beat: Beat;
   /** False in the stacked fallback, where everything is visible at once. */
   readonly live: boolean;
@@ -27,7 +34,7 @@ interface Props {
  * benefit of the one the reader is looking at is how a scroll page ends up at
  * 20fps. They mount within one stage of active and unmount past it.
  */
-export default function Copy({ id, beat, live, store, register }: Props) {
+export default function Copy({ id, beat, lead, live, store, register }: Props) {
   const [near, setNear] = useState(!live);
 
   useEffect(() => {
@@ -53,9 +60,15 @@ export default function Copy({ id, beat, live, store, register }: Props) {
     >
       <div className="stage-copy">
         <p className="text-micro font-mono uppercase text-accent">{beat.eyebrow}</p>
-        <h2 className="mt-4 text-display font-display font-semibold text-fg text-balance">
-          {beat.headline}
-        </h2>
+        {lead ? (
+          <h1 className="mt-4 text-display font-display font-semibold text-fg text-balance">
+            {beat.headline}
+          </h1>
+        ) : (
+          <h2 className="mt-4 text-display font-display font-semibold text-fg text-balance">
+            {beat.headline}
+          </h2>
+        )}
         <p className="mt-5 text-lead text-fg-dim text-pretty">{beat.body}</p>
         {beat.kicker ? (
           <p className="stage-kicker mt-4 text-caption text-fg-mute text-pretty">{beat.kicker}</p>

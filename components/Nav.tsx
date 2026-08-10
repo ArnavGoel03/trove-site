@@ -77,12 +77,20 @@ export default function Nav() {
     };
   }, [open]);
 
+  // `backdrop-saturate-50` on the bar below is doing legibility work, not
+  // decoration. The bar is 30% black over a blur, which is enough to carry a
+  // dark page but not enough to carry the accent glow behind the download CTA:
+  // scrolled to the bottom of the homepage, that glow bled through as a red
+  // smear under "Pricing / Relay / Tend / Compare". Halving saturation turns
+  // anything strongly coloured passing underneath into a grey wash and leaves
+  // the nav's own contrast where it was, without going opaque and losing the
+  // glass.
   return (
     <motion.header
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 inset-x-0 z-50 px-6 py-4 bg-black/40 backdrop-blur-xl supports-[backdrop-filter]:bg-black/30 border-b border-line-soft"
+      className="fixed top-0 inset-x-0 z-50 px-6 py-4 bg-black/40 backdrop-blur-xl backdrop-saturate-50 supports-[backdrop-filter]:bg-black/30 border-b border-line-soft"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link

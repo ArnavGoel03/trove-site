@@ -115,7 +115,10 @@ const RULES = [
     // "40+ ops" is the Text Tools pipeline, a different number entirely.
     name: "hardcoded tool count",
     pattern:
-      /\b\d+\+[- ](?:tool|pane)s?\b|\b\d+-(?:tool|pane)\b|\b(?:\d+|eleven|twelve|twenty|thirty|forty|fifty) (?:macOS )?(?:Shortcuts )?(?:intents|AppIntents|entity pickers)\b/i,
+      // `N+ more` is the same claim wearing a different hat: it appeared in the
+      // Trove card blurb as "30+ more" against a catalog of 53, understating
+      // the product by seventeen panes because nothing derived it.
+      /\b\d+\+[- ](?:tool|pane)s?\b|\b\d+-(?:tool|pane)\b|\b\d+\+ more\b|\b(?:\d+|eleven|twelve|twenty|thirty|forty|fifty) (?:macOS )?(?:Shortcuts )?(?:intents|AppIntents|entity pickers)\b/i,
     allow: ["scripts/check-hardcoded.mjs"],
     use: "TOOL_COUNT from lib/panes.ts, or INTENTS.length from lib/intents.ts",
   },

@@ -45,6 +45,13 @@ export default function Hash() {
     };
   }, [text, algo]);
 
+  // The algorithm select is sized by flex-basis, not by a width utility.
+  // `.demo-input` sets `width: 100%` and app/globals.css uses no cascade
+  // layers, so every component class there beats every Tailwind utility no
+  // matter the source order. `w-[7.5rem]` lost: the select took 371px of a
+  // 402px row and the text field beside it collapsed to 23px, hiding "the
+  // quick brown fox" entirely. A flex item takes its main size from flex-basis
+  // before it looks at width, so this holds whichever rule wins on width.
   return (
     <Shell
       title="Hashes"
@@ -69,7 +76,7 @@ export default function Hash() {
           id="demo-hash-algo"
           value={algo}
           onChange={(e) => setAlgo(e.target.value as Algo)}
-          className="demo-input w-[7.5rem] font-mono"
+          className="demo-input font-mono grow-0 shrink-0 basis-[7.5rem]"
         >
           {ALGOS.map((a) => (
             <option key={a} value={a}>

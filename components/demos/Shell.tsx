@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 /**
  * The frame every demo sits in.
@@ -24,8 +24,54 @@ export default function Shell({
   readonly href?: string;
   readonly children: ReactNode;
 }) {
+  const root = useRef<HTMLElement>(null);
+
+  // Marks each capped pane that currently has more content than it can show,
+  // so the stylesheet can fade its bottom edge. It lives here rather than in
+  // the eight demos because the demos differ only in what they put inside the
+  // pane, not in how the pane behaves.
+  //
+  // The fade is the entire affordance on a phone. macOS and iOS draw overlay
+  // scrollbars, which are invisible until you are already scrolling, so the
+  // capped JSON output on a 393px screen was a block of text sliced through
+  // the middle of a line with nothing to say it continued. `scrollbar-color`
+  // does not help: Chrome accepts the declaration and keeps the overlay bar,
+  // reserving no gutter, so it is still invisible at rest.
+  //
+  // `data-overflow` and not a permanent fade, because a pane whose content
+  // fits would otherwise dim its own last line for no reason.
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const panes = [...el.querySelectorAll<HTMLElement>(".demo-input, .demo-output")];
+    if (panes.length === 0) return;
+
+    const sync = () => {
+      for (const p of panes) {
+        // A pane scrolled to the end has nothing below it to hint at.
+        const more = p.scrollHeight - p.clientHeight - p.scrollTop > 2;
+        p.dataset.overflow = more ? "1" : "0";
+      }
+    };
+
+    sync();
+    const ro = new ResizeObserver(sync);
+    for (const p of panes) {
+      ro.observe(p);
+      p.addEventListener("scroll", sync, { passive: true });
+      p.addEventListener("input", sync);
+    }
+    return () => {
+      ro.disconnect();
+      for (const p of panes) {
+        p.removeEventListener("scroll", sync);
+        p.removeEventListener("input", sync);
+      }
+    };
+  });
+
   return (
-    <section className="demo-shell">
+    <section className="demo-shell" ref={root}>
       <header className="mb-3 flex items-baseline justify-between gap-3">
         <h3 className="text-micro font-mono uppercase text-fg-mute">{title}</h3>
         {href ? (

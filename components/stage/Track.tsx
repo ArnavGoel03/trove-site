@@ -98,7 +98,12 @@ export default function Track() {
           }
           continue;
         }
-        const { opacity, shift } = copyEnvelope(frame.local);
+        // The landing beat does not fade in: it is on screen before anyone has
+        // scrolled, so an arrival fade leaves the opening frame wordless.
+        const { opacity, shift } = copyEnvelope(
+          frame.local,
+          frame.id !== STAGES[0].id,
+        );
         el.style.visibility = "visible";
         el.style.opacity = String(opacity);
         el.style.transform = `translate3d(0, ${(shift * NUDGE_PX).toFixed(2)}px, 0)`;
@@ -139,11 +144,12 @@ export default function Track() {
         <div className="stage-layer stage-scrim" aria-hidden="true" />
 
         <div className="stage-beats">
-          {STAGES.map((stage) => (
+          {STAGES.map((stage, i) => (
             <Copy
               key={stage.id}
               id={stage.id}
               beat={BEATS[stage.id]}
+              lead={i === 0}
               live={live}
               store={store}
               register={(el) => {

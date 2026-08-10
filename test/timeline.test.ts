@@ -191,3 +191,19 @@ test("span and clamp01 hold at the edges", () => {
   assert.equal(clamp01(-1), 0);
   assert.equal(clamp01(2), 1);
 });
+
+test("the landing beat is legible before anyone scrolls", () => {
+  // The homepage opened on a dim app window and no words: the first beat was
+  // at local 0, and local 0 is the bottom of the arrival fade. Every other beat
+  // is scrolled into and earns that fade; this one is simply already there.
+  assert.equal(copyEnvelope(0, false).opacity, 1);
+  assert.equal(copyEnvelope(0, false).shift, 0);
+
+  // It still leaves the way every other beat leaves, so the handoff to beat two
+  // looks the same in both directions.
+  assert.equal(copyEnvelope(1, false).opacity, 0);
+  assert.equal(copyEnvelope(1, false).shift, -1);
+
+  // And the default is unchanged, so no other beat picked up the exemption.
+  assert.equal(copyEnvelope(0).opacity, 0);
+});
