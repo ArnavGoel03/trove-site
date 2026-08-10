@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
-import { ISSUES_URL, ISSUES_LABEL } from "@/lib/releases";
+import { CONTACT, pageTitle } from "@/lib/brand";
+import { ISSUES_URL, ISSUES_LABEL, releasePageURL } from "@/lib/releases";
 
 export const metadata: Metadata = {
-  title: "Contact - Trove",
+  title: pageTitle("Contact"),
   description:
     "Get in touch with the Trove team. Support, bug reports, and security disclosures.",
 };
@@ -28,10 +29,10 @@ export default function ContactPage() {
         </p>
         <p>
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.support}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>
         </p>
       </Section>
@@ -62,20 +63,41 @@ export default function ContactPage() {
           </a>{" "}
           page. The dedicated address is{" "}
           <a
-            href="mailto:security@trove.app"
+            href={CONTACT.security}
             className="text-white hover:underline"
           >
-            security@trove.app
+            {CONTACT.address}
           </a>
           .
         </p>
       </Section>
 
-      <Section title="Social">
+      {/* No Social section. It used to advertise "@trove_app (placeholder
+          until the handle is live)", which is a page telling visitors, in
+          writing, that it has not been finished. A channel that does not exist
+          is not a contact method, and the two below are real. */}
+      <Section title="Release announcements">
         <p>
-          We post release notes and occasional updates on X / Twitter:{" "}
-          <span className="text-white">@trove_app</span> (placeholder until
-          the handle is live).
+          Every release is announced in two places you can subscribe to today:
+          the{" "}
+          <a href="/changelog" className="text-white hover:underline">
+            changelog
+          </a>{" "}
+          (which has an{" "}
+          <a href="/changelog/rss.xml" className="text-white hover:underline">
+            RSS feed
+          </a>
+          ), and{" "}
+          <a
+            href={releasePageURL()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:underline"
+          >
+            GitHub Releases
+          </a>
+          , where the Watch button will email you. Trove also checks for
+          updates itself, so you do not need either one to stay current.
         </p>
       </Section>
 

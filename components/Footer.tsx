@@ -1,11 +1,12 @@
 "use client";
 
-import { Github, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { STUDIO, TROVE, APPS } from "@/lib/brand";
+import { APPS, CONTACT, STUDIO, TROVE } from "@/lib/brand";
 import { releasePageURL, ISSUES_URL } from "@/lib/releases";
 import Logomark from "./Logomark";
+import GithubMark from "./icons/GithubMark";
 
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm";
@@ -44,6 +45,7 @@ export default function Footer() {
           title={APPS.trove.name}
           links={[
             { label: "Features", href: "/features" },
+            { label: "Pricing", href: "/pricing" },
             { label: "Compare", href: "/compare" },
             { label: "Changelog", href: "/changelog" },
             { label: "Roadmap", href: "/roadmap" },
@@ -121,10 +123,10 @@ export default function Footer() {
               aria-label={`${TROVE.name} releases on GitHub`}
               className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
             >
-              <Github size={16} />
+              <GithubMark size={16} />
             </a>
             <a
-              href="mailto:support@trove.app"
+              href={CONTACT.support}
               aria-label="Email support"
               className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
             >

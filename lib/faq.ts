@@ -38,7 +38,12 @@ export const FAQ: FaqItem[] = [
     group: "About Trove",
     question: "Is Trove safe? Does Trove upload my data?",
     answer:
-      "Trove is safe and private by design. It is 100% local: it does not upload your files, clipboard, screenshots, or any other data, and it has no analytics or telemetry. The only network call it makes is polling GitHub Releases to check for updates, and the source code is open for inspection on GitHub.",
+      // Do not restore the "source code is open for inspection" line that used
+      // to close this answer. It was false: Trove is a paid product and its
+      // source repo is private, permanently. A privacy claim that leans on a
+      // verification route nobody can actually take is worse than no claim, so
+      // this points at the two things a sceptic CAN check without our help.
+      "Trove is safe and private by design. It is 100% local: it does not upload your files, clipboard, screenshots, or any other data, and it has no analytics or telemetry. The only network call it makes is polling GitHub Releases to check for updates. You do not have to take that on faith: Trove ships with no account and no login, so there is nothing to send data to, and you can watch every connection it makes with Little Snitch or macOS's own firewall.",
   },
   {
     group: "About Trove",

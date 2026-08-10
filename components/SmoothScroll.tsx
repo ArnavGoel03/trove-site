@@ -9,7 +9,7 @@
 // `html { scroll-behavior: smooth }` rule in globals.css (which is
 // suppressed under `prefers-reduced-motion`).
 //
-// Kept as a no-op so existing imports keep working — and so it can
+// Kept as a no-op so existing imports keep working, and so it can
 // be re-enabled behind a query flag in the future if needed.
 export default function SmoothScroll() {
   return null;

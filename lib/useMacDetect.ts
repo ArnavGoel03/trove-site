@@ -8,12 +8,12 @@ interface UserAgentData {
   platform?: string;
 }
 
-/// Detects the visitor's desktop platform. iPadOS reports as Macintosh — we
+/// Detects the visitor's desktop platform. iPadOS reports as Macintosh, so we
 /// exclude touch-Macs from the "mac" branch so iPad users don't get the .zip.
 /// Returns:
 ///   "mac"     → ship Trove for Mac (.zip)
 ///   "windows" → ship Trove for Windows (.zip with .exe inside)
-///   "other"   → Linux, ChromeOS, mobile — copy-link fallback
+///   "other"   → Linux, ChromeOS, mobile, copy-link fallback
 ///   "unknown" → SSR, before the first effect tick
 export function useMacDetect(): Platform {
   const [platform, setPlatform] = useState<Platform>("unknown");

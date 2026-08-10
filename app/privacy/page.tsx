@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
-import { STUDIO_HOST } from "@/lib/brand";
+import { CONTACT, pageTitle, STUDIO_HOST } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Trove",
+  title: pageTitle("Privacy Policy"),
   description:
     "Trove is local-only. We collect nothing in the app. This page explains exactly what data, if any, leaves your Mac.",
 };
@@ -38,8 +38,8 @@ export default function PrivacyPage() {
           any other usage data to us or to any third party.
         </p>
         <p>
-          The only network activity originating from Trove is initiated by you
-          — for example, checking for an update from the official release
+          The only network activity originating from Trove is initiated by you:
+          checking for an update from the official release
           channel, or using an opt-in pane that explicitly requires the network
           (such as a translation pane). These features are clearly labeled in
           the app.
@@ -62,8 +62,8 @@ export default function PrivacyPage() {
 
       <Section title="4. Where your data is stored">
         <p>
-          <span className="text-white">In the app:</span> All Trove data —
-          clipboard history, pane settings, snippets, notes, captures — lives
+          <span className="text-white">In the app:</span> All Trove data
+          (clipboard history, pane settings, snippets, notes, captures) lives
           on your Mac at{" "}
           <code className="text-white/90 bg-white/[0.04] px-1.5 py-0.5 rounded">
             ~/Library/Application Support/Trove/
@@ -127,8 +127,8 @@ export default function PrivacyPage() {
 
       <Section title="9. Changes to this policy">
         <p>
-          We may update this policy occasionally — for example, when adding a
-          new opt-in network feature, or to clarify wording. Material changes
+          We may update this policy occasionally, for example when adding a new
+          opt-in network feature or to clarify wording. Material changes
           will be noted by updating the &ldquo;Last updated&rdquo; date at the
           top of this page.
         </p>
@@ -138,10 +138,10 @@ export default function PrivacyPage() {
         <p>
           Questions about this policy? Email{" "}
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.privacy}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>
           .
         </p>

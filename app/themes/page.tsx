@@ -3,10 +3,10 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Settings, Palette } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
-import { STUDIO, TROVE } from "@/lib/brand";
+import { pageTitle, STUDIO, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Themes: Trove",
+  title: pageTitle("Themes"),
   description:
     "Dark, Light, Linear, and Cron themes ship in Trove. Pick one in Settings → Theme and the entire app, every pane, every chrome element, follows.",
   alternates: { canonical: `${STUDIO.domain}/themes` },

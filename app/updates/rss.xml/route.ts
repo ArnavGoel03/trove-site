@@ -1,5 +1,5 @@
 import { listUpdates } from "@/lib/updates";
-import { STUDIO } from "@/lib/brand";
+import { STUDIO, TROVE } from "@/lib/brand";
 
 // Static RSS 2.0 feed for /updates. Revalidates on the same 6h cycle as
 // the rest of the marketing surface so a new post in content/updates/
@@ -34,7 +34,7 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Trove — Updates</title>
+    <title>${TROVE.name}: Updates</title>
     <link>${SITE}/updates</link>
     <atom:link href="${SITE}/updates/rss.xml" rel="self" type="application/rss+xml" />
     <description>Release deep-dives, devlogs, and behind-the-scenes notes from the Trove project.</description>

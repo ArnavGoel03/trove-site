@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
+import { CONTACT, pageTitle } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Acceptable Use Policy — Trove",
+  title: pageTitle("Acceptable Use Policy"),
   description:
     "What you can and cannot do with your Trove license and the Trove software.",
 };
@@ -68,19 +69,19 @@ export default function AcceptableUsePage() {
         <p>
           If you believe someone is violating this policy, please report it to{" "}
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.support}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>
           . Security-sensitive reports should go to{" "}
           <a
-            href="mailto:security@trove.app"
+            href={CONTACT.security}
             className="text-white hover:underline"
           >
-            security@trove.app
-          </a>{" "}
-          — see our{" "}
+            {CONTACT.address}
+          </a>
+          . See our{" "}
           <a href="/security" className="text-white hover:underline">
             Security
           </a>{" "}

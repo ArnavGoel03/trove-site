@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { pageTitle } from "@/lib/brand";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
 
 export const metadata: Metadata = {
-  title: "End User License Agreement — Trove",
+  title: pageTitle("End User License Agreement"),
   description:
-    "Trove End User License Agreement — your right to use the Trove software.",
+    "Trove End User License Agreement: your right to use the Trove software.",
 };
 
 export default function EulaPage() {

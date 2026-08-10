@@ -12,10 +12,10 @@ import {
   Type,
 } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
-import { STUDIO } from "@/lib/brand";
+import { pageTitle, STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Accessibility: Trove",
+  title: pageTitle("Accessibility"),
   description:
     "How Trove supports VoiceOver, Reduced Motion, contrast tokens, keyboard navigation, and the full macOS accessibility surface.",
   alternates: { canonical: `${STUDIO.domain}/accessibility` },

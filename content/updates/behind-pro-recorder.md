@@ -6,7 +6,7 @@ tag: "Devlog"
 excerpt: "How the Recorder pane went from a 2-button wrapper around AVFoundation to a Screen Studio competitor in 9 days. The architecture, the rabbit holes, and the bugs that bit hardest."
 ---
 
-The Recorder pane in 1.0.0 was a polite wrapper around `AVCaptureSession` — start, stop, save to `~/Movies/Trove`. Useful for a screen grab, useless for a tutorial.
+The Recorder pane in 1.0.0 was a polite wrapper around `AVCaptureSession`: start, stop, save to `~/Movies/Trove`. Useful for a screen grab, useless for a tutorial.
 
 1.1.0's Recorder is a different beast. This is the devlog.
 
@@ -15,7 +15,7 @@ The Recorder pane in 1.0.0 was a polite wrapper around `AVCaptureSession` — st
 - Must stay native. No Electron, no Chromium recording stack, no headless browser hacks.
 - Must export a `.mov` that Final Cut and DaVinci both ingest cleanly, with separate audio tracks the editor can independently rebalance.
 - Must add zero noticeable launch-time cost to the rest of Trove. The pane lazy-loads, the capture stack stays cold until the user opens it.
-- Must respect Reduced Motion — the click ripple is the marquee feature, but if `accessibilityDisplayShouldReduceMotion` is true, the ripple is suppressed.
+- Must respect Reduced Motion. The click ripple is the marquee feature, but if `accessibilityDisplayShouldReduceMotion` is true, the ripple is suppressed.
 
 ### The architecture, in three layers
 
@@ -23,9 +23,9 @@ The capture pipeline ended up looking like this:
 
 - `RecorderEngine` owns the `AVCaptureSession` and the assistant `CMSampleBufferDelegate` pair (one for video, one for audio).
 - `RecorderOverlay` is a borderless transparent `NSWindow` pinned at level `.popUpMenu` that draws the click ripple, keystroke pill, and selection rectangle. It's the only on-screen affordance during a recording.
-- `RecorderWriter` is the `AVAssetWriter` adapter — two writer inputs for two audio tracks, one for video, plus the metadata track for the keystroke overlay timing.
+- `RecorderWriter` is the `AVAssetWriter` adapter: two writer inputs for two audio tracks, one for video, plus the metadata track for the keystroke overlay timing.
 
-The trick was that the overlay couldn't show up in the recording. The naïve solution — set the overlay window's `sharingType` to `.none` — works for `CGWindowList` capture but not for `ScreenCaptureKit`. The real fix was to add the overlay window's `windowID` to the `SCContentFilter`'s excluded list. That took a day to find.
+The trick was that the overlay couldn't show up in the recording. The naive solution (set the overlay window's `sharingType` to `.none`) works for `CGWindowList` capture but not for `ScreenCaptureKit`. The real fix was to add the overlay window's `windowID` to the `SCContentFilter`'s excluded list. That took a day to find.
 
 ### The bugs
 
@@ -35,10 +35,10 @@ The trick was that the overlay couldn't show up in the recording. The naïve sol
 
 ### What I'd do differently
 
-The overlay window approach is fine for now, but a CoreAnimation layer pinned to the captured surface would be cheaper and frame-locked. That's the 1.2.0 plan — bring the overlay rendering inside the capture loop instead of synchronizing two clocks.
+The overlay window approach is fine for now, but a CoreAnimation layer pinned to the captured surface would be cheaper and frame-locked. That's the 1.2.0 plan: bring the overlay rendering inside the capture loop instead of synchronizing two clocks.
 
 ### Try it
 
-The Record pane is in the Capture section of the sidebar. ⌘R focuses it from anywhere in the app. The pro features are in the gear popover — click ripple, keystroke overlay, voice-activity auto-pause are all one-tap toggles.
+The Record pane is in the Capture section of the sidebar. ⌘R focuses it from anywhere in the app. The pro features are in the gear popover: click ripple, keystroke overlay, voice-activity auto-pause are all one-tap toggles.
 
 Bug reports: [GitHub Issues](https://github.com/ArnavGoel03/trove-releases/issues).

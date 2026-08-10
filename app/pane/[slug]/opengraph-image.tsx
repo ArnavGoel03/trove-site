@@ -1,10 +1,11 @@
 import { troveOg } from "@/lib/og";
+import { ogAlt } from "@/lib/brand";
 import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Trove — Pane";
+export const alt = ogAlt("Pane");
 
 type Params = { slug: string };
 

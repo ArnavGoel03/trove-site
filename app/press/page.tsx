@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Download } from "lucide-react";
-import { STUDIO, PLATFORM, TROVE } from "@/lib/brand";
+import { pageTitle, PLATFORM, STUDIO, TROVE } from "@/lib/brand";
 import { ISSUES_URL, releasePageURL } from "@/lib/releases";
 
 export const metadata: Metadata = {
-  title: "Press kit: Trove",
+  title: pageTitle("Press kit"),
   description:
     "Pitch lines, key facts, screenshots, and brand assets for press, podcasts, and reviewers covering Trove.",
   alternates: { canonical: `${STUDIO.domain}/press` },

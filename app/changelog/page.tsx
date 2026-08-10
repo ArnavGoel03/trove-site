@@ -4,11 +4,11 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { articleLd, breadcrumbLd } from "@/components/JsonLd";
 import { fetchChangelog, renderMarkdown } from "@/lib/changelog";
 import { slugifyVersion } from "@/lib/slug";
-import { STUDIO } from "@/lib/brand";
+import { pageTitle, STUDIO } from "@/lib/brand";
 import { releasePageURL } from "@/lib/releases";
 
 export const metadata: Metadata = {
-  title: "Changelog: Trove",
+  title: pageTitle("Changelog"),
   description:
     "Every shipped change in Trove, live-sourced from the canonical CHANGELOG.md. Stable releases, beta builds, and pre-release history.",
   alternates: { canonical: `${STUDIO.domain}/changelog` },

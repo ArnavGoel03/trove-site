@@ -3,12 +3,16 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 /**
- * Standard outer chrome for every non-homepage route: fixed Nav at top,
- * grain overlay (already provided by root layout), centered article width,
- * Footer at the bottom. Uses the same dark + orange palette as the homepage
- * so deep-links don't feel like a different site. `wide` widens the inner
- * column past the legal-style 3xl reading width when a page needs grids
- * or tables (e.g. /compare, /shortcuts, /pane/[slug]).
+ * Standard outer chrome for every non-homepage route: fixed Nav at top, grain
+ * overlay (from the root layout), a centred column, Footer at the bottom.
+ *
+ * Every size and colour here is a token, so this file is the single lever for
+ * the reading rhythm of about thirty pages. It used to write its own
+ * `text-[16px] sm:text-[17px]` and `text-[var(--color-fg-dim)]`, which meant a
+ * change to the type scale moved the homepage and left every other page behind.
+ *
+ * `wide` widens the column past the legal-style reading measure for pages that
+ * carry grids or tables (/compare, /shortcuts, /pane/[slug], /pricing).
  */
 export default function PageShell({
   eyebrow,
@@ -27,22 +31,20 @@ export default function PageShell({
     <main id="main-content" className="relative">
       <Nav />
       <div
-        className={`relative ${wide ? "max-w-6xl" : "max-w-3xl"} mx-auto px-6 pt-32 pb-24`}
+        className={`relative mx-auto px-5 pt-32 pb-24 sm:px-8 ${
+          wide ? "max-w-6xl" : "max-w-3xl"
+        }`}
       >
         {eyebrow ? (
-          <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
-            {eyebrow}
-          </div>
+          <p className="mb-4 text-micro font-mono uppercase text-accent">{eyebrow}</p>
         ) : null}
-        <h1 className="text-4xl sm:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] text-white">
+        <h1 className="font-display text-display font-semibold text-fg text-balance">
           {title}
         </h1>
         {lede ? (
-          <p className="mt-6 text-[16px] sm:text-[17px] leading-[1.7] text-[var(--color-fg-dim)] max-w-2xl">
-            {lede}
-          </p>
+          <p className="mt-6 max-w-2xl text-lead text-fg-dim text-pretty">{lede}</p>
         ) : null}
-        <div className="mt-12">{children}</div>
+        <div className="mt-14">{children}</div>
       </div>
       <Footer />
     </main>

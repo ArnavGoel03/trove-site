@@ -1,29 +1,47 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Github, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { APPS, STUDIO, TROVE } from "@/lib/brand";
 import { releasePageURL } from "@/lib/releases";
 import { useEffect, useState } from "react";
 import Logomark from "./Logomark";
+import GithubMark from "./icons/GithubMark";
 
 // Home wordmark: the studio name once the studio brand is live, the
 // flagship app name otherwise. Never a hardcoded literal either way.
 const HOME_BRAND = STUDIO.live ? STUDIO.name : TROVE.name;
 
-const NAV_LINKS = [
+/**
+ * One list, two audiences.
+ *
+ * Nine links fit a 1600px browser and nothing else: at 1100px they wrapped
+ * into the download button, and adding Pricing (which is now a real route, and
+ * the one link a buyer actually looks for) would have made ten. `secondary`
+ * marks the links the desktop bar drops. Nothing is lost by dropping them:
+ * every one is in the footer, and the mobile sheet still renders the whole
+ * list, because a sheet has vertical room and no reason to hide anything.
+ */
+const NAV_LINKS: readonly {
+  label: string;
+  href: string;
+  secondary?: boolean;
+}[] = [
   { label: "Features", href: "/features" },
+  { label: "Pricing", href: "/pricing" },
   { label: APPS.relay.name, href: APPS.relay.href },
   { label: APPS.tend.name, href: APPS.tend.href },
   { label: "Compare", href: "/compare" },
-  { label: "Guides", href: "/guides" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Updates", href: "/updates" },
-  { label: "Changelog", href: "/changelog" },
-  { label: "Security", href: "/security" },
+  { label: "Guides", href: "/guides", secondary: true },
+  { label: "FAQ", href: "/faq", secondary: true },
+  { label: "Updates", href: "/updates", secondary: true },
+  { label: "Changelog", href: "/changelog", secondary: true },
+  { label: "Security", href: "/security", secondary: true },
 ];
+
+const PRIMARY_LINKS = NAV_LINKS.filter((l) => !l.secondary);
 
 /**
  * Returns true when `href` is the active section for the current path.
@@ -82,7 +100,7 @@ export default function Nav() {
           aria-label="Primary"
           className="hidden md:flex items-center gap-6 text-[13px] text-[var(--color-fg-dim)]"
         >
-          {NAV_LINKS.map((l) => {
+          {PRIMARY_LINKS.map((l) => {
             const active = isActive(pathname, l.href);
             return (
               <Link
@@ -108,7 +126,7 @@ export default function Nav() {
             title="Releases on GitHub"
             className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-[var(--color-fg-dim)] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
-            <Github size={15} strokeWidth={1.75} />
+            <GithubMark size={15} />
           </a>
           <Link
             href="/download"

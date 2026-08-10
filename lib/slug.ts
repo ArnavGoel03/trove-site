@@ -1,6 +1,6 @@
 // Slug helpers shared across /pane/[slug], /changelog version anchors,
 // /guides, and sitemap generation. Centralized so the URL shape stays
-// consistent across pages — change the rules here and every consumer
+// consistent across pages: change the rules here and every consumer
 // picks it up.
 
 /** Turn a pane name like "Text Tools" into "text-tools". */

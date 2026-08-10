@@ -31,7 +31,7 @@ export default function ActionsIndex() {
           <p className="mt-4 text-[16px] text-[var(--color-fg-dim)] leading-relaxed">
             {ACTIONS.length}+ instant transforms that run on your Mac
             without leaving the keyboard. Open Trove (or hit your bound
-            hotkey), type the trigger and your input, hit Return — the
+            hotkey), type the trigger and your input, hit Return. The
             result is on your clipboard. No upload, no telemetry, no
             online tool tab to close.
           </p>

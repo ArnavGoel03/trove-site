@@ -4,12 +4,12 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { GUIDES } from "@/lib/guides";
 import { ChevronRight } from "lucide-react";
-import { STUDIO } from "@/lib/brand";
+import { pageTitle, STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Guides — Trove",
+  title: pageTitle("Guides"),
   description:
-    "Long-form how-tos for Trove — recording, OCR, hashing, clipboard workflows, text-transform pipelines.",
+    "Long-form how-tos for Trove: recording, OCR, hashing, clipboard workflows, text-transform pipelines.",
   alternates: { canonical: `${STUDIO.domain}/guides` },
 };
 

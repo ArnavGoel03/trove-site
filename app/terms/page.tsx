@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
+import { CONTACT, pageTitle } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Trove",
+  title: pageTitle("Terms of Service"),
   description:
     "The terms governing your use of Trove for macOS, including license, permitted use, and warranty.",
 };
@@ -84,10 +85,10 @@ export default function TermsPage() {
           accessible through Trove or the website infringes your copyright,
           send a DMCA notice to{" "}
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.support}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>{" "}
           with the information required by 17 U.S.C. § 512(c)(3).
         </p>
@@ -139,10 +140,10 @@ export default function TermsPage() {
         <p>
           Before filing a formal claim, please email{" "}
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.support}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>{" "}
           so we can try to resolve the issue directly. We commit to a
           good-faith response within a reasonable timeframe.
@@ -162,10 +163,10 @@ export default function TermsPage() {
         <p>
           Questions about these Terms? Email{" "}
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.support}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>
           .
         </p>

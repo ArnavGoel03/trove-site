@@ -1,6 +1,6 @@
 // Blog index for the /updates section. Posts live as .md files under
 // content/updates/*.md with a YAML-ish frontmatter block. We parse at
-// build time — no dependencies, no MDX runtime. The renderer reuses the
+// build time, with no dependencies, no MDX runtime. The renderer reuses the
 // same `renderMarkdown` escaper as lib/changelog.ts so styling falls out
 // of the existing .md-body block in globals.css.
 
@@ -21,7 +21,7 @@ export type UpdatePost = {
 const CONTENT_DIR = path.join(process.cwd(), "content", "updates");
 
 function parseFrontmatter(raw: string): { meta: Record<string, string>; body: string } {
-  // Tiny frontmatter parser — supports `key: value` lines between two `---`
+  // Tiny frontmatter parser: supports `key: value` lines between two `---`
   // fences at the top of the file. Quotes are stripped if present.
   const m = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!m) return { meta: {}, body: raw };

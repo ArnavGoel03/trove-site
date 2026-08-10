@@ -1,8 +1,9 @@
 import { troveOg } from "@/lib/og";
+import { ogAlt } from "@/lib/brand";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Trove — Roadmap";
+export const alt = ogAlt("Roadmap");
 
 export default function Image() {
   return troveOg({

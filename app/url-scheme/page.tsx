@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
-import { STUDIO } from "@/lib/brand";
+import { pageTitle, STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "trove:// URL scheme: Trove",
+  title: pageTitle("trove:// URL scheme"),
   description:
     "Full reference for Trove's URL scheme: pane navigation, Stage operations, calculator, snippet copy, history paste, QR generation. Frontmost-gated where it counts.",
   alternates: { canonical: `${STUDIO.domain}/url-scheme` },

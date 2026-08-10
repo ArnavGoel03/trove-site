@@ -1,4 +1,40 @@
 import { APPS, TROVE, STUDIO, SEO_DESCRIPTION, PLATFORM, type AppBrand } from "@/lib/brand";
+import { PRICING, TRIAL_LABEL } from "@/lib/pricing";
+
+/**
+ * The subscription, as schema.org sees it.
+ *
+ * `price` is written in major units because that is what the vocabulary asks
+ * for; the division is the ONLY place on the site allowed to turn minor units
+ * back into dollars, and it happens here rather than in prose so nothing a
+ * reader sees can round differently from what a crawler is told. The yearly
+ * figure is the headline, so it is the one quoted.
+ */
+function offerFor(name: string, soon: boolean) {
+  if (soon) {
+    return {
+      "@type": "Offer",
+      name: `${name} subscription`,
+      availability: "https://schema.org/PreOrder",
+    };
+  }
+  return {
+    "@type": "Offer",
+    name: `${name} subscription`,
+    description: `${TRIAL_LABEL}, then a subscription. One licence unlocks every app in the suite.`,
+    availability: "https://schema.org/InStock",
+    price: (PRICING.yearly / 100).toFixed(2),
+    priceCurrency: "USD",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: (PRICING.yearly / 100).toFixed(2),
+      priceCurrency: "USD",
+      billingDuration: 1,
+      billingIncrement: 1,
+      unitCode: "ANN",
+    },
+  };
+}
 /**
  * Renders a `<script type="application/ld+json">` block server-side so
  * Googlebot / Bingbot get the structured data on first byte (no JS run
@@ -53,12 +89,7 @@ export function softwareApplicationLd() {
       "Window tiling and switcher",
       "macOS Shortcuts intents and trove:// URL scheme automation",
     ],
-    offers: {
-      "@type": "Offer",
-      name: `${TROVE.name} subscription`,
-      description: "14-day free trial, then a subscription.",
-      availability: "https://schema.org/InStock",
-    },
+    offers: offerFor(TROVE.name, false),
     license: `${STUDIO.domain}/eula`,
     publisher: ORG,
   };
@@ -86,16 +117,7 @@ export function softwareApplicationLdFor(appKey: keyof typeof APPS) {
     operatingSystem: "macOS 13.0 or later",
     url: `${STUDIO.domain}${app.href}`,
     description: app.blurb,
-    offers: {
-      "@type": "Offer",
-      name: `${app.name} subscription`,
-      ...(app.status === "soon"
-        ? { availability: "https://schema.org/PreOrder" }
-        : {
-            description: "14-day free trial, then a subscription.",
-            availability: "https://schema.org/InStock",
-          }),
-    },
+    offers: offerFor(app.name, app.status === "soon"),
     publisher: ORG,
   };
 }

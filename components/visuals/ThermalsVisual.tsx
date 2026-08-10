@@ -18,7 +18,7 @@ export default function ThermalsVisual() {
 
   // Only animate when the visual is on screen. Off-screen sections
   // were burning a rAF tick each frame even though nothing was
-  // visible — multiply that by 5 visuals and you get permanent
+  // visible. Multiply that by 5 visuals and you get permanent
   // main-thread load.
   useEffect(() => {
     const el = rootRef.current;
@@ -63,7 +63,7 @@ export default function ThermalsVisual() {
   const filledPath = useTransform(pathD, (d) => `${d} L 100 60 L 0 60 Z`);
 
   const tempSpring = useSpring(gpuTemp, { stiffness: 80, damping: 14 });
-  // Format motion values to one decimal — without this they render full
+  // Format motion values to one decimal. Without this they render full
   // floating-point precision ("63.289727933796...") because <span>{motionValue}</span>
   // serialises the raw number, not the displayed string.
   const tempLabel = useTransform(tempSpring, (v) => v.toFixed(1));

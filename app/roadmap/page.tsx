@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
-import { STUDIO, TROVE } from "@/lib/brand";
+import { pageTitle, STUDIO, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Roadmap: Trove",
+  title: pageTitle("Roadmap"),
   description:
     "What's shipped in the current Trove release, what's in active development, and what's deferred. The honest list: no aspirational vaporware.",
   alternates: { canonical: `${STUDIO.domain}/roadmap` },

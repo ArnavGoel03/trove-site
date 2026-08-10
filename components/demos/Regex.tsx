@@ -3,7 +3,10 @@
 import { useMemo, useState } from "react";
 import Shell from "./Shell";
 
-const SAMPLE_SUBJECT = `arnav@example.com, support@trove.app
+// Deliberately example.com, not a real support address. Sample data gets read
+// as documentation: the previous subject advertised a support mailbox on a
+// domain nobody here owns, to everyone who scrolled this demo.
+const SAMPLE_SUBJECT = `arnav@example.com, support@example.com
 ops+alerts@arnavgoel.dev
 not-an-address@, @nope.com`;
 

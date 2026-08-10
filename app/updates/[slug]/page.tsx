@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import PageShell from "@/components/PageShell";
 import JsonLd, { articleLd, breadcrumbLd } from "@/components/JsonLd";
 import { listUpdates, getUpdate, renderMarkdown } from "@/lib/updates";
-import { STUDIO } from "@/lib/brand";
+import { pageTitle, STUDIO } from "@/lib/brand";
 
 type Params = { slug: string };
 
@@ -22,7 +22,7 @@ export async function generateMetadata({
   const post = await getUpdate(slug);
   if (!post) return {};
   return {
-    title: `${post.title} — Trove`,
+    title: pageTitle(post.title),
     description: post.excerpt,
     alternates: { canonical: `${STUDIO.domain}/updates/${slug}` },
     openGraph: {

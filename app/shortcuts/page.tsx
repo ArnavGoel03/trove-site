@@ -6,10 +6,10 @@ import { GLOBAL_CHORDS, PANE_CHORDS } from "@/lib/chords";
 import { PANES } from "@/lib/panes";
 import { slugifyPane } from "@/lib/slug";
 import PrintButton from "@/components/PrintButton";
-import { STUDIO } from "@/lib/brand";
+import { pageTitle, STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Shortcuts cheatsheet — Trove",
+  title: pageTitle("Shortcuts cheatsheet"),
   description:
     "Every Trove keyboard chord, app-wide and per-pane. Printable cheatsheet sourced from the in-app ChordRegistry.",
   alternates: { canonical: `${STUDIO.domain}/shortcuts` },

@@ -113,7 +113,7 @@ export const INTENTS: Intent[] = [
     name: "GetStageCountIntent",
     title: "Get Trove Stage Item Count",
     description:
-      "Returns the count as an Int — useful for branching in a Shortcut.",
+      "Returns the count as an Int, useful for branching in a Shortcut.",
     category: "Stage",
     icon: Tally5,
     kind: "Query",
@@ -124,7 +124,7 @@ export const INTENTS: Intent[] = [
     name: "EvaluateExpressionIntent",
     title: "Evaluate Expression with Trove",
     description:
-      "Run an expression through Trove's calc engine — variables, units, currency.",
+      "Run an expression through Trove's calc engine: variables, units, currency.",
     category: "Compute",
     icon: Sigma,
     kind: "Action",
@@ -148,12 +148,12 @@ export const INTENTS: Intent[] = [
     kind: "Action",
   },
 
-  // Snippets — entity picker surface (8 total counting entity queries)
+  // Snippets: entity picker surface (8 total counting entity queries)
   {
     name: "GetSnippetIntent",
     title: "Get Trove Snippet",
     description:
-      "Rich picker — shows snippet name + body preview. Returns the body.",
+      "Rich picker: shows snippet name + body preview. Returns the body.",
     category: "Snippets",
     icon: Pencil,
     kind: "Entity picker",
@@ -162,7 +162,7 @@ export const INTENTS: Intent[] = [
     name: "GetSnippetByNameIntent",
     title: "Get Trove Snippet by Name",
     description:
-      "Name lookup — exact, then prefix, then substring. Returns the body.",
+      "Name lookup: exact, then prefix, then substring. Returns the body.",
     category: "Snippets",
     icon: Search,
     kind: "Action",
@@ -213,7 +213,7 @@ export const INTENTS: Intent[] = [
     name: "PickClipboardEntryIntent",
     title: "Pick Trove Clipboard Entry",
     description:
-      "Rich picker — shows entry kind, capture date, and a preview. Returns the entry.",
+      "Rich picker: shows entry kind, capture date, and a preview. Returns the entry.",
     category: "Clipboard history",
     icon: KeySquare,
     kind: "Entity picker",

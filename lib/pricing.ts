@@ -27,14 +27,37 @@ export const PRICING = {
   monthly: 499 as Minor,
   /** Days of full access before any card is required. */
   trialDays: 14,
-  /** Days after purchase in which a refund is unconditional. */
-  refundDays: 30,
-  /** What one licence covers. Derived from brand.ts app keys, not retyped. */
-  seats: 1,
+  /**
+   * Days after purchase in which a refund is unconditional.
+   *
+   * 14, because that is the window /refund has published since May 2026 and a
+   * pricing page promising 30 would be the site contradicting its own policy
+   * document. Change it here and /refund follows.
+   */
+  refundDays: 14,
+  /**
+   * How many Macs one licence activates on. `null` means no limit, which is
+   * what the entitlement actually carries: `deviceLimit` in
+   * lib/licensing/sign.ts is nullable and the issuer leaves it unset.
+   * A number here would be a claim the licence server does not enforce.
+   */
+  deviceLimit: null as number | null,
 } as const;
 
 /** "14-day free trial", written once. */
 export const TRIAL_LABEL = `${PRICING.trialDays}-day free trial`;
+
+/** "14 days", for policy prose that supplies its own noun. */
+export const REFUND_LABEL = `${PRICING.refundDays} days`;
+
+/**
+ * What the licence activates on, in words. Reads from `deviceLimit` so the
+ * sentence and the signed entitlement can never disagree.
+ */
+export const DEVICES_LABEL =
+  PRICING.deviceLimit === null
+    ? "every Mac you own"
+    : `${PRICING.deviceLimit} Mac${PRICING.deviceLimit === 1 ? "" : "s"}`;
 
 /**
  * Formats minor units as USD, dropping a zero cents part.

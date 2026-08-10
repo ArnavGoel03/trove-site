@@ -3,10 +3,10 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { INTENTS, type IntentCategory } from "@/lib/intents";
 import { ACCENT } from "@/lib/brand-tokens.generated";
-import { STUDIO, TROVE } from "@/lib/brand";
+import { pageTitle, STUDIO, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Shortcuts gallery: Trove",
+  title: pageTitle("Shortcuts gallery"),
   description:
     "Every macOS Shortcuts AppIntent Trove ships. Browse the catalog before opening the Shortcuts editor.",
   alternates: { canonical: `${STUDIO.domain}/shortcuts-gallery` },

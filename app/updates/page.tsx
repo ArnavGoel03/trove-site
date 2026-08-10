@@ -3,10 +3,10 @@ import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { listUpdates } from "@/lib/updates";
-import { STUDIO } from "@/lib/brand";
+import { pageTitle, STUDIO } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Updates — Trove",
+  title: pageTitle("Updates"),
   description:
     "Release deep-dives, devlogs, and behind-the-scenes notes from the Trove project.",
   alternates: { canonical: `${STUDIO.domain}/updates` },

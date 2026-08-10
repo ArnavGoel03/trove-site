@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import LegalLayout, { Section } from "@/components/legal/LegalLayout";
+import { CONTACT, pageTitle } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Refund Policy — Trove",
+  title: pageTitle("Refund Policy"),
   description:
     "Trove offers a 14-day no-questions-asked refund. Here's how it works.",
 };
@@ -16,7 +17,7 @@ export default function RefundPage() {
         <>
           We want you to be happy with Trove. If it&rsquo;s not the right tool
           for your Mac, we&rsquo;ll refund your purchase within the window
-          described below — no interrogation.
+          described below. No interrogation.
         </>
       }
     >
@@ -32,10 +33,10 @@ export default function RefundPage() {
         <p>
           Email{" "}
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.support}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>{" "}
           from the address you used to purchase, and include your order ID (or
           the receipt email). We&rsquo;ll process the refund to the original
@@ -101,10 +102,10 @@ export default function RefundPage() {
         <p>
           Refund questions? Email{" "}
           <a
-            href="mailto:support@trove.app"
+            href={CONTACT.support}
             className="text-white hover:underline"
           >
-            support@trove.app
+            {CONTACT.address}
           </a>
           .
         </p>

@@ -53,6 +53,7 @@ export const STUDIO = {
  */
 export const STUDIO_HOST = STUDIO.domain.replace(/^https?:\/\//, "");
 
+
 /** Every app in the suite. Rename any app by editing its `name` here. */
 export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
   trove: {
@@ -99,9 +100,64 @@ export const SUITE = {
 /** The flagship app this site currently leads with. */
 export const TROVE = APPS.trove;
 
+/**
+ * Where a human can actually reach a human.
+ *
+ * Twelve links across /contact, /privacy, /terms, /refund and /acceptable-use
+ * pointed at `support@trove.app` and `security@trove.app`. Nobody here owns
+ * `trove.app`: it is not this site's domain and never was, so every support
+ * request, every privacy request, and every security disclosure the site
+ * invited was addressed to somebody else's domain. That is the same failure as
+ * the `gettrove.vercel.app` links, which is why it now has one home and a rule
+ * in scripts/check-hardcoded.mjs.
+ *
+ * One address, because this is one person. The subject tags are what turn a
+ * single inbox back into separate queues; a second real mailbox would just be
+ * a second thing to forget to read.
+ */
+const INBOX = "yashgoel0304@gmail.com";
+
+/** Builds a mailto with a tagged subject, so one inbox still sorts. */
+function inboxFor(tag: string): string {
+  return `mailto:${INBOX}?subject=${encodeURIComponent(`[${tag}] ${TROVE.name}`)}`;
+}
+
+export const CONTACT = {
+  /** The address itself, for the places that display it as text. */
+  address: INBOX,
+  /** Licences, billing, and how-do-I questions. */
+  support: inboxFor("Support"),
+  /** Responsible disclosure. Same inbox, tagged so it is not missed. */
+  security: inboxFor("Security"),
+  /** Privacy and data requests, which several jurisdictions require a route for. */
+  privacy: inboxFor("Privacy"),
+  /** Accessibility reports. */
+  accessibility: inboxFor("A11Y"),
+  /** Press and review copies. */
+  press: inboxFor("Press"),
+} as const;
+
 /** SEO title used in <title> and Open Graph. */
 export const SEO_TITLE = `${TROVE.name}: ${TROVE.tagline}`;
 export const SEO_DESCRIPTION = TROVE.blurb;
+
+/**
+ * Page title and social-card alt text.
+ *
+ * Eighteen routes wrote the brand name straight into a string literal and did
+ * it three different ways: colon, ASCII hyphen, and a long dash. The tab bar
+ * showed a different separator depending on which page you were on, and
+ * renaming the app would have missed all eighteen. One helper, one separator,
+ * and the name comes from APPS.
+ */
+export function pageTitle(page: string): string {
+  return `${page}: ${TROVE.name}`;
+}
+
+/** Alt text for a route's Open Graph image. Same reasoning as `pageTitle`. */
+export function ogAlt(page: string): string {
+  return `${TROVE.name}: ${page}`;
+}
 
 /**
  * Current product facts. The price fields are re-exports, not definitions:

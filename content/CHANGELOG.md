@@ -2123,8 +2123,8 @@ land when Apple ships official APIs.
   instead of dumping the user into a blank sidebar slot.
 - **`trove://pane/open?pane=PDF`** case-insensitive lookup so URL
   scheme callers don't break on capitalization drift.
-- **Send Feedback** now goes to GitHub Discussions, not the dead
-  `mailto:hello@gettrove.vercel.app`. (App + Help menus.)
+- **Send Feedback** now goes to GitHub Discussions, not the dead feedback
+  mailbox. (App + Help menus.)
 - **`troveTerminateRequested`** notification name removed (had no
   listener; RecEngine reads activity tracker directly).
 - **Storage-cache toast spam** throttled to one per minute per
@@ -2548,9 +2548,10 @@ to read the per-beta sections unless you're tracing a regression.
   pollutes the rotor). All reverted to literal `.font(.headline)`.
 - **P2 - Menu naming + email consistency.** Help menu "What's New" now
   reads "What's New in Trove…" to match the App menu entry. Help menu
-  "Send Feedback" address unified to the branded `hello@gettrove.vercel.app`
-  to match the App menu's entry (Help previously routed to a personal
-  Gmail).
+  "Send Feedback" address unified to match the App menu's entry (Help
+  previously routed to a personal Gmail). That address was later retired:
+  the domain it used was never ours. See lib/brand.ts CONTACT in the site
+  repo for the one that replaced it.
 - **P1 - Theme + Accent submenu lacked active-selection feedback.** Both
   submenus now prefix the active option with a `✓` glyph so the user can
   tell at a glance which theme / accent is on.

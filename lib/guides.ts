@@ -36,7 +36,7 @@ export const GUIDES: Guide[] = [
       },
       {
         name: "Set the countdown to 3 seconds",
-        text: "Use the Countdown stepper. Pressing Esc during the countdown cancels — you don't have to recover from a misclick.",
+        text: "Use the Countdown stepper. Pressing Esc during the countdown cancels, so you don't have to recover from a misclick.",
       },
       {
         name: "Optional: enable webcam PIP and choose a position",
@@ -56,11 +56,11 @@ export const GUIDES: Guide[] = [
       },
     ],
     outro:
-      "MOV with separate audio tracks ships under Export → Container. Pick MOV if you're handing the footage to a Premiere / DaVinci editor — they'll see the mic and system-audio tracks as separate so it's trivial to duck one against the other.",
+      "MOV with separate audio tracks ships under Export → Container. Pick MOV if you're handing the footage to a Premiere / DaVinci editor: they'll see the mic and system-audio tracks as separate so it's trivial to duck one against the other.",
   },
   {
     slug: "ocr-screenshot",
-    title: "OCR a screenshot — region capture, recognize, translate, copy",
+    title: "OCR a screenshot: region capture, recognize, translate, copy",
     eyebrow: "OCR",
     lede: "Apple Vision runs OCR on-device in under a second. This walks the full Region → Text → optional Translate → Clipboard flow without leaving Trove.",
     estimate: "2 min",
@@ -72,7 +72,7 @@ export const GUIDES: Guide[] = [
       },
       {
         name: "Press ⌘⇧N to capture a region",
-        text: "Drag the crosshair over the text you want to recognize. macOS shows the standard region overlay — Esc cancels.",
+        text: "Drag the crosshair over the text you want to recognize. macOS shows the standard region overlay. Esc cancels.",
       },
       {
         name: "Pick a recognition language",
@@ -80,7 +80,7 @@ export const GUIDES: Guide[] = [
       },
       {
         name: "Optional: translate",
-        text: "If the source isn't in your target language, tap Translate. Apple Translate runs locally for the supported pairs — no cloud.",
+        text: "If the source isn't in your target language, tap Translate. Apple Translate runs locally for the supported pairs, with no cloud.",
       },
       {
         name: "Copy or send onward",
@@ -88,7 +88,7 @@ export const GUIDES: Guide[] = [
       },
     ],
     outro:
-      "Need to OCR an existing PDF? The PDF pane has an OCR action that does the same Vision pipeline on every page and writes a searchable PDF — see the PDF pane page for the keystroke.",
+      "Need to OCR an existing PDF? The PDF pane has an OCR action that does the same Vision pipeline on every page and writes a searchable PDF. See the PDF pane page for the keystroke.",
   },
   {
     slug: "verify-download-hashes",
@@ -112,7 +112,7 @@ export const GUIDES: Guide[] = [
       },
       {
         name: "Investigate any ✗ rows",
-        text: "Click a row → Reveal in Finder. Re-download or check the source — a mismatch means the file you got isn't the file the publisher signed.",
+        text: "Click a row → Reveal in Finder. Re-download or check the source: a mismatch means the file you got isn't the file the publisher signed.",
       },
     ],
     outro:
@@ -120,7 +120,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "clipboard-workflow",
-    title: "Build a clipboard workflow — Stage + History + ⌃⇧⌘V HUD",
+    title: "Build a clipboard workflow: Stage + History + ⌃⇧⌘V HUD",
     eyebrow: "Clipboard",
     lede: "Stage is the multi-clipboard holding pen. History is the persistent log. ⌃⇧⌘V is the global HUD. This guide stitches all three into a clipboard workflow that beats single-buffer macOS by a country mile.",
     estimate: "3 min",
@@ -132,11 +132,11 @@ export const GUIDES: Guide[] = [
       },
       {
         name: "Use Stage as a multi-clipboard",
-        text: "Drag files, paste text (⌘⇧V), screenshot (⌘⇧N) — all land in Stage. When you're ready, Copy All as Files or Copy All as Text dumps everything to the system clipboard.",
+        text: "Drag files, paste text (⌘⇧V), screenshot (⌘⇧N) all land in Stage. When you're ready, Copy All as Files or Copy All as Text dumps everything to the system clipboard.",
       },
       {
         name: "Search history with regex",
-        text: "Inside History, press ⌘⇧. to toggle into regex mode. ReDoS-guarded — no runaway patterns. Pin entries to keep them at the top.",
+        text: "Inside History, press ⌘⇧. to toggle into regex mode. ReDoS-guarded, so no runaway patterns. Pin entries to keep them at the top.",
       },
       {
         name: "Recover a deleted clip",
@@ -148,7 +148,7 @@ export const GUIDES: Guide[] = [
     slug: "text-transforms-pipeline",
     title: "Build and save a text-transform pipeline",
     eyebrow: "Text Tools",
-    lede: "Text Tools is a chainable pipeline — Base64 → JSON pretty → JWT decode → regex. The chain is reusable. Save it as a Recipe and replay tomorrow.",
+    lede: "Text Tools is a chainable pipeline: Base64 → JSON pretty → JWT decode → regex. The chain is reusable. Save it as a Recipe and replay tomorrow.",
     estimate: "3 min",
     panes: ["Text Tools", "Stage"],
     steps: [
@@ -170,7 +170,7 @@ export const GUIDES: Guide[] = [
       },
     ],
     outro:
-      "Errored steps explain themselves in the chip's right-click menu — no silent skipping. Skipped steps (e.g. JSON pretty on non-JSON input) say why they were skipped so the chain stays debuggable.",
+      "Errored steps explain themselves in the chip's right-click menu, with no silent skipping. Skipped steps (e.g. JSON pretty on non-JSON input) say why they were skipped so the chain stays debuggable.",
   },
   // ── v1.5.32 SEO long-tail guides ───────────────────────────────────────
   // Each targets a specific high-volume "how do I X on my Mac" search and
@@ -180,7 +180,7 @@ export const GUIDES: Guide[] = [
     title: "Decode a JWT on Mac (without uploading the token)",
     eyebrow: "JWT",
     lede:
-      "Most JWT decoders are web tools that upload your token. Trove decodes it locally in ⌘K — three keystrokes, never leaves the Mac.",
+      "Most JWT decoders are web tools that upload your token. Trove decodes it locally in ⌘K: three keystrokes, and it never leaves the Mac.",
     estimate: "30 sec",
     panes: ["Stage", "Snippets"],
     steps: [
@@ -192,10 +192,10 @@ export const GUIDES: Guide[] = [
       {
         name: "Type 'jwt decode' followed by the token",
         text:
-          "Trove splits the eyJ.eyJ.sig payload, base64url-decodes the payload segment, and pretty-prints the JSON. Signature is NOT verified — use HMAC-SHA256 or the Passwords pane if you need that.",
+          "Trove splits the eyJ.eyJ.sig payload, base64url-decodes the payload segment, and pretty-prints the JSON. Signature is NOT verified. Use HMAC-SHA256 or the Passwords pane if you need that.",
       },
       {
-        name: "Hit Return — the decoded payload is on your clipboard",
+        name: "Hit Return, and the decoded payload is on your clipboard",
         text:
           "Paste anywhere. The token never touches the network. Trove has no telemetry.",
       },
@@ -240,7 +240,7 @@ export const GUIDES: Guide[] = [
       {
         name: "Drop the file into the Hash pane",
         text:
-          "Trove hashes MD5 + SHA-1 + SHA-256 in a single streaming pass — works on multi-GB files.",
+          "Trove hashes MD5 + SHA-1 + SHA-256 in a single streaming pass, which works on multi-GB files.",
       },
       {
         name: "Paste the expected hash",
@@ -254,7 +254,7 @@ export const GUIDES: Guide[] = [
       },
     ],
     outro:
-      "Trove also offers an auto-copy SHA256 toggle in the Hash toolbar — handy when you're verifying a queue of downloads.",
+      "Trove also offers an auto-copy SHA256 toggle in the Hash toolbar, handy when you're verifying a queue of downloads.",
   },
   {
     slug: "flush-dns-cache-mac",
@@ -273,7 +273,7 @@ export const GUIDES: Guide[] = [
       {
         name: "Edit your rule packs and hit Apply",
         text:
-          "Trove writes /etc/hosts via one `osascript with administrator privileges` call. The same call then runs `dscacheutil -flushcache && killall -HUP mDNSResponder` — the official combo.",
+          "Trove writes /etc/hosts via one `osascript with administrator privileges` call. The same call then runs `dscacheutil -flushcache && killall -HUP mDNSResponder`, the official combo.",
       },
       {
         name: "Done",

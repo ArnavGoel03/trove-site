@@ -86,6 +86,32 @@ const RULES = [
     ],
     use: "formatUSD() over PRICING from lib/pricing.ts, or a cited entry in lib/rivals.ts",
   },
+  {
+    // Twelve links across /contact, /privacy, /terms, /refund and
+    // /acceptable-use invited support requests, privacy requests and security
+    // disclosures to a mailbox on `trove.app`, a domain nobody here owns. Same
+    // failure as the marketing-domain rule above: mail to a stranger, silently.
+    name: "mailbox on a domain we do not own",
+    pattern: /@trove\.app\b|gettrove\.vercel\.app/,
+    // lib/brand.ts is the canonical home and its doc comment names the dead
+    // domain on purpose, so the next reader knows what CONTACT replaced.
+    allow: ["lib/brand.ts", "scripts/check-hardcoded.mjs"],
+    use: "CONTACT.support / CONTACT.security / CONTACT.address from lib/brand.ts",
+    alsoMarkdown: true,
+  },
+  {
+    // Not a single-source rule, a house rule: no em or en dashes anywhere. The
+    // codepoints are written as escapes rather than literals so this file does
+    // not trip its own check, and so a careless editor cannot "fix" the rule by
+    // reformatting it. 91 of these were purged on 2026-08-10; this is what
+    // stops the 92nd. A dash that is genuinely data (matching input that
+    // contains one) belongs in `allow` with a comment saying why.
+    name: "em or en dash",
+    pattern: /[\u2013\u2014]/,
+    allow: ["scripts/check-hardcoded.mjs"],
+    use: "a comma, colon, period, parentheses, or an ASCII hyphen",
+    alsoMarkdown: true,
+  },
 ];
 
 const SKIP_DIRS = new Set([

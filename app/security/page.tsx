@@ -9,10 +9,10 @@ import {
   AlertTriangle,
   Wrench,
 } from "lucide-react";
-import { STUDIO, STUDIO_HOST, SIGNING, TROVE } from "@/lib/brand";
+import { pageTitle, SIGNING, STUDIO, STUDIO_HOST, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "Security: Trove",
+  title: pageTitle("Security"),
   description:
     "Trove's security posture: local-only by default, code-signed with a hardened runtime, frontmost-gated URL scheme, red-teamed core surfaces, responsible disclosure program.",
   alternates: { canonical: `${STUDIO.domain}/security` },
