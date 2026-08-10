@@ -175,7 +175,10 @@ html {
   top: 0;
   left: 0;
   z-index: 100;
-  transform: translateY(-120%);
+  /* Far enough that the box shadow clears the top edge too. At -120% the
+     shadow's 30px blur still painted a red sliver across the first 8px of
+     every page, which showed up in every screenshot before it was noticed. */
+  transform: translateY(-300%);
   margin: 8px;
   padding: 10px 16px;
   border-radius: 9999px;
@@ -387,14 +390,29 @@ html {
  *
  * A tall track scrolls; one sticky viewport-sized frame inside it does not.
  * Everything the reader sees is painted into that frame as a function of how
- * far through the track they are. The track's height comes from TRACK_VH in
- * lib/timeline.ts via an inline custom property, never from a number typed
- * here, so a change to the stage weights moves the boundaries and the track
- * together instead of quietly desyncing them.
+ * far through the track they are. --track-vh is set inline from TRACK_VH in
+ * lib/timeline.ts, never typed here, so a change to the stage weights moves the
+ * boundaries and the track together instead of quietly desyncing them.
+ *
+ * THE HEIGHT ARITHMETIC, because getting it wrong is silent and costs 10%.
+ * The frame is sticky and one viewport tall, so it stops being pinned one
+ * viewport before the track ends. Scroll progress therefore runs over
+ * (trackHeight - 100vh), and the DOM must make that equal --track-vh exactly,
+ * or the beat that lib/timeline says is at 40% of the argument sits at 44% of
+ * the page. Hence the extra 100: track = --track-vh + one viewport of tail.
+ *
+ * THREE STATES, ONE DOM. There is no second copy of this page to drift.
+ *   (no attribute)  what the server sends and what a reader with no JS keeps:
+ *                   the scrubbed layout, first beat showing, poster painted.
+ *   data-live="1"   the client measured a capable machine. JS drives opacity
+ *                   and transform per frame and the canvas mounts.
+ *   data-live="0"   reduced motion, or no WebGL. The frame stops being sticky,
+ *                   the canvas never mounts, and the nine beats become ordinary
+ *                   stacked sections. The same words, laid out to be read.
  * =========================================================================*/
 .stage-track {
   position: relative;
-  height: calc(var(--track-vh) * 1vh);
+  height: calc((var(--track-vh) + 100) * 1vh);
 }
 
 .stage-frame {
@@ -414,28 +432,499 @@ html {
   inset: 0;
 }
 
-/* DOM copy anchored to a projected 3D point. Left/top come from the
-   projection each frame; the translate keeps the anchor at the element's
-   centre rather than its corner. */
-.stage-anchor {
+/* All nine beats stacked in one grid cell, so they cross-fade in place instead
+   of pushing each other around. */
+.stage-beats {
   position: absolute;
-  transform: translate(-50%, -50%);
-  will-change: transform, opacity;
+  inset: 0;
+  display: grid;
+  align-items: center;
+  padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+  padding-block: calc(var(--nav-h, 4rem) + 1rem) 2rem;
+  /* The scene behind stays draggable and the beats never eat a click meant for
+     a demo: each beat re-enables pointer events on itself when it is active. */
+  pointer-events: none;
+}
+
+.stage-beat {
+  grid-area: 1 / 1;
+  width: 100%;
+  max-width: 68rem;
+  margin-inline: auto;
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity, transform;
+}
+
+/* Before JS runs there is no active beat, so the first one is the poster's
+   caption. Without this the server would send a frame with nothing in it. */
+.stage-beat:first-child {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* The reader controls the clock, so nothing here has a transition: a CSS
-   transition would fight the scroll position and lag behind it on the way
-   back up. Opacity and transform are set directly per frame. */
+   transition would fight the scroll position and lag behind it on the way back
+   up, and the lag would be in the wrong direction half the time. Opacity and
+   transform are written directly, once per frame. */
 .stage-copy {
+  /* Narrow enough that the measure ends before the widest shot's subject
+     starts. The collapse frames the hero across the right 55% of the viewport,
+     so a 34rem measure put the last two words of every paragraph on top of the
+     app's own sidebar. */
+  max-width: 32rem;
+}
+
+/* The canvas is scenery. Every clickable thing on this page is DOM, and a
+   full-bleed canvas sitting over the beats would swallow the demos. */
+.stage-scene {
+  pointer-events: none;
+}
+
+/* The poster is under the canvas until the canvas has something in it. Both up
+   at once is two of the same window on screen; see Track.tsx. */
+.stage-poster {
+  transition: opacity 600ms ease;
+}
+
+.stage-poster[data-handed-over="1"] {
+  opacity: 0;
+}
+
+/* Legibility, as a gradient. Wide: the copy sits left, so the left edge holds
+   near the page background and clears by the middle. The numbers are picked so
+   body text at --color-fg-dim keeps its contrast ratio over the brightest
+   thing the scene ever puts behind it, which is the collapse. */
+.stage-scrim {
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--color-bg) 95%, transparent) 0%,
+    color-mix(in oklab, var(--color-bg) 90%, transparent) 30%,
+    color-mix(in oklab, var(--color-bg) 58%, transparent) 52%,
+    transparent 70%
+  );
+}
+
+/* Narrow: the copy sits under the subject, so the gradient turns ninety
+   degrees with it. scene/rig.ts lifts the subject by the matching amount. */
+@media (max-width: 48rem) {
+  .stage-scrim {
+    background: linear-gradient(
+      to top,
+      color-mix(in oklab, var(--color-bg) 94%, transparent) 0%,
+      color-mix(in oklab, var(--color-bg) 88%, transparent) 34%,
+      color-mix(in oklab, var(--color-bg) 50%, transparent) 52%,
+      transparent 70%
+    );
+  }
+}
+
+/* Stacked mode has no moving picture to read over, and the scrim there would
+   just be a dark bar between sections. */
+.stage-track[data-live="0"] .stage-scrim {
+  display: none;
+}
+
+/* On a narrow viewport the words take the lower half and the scene keeps the
+   upper one. scene/rig.ts aims the camera below the subject by the matching
+   amount, so the two halves are decided in two files that agree on purpose. */
+@media (max-width: 48rem) {
+  .stage-beats {
+    align-items: end;
+    padding-block-end: 3.5rem;
+  }
+}
+
+/* A small phone in portrait: an iPhone SE gives a beat about 530px once the
+   header and the scene have taken their share, and the tallest beat wants 610.
+   The kicker is the line that goes, because it is the one sentence in a beat
+   that restates rather than argues. */
+@media (max-width: 48rem) and (max-height: 45rem) {
+  .stage-beats {
+    padding-block: calc(var(--nav-h, 4rem) + 0.25rem) 1.5rem;
+  }
+
+  .stage-kicker {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Live demos
+ *
+ * min-height is the important line. Six widgets that each sized themselves
+ * would move the copy above them every time a chunk landed or a beat changed,
+ * and a page that reflows under the reader's eyes is a page that feels broken
+ * no matter how good the animation is. One height, used by the widget and by
+ * the skeleton that stands in for it.
+ * ------------------------------------------------------------------------ */
+.demo-shell {
+  min-height: 15.5rem;
+  padding: 1rem 1.125rem 1.125rem;
+  border: 1px solid var(--color-line-soft);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-1);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+}
+
+.demo-input {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  color: var(--color-fg);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line-soft);
+  border-radius: var(--radius-sm);
+  resize: vertical;
+}
+
+.demo-input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.demo-output {
+  margin-top: 0.625rem;
+  max-height: 8.5rem;
+  overflow: auto;
+  padding: 0.5rem 0.65rem;
+  font-size: var(--text-caption);
+  line-height: 1.55;
+  color: var(--color-fg-dim);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line-soft);
+  border-radius: var(--radius-sm);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Narrow overrides live below the rules they override, not beside the layout
+   rules they belong with. A media query adds no specificity, so `.demo-shell`
+   inside one at the top of this file loses to `.demo-shell` further down, and
+   the phone silently keeps the desktop height. */
+@media (max-width: 48rem) {
+  /* A phone frame is 852px tall at best and the scene wants the top half of
+     it, so a beat has roughly 420px for its evidence. Two demos stacked need
+     570 and push the headline off the bottom of the screen, which loses the
+     argument to save the proof. The second demo is the one that goes: every
+     tool has its own page, and no beat depends on the pair. */
+  .stage-demos > * + * {
+    display: none;
+  }
+
+  .demo-shell {
+    min-height: 12.5rem;
+  }
+
+  .demo-output {
+    max-height: 6rem;
+  }
+}
+
+/* Capped rather than merely shortened. A demo's natural height is whatever its
+   output happens to be that frame, and one long line was enough to push the
+   headline off the top of an SE. The cap is the height the beat can spare;
+   anything past it scrolls inside the card. */
+@media (max-width: 48rem) and (max-height: 45rem) {
+  .demo-shell {
+    min-height: 9rem;
+    max-height: 13rem;
+    overflow-y: auto;
+  }
+
+  .demo-output {
+    max-height: 4.5rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * The receipt, in the sticky frame: four numbers and a line of provenance.
+ *
+ * Deliberately small. The frame is one viewport tall and already carries a
+ * headline and a paragraph, so the itemised table lives below the track in
+ * .ledger, where it has room to be read rather than glanced at.
+ * ------------------------------------------------------------------------ */
+.receipt {
+  margin-top: 1.75rem;
   max-width: 34rem;
 }
 
-/* Reduced motion and no-WebGL readers get the same nine beats stacked as
-   ordinary sections. Not a degraded page: the same words, laid out to be
-   read rather than scrubbed. */
-.stage-fallback-beat {
+.receipt-totals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.receipt-totals > div {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--color-line-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-1);
+}
+
+.receipt-totals dt {
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-fg-mute);
+}
+
+.receipt-totals dd {
+  margin-top: 0.2rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--text-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-fg);
+}
+
+/* Tabular figures above are what keep the count-up from jittering the layout:
+   without them every digit change would re-measure the row. */
+.receipt-unit {
+  font-size: var(--text-micro);
+  color: var(--color-fg-mute);
+}
+
+.receipt-headline dd {
+  font-size: var(--text-title);
+  font-weight: 600;
+}
+
+.receipt-win {
+  border-color: color-mix(in oklab, var(--color-accent) 55%, transparent) !important;
+  background: color-mix(in oklab, var(--color-accent) 12%, transparent) !important;
+}
+
+.receipt-win dd {
+  color: var(--color-fg);
+}
+
+.receipt-note {
+  margin-top: 0.85rem;
+  font-size: var(--text-micro);
+  line-height: 1.6;
+  color: var(--color-fg-mute);
+}
+
+.receipt-note span {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-fg-dim);
+}
+
+/* ---------------------------------------------------------------------------
+ * The itemised ledger, below the track. A real table, with a real source per
+ * row, because this is the part a sceptical reader came for.
+ * ------------------------------------------------------------------------ */
+.ledger {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  font-size: var(--text-caption);
+}
+
+.ledger th,
+.ledger td {
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.ledger thead th {
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-fg-mute);
+  font-weight: 500;
+  border-bottom-color: var(--color-line-strong);
+}
+
+.ledger tbody th {
+  font-weight: 600;
+  color: var(--color-fg);
+  white-space: nowrap;
+}
+
+.ledger td {
+  color: var(--color-fg-dim);
+}
+
+.ledger-replaces {
+  color: var(--color-fg-mute);
+}
+
+.ledger-num {
+  text-align: right;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ledger-source {
+  color: var(--color-fg-dim);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-line-strong);
+}
+
+.ledger-source:hover {
+  color: var(--color-accent);
+}
+
+.ledger-checked {
+  display: block;
+  font-size: var(--text-micro);
+  color: var(--color-fg-mute);
+  font-variant-numeric: tabular-nums;
+}
+
+.ledger tfoot th {
+  font-weight: 500;
+  color: var(--color-fg-dim);
+  text-align: right;
+}
+
+.ledger tfoot .ledger-total th,
+.ledger tfoot .ledger-total td {
+  color: var(--color-fg);
+  font-weight: 600;
+  border-top: 1px solid var(--color-line-strong);
+}
+
+.ledger tfoot .ledger-win th,
+.ledger tfoot .ledger-win td {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* Below the point where five columns stop fitting, the table becomes a list of
+   cards. Two reasons this is not left as a sideways scroll: a reader on a phone
+   has to discover the scroll before they can see the prices, which is the one
+   thing this section exists to show them; and a 44rem child inside a 22rem
+   viewport makes the browser widen its layout viewport, which stretches every
+   fixed element on the page including the header.
+
+   The roles in Ledger.tsx are what keeps this a table to a screen reader once
+   `display` stops saying so. */
+@media (max-width: 48rem) {
+  .ledger,
+  .ledger tbody,
+  .ledger tfoot,
+  .ledger tr,
+  .ledger th,
+  .ledger td {
+    display: block;
+  }
+
+  .ledger {
+    min-width: 0;
+  }
+
+  /* A column head with no column beside it is noise; each cell names itself. */
+  .ledger thead {
+    display: none;
+  }
+
+  .ledger tbody tr {
+    margin-bottom: 0.75rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-line-soft);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-1);
+  }
+
+  .ledger tbody th,
+  .ledger tbody td {
+    padding: 0.1rem 0;
+    border-bottom: 0;
+    white-space: normal;
+  }
+
+  .ledger tbody th {
+    font-size: var(--text-body);
+    margin-bottom: 0.2rem;
+  }
+
+  .ledger tbody td[data-label]::before {
+    content: attr(data-label) ": ";
+    color: var(--color-fg-mute);
+  }
+
+  .ledger tbody .ledger-num {
+    text-align: left;
+    color: var(--color-fg);
+  }
+
+  .ledger tfoot tr {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.45rem 0.15rem;
+    border-bottom: 1px solid var(--color-line-soft);
+  }
+
+  .ledger tfoot th {
+    padding: 0;
+    border-bottom: 0;
+    text-align: left;
+  }
+
+  .ledger tfoot td {
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  /* The fifth column is empty in the footer; as a block it would be a gap. */
+  .ledger tfoot td:empty {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Stacked state: reduced motion, or a machine with no WebGL2.
+ * ------------------------------------------------------------------------ */
+.stage-track[data-live="0"] {
+  height: auto;
+}
+
+.stage-track[data-live="0"] .stage-frame {
+  position: static;
+  height: auto;
+  overflow: visible;
+  transform: none;
+}
+
+/* The poster stays, bounded, as the opening image. The canvas layer is not
+   hidden here, it is never mounted. */
+.stage-track[data-live="0"] .stage-layer {
+  position: relative;
+  inset: auto;
+  height: min(60svh, 32rem);
+}
+
+.stage-track[data-live="0"] .stage-beats {
+  position: static;
+  display: block;
+  pointer-events: auto;
+  padding-block: 0;
+}
+
+.stage-track[data-live="0"] .stage-beat {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
   min-height: 60svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-top: 1px solid var(--color-line-soft);
+  padding-block: 3rem;
+}
+
+.stage-track[data-live="0"] .stage-beat:first-child {
+  border-top: 0;
 }

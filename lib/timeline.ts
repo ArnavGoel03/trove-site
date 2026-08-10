@@ -190,6 +190,46 @@ export function stageAt(progress: number): StageAt {
   };
 }
 
+/**
+ * How long a beat's copy takes to arrive and to leave, as a fraction of its
+ * stage. Shorter than the scene's own easing on purpose: words should be
+ * legible for most of the beat, and a headline that spends a third of its life
+ * at 40% opacity is a headline nobody finishes reading.
+ */
+export const COPY_IN = 0.12;
+export const COPY_OUT = 0.18;
+
+export interface Envelope {
+  /** 0 to 1. */
+  readonly opacity: number;
+  /**
+   * Vertical offset as a signed fraction of one nudge: +1 means "still below,
+   * on its way in", -1 means "gone up and out". The caller decides how many
+   * pixels a nudge is, because that is a layout question, not a timing one.
+   */
+  readonly shift: number;
+}
+
+/**
+ * The copy's own fade, derived from raw `local` rather than `eased`.
+ *
+ * Deliberately not `eased`: the stage easing pins at 0 through the intro hold
+ * and at 1 through the outro hold, which is exactly backwards for words. The
+ * hold is when the reader is reading, so that is when opacity must be 1.
+ *
+ * Pure, so a reverse scrub reproduces it exactly, and total, so a NaN frame
+ * fades to nothing rather than throwing mid-render.
+ */
+export function copyEnvelope(local: number): Envelope {
+  const l = Number.isFinite(local) ? clamp01(local) : 0;
+  const arriving = span(l, 0, COPY_IN);
+  const leaving = span(l, 1 - COPY_OUT, 1);
+  return {
+    opacity: Math.min(easeOutCubic(arriving), 1 - easeOutCubic(leaving)),
+    shift: (1 - arriving) - leaving,
+  };
+}
+
 /** Track progress at which a stage begins. For scroll-to-beat links. */
 export function progressForStage(id: StageId): number {
   const index = INDEX_BY_ID.get(id);

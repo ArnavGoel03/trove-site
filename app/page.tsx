@@ -1,56 +1,51 @@
 import dynamic from "next/dynamic";
+
 import Nav from "@/components/Nav";
-import Hero from "@/components/Hero";
+import Track from "@/components/stage/Track";
 import JsonLd, {
   softwareApplicationLd,
   webPageLd,
   organizationLd,
   suiteItemListLd,
 } from "@/components/JsonLd";
-import { STUDIO } from "@/lib/brand";
+import { SEO_DESCRIPTION, SEO_TITLE, STUDIO } from "@/lib/brand";
 
-// Below-the-fold sections are loaded as separate chunks so the
-// initial JS to interactive on Hero is as small as possible.
-// They're still server-rendered (no `ssr: false`) so the HTML
-// shows up immediately for SEO and no layout jump.
-const FeatureReel = dynamic(() => import("@/components/FeatureReel"));
+/**
+ * The homepage is one argument told in nine beats, then the evidence for it.
+ *
+ * `Track` is the argument: a sticky frame, a scroll-driven scene behind it, and
+ * every word of the copy in ordinary DOM so it is selectable, indexable and
+ * readable by a screen reader whether or not the canvas ever loads. `Ledger`
+ * is the evidence, server-rendered and static. `Close` is the ask.
+ *
+ * Everything below the track is `dynamic()` without `ssr: false`: still
+ * server-rendered into the first HTML, just split into its own chunk so the
+ * JavaScript that makes the stage move is not queued behind a footer.
+ */
+const Ledger = dynamic(() => import("@/components/Ledger"));
 const Suite = dynamic(() => import("@/components/Suite"));
-const Compare = dynamic(() => import("@/components/Compare"));
-const Privacy = dynamic(() => import("@/components/Privacy"));
-const Requirements = dynamic(() => import("@/components/Requirements"));
+const Close = dynamic(() => import("@/components/Close"));
 const Footer = dynamic(() => import("@/components/Footer"));
-const SmoothScroll = dynamic(() => import("@/components/SmoothScroll"));
 
 export default function Page() {
   return (
     <main id="main-content" className="relative">
-      {/* Structured data: SoftwareApplication + WebPage. Server-rendered
-          at the top of <main> so search-engine fetchers see it on first
-          byte without waiting for hydration. */}
+      {/* Structured data first, so a fetcher that reads only the head of the
+          document still gets the product, the price and the studio. */}
       <JsonLd data={softwareApplicationLd()} />
-      <JsonLd
-        data={webPageLd(
-          "Trove: your Mac, finally tidy.",
-          "40+ private tools in one native Mac app. Replaces a dozen paid utilities. 14-day free trial.",
-          STUDIO.domain,
-        )}
-      />
-      {/* Studio-level schema: search engines should see one studio (STUDIO)
-          publishing three apps, not just the Trove flagship. */}
+      <JsonLd data={webPageLd(SEO_TITLE, SEO_DESCRIPTION, STUDIO.domain)} />
       {STUDIO.live ? (
         <>
           <JsonLd data={organizationLd()} />
           <JsonLd data={suiteItemListLd()} />
         </>
       ) : null}
-      <SmoothScroll />
+
       <Nav />
-      <Hero />
-      <FeatureReel />
+      <Track />
+      <Ledger />
       <Suite />
-      <Compare />
-      <Privacy />
-      <Requirements />
+      <Close />
       <Footer />
     </main>
   );

@@ -4,6 +4,9 @@ import { test } from "node:test";
 import {
   BOUNDS,
   clamp01,
+  copyEnvelope,
+  COPY_IN,
+  COPY_OUT,
   progressForStage,
   progressForBeat,
   span,
@@ -138,6 +141,45 @@ test("stage distance is signed and zero at home", () => {
   assert.equal(stageDistance(receipt.index, "receipt"), 0);
   assert.ok(stageDistance(receipt.index, "desk") < 0);
   assert.ok(stageDistance(receipt.index, "trust") > 0);
+});
+
+test("copy is fully legible for most of its beat", () => {
+  // The failure this guards against is a headline that is never at full
+  // opacity, which looks like a rendering bug and reads as a broken page.
+  let readable = 0;
+  const N = 1000;
+  for (let i = 0; i < N; i++) {
+    const { opacity } = copyEnvelope(i / (N - 1));
+    if (opacity > 0.999) readable++;
+  }
+  const fraction = readable / N;
+  assert.ok(fraction > 0.6, `copy is only fully readable for ${fraction} of its beat`);
+  // And it must actually finish arriving and finish leaving.
+  assert.equal(copyEnvelope(0).opacity, 0);
+  assert.equal(copyEnvelope(1).opacity, 0);
+  assert.equal(copyEnvelope(0.5).opacity, 1);
+  assert.ok(COPY_IN + COPY_OUT < 0.5);
+});
+
+test("copy shift runs from below to above without a jump", () => {
+  assert.equal(copyEnvelope(0).shift, 1);
+  assert.equal(copyEnvelope(1).shift, -1);
+  assert.equal(copyEnvelope(0.5).shift, 0);
+
+  let last = Infinity;
+  for (let i = 0; i <= 1000; i++) {
+    const { shift } = copyEnvelope(i / 1000);
+    assert.ok(shift <= last + 1e-12, "shift is not monotonically decreasing");
+    last = shift;
+  }
+});
+
+test("copyEnvelope is total", () => {
+  for (const bad of [NaN, Infinity, -Infinity, -3, 7]) {
+    const e = copyEnvelope(bad);
+    assert.ok(Number.isFinite(e.opacity) && e.opacity >= 0 && e.opacity <= 1);
+    assert.ok(Number.isFinite(e.shift));
+  }
 });
 
 test("span and clamp01 hold at the edges", () => {
