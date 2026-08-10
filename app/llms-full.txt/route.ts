@@ -2,7 +2,7 @@
 // pane catalog and the complete FAQ Q&A, generated from the same source of
 // truth (lib/panes.ts, lib/faq.ts) so it can never drift from the site.
 
-import { PANES, SECTIONS } from "@/lib/panes";
+import { PANES, SECTIONS, TOOL_COUNT } from "@/lib/panes";
 import { FAQ } from "@/lib/faq";
 import { GUIDES } from "@/lib/guides";
 import { PRODUCT, STUDIO } from "@/lib/brand";
@@ -12,7 +12,7 @@ export const dynamic = "force-static";
 function build(): string {
   const header = `# Trove: full LLM context
 
-> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles 40+ tools plus a 60+ action inline command palette into one native ~14 MB app. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon only (no Intel build).
+> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles ${TOOL_COUNT} tools plus a 60+ action inline command palette into one native ~14 MB app. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon only (no Intel build).
 
 Website: ${STUDIO.domain}
 Download: ${STUDIO.domain}/download

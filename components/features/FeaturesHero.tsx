@@ -2,11 +2,12 @@
 
 import { motion } from "motion/react";
 import { PANE_COUNT } from "@/lib/panes";
+import { INTENTS } from "@/lib/intents";
 import { TROVE } from "@/lib/brand";
 
 export default function FeaturesHero() {
   return (
-    <section className="relative px-6 pt-32 pb-12 overflow-hidden">
+    <section className="relative pt-32 pb-12 overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-80"
@@ -16,7 +17,7 @@ export default function FeaturesHero() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative px-6 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -25,7 +26,7 @@ export default function FeaturesHero() {
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface-1 backdrop-blur px-3 py-1 text-caption text-fg-dim mb-7">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.7)]" />
-            v{TROVE.version} · {PANE_COUNT} panes · 11 Shortcuts intents
+            v{TROVE.version} · {PANE_COUNT} panes · {INTENTS.length} Shortcuts intents
           </div>
 
           <h1 className="text-hero font-semibold bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
@@ -43,7 +44,7 @@ export default function FeaturesHero() {
 
           <div className="mt-7 flex flex-wrap gap-2 text-caption">
             <Chip>{PANE_COUNT} panes</Chip>
-            <Chip>11 Shortcuts intents</Chip>
+            <Chip>{INTENTS.length} Shortcuts intents</Chip>
             <Chip>5 URL-scheme verbs</Chip>
             <Chip>Sub-500 ms cold launch</Chip>
             <Chip>~14 MB on disk</Chip>

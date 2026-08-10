@@ -1,4 +1,5 @@
-// Single source of truth for the 40+ tools Trove ships.
+// Single source of truth for the tools Trove ships. TOOL_COUNT, below, is
+// the only place the site is allowed to say how many there are.
 //
 // Mirrors `enum Pane` in `macos/main.swift` line-for-line: same rawValue,
 // same icon name (SF Symbol, mapped here to a Lucide equivalent for the
@@ -70,6 +71,7 @@ import {
 } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
 import { TROVE } from "./brand";
+import { ENTITY_INTENT_COUNT, INTENTS } from "./intents";
 
 export type PaneSection =
   | "Clipboard"
@@ -628,7 +630,7 @@ export type Capability = {
 export const CAPABILITIES: Capability[] = [
   {
     eyebrow: "macOS Shortcuts",
-    title: "11 AppIntents · 8 entity pickers",
+    title: `${INTENTS.length} AppIntents · ${ENTITY_INTENT_COUNT} entity pickers`,
     body: "Every Trove action is a Shortcut. Snippets and clipboard entries show up as real entities inside the Shortcuts editor with body and capture-date previews, so picking the right one feels like browsing your data, not stringly-typed guessing.",
     bullets: [
       "Open Pane · Stage operations (add text/file, paste clipboard, capture screenshot, copy/clear)",
@@ -784,4 +786,19 @@ export const CAPABILITIES: Capability[] = [
   },
 ];
 
-export const PANE_COUNT = PANES.length; // 53
+export const PANE_COUNT = PANES.length;
+
+/**
+ * How many tools the app has, as prose renders it.
+ *
+ * Nineteen files typed a rounded number by hand while this list held 53 of
+ * them, so each one undersold the product by roughly a quarter.
+ * Every one of those pages undersold the product by a quarter, and none of
+ * them would have moved when the 54th pane landed. `PRODUCT.toolCount` used to
+ * be a second hardcoded copy of the same wrong number; it is gone, and this is
+ * the only place a tool count is written.
+ *
+ * It lives here rather than in lib/brand.ts because this file already imports
+ * brand, and a count that is derived from a list belongs next to the list.
+ */
+export const TOOL_COUNT = String(PANE_COUNT);

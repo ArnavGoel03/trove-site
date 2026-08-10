@@ -3,7 +3,9 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Download } from "lucide-react";
 import { pageTitle, PLATFORM, STUDIO, TROVE } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 import { ISSUES_URL, releasePageURL } from "@/lib/releases";
+import { INTENTS } from "@/lib/intents";
 
 export const metadata: Metadata = {
   title: pageTitle("Press kit"),
@@ -21,7 +23,7 @@ const FACTS: { label: string; value: string }[] = [
   { label: "Binary size", value: "~14 MB" },
   { label: "Resident memory at rest", value: "< 30 MB" },
   { label: `Panes shipped (v${TROVE.version})`, value: "53" },
-  { label: "macOS Shortcuts intents", value: "11" },
+  { label: "macOS Shortcuts intents", value: String(INTENTS.length) },
   { label: "Price", value: "on a subscription" },
   { label: "License", value: "Single-user, multi-device" },
   { label: "Distribution", value: "GitHub Releases + Homebrew Cask" },
@@ -33,7 +35,7 @@ const FACTS: { label: string; value: string }[] = [
 const PITCHES = [
   {
     angle: "The one-line",
-    body: "Trove is a single ~14 MB native Mac app that bundles 40+ tools (clipboard, capture, system, files, storage) and replaces around a dozen menu-bar utilities. Scriptable from Shortcuts. Local-only. No telemetry.",
+    body: `Trove is a single ~14 MB native Mac app that bundles ${TOOL_COUNT} tools (clipboard, capture, system, files, storage) and replaces around a dozen menu-bar utilities. Scriptable from Shortcuts. Local-only. No telemetry.`,
   },
   {
     angle: "For the privacy-first reader",

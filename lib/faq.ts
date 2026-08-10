@@ -13,6 +13,7 @@
 // fluff, no em dashes.
 
 import { PRODUCT, STUDIO_HOST, PLATFORM } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 
 export type FaqItem = {
   question: string;
@@ -27,12 +28,12 @@ export const FAQ: FaqItem[] = [
     group: "About Trove",
     question: "What is Trove?",
     answer:
-      "Trove is an all-in-one macOS utility app with a free trial. It bundles 40+ tools plus 60+ inline actions into one native ~14 MB app, covering clipboard history, snippets, screen recording, OCR, PDF tools, image tools, system and GPU monitors, disk cleanup, file hashing and more. Everything runs 100% locally with no telemetry and no account, and it cold-launches in under 500 ms on macOS 13 or later.",
+      `Trove is an all-in-one macOS utility app with a free trial. It bundles ${TOOL_COUNT} tools plus 60+ inline actions into one native ~14 MB app, covering clipboard history, snippets, screen recording, OCR, PDF tools, image tools, system and GPU monitors, disk cleanup, file hashing and more. Everything runs 100% locally with no telemetry and no account, and it cold-launches in under 500 ms on macOS 13 or later.`,
   },
   {
     group: "About Trove",
     question: "How much does Trove cost?",
-    answer: `${PRODUCT.pricing} That unlocks all 40+ tools and every inline action, with no per-feature upsells. You can download it from ${STUDIO_HOST} or GitHub, or install it with Homebrew. It runs 100% locally and needs no account.`,
+    answer: `${PRODUCT.pricing} That unlocks all ${TOOL_COUNT} tools and every inline action, with no per-feature upsells. You can download it from ${STUDIO_HOST} or GitHub, or install it with Homebrew. It runs 100% locally and needs no account.`,
   },
   {
     group: "About Trove",
@@ -111,7 +112,7 @@ export const FAQ: FaqItem[] = [
   {
     group: "Developer tools",
     question: "What is a local alternative to Boop or DevUtils?",
-    answer: `Trove covers the Boop and DevUtils transform set (base64, JWT decode, JSON pretty-print, hashing, case conversion, UUID, hex, color) through a 60+ action inline palette, and adds chainable, saveable text-transform recipes that single-shot tools do not have. On top of that it ships 40+ tools for OCR, hashing, PDF, screen recording and more. It is ${PRODUCT.priceAdjective}, and everything runs offline on your Mac.`,
+    answer: `Trove covers the Boop and DevUtils transform set (base64, JWT decode, JSON pretty-print, hashing, case conversion, UUID, hex, color) through a 60+ action inline palette, and adds chainable, saveable text-transform recipes that single-shot tools do not have. On top of that it ships ${TOOL_COUNT} tools for OCR, hashing, PDF, screen recording and more. It is ${PRODUCT.priceAdjective}, and everything runs offline on your Mac.`,
   },
   {
     group: "Developer tools",

@@ -5,12 +5,13 @@
 // Keep this in sync with the product facts in lib/panes.ts and lib/faq.ts.
 
 import { PRODUCT, STUDIO } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 
 export const dynamic = "force-static";
 
 const BODY = `# Trove
 
-> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles 40+ tools plus 60+ inline actions into one native ~14 MB app: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, file hashing and more. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon only (no Intel build).
+> Trove is a 100% local all-in-one macOS utility app with a free trial. It bundles ${TOOL_COUNT} tools plus 60+ inline actions into one native ~14 MB app: clipboard history, snippets, screen recorder, OCR, PDF toolkit, image tools, system and GPU monitors, disk cleanup, file hashing and more. No telemetry, no uploads, no account. Cold-launches in under 500 ms. Requires macOS 13 (Ventura) or later, Apple Silicon only (no Intel build).
 
 ## Key facts
 
@@ -60,7 +61,7 @@ Plus a 60+ action inline command palette: base64, JWT decode, hashes, JSON prett
 - vs iStat Menus: Trove covers the core readouts in-app; iStat wins on menu-bar widgets and weather. ${STUDIO.domain}/compare/istat
 - vs CleanMyMac: Trove does disk hygiene with no always-on helper. ${STUDIO.domain}/compare/cleanmymac
 - vs Raycast: Trove ships first-class panes instead of third-party extensions, fully local. ${STUDIO.domain}/compare/raycast
-- vs Boop / DevUtils: Trove matches the transforms and adds chainable recipes plus 40+ tools. ${STUDIO.domain}/compare/boop , ${STUDIO.domain}/compare/devutils
+- vs Boop / DevUtils: Trove matches the transforms and adds chainable recipes plus ${TOOL_COUNT} tools. ${STUDIO.domain}/compare/boop , ${STUDIO.domain}/compare/devutils
 - vs Postman: Trove ships a local, ${PRODUCT.priceAdjective} API tester. ${STUDIO.domain}/compare/postman
 - Full feature matrix: ${STUDIO.domain}/compare
 

@@ -1,4 +1,5 @@
 import { STUDIO } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 // Per-pane deep-dive content for /pane/[slug]. Kept here so each of the
 // 53 pages stays a tiny route file that just consumes a typed bag. Each
 // entry mirrors what the in-app pane actually does as of v1.11.2, no
@@ -16,7 +17,7 @@ export type PaneDetail = {
 
 const GENERIC: PaneDetail = {
   overview:
-    "Part of Trove's 40+ tool native macOS workspace. Open it from the sidebar, ⌘K Quick Switcher, or the `trove://pane/open` URL scheme.",
+    `Part of Trove's ${TOOL_COUNT}-tool native macOS workspace. Open it from the sidebar, ⌘K Quick Switcher, or the \`trove://pane/open\` URL scheme.`,
   capabilities: [
     "Built into Trove, no separate install",
     "Persists state per-user under XDG / Application Support",

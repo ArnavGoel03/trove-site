@@ -106,6 +106,19 @@ const RULES = [
     use: "a comma, colon, period, parentheses, or an ASCII hyphen",
     alsoMarkdown: true,
   },
+  {
+    // Nineteen files said "40+ tools" while lib/panes.ts held 53 of them, so
+    // every page undersold the product by a quarter and /features managed to
+    // print "53 panes" and "40+ tools" on the same screen. The count is now
+    // derived from the list; this stops a hand-typed one coming back. The
+    // pattern deliberately requires the word tool or pane after the number:
+    // "40+ ops" is the Text Tools pipeline, a different number entirely.
+    name: "hardcoded tool count",
+    pattern:
+      /\b\d+\+[- ](?:tool|pane)s?\b|\b\d+-(?:tool|pane)\b|\b\d+ (?:Shortcuts intents|AppIntents)\b/i,
+    allow: ["scripts/check-hardcoded.mjs"],
+    use: "TOOL_COUNT from lib/panes.ts, or INTENTS.length from lib/intents.ts",
+  },
 ];
 
 const SKIP_DIRS = new Set([

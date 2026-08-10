@@ -219,3 +219,16 @@ export const INTENTS: Intent[] = [
     kind: "Entity picker",
   },
 ];
+
+/**
+ * How many of the shipped intents surface Trove's data rather than perform an
+ * action: the entity pickers plus the queries that feed them.
+ *
+ * lib/panes.ts used to write both halves of that sentence as literals, and
+ * both had been stale for two releases: it undercounted the catalog above by
+ * nearly half, on a page whose whole job is to say how much automation surface
+ * you get.
+ */
+export const ENTITY_INTENT_COUNT = INTENTS.filter(
+  (i) => i.kind !== "Action",
+).length;

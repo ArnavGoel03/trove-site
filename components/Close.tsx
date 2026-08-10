@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { PLATFORM, PRODUCT, SIGNING, TROVE } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 import { formatUSD, PRICING, TRIAL_LABEL, YEARLY_SAVING } from "@/lib/pricing";
 import DownloadButton from "./DownloadButton";
 
@@ -27,7 +28,7 @@ export default function Close() {
           Try it for {PRICING.trialDays} days. Nothing to cancel.
         </h2>
         <p className="mt-5 max-w-xl text-lead text-fg-dim text-pretty">
-          The trial is the whole app, {PRODUCT.toolCount} tools, no account and no card. When it
+          The trial is the whole app, {TOOL_COUNT} tools, no account and no card. When it
           ends, {TROVE.name} is {formatUSD(PRICING.yearly)} a year or {formatUSD(PRICING.monthly)} a
           month, and the yearly is {formatUSD(YEARLY_SAVING)} cheaper.
         </p>

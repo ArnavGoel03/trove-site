@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { TOOL_COUNT } from "@/lib/panes";
 
 // Web app manifest. Lets the site be installed as a PWA-style shortcut
 // and gives Android/Chrome a name, theme color and icon. Icons resolve
@@ -8,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Trove",
     short_name: "Trove",
     description:
-      "40+ private tools for clipboard, capture, system, files and storage, in one native macOS app.",
+      `${TOOL_COUNT} private tools for clipboard, capture, system, files and storage, in one native macOS app.`,
     start_url: "/",
     display: "standalone",
     background_color: "#08080b",

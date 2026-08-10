@@ -11,6 +11,7 @@
 // a source of truth one import away.
 
 import { PLATFORM, PRODUCT, SIGNING, TROVE } from "./brand.ts";
+import { TOOL_COUNT } from "./panes.ts";
 import { formatUSD, PRICING, TRIAL_LABEL } from "./pricing.ts";
 import { firstYearMinor, RIVALS } from "./rivals.ts";
 import type { StageId } from "./timeline.ts";
@@ -67,7 +68,7 @@ export const BEATS: Record<StageId, Beat> = {
   collapse: {
     eyebrow: "03 / The collapse",
     headline: "They fold into one window.",
-    body: `${TROVE.name} is ${PRODUCT.toolCount} tools behind a single sidebar. One shortcut opens it, one search field finds anything in it, and there is one thing to keep up to date.`,
+    body: `${TROVE.name} is ${TOOL_COUNT} tools behind a single sidebar. One shortcut opens it, one search field finds anything in it, and there is one thing to keep up to date.`,
     kicker: "Cold launch under half a second, because it is one native app and not a browser wearing a hat.",
   },
 

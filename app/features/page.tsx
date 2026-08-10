@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import FeaturesHero from "@/components/features/FeaturesHero";
 import PaneGrid from "@/components/features/PaneGrid";
 import { STUDIO, TROVE } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 
 const CapabilityList = dynamic(
   () => import("@/components/features/CapabilityList"),
@@ -14,14 +15,14 @@ const FeaturesCta = dynamic(() => import("@/components/features/FeaturesCta"));
 export const metadata: Metadata = {
   title: `Features: every pane in Trove ${TROVE.version}`,
   description:
-    `All 40+ tools in Trove ${TROVE.version}: Clipboard, Compute, Capture, Files, System, Storage. Plus Shortcuts integration, URL scheme verbs, SHA256SUMS verification, saved Text Tools recipes, Homebrew cask, and the sub-500ms cold launch.`,
+    `All ${TOOL_COUNT} tools in Trove ${TROVE.version}: Clipboard, Compute, Capture, Files, System, Storage. Plus Shortcuts integration, URL scheme verbs, SHA256SUMS verification, saved Text Tools recipes, Homebrew cask, and the sub-500ms cold launch.`,
   alternates: {
     canonical: `${STUDIO.domain}/features`,
   },
   openGraph: {
     title: `Features: every pane in Trove ${TROVE.version}`,
     description:
-      "All 40+ tools plus Shortcuts, URL scheme, SHA256SUMS verify, saved recipes, Homebrew cask.",
+      `All ${TOOL_COUNT} tools plus Shortcuts, URL scheme, SHA256SUMS verify, saved recipes, Homebrew cask.`,
     url: `${STUDIO.domain}/features`,
     type: "article",
   },

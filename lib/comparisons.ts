@@ -1,4 +1,5 @@
 import { PRODUCT } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 
 /**
  * The head-to-head pages, and the single source of which ones exist.
@@ -88,7 +89,7 @@ export const COMPARISONS: Record<string, Comparison> = {
     competitor: "Raycast",
     metaTitle: "Trove vs Raycast: local productivity panes vs launcher",
     metaDescription:
-      "Raycast is a launcher with extensions. Trove is a panel-based productivity app with 40+ in-app panes + 60+ ⌘K inline actions. Both have a ⌘K palette; the philosophy and integrations differ.",
+      `Raycast is a launcher with extensions. Trove is a panel-based productivity app with ${TOOL_COUNT} in-app panes + 60+ ⌘K inline actions. Both have a ⌘K palette; the philosophy and integrations differ.`,
     intro:
       "Raycast is a great launcher with a third-party extension marketplace. Trove is panel-based: every action lives as a first-class pane, plus 60+ inline transforms in ⌘K. The two coexist on most pro Mac desktops; this page is about when Trove fits better.",
     highlights: [
@@ -164,15 +165,18 @@ export const COMPARISONS: Record<string, Comparison> = {
     competitor: "Boop",
     metaTitle: "Trove vs Boop: text transforms with more surface",
     metaDescription:
-      "Boop is a fantastic open-source text-transform app. Trove has 60+ ⌘K inline transforms AND 40+ panes (Boop+Hash+OCR+API tester+more) in one app.",
+      `Boop is a fantastic open-source text-transform app. Trove has 60+ ⌘K inline transforms AND ${TOOL_COUNT} panes (Boop+Hash+OCR+API tester+more) in one app.`,
     intro:
-      "Boop is a beloved, focused open-source text transformer. Trove's ⌘K palette covers the same transforms (base64, JWT, hashes, JSON pretty, case conversion, leet) AND adds 40+ panes for everything else. If Boop is the only thing you use it for, Boop is great. If you also want OCR, hash verify, API testing, screen recording, etc., Trove wraps it all in one app.",
+      `Boop is a beloved, focused open-source text transformer. Trove's ⌘K palette covers the same transforms (base64, JWT, hashes, JSON pretty, case conversion, leet) AND adds ${TOOL_COUNT} panes for everything else. If Boop is the only thing you use it for, Boop is great. If you also want OCR, hash verify, API testing, screen recording, etc., Trove wraps it all in one app.`,
     highlights: [
       {
         trove: "60+ inline ⌘K actions: encoding, hashing, case, JSON, time, color, text",
         them: "60+ Boop scripts, similar coverage",
       },
-      { trove: "40+ panes for everything else", them: "Text transforms only" },
+      {
+        trove: `${TOOL_COUNT} panes for everything else`,
+        them: "Text transforms only",
+      },
       {
         trove: `${PRODUCT.priceAdjective}, local-first`,
         them: "Free, open-source (MIT)",
@@ -194,7 +198,7 @@ export const COMPARISONS: Record<string, Comparison> = {
     metaDescription:
       "DevUtils nails offline dev transforms. Trove covers the same set + screen recording, OCR, API tester, hosts editor, LLM chat.",
     intro:
-      "DevUtils is a focused, paid offline dev toolkit. Trove covers the same transform set (base64, JWT, JSON, hashes, UUID, JSONPath, color) plus 40+ additional panes (Recorder, OCR, Hash verify, API Tester, Hosts editor, LLM chat).",
+      `DevUtils is a focused, paid offline dev toolkit. Trove covers the same transform set (base64, JWT, JSON, hashes, UUID, JSONPath, color) plus ${TOOL_COUNT} additional panes (Recorder, OCR, Hash verify, API Tester, Hosts editor, LLM chat).`,
     highlights: [
       {
         trove: `${PRODUCT.priceAdjective}, local-first`,

@@ -166,7 +166,6 @@ export function ogAlt(page: string): string {
  * PRODUCT so the thirty-odd existing call sites keep working untouched.
  */
 export const PRODUCT = {
-  toolCount: "40+",
   trial: TRIAL_LABEL,
   pricing: PRICE_SENTENCE,
   /** Inline adjective, e.g. "Trove is a <priceAdjective> screen recorder." */

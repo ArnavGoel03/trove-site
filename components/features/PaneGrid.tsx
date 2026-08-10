@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
-import { PANES, SECTIONS, type Pane } from "@/lib/panes";
+import { PANES, SECTIONS, TOOL_COUNT, type Pane } from "@/lib/panes";
 import { useReveal } from "@/lib/reveal";
 
-// 40+ tools, grouped by sidebar section. Identical to the in-app Customize
+// Every tool, grouped by sidebar section. Identical to the in-app Customize
 // panel: same names, same one-liners, same section labels.
 export default function PaneGrid() {
   const rise = useReveal();
@@ -18,7 +18,7 @@ export default function PaneGrid() {
           The full set
         </div>
         <h2 className="text-display font-semibold">
-          40+ tools, grouped the way{" "}
+          {TOOL_COUNT} tools, grouped the way{" "}
           <span className="text-fg-dim">
             the app groups them.
           </span>

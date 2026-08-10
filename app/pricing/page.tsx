@@ -6,6 +6,7 @@ import JsonLd, { breadcrumbLd, faqPageLd, webPageLd } from "@/components/JsonLd"
 import PageShell from "@/components/PageShell";
 import { Bullets, Card, Note, Pill, Section, Stat, TextLink } from "@/components/ui";
 import { APPS, PLATFORM, PRODUCT, SIGNING, STUDIO, STUDIO_HOST, SUITE, TROVE } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 import {
   DEVICES_LABEL,
   formatUSD,
@@ -67,7 +68,7 @@ const QUESTIONS: readonly { question: string; answer: string }[] = [
     question: `Why is it ${formatUSD(PRICING.yearly)} and not one payment forever?`,
     answer:
       `A lifetime price is a bet that the app stops changing. ${TROVE.name} shipped ` +
-      `${PRODUCT.toolCount} tools and is on version ${TROVE.version}; a yearly price is what ` +
+      `${TOOL_COUNT} tools and is on version ${TROVE.version}; a yearly price is what ` +
       `pays for the next version instead of the last one. If that is not the trade you want, ` +
       `the monthly plan exists precisely so you can leave after a month.`,
   },
@@ -104,7 +105,7 @@ export default function PricingPage() {
         title="One licence. Every app. One price."
         lede={
           <>
-            {TRIAL_LABEL} of the whole thing: {PRODUCT.toolCount} tools, no account, no card.
+            {TRIAL_LABEL} of the whole thing: {TOOL_COUNT} tools, no account, no card.
             After that it is {formatUSD(PRICING.yearly)} a year, and the same key unlocks{" "}
             {APPS.relay.name} and {APPS.tend.name} the day they ship.
           </>

@@ -5,6 +5,7 @@ import JsonLd, { articleLd, breadcrumbLd } from "@/components/JsonLd";
 import { fetchChangelog, renderMarkdown } from "@/lib/changelog";
 import { slugifyVersion } from "@/lib/slug";
 import { pageTitle, STUDIO } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 import { releasePageURL } from "@/lib/releases";
 
 export const metadata: Metadata = {
@@ -50,7 +51,7 @@ export default async function ChangelogPage() {
         data={articleLd({
           headline: "Trove Changelog",
           description:
-            "Live-sourced release notes for Trove, the 40+ tool native macOS utility.",
+            `Live-sourced release notes for Trove, the ${TOOL_COUNT}-tool native macOS utility.`,
           url: `${STUDIO.domain}/changelog`,
         })}
       />

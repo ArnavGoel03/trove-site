@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { ACTIONS, ACTION_CATEGORIES } from "@/lib/actions";
 import { STUDIO } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 
 export const metadata: Metadata = {
   title:
@@ -74,8 +75,8 @@ export default function ActionsIndex() {
             What about the rest of Trove?
           </h3>
           <p className="mt-2 text-caption text-fg-dim">
-            These actions live in the Quick Switcher; Trove also has 40+
-            full panes (API Tester, Speedtest, Hash, OCR, Hosts editor,
+            These actions live in the Quick Switcher; Trove also has{" "}
+            {TOOL_COUNT} full panes (API Tester, Speedtest, Hash, OCR, Hosts editor,
             Local LLM chat, Image Editor, …). Browse them at{" "}
             <Link href="/features" className="text-white underline">
               /features

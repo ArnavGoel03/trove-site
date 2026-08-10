@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { ACCENT, ACCENT_RGB } from "@/lib/brand-tokens.generated";
+import { TOOL_COUNT } from "@/lib/panes";
 
 export const alt = "Trove: one app instead of a dozen.";
 export const size = { width: 1200, height: 630 };
@@ -82,7 +83,9 @@ export default function OgImage() {
             color: "#71717a",
           }}
         >
-          40+ tools · Local-first · No account · No telemetry
+          {/* One text node, not two: satori refuses a <div> with more than
+              one child unless it is explicitly display:flex. */}
+          {`${TOOL_COUNT} tools · Local-first · No account · No telemetry`}
         </div>
       </div>
     ),

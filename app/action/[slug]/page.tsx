@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { ACTIONS, ACTIONS_BY_SLUG, relatedActions } from "@/lib/actions";
 import { PRODUCT, STUDIO } from "@/lib/brand";
+import { TOOL_COUNT } from "@/lib/panes";
 
 // Pre-render every action page at build time for snappy SEO + Lighthouse.
 export async function generateStaticParams() {
@@ -217,7 +218,7 @@ export default async function ActionPage({ params }: PageProps) {
 
         <section className="mt-12 rounded-2xl border border-line-soft bg-surface-1 p-6">
           <h3 className="text-body font-semibold">
-            Want all 60+ inline actions, plus 40+ panes?
+            Want all 60+ inline actions, plus {TOOL_COUNT} panes?
           </h3>
           <p className="mt-2 text-caption text-fg-dim">
             Trove ships an API tester (Postman-class), local LLM chat, hash
