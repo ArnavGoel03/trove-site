@@ -13,16 +13,16 @@ const FOCUS_RING =
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.05] mt-20">
+    <footer className="relative border-t border-line-soft mt-20">
       <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(5,1fr)] gap-10">
         <div>
           <div className="flex items-center gap-2.5 mb-4">
             <Logomark name={STUDIO.name} size={30} />
-            <span className="text-[15px] font-semibold tracking-tight">
+            <span className="text-body font-semibold tracking-tight">
               {STUDIO.name}
             </span>
           </div>
-          <p className="text-[13px] text-[var(--color-fg-dim)] max-w-sm leading-relaxed">
+          <p className="text-caption text-fg-dim max-w-sm leading-relaxed">
             {/* STUDIO.tagline is already "Private, native Mac apps. One
                 subscription.", so prefixing it here printed both halves twice.
                 Say it once, then add what the tagline doesn't cover. */}
@@ -98,9 +98,9 @@ export default function Footer() {
         />
       </div>
 
-      <div className="border-t border-white/[0.04]">
+      <div className="border-t border-line-soft">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-[12px] text-[var(--color-fg-mute)]">
+          <div className="flex items-center gap-3 text-caption text-fg-mute">
             <span>
               {"©"} {new Date().getFullYear()} {STUDIO.name}. macOS, Apple Silicon
               and the Apple logo are trademarks of Apple Inc.
@@ -121,14 +121,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${TROVE.name} releases on GitHub`}
-              className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
+              className={`text-fg-mute hover:text-white transition-colors ${FOCUS_RING}`}
             >
               <GithubMark size={16} />
             </a>
             <a
               href={CONTACT.support}
               aria-label="Email support"
-              className={`text-[var(--color-fg-mute)] hover:text-white transition-colors ${FOCUS_RING}`}
+              className={`text-fg-mute hover:text-white transition-colors ${FOCUS_RING}`}
             >
               <Mail size={16} />
             </a>
@@ -174,11 +174,11 @@ function LatestReleaseBadge() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Latest release notes on GitHub"
-      className={`inline-flex items-center gap-1.5 text-[11.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors font-medium ${FOCUS_RING}`}
+      className={`inline-flex items-center gap-1.5 text-caption text-fg-dim hover:text-white transition-colors font-medium ${FOCUS_RING}`}
     >
       <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
       <span className="font-mono tabular-nums">{tag ?? "Releases"}</span>
-      <span className="text-[var(--color-fg-dim)]">&middot;</span>
+      <span className="text-fg-dim">&middot;</span>
       <span>release notes</span>
     </a>
   );
@@ -193,7 +193,7 @@ function FooterCol({
 }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-dim)] mb-4">
+      <div className="text-micro uppercase text-fg-dim mb-4">
         {title}
       </div>
       <ul className="space-y-2.5">
@@ -204,14 +204,14 @@ function FooterCol({
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-[13.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors ${FOCUS_RING}`}
+                className={`text-caption text-fg-dim hover:text-white transition-colors ${FOCUS_RING}`}
               >
                 {l.label}
               </a>
             ) : (
               <Link
                 href={l.href}
-                className={`text-[13.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors ${FOCUS_RING}`}
+                className={`text-caption text-fg-dim hover:text-white transition-colors ${FOCUS_RING}`}
               >
                 {l.label}
               </Link>

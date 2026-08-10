@@ -61,9 +61,9 @@ function DirectionCard({ dir }: { dir: Dir }) {
   return (
     <div className="flex flex-col gap-4">
       {/* Faux app window, monochrome base + this accent */}
-      <div className="rounded-2xl overflow-hidden border border-white/[0.07] bg-[#0E1012] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
+      <div className="rounded-2xl overflow-hidden border border-line-soft bg-[#0E1012] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
         {/* Title bar */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-black/30">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-line-soft bg-black/30">
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-full bg-white/20" />
             <span className="w-3 h-3 rounded-full bg-white/20" />
@@ -72,12 +72,12 @@ function DirectionCard({ dir }: { dir: Dir }) {
           <div className="flex items-center gap-2">
             {/* Solid logo mark in the accent */}
             <span
-              className="inline-flex w-5 h-5 rounded-[6px] items-center justify-center text-[11px] font-bold text-white"
+              className="inline-flex w-5 h-5 rounded-[6px] items-center justify-center text-caption font-bold text-white"
               style={{ background: dir.accent }}
             >
               Q
             </span>
-            <span className="text-[12px] font-semibold tracking-tight text-white">
+            <span className="text-caption font-semibold tracking-tight text-white">
               Quiver
             </span>
           </div>
@@ -86,24 +86,24 @@ function DirectionCard({ dir }: { dir: Dir }) {
 
         {/* Body */}
         <div className="p-5">
-          <h3 className="text-[19px] font-semibold tracking-[-0.02em] text-white leading-tight">
+          <h3 className="text-lead font-semibold text-white leading-tight">
             Three native apps.
             <br />
             One subscription.
           </h3>
-          <p className="mt-2 text-[12.5px] text-[#9BA1A9] leading-relaxed">
+          <p className="mt-2 text-caption text-[#9BA1A9] leading-relaxed">
             Fast, private Mac apps. One key unlocks all three.
           </p>
 
           {/* Primary + ghost buttons */}
           <div className="mt-4 flex items-center gap-2.5">
             <button
-              className="rounded-full px-4 py-2 text-[12.5px] font-semibold text-white"
+              className="rounded-full px-4 py-2 text-caption font-semibold text-white"
               style={{ background: dir.accent }}
             >
               Download
             </button>
-            <button className="rounded-full px-4 py-2 text-[12.5px] font-medium text-white/85 border border-white/[0.12] bg-white/[0.03]">
+            <button className="rounded-full px-4 py-2 text-caption font-medium text-white/85 border border-line-strong bg-surface-1">
               See features
             </button>
           </div>
@@ -130,14 +130,14 @@ function DirectionCard({ dir }: { dir: Dir }) {
                     size={16}
                     style={{ color: active ? dir.accent : "rgba(255,255,255,0.8)" }}
                   />
-                  <span className="text-[10px] text-[#9BA1A9]">{t.label}</span>
+                  <span className="text-caption text-[#9BA1A9]">{t.label}</span>
                 </div>
               );
             })}
           </div>
 
           {/* Text link + inline accent */}
-          <div className="mt-4 flex items-center justify-between text-[12px]">
+          <div className="mt-4 flex items-center justify-between text-caption">
             <span className="text-[#9BA1A9]">
               Trial ends in{" "}
               <span style={{ color: dir.accent }} className="font-semibold">
@@ -158,14 +158,14 @@ function DirectionCard({ dir }: { dir: Dir }) {
             className="w-3.5 h-3.5 rounded-full"
             style={{ background: dir.accent }}
           />
-          <span className="text-[14px] font-semibold text-white">
+          <span className="text-caption font-semibold text-white">
             {dir.name}
           </span>
-          <span className="text-[11.5px] font-mono text-[#6b7280]">
+          <span className="text-caption font-mono text-[#6b7280]">
             {dir.accent}
           </span>
         </div>
-        <p className="mt-1.5 text-[12.5px] text-[#9BA1A9] leading-relaxed">
+        <p className="mt-1.5 text-caption text-[#9BA1A9] leading-relaxed">
           {dir.note}
         </p>
       </div>
@@ -178,13 +178,13 @@ export default function BrandPreview() {
     <main className="min-h-screen bg-[#0A0B0D] px-6 py-16 sm:py-24">
       <div className="max-w-6xl mx-auto">
         <div className="max-w-2xl">
-          <p className="text-[12px] uppercase tracking-[0.18em] text-[#6b7280] mb-3">
+          <p className="text-micro uppercase text-[#6b7280] mb-3">
             Brand directions
           </p>
-          <h1 className="text-[30px] sm:text-[40px] font-semibold tracking-[-0.03em] text-white leading-[1.05]">
+          <h1 className="text-title font-semibold text-white">
             Which one feels like software?
           </h1>
-          <p className="mt-4 text-[15px] text-[#9BA1A9] leading-relaxed">
+          <p className="mt-4 text-body text-[#9BA1A9] leading-relaxed">
             Monochrome graphite base, one solid accent doing minimal work: the
             premium native-tool look, not an AI launch page. Same mini UI in
             each direction so you can compare the feel, not the mockup. No

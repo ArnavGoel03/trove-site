@@ -90,7 +90,7 @@ export default async function ActionPage({ params }: PageProps) {
       <main id="top" className="pt-32 pb-24 px-6 max-w-4xl mx-auto">
         <nav
           aria-label="Breadcrumb"
-          className="text-[12px] text-[var(--color-fg-dim)] mb-6"
+          className="text-caption text-fg-dim mb-6"
         >
           <Link href="/" className="hover:text-white">
             Trove
@@ -106,60 +106,60 @@ export default async function ActionPage({ params }: PageProps) {
         <h1 className="text-[clamp(34px,5vw,52px)] font-semibold tracking-tight leading-[1.05]">
           {action.title} on Mac
         </h1>
-        <p className="mt-4 text-[18px] text-[var(--color-fg-dim)] leading-relaxed">
+        <p className="mt-4 text-lead text-fg-dim leading-relaxed">
           {action.tagline}
         </p>
 
-        <section className="mt-10 rounded-3xl border border-white/[0.07] bg-white/[0.025] p-7">
-          <div className="text-[12px] uppercase tracking-wide text-[var(--color-fg-dim)] mb-3">
+        <section className="mt-10 rounded-3xl border border-line-soft bg-surface-1 p-7">
+          <div className="text-micro uppercase tracking-wide text-fg-dim mb-3">
             One-keystroke workflow
           </div>
-          <ol className="space-y-3 text-[14.5px]">
+          <ol className="space-y-3 text-caption">
             <li>
               <strong>1.</strong> Open Trove (or hit your ⌘K hotkey from
               anywhere).
             </li>
             <li>
               <strong>2.</strong> Type:{" "}
-              <code className="px-1.5 py-0.5 rounded bg-black/40 font-mono text-[13px]">
+              <code className="px-1.5 py-0.5 rounded bg-black/40 font-mono text-caption">
                 {action.triggers[0]}
               </code>
             </li>
             <li>
-              <strong>3.</strong> Hit <kbd className="px-1.5 py-0.5 rounded bg-black/40 border border-white/10 text-[12px]">↩</kbd>, the result is on your clipboard.
+              <strong>3.</strong> Hit <kbd className="px-1.5 py-0.5 rounded bg-black/40 border border-line-strong text-caption">↩</kbd>, the result is on your clipboard.
             </li>
           </ol>
         </section>
 
         <section className="mt-10">
-          <div className="text-[12px] uppercase tracking-wide text-[var(--color-fg-dim)] mb-3">
+          <div className="text-micro uppercase tracking-wide text-fg-dim mb-3">
             Example
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
-              <div className="text-[11px] text-[var(--color-fg-dim)] uppercase tracking-wide mb-2">
+            <div className="rounded-2xl border border-line-soft bg-surface-1 p-5">
+              <div className="text-micro text-fg-dim uppercase tracking-wide mb-2">
                 Input
               </div>
-              <pre className="font-mono text-[13px] whitespace-pre-wrap break-all">
+              <pre className="font-mono text-caption whitespace-pre-wrap break-all">
                 {action.example.input}
               </pre>
             </div>
-            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
-              <div className="text-[11px] text-[var(--color-fg-dim)] uppercase tracking-wide mb-2">
+            <div className="rounded-2xl border border-line-soft bg-surface-1 p-5">
+              <div className="text-micro text-fg-dim uppercase tracking-wide mb-2">
                 Output
               </div>
-              <pre className="font-mono text-[13px] whitespace-pre-wrap break-all">
+              <pre className="font-mono text-caption whitespace-pre-wrap break-all">
                 {action.example.output}
               </pre>
             </div>
           </div>
         </section>
 
-        <section className="mt-10 text-[15px] leading-relaxed text-[var(--color-fg-dim)]">
+        <section className="mt-10 text-body leading-relaxed text-fg-dim">
           <p>{action.body}</p>
           <p className="mt-4">
             Trove is local-first: no telemetry, no upload, no account.
-            <code className="mx-1 px-1.5 py-0.5 rounded bg-black/40 font-mono text-[12px]">
+            <code className="mx-1 px-1.5 py-0.5 rounded bg-black/40 font-mono text-caption">
               {action.triggers[0]}
             </code>
             runs on your Mac in microseconds. The full catalog of inline
@@ -177,14 +177,14 @@ export default async function ActionPage({ params }: PageProps) {
 
         {action.triggers.length > 1 && (
           <section className="mt-8">
-            <div className="text-[12px] uppercase tracking-wide text-[var(--color-fg-dim)] mb-2">
+            <div className="text-micro uppercase tracking-wide text-fg-dim mb-2">
               Also triggers on
             </div>
             <ul className="flex flex-wrap gap-2">
               {action.triggers.slice(1).map((t) => (
                 <li
                   key={t}
-                  className="px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/[0.06] text-[12.5px] font-mono"
+                  className="px-2.5 py-1 rounded-full bg-surface-2 border border-line-soft text-caption font-mono"
                 >
                   {t}
                 </li>
@@ -195,7 +195,7 @@ export default async function ActionPage({ params }: PageProps) {
 
         {related.length > 0 && (
           <section className="mt-12">
-            <h2 className="text-[20px] font-semibold tracking-tight mb-3">
+            <h2 className="text-lead font-semibold tracking-tight mb-3">
               Related actions
             </h2>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -203,10 +203,10 @@ export default async function ActionPage({ params }: PageProps) {
                 <Link
                   key={a.slug}
                   href={`/action/${a.slug}`}
-                  className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 hover:bg-white/[0.05] transition-colors"
+                  className="rounded-xl border border-line-soft bg-surface-1 p-4 hover:bg-surface-2 transition-colors"
                 >
-                  <div className="text-[14.5px] font-semibold">{a.title}</div>
-                  <div className="text-[12.5px] text-[var(--color-fg-dim)] mt-1 line-clamp-2">
+                  <div className="text-caption font-semibold">{a.title}</div>
+                  <div className="text-caption text-fg-dim mt-1 line-clamp-2">
                     {a.tagline}
                   </div>
                 </Link>
@@ -215,11 +215,11 @@ export default async function ActionPage({ params }: PageProps) {
           </section>
         )}
 
-        <section className="mt-12 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
-          <h3 className="text-[16px] font-semibold">
+        <section className="mt-12 rounded-2xl border border-line-soft bg-surface-1 p-6">
+          <h3 className="text-body font-semibold">
             Want all 60+ inline actions, plus 40+ panes?
           </h3>
-          <p className="mt-2 text-[13.5px] text-[var(--color-fg-dim)]">
+          <p className="mt-2 text-caption text-fg-dim">
             Trove ships an API tester (Postman-class), local LLM chat, hash
             verifier, OCR, screen recorder, hosts file editor, password
             generator + HIBP, treemap, and more. Local-first. {PRODUCT.pricing}
@@ -227,13 +227,13 @@ export default async function ActionPage({ params }: PageProps) {
           <div className="mt-4 flex flex-wrap gap-2">
             <Link
               href="/download"
-              className="btn-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13.5px] font-semibold"
+              className="btn-primary inline-flex items-center gap-2 rounded-full px-4 py-2 text-caption font-semibold"
             >
               Download Trove
             </Link>
             <Link
               href="/action"
-              className="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13.5px]"
+              className="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-2 text-caption"
             >
               Browse all actions
             </Link>

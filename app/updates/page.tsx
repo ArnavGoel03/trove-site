@@ -36,21 +36,21 @@ export default async function UpdatesPage() {
         ])}
       />
 
-      <div className="mb-10 flex items-center gap-3 text-[12.5px] text-[var(--color-fg-dim)]">
+      <div className="mb-10 flex items-center gap-3 text-caption text-fg-dim">
         <a
           href="/updates/rss.xml"
-          className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-3 py-1 hover:border-white/20 transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-full border border-line-soft px-3 py-1 hover:border-line-strong transition-colors"
         >
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent" />
           RSS feed
         </a>
-        <span className="text-[var(--color-fg-mute)]">
+        <span className="text-fg-mute">
           {posts.length} post{posts.length === 1 ? "" : "s"}
         </span>
       </div>
 
       {posts.length === 0 ? (
-        <div className="pane rounded-xl p-6 text-[14px] text-[var(--color-fg-dim)]">
+        <div className="pane rounded-xl p-6 text-caption text-fg-dim">
           Nothing here yet. Come back soon.
         </div>
       ) : (
@@ -59,20 +59,20 @@ export default async function UpdatesPage() {
             <Link
               key={p.slug}
               href={`/updates/${p.slug}`}
-              className="block pane rounded-xl p-6 hover:border-white/20 transition-colors"
+              className="block pane rounded-xl p-6 hover:border-line-strong transition-colors"
             >
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)]">
+                <span className="text-micro uppercase tracking-[0.2em] text-accent">
                   {p.tag}
                 </span>
-                <span className="text-[12px] text-[var(--color-fg-mute)] font-mono tabular-nums">
+                <span className="text-caption text-fg-mute font-mono tabular-nums">
                   {p.date}
                 </span>
               </div>
-              <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-2">
+              <h2 className="text-lead font-semibold text-white mb-2">
                 {p.title}
               </h2>
-              <p className="text-[14.5px] leading-[1.7] text-[var(--color-fg-dim)]">
+              <p className="text-caption leading-[1.7] text-fg-dim">
                 {p.excerpt}
               </p>
             </Link>

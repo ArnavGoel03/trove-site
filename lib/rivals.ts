@@ -186,3 +186,27 @@ export function oldestCheck(): string {
     RIVALS[0].checked,
   );
 }
+
+/**
+ * The cited price for a product, exactly as its own vendor shows it, or null.
+ *
+ * /compare listed thirteen prices in one hand-typed sentence with no source and
+ * no date, and four of them disagreed with the table above: TextSniper was
+ * written as $7 where its App Store listing says $9.99, DaisyDisk as $10 where
+ * the listing says $9.99. A comparison page that gets a rival's own price wrong
+ * has handed the reader a reason to disbelieve every other row.
+ *
+ * Matching is by prefix so a column headed "iStat Menus" finds the versioned
+ * entry "iStat Menus 7" and "Raycast" finds "Raycast Pro". Anything not in
+ * RIVALS returns null, and the caller must then say nothing about its price
+ * rather than guess: an uncited number is the defect this replaces.
+ */
+export function citedPrice(product: string): string | null {
+  const match = RIVALS.find(
+    (r) => r.name === product || r.name.startsWith(`${product} `),
+  );
+  if (!match) return null;
+  return match.cadence === "year"
+    ? `${match.asShown} per year`
+    : `${match.asShown} one-time`;
+}

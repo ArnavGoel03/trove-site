@@ -117,14 +117,14 @@ export default function SecurityPage() {
           return (
             <article key={s.title} className="pane rounded-xl p-6">
               <header className="flex items-center gap-3 mb-4">
-                <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-accent/12 text-[var(--color-accent)]">
+                <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-accent/12 text-accent">
                   <Icon size={20} strokeWidth={1.5} />
                 </span>
-                <h2 className="text-[20px] font-semibold tracking-tight text-white">
+                <h2 className="text-lead font-semibold tracking-tight text-white">
                   {s.title}
                 </h2>
               </header>
-              <p className="text-[15px] leading-[1.7] text-[var(--color-fg-dim)]">
+              <p className="text-body leading-[1.7] text-fg-dim">
                 {s.body}
               </p>
               {s.bullets ? (
@@ -132,7 +132,7 @@ export default function SecurityPage() {
                   {s.bullets.map((b) => (
                     <li
                       key={b}
-                      className="text-[14px] leading-[1.7] text-[var(--color-fg-dim)] pl-5 relative before:content-['-'] before:absolute before:left-0 before:text-[var(--color-fg-mute)]"
+                      className="text-caption leading-[1.7] text-fg-dim pl-5 relative before:content-['-'] before:absolute before:left-0 before:text-fg-mute"
                     >
                       {b}
                     </li>

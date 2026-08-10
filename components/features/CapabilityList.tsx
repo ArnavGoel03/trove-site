@@ -20,16 +20,16 @@ export default function CapabilityList() {
         {...rise()}
         className="max-w-3xl mb-14"
       >
-        <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
+        <div className="text-micro uppercase tracking-[0.2em] text-fg-mute mb-4">
           Power-user surface · {TROVE.version}
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02]">
+        <h2 className="text-display font-semibold">
           The headline upgrades{" "}
-          <span className="text-[var(--color-fg-dim)]">
+          <span className="text-fg-dim">
             that landed across the 14-beta cycle.
           </span>
         </h2>
-        <p className="mt-5 text-[15px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
+        <p className="mt-5 text-body text-fg-dim max-w-2xl leading-relaxed">
           Stable users arriving from 1.0.7 get everything below in a single
           update. The per-beta history is preserved in the changelog if you
           need it.
@@ -60,29 +60,29 @@ export default function CapabilityList() {
 
               <div className="flex items-start gap-4">
                 <div
-                  className="w-10 h-10 rounded-xl border border-white/[0.08] bg-white/[0.03] flex items-center justify-center shrink-0"
+                  className="w-10 h-10 rounded-xl border border-line-soft bg-surface-1 flex items-center justify-center shrink-0"
                   style={{ boxShadow: `inset 0 0 0 1px ${cap.accent}33` }}
                 >
                   <Icon size={18} className="text-white/90" />
                 </div>
                 <div className="min-w-0">
                   <div
-                    className="text-[11.5px] uppercase tracking-[0.18em] mb-2"
+                    className="text-micro uppercase mb-2"
                     style={{ color: cap.accent }}
                   >
                     {cap.eyebrow}
                   </div>
-                  <h3 className="text-[20px] sm:text-[22px] font-semibold tracking-[-0.02em] text-white leading-snug">
+                  <h3 className="text-lead font-semibold text-white leading-snug">
                     {cap.title}
                   </h3>
                 </div>
               </div>
 
-              <p className="mt-5 text-[14px] text-[var(--color-fg-dim)] leading-relaxed">
+              <p className="mt-5 text-caption text-fg-dim leading-relaxed">
                 {cap.body}
               </p>
 
-              <ul className="mt-5 space-y-2 text-[13px]">
+              <ul className="mt-5 space-y-2 text-caption">
                 {cap.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-2.5">
                     <span
@@ -90,7 +90,7 @@ export default function CapabilityList() {
                       className="mt-2 inline-block w-1 h-1 rounded-full shrink-0"
                       style={{ background: cap.accent }}
                     />
-                    <span className="text-[var(--color-fg-dim)]">{b}</span>
+                    <span className="text-fg-dim">{b}</span>
                   </li>
                 ))}
               </ul>

@@ -152,9 +152,14 @@ export default function PricingPage() {
           title="What it costs to not buy it"
           lede={
             <>
-              The {RIVALS.length} apps {TROVE.name} replaces, priced from their own vendors&rsquo;
-              pages and checked on {oldestCheck()}. Subscriptions counted for one year, one-time
-              purchases counted once.
+              {/* The explicit {" "} is load-bearing. A JSX text run that opens
+                  with a space and also carries an HTML entity loses that
+                  leading space through the compiler, which is how this page
+                  first shipped reading "10 apps Trovereplaces". */}
+              The {RIVALS.length} apps {TROVE.name}{" "}
+              replaces, priced from their own vendors&rsquo; pages and checked on{" "}
+              {oldestCheck()}. Subscriptions counted for one year, one-time purchases counted
+              once.
             </>
           }
         >

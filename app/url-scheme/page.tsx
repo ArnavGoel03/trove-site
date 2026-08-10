@@ -164,12 +164,12 @@ export default function URLSchemePage() {
       />
 
       <section className="pane rounded-xl p-5 mb-12">
-        <div className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-2">
+        <div className="text-micro uppercase tracking-[0.2em] text-fg-mute mb-2">
           Frontmost gating
         </div>
-        <p className="text-[14px] leading-[1.7] text-[var(--color-fg-dim)]">
+        <p className="text-caption leading-[1.7] text-fg-dim">
           Any verb marked{" "}
-          <span className="text-[var(--color-accent)] font-medium">
+          <span className="text-accent font-medium">
             frontmost-only
           </span>{" "}
           is refused with a toast unless Trove is the frontmost app. This blocks
@@ -193,31 +193,31 @@ export default function URLSchemePage() {
             }
           >
             <header className="flex items-start justify-between gap-4 mb-3">
-              <h2 className="font-mono text-[16px] text-white">{v.verb}</h2>
+              <h2 className="font-mono text-body text-white">{v.verb}</h2>
               {v.frontmost ? (
-                <span className="shrink-0 inline-flex items-center rounded-full border border-[var(--color-accent)]/40 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.15em] text-[var(--color-accent)]">
+                <span className="shrink-0 inline-flex items-center rounded-full border border-accent/40 px-2.5 py-0.5 text-micro uppercase text-accent">
                   Frontmost-only
                 </span>
               ) : (
-                <span className="shrink-0 inline-flex items-center rounded-full border border-white/[0.08] px-2.5 py-0.5 text-[10px] uppercase tracking-[0.15em] text-[var(--color-fg-mute)]">
+                <span className="shrink-0 inline-flex items-center rounded-full border border-line-soft px-2.5 py-0.5 text-micro uppercase text-fg-mute">
                   Safe
                 </span>
               )}
             </header>
-            <code className="block font-mono text-[13px] bg-white/[0.04] border border-white/[0.06] rounded-md px-3 py-2 text-white mb-3 break-all">
+            <code className="block font-mono text-caption bg-surface-1 border border-line-soft rounded-md px-3 py-2 text-white mb-3 break-all">
               {v.example}
             </code>
-            <p className="text-[14px] leading-[1.7] text-[var(--color-fg-dim)]">
+            <p className="text-caption leading-[1.7] text-fg-dim">
               {v.description}
             </p>
             {v.params ? (
               <ul className="mt-4 space-y-2">
                 {v.params.map((p) => (
-                  <li key={p.name} className="flex gap-3 text-[13px]">
-                    <code className="font-mono text-[12px] bg-white/[0.04] border border-white/[0.06] rounded px-2 py-0.5 text-white h-fit shrink-0">
+                  <li key={p.name} className="flex gap-3 text-caption">
+                    <code className="font-mono text-caption bg-surface-1 border border-line-soft rounded px-2 py-0.5 text-white h-fit shrink-0">
                       {p.name}
                     </code>
-                    <span className="text-[var(--color-fg-dim)] leading-[1.65]">
+                    <span className="text-fg-dim leading-[1.65]">
                       {p.about}
                     </span>
                   </li>

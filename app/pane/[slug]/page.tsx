@@ -93,10 +93,10 @@ export default async function PanePage({
           <Icon size={28} strokeWidth={1.5} />
         </span>
         <div>
-          <div className="text-[11px] uppercase tracking-[0.22em] text-[var(--color-fg-mute)]">
+          <div className="text-micro uppercase tracking-[0.22em] text-fg-mute">
             SF Symbol · {pane.sfSymbol}
           </div>
-          <div className="text-[14px] text-[var(--color-fg-dim)] mt-1">
+          <div className="text-caption text-fg-dim mt-1">
             Open from the sidebar, the ⌘K Quick Switcher, or{" "}
             <code className="md-inline">trove://pane/open?pane={pane.name}</code>
           </div>
@@ -104,23 +104,23 @@ export default async function PanePage({
       </div>
 
       <section className="mb-14">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-4">
+        <h2 className="text-lead font-semibold text-white mb-4">
           What it does
         </h2>
-        <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
+        <p className="text-body leading-[1.75] text-fg-dim">
           {detail.overview}
         </p>
       </section>
 
       <section className="mb-14">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-4">
+        <h2 className="text-lead font-semibold text-white mb-4">
           Capabilities
         </h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {detail.capabilities.map((c) => (
             <li
               key={c}
-              className="pane rounded-xl p-4 text-[14px] leading-relaxed text-[var(--color-fg-dim)]"
+              className="pane rounded-xl p-4 text-caption leading-relaxed text-fg-dim"
             >
               {c}
             </li>
@@ -130,17 +130,17 @@ export default async function PanePage({
 
       {chords.length > 0 ? (
         <section className="mb-14">
-          <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-4">
+          <h2 className="text-lead font-semibold text-white mb-4">
             Shortcuts
           </h2>
           <div className="pane rounded-xl divide-y divide-white/[0.06]">
             {chords.map((c, i) => (
               <div
                 key={i}
-                className="flex items-center justify-between gap-4 px-5 py-3 text-[14px]"
+                className="flex items-center justify-between gap-4 px-5 py-3 text-caption"
               >
-                <span className="text-[var(--color-fg-dim)]">{c.label}</span>
-                <kbd className="font-mono text-[12px] bg-white/[0.05] border border-white/[0.08] rounded-md px-2 py-0.5 text-white">
+                <span className="text-fg-dim">{c.label}</span>
+                <kbd className="font-mono text-caption bg-surface-2 border border-line-soft rounded-md px-2 py-0.5 text-white">
                   {c.keys}
                 </kbd>
               </div>
@@ -148,7 +148,7 @@ export default async function PanePage({
           </div>
           <Link
             href="/shortcuts"
-            className="inline-block mt-3 text-[12px] text-[var(--color-fg-mute)] hover:text-white transition-colors"
+            className="inline-block mt-3 text-caption text-fg-mute hover:text-white transition-colors"
           >
             See all shortcuts →
           </Link>
@@ -157,16 +157,16 @@ export default async function PanePage({
 
       {detail.urlScheme && detail.urlScheme.length > 0 ? (
         <section className="mb-14">
-          <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-4">
+          <h2 className="text-lead font-semibold text-white mb-4">
             URL scheme
           </h2>
           <div className="pane rounded-xl p-5 space-y-3">
             {detail.urlScheme.map((u) => (
               <div key={u.example}>
-                <code className="block font-mono text-[13px] text-white bg-white/[0.04] border border-white/[0.06] rounded-md px-3 py-2">
+                <code className="block font-mono text-caption text-white bg-surface-1 border border-line-soft rounded-md px-3 py-2">
                   {u.example}
                 </code>
-                <div className="text-[13px] text-[var(--color-fg-mute)] mt-1">
+                <div className="text-caption text-fg-mute mt-1">
                   {u.note}
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default async function PanePage({
           </div>
           <Link
             href="/url-scheme"
-            className="inline-block mt-3 text-[12px] text-[var(--color-fg-mute)] hover:text-white transition-colors"
+            className="inline-block mt-3 text-caption text-fg-mute hover:text-white transition-colors"
           >
             Full URL scheme reference →
           </Link>
@@ -183,11 +183,11 @@ export default async function PanePage({
 
       {detail.privacy ? (
         <section className="mb-14">
-          <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-4">
+          <h2 className="text-lead font-semibold text-white mb-4">
             Privacy
           </h2>
           <div
-            className="pane rounded-xl p-5 text-[14px] leading-[1.7] text-[var(--color-fg-dim)]"
+            className="pane rounded-xl p-5 text-caption leading-[1.7] text-fg-dim"
             style={{ borderColor: "rgba(91, 227, 164, 0.25)" }}
           >
             {detail.privacy}
@@ -197,7 +197,7 @@ export default async function PanePage({
 
       {related.length > 0 ? (
         <section>
-          <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-4">
+          <h2 className="text-lead font-semibold text-white mb-4">
             Other {pane.section} panes
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -207,7 +207,7 @@ export default async function PanePage({
                 <Link
                   key={p.name}
                   href={`/pane/${slugifyPane(p.name)}`}
-                  className="pane rounded-xl p-4 flex items-center gap-3 hover:border-white/20 transition-colors"
+                  className="pane rounded-xl p-4 flex items-center gap-3 hover:border-line-strong transition-colors"
                 >
                   <span
                     className="inline-flex w-9 h-9 rounded-lg items-center justify-center shrink-0"
@@ -216,10 +216,10 @@ export default async function PanePage({
                     <RIcon size={18} strokeWidth={1.5} />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[14px] font-medium text-white">
+                    <div className="text-caption font-medium text-white">
                       {p.name}
                     </div>
-                    <div className="text-[12px] text-[var(--color-fg-mute)] truncate">
+                    <div className="text-caption text-fg-mute truncate">
                       {p.blurb}
                     </div>
                   </div>

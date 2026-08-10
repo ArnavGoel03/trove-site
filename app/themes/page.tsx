@@ -124,14 +124,14 @@ export default function ThemesPage() {
       />
 
       <div className="pane rounded-xl p-5 mb-10 flex items-start gap-3">
-        <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-accent/12 text-[var(--color-accent)] shrink-0">
+        <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-accent/12 text-accent shrink-0">
           <Settings size={16} strokeWidth={1.75} />
         </span>
         <div>
-          <div className="text-[14px] font-medium text-white mb-1">
+          <div className="text-caption font-medium text-white mb-1">
             How to switch
           </div>
-          <p className="text-[13.5px] leading-[1.7] text-[var(--color-fg-dim)]">
+          <p className="text-caption leading-[1.7] text-fg-dim">
             Open Trove, hit <kbd className="md-inline">⌘,</kbd> for Settings,
             choose <span className="text-white">Theme</span> in the sidebar,
             and pick one of the four palettes. The switch is live: no relaunch,
@@ -157,13 +157,13 @@ export default function ThemesPage() {
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#febc2e" }} />
               <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
               <span
-                className="ml-3 text-[11px] font-medium tracking-tight"
+                className="ml-3 text-caption font-medium tracking-tight"
                 style={{ color: t.textDim }}
               >
                 Trove: {t.name}
               </span>
               <span
-                className="ml-auto text-[10px] uppercase tracking-[0.18em] px-2 py-0.5 rounded-full"
+                className="ml-auto text-micro uppercase px-2 py-0.5 rounded-full"
                 style={{
                   color: t.accent,
                   border: `1px solid ${t.accent}33`,
@@ -195,7 +195,7 @@ export default function ThemesPage() {
                         className="w-1 h-1 rounded-full"
                         style={{ background: i === 0 ? t.accent : t.textDim }}
                       />
-                      <span className="text-[11px] font-medium tracking-tight">
+                      <span className="text-caption font-medium tracking-tight">
                         {label}
                       </span>
                     </div>
@@ -207,13 +207,13 @@ export default function ThemesPage() {
               <div className="px-4 py-4 flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <div
-                    className="text-[13px] font-semibold tracking-tight"
+                    className="text-caption font-semibold tracking-tight"
                     style={{ color: t.text }}
                   >
                     Stage
                   </div>
                   <div
-                    className="text-[10px] font-mono tabular-nums"
+                    className="text-caption font-mono tabular-nums"
                     style={{ color: t.textDim }}
                   >
                     3 items
@@ -233,13 +233,13 @@ export default function ThemesPage() {
                     }}
                   >
                     <div
-                      className="text-[11.5px] font-medium tracking-tight"
+                      className="text-caption font-medium tracking-tight"
                       style={{ color: t.text }}
                     >
                       {row.label}
                     </div>
                     <div
-                      className="text-[10px] mt-0.5"
+                      className="text-caption mt-0.5"
                       style={{ color: t.textDim }}
                     >
                       {row.meta}
@@ -248,7 +248,7 @@ export default function ThemesPage() {
                 ))}
                 <div className="mt-auto flex items-center gap-2">
                   <span
-                    className="text-[10.5px] px-2.5 py-1 rounded-full font-medium"
+                    className="text-caption px-2.5 py-1 rounded-full font-medium"
                     style={{
                       background: `linear-gradient(180deg, ${t.accent}, ${t.accent2})`,
                       color: t.surface,
@@ -257,7 +257,7 @@ export default function ThemesPage() {
                     Stage all
                   </span>
                   <span
-                    className="text-[10.5px] px-2.5 py-1 rounded-full"
+                    className="text-caption px-2.5 py-1 rounded-full"
                     style={{
                       color: t.textDim,
                       border: `1px solid ${t.border}`,
@@ -276,17 +276,17 @@ export default function ThemesPage() {
             >
               <div className="flex items-center gap-2 mb-1">
                 <span
-                  className="text-[14px] font-semibold tracking-tight"
+                  className="text-caption font-semibold tracking-tight"
                   style={{ color: t.text }}
                 >
                   {t.name}
                 </span>
-                <span className="text-[12px]" style={{ color: t.textDim }}>
+                <span className="text-caption" style={{ color: t.textDim }}>
                   · {t.tagline}
                 </span>
               </div>
               <p
-                className="text-[12px] leading-[1.55]"
+                className="text-caption leading-[1.55]"
                 style={{ color: t.textDim }}
               >
                 {t.description}
@@ -304,7 +304,7 @@ export default function ThemesPage() {
                   />
                 ))}
                 <span
-                  className="ml-2 text-[10px] font-mono tabular-nums"
+                  className="ml-2 text-caption font-mono tabular-nums"
                   style={{ color: t.textDim }}
                 >
                   {t.swatch.length} tokens
@@ -320,10 +320,10 @@ export default function ThemesPage() {
           <Palette size={16} strokeWidth={1.75} />
         </span>
         <div>
-          <div className="text-[14px] font-medium text-white mb-1">
+          <div className="text-caption font-medium text-white mb-1">
             Coming in 1.2.0: custom palettes
           </div>
-          <p className="text-[13.5px] leading-[1.7] text-[var(--color-fg-dim)]">
+          <p className="text-caption leading-[1.7] text-fg-dim">
             Per-token customization (surface, accent, border, text) with a live
             preview pane. Export as a .trovetheme file, share via Discussions,
             import with a double-click.

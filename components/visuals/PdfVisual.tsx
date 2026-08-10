@@ -13,7 +13,7 @@ const actions = [
 export default function PdfVisual() {
   return (
     <div className="w-full h-full p-6 sm:p-10 flex flex-col gap-5 bg-[radial-gradient(120%_80%_at_50%_0%,rgba(76,184,255,0.12),transparent_60%)]">
-      <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
+      <div className="text-micro uppercase text-fg-mute">
         PDF Tools
       </div>
 
@@ -36,7 +36,7 @@ export default function PdfVisual() {
                 delay: i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="absolute inset-0 rounded-lg border border-white/[0.08] bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] p-4 flex flex-col gap-2 origin-bottom-left"
+              className="absolute inset-0 rounded-lg border border-line-soft bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] p-4 flex flex-col gap-2 origin-bottom-left"
               style={{ zIndex: 10 - i }}
             >
               <FileText size={20} className="text-[#4cb8ff]" />
@@ -44,12 +44,12 @@ export default function PdfVisual() {
                 {[100, 86, 92, 70, 80, 60].map((w, j) => (
                   <div
                     key={j}
-                    className="h-1 rounded-full bg-white/[0.08]"
+                    className="h-1 rounded-full bg-surface-3"
                     style={{ width: `${w}%` }}
                   />
                 ))}
               </div>
-              <div className="mt-auto text-[9px] font-mono text-[var(--color-fg-mute)]">
+              <div className="mt-auto text-caption font-mono text-fg-mute">
                 quarterly-report-{i + 1}.pdf
               </div>
             </motion.div>
@@ -68,7 +68,7 @@ export default function PdfVisual() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.4 }}
               transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
-              className="rounded-lg border border-white/[0.06] bg-white/[0.025] hover:bg-white/[0.05] transition-colors px-2 py-2.5 flex flex-col items-center gap-1.5 text-[11px] text-[var(--color-fg-dim)]"
+              className="rounded-lg border border-line-soft bg-surface-1 hover:bg-surface-2 transition-colors px-2 py-2.5 flex flex-col items-center gap-1.5 text-caption text-fg-dim"
             >
               <Icon size={14} className="text-white/80" />
               {a.label}

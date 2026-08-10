@@ -69,7 +69,7 @@ export default async function DownloadPage() {
           <h1 className="text-[clamp(34px,5vw,52px)] font-semibold tracking-tight leading-[1.05]">
             Download Trove
           </h1>
-          <p className="mt-4 text-[16px] text-[var(--color-fg-dim)] leading-relaxed">
+          <p className="mt-4 text-body text-fg-dim leading-relaxed">
             Native on every supported platform. Local-only by default: no
             account, no telemetry, no upload. Single binary, no installer.
           </p>
@@ -108,7 +108,7 @@ export default async function DownloadPage() {
           />
         </div>
 
-        <section className="mt-16 grid sm:grid-cols-3 gap-6 text-[13.5px]">
+        <section className="mt-16 grid sm:grid-cols-3 gap-6 text-caption">
           <Highlight
             title="Local-only"
             body="No account, no telemetry, no upload. Everything runs on the device."
@@ -123,7 +123,7 @@ export default async function DownloadPage() {
           />
         </section>
 
-        <section className="mt-12 grid sm:grid-cols-2 gap-6 text-[13.5px]">
+        <section className="mt-12 grid sm:grid-cols-2 gap-6 text-caption">
           <LinkCard
             title="Want every release?"
             href={`https://github.com/${RELEASE_REPO}/releases`}
@@ -145,9 +145,9 @@ export default async function DownloadPage() {
 
 function Highlight({ title, body }: { title: string; body: string }) {
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
-      <div className="text-[15px] font-semibold tracking-tight">{title}</div>
-      <p className="mt-1.5 text-[var(--color-fg-dim)] leading-relaxed">
+    <div className="rounded-2xl border border-line-soft bg-surface-1 p-5">
+      <div className="text-body font-semibold tracking-tight">{title}</div>
+      <p className="mt-1.5 text-fg-dim leading-relaxed">
         {body}
       </p>
     </div>
@@ -170,13 +170,13 @@ function LinkCard({
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="block rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 hover:bg-white/[0.04] hover:border-white/[0.12] transition-colors"
+      className="block rounded-2xl border border-line-soft bg-surface-1 p-5 hover:bg-surface-1 hover:border-line-strong transition-colors"
     >
-      <div className="text-[15px] font-semibold tracking-tight">
+      <div className="text-body font-semibold tracking-tight">
         {title}
-        <span className="ml-1 text-[var(--color-fg-dim)] font-normal">→</span>
+        <span className="ml-1 text-fg-dim font-normal">→</span>
       </div>
-      <p className="mt-1.5 text-[var(--color-fg-dim)] leading-relaxed">
+      <p className="mt-1.5 text-fg-dim leading-relaxed">
         {children}
       </p>
     </a>

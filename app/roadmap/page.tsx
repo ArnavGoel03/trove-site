@@ -160,14 +160,14 @@ function Bucket({
   return (
     <section className="mb-16">
       <div className="flex items-baseline justify-between mb-5">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white">
+        <h2 className="text-lead font-semibold text-white">
           {title}
         </h2>
-        <span className="text-[12px] text-[var(--color-fg-mute)]">
+        <span className="text-caption text-fg-mute">
           {items.length} item{items.length === 1 ? "" : "s"}
         </span>
       </div>
-      <p className="text-[14px] leading-[1.7] text-[var(--color-fg-dim)] mb-6 max-w-2xl">
+      <p className="text-caption leading-[1.7] text-fg-dim mb-6 max-w-2xl">
         {blurb}
       </p>
       <ul className="space-y-3">
@@ -178,7 +178,7 @@ function Bucket({
             style={{ borderColor: `${tint}30` }}
           >
             <span
-              className="inline-flex shrink-0 mt-0.5 w-6 h-6 rounded-full items-center justify-center text-[10px] font-semibold uppercase tracking-[0.1em]"
+              className="inline-flex shrink-0 mt-0.5 w-6 h-6 rounded-full items-center justify-center text-micro font-semibold uppercase tracking-[0.1em]"
               style={{ background: `${tint}22`, color: tint }}
               title={
                 it.size === "S"
@@ -191,10 +191,10 @@ function Bucket({
               {it.size}
             </span>
             <div>
-              <div className="text-[15px] font-medium text-white">
+              <div className="text-body font-medium text-white">
                 {it.title}
               </div>
-              <div className="text-[14px] text-[var(--color-fg-dim)] leading-[1.65] mt-1.5">
+              <div className="text-caption text-fg-dim leading-[1.65] mt-1.5">
                 {it.body}
               </div>
             </div>

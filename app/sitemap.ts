@@ -4,6 +4,7 @@ import { slugifyPane } from "@/lib/slug";
 import { GUIDES } from "@/lib/guides";
 import { listUpdates } from "@/lib/updates";
 import { ACTIONS } from "@/lib/actions";
+import { COMPARISON_SLUGS } from "@/lib/comparisons";
 import { APPS, STUDIO } from "@/lib/brand";
 
 const BASE = STUDIO.domain;
@@ -197,8 +198,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const comparisonSlugs = ["postman", "raycast", "cleanmymac", "boop", "devutils"];
-  const comparisonPages: MetadataRoute.Sitemap = comparisonSlugs.map((s) => ({
+  const comparisonPages: MetadataRoute.Sitemap = COMPARISON_SLUGS.map((s) => ({
     url: `${BASE}/compare/${s}`,
     lastModified: now,
     changeFrequency: "monthly",

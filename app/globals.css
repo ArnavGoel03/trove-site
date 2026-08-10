@@ -123,29 +123,7 @@ html {
   /* NOTE: never put a `transform` (or filter/perspective) on html or body.
      It makes every position:fixed descendant (nav, skip-link, grain) resolve
      against the full-height document instead of the viewport, which un-pins
-     the nav and lets you scroll into dead space above it. The FeatureReel
-     sticky blocks get their own compositor layer via .feature-block-sticky. */
-}
-
-/* Heavy off-screen content (FeatureReel blocks) doesn't paint or
-   composite until it's near the viewport: buys 50-80 ms per scroll
-   event on a long page. `contain-intrinsic-size` reserves the layout
-   slot so the scroll position doesn't jump when the browser starts
-   painting a previously-skipped block. Keep this in sync with the
-   block height in FeatureReel.tsx (170vh) or the reserved slot will
-   be wrong and the scroll position will jump when a block first
-   paints. */
-.feature-block {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 170vh;
-}
-
-/* The sticky inner of each FeatureBlock gets its own compositor layer
-   so per-scroll transforms on its children don't force a paint of the
-   surrounding section. */
-.feature-block-sticky {
-  transform: translateZ(0);
-  will-change: transform;
+     the nav and lets you scroll into dead space above it. */
 }
 
 * {

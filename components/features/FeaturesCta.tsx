@@ -41,40 +41,40 @@ export default function FeaturesCta() {
           }}
         />
 
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] max-w-2xl">
+        <h2 className="text-display font-semibold max-w-2xl">
           Try the {TROVE.version} release.
           <br />
-          <span className="text-[var(--color-fg-dim)]">
+          <span className="text-fg-dim">
             Two ways to install.
           </span>
         </h2>
 
         <div className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="rounded-2xl border border-white/[0.08] bg-black/30 p-5">
-            <div className="text-[11.5px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)] mb-3">
+          <div className="rounded-2xl border border-line-soft bg-black/30 p-5">
+            <div className="text-micro uppercase text-fg-mute mb-3">
               Direct download
             </div>
-            <p className="text-[13.5px] text-[var(--color-fg-dim)] mb-5 leading-relaxed">
+            <p className="text-caption text-fg-dim mb-5 leading-relaxed">
               The fastest path: grab the .zip from GitHub Releases
               ({PLATFORM.arch}, {PLATFORM.minMacOS}). {SIGNING.firstLaunch}
             </p>
             <DownloadButton size="md" />
           </div>
 
-          <div className="rounded-2xl border border-white/[0.08] bg-black/30 p-5">
-            <div className="text-[11.5px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)] mb-3">
+          <div className="rounded-2xl border border-line-soft bg-black/30 p-5">
+            <div className="text-micro uppercase text-fg-mute mb-3">
               Homebrew Cask
             </div>
-            <p className="text-[13.5px] text-[var(--color-fg-dim)] mb-4 leading-relaxed">
+            <p className="text-caption text-fg-dim mb-4 leading-relaxed">
               Once the tap is published, install and update sit on the same
-              <code className="text-white/90 bg-white/[0.04] px-1.5 py-0.5 rounded text-[12px] mx-1">
+              <code className="text-white/90 bg-surface-1 px-1.5 py-0.5 rounded text-caption mx-1">
                 brew upgrade --cask
               </code>
               flow as your other Mac apps.
             </p>
             <button
               onClick={copyBrew}
-              className="btn-ghost group inline-flex items-center gap-2 rounded-xl font-mono text-[12.5px] px-3.5 py-2.5 w-full justify-between cursor-pointer"
+              className="btn-ghost group inline-flex items-center gap-2 rounded-xl font-mono text-caption px-3.5 py-2.5 w-full justify-between cursor-pointer"
             >
               <span className="flex items-center gap-2 min-w-0">
                 <Terminal size={14} className="opacity-70 shrink-0" />
@@ -88,7 +88,7 @@ export default function FeaturesCta() {
           </div>
         </div>
 
-        <div className="mt-7 flex flex-wrap items-center gap-4 text-[12.5px] text-[var(--color-fg-dim)]">
+        <div className="mt-7 flex flex-wrap items-center gap-4 text-caption text-fg-dim">
           <a
             href={ISSUES_URL}
             target="_blank"
@@ -97,7 +97,7 @@ export default function FeaturesCta() {
           >
             <Github size={13} /> Report an issue
           </a>
-          <span className="text-[var(--color-fg-mute)]">·</span>
+          <span className="text-fg-mute">·</span>
           <a
             href={releasePageURL()}
             target="_blank"
@@ -106,7 +106,7 @@ export default function FeaturesCta() {
           >
             All releases
           </a>
-          <span className="text-[var(--color-fg-mute)]">·</span>
+          <span className="text-fg-mute">·</span>
           <a
             href="/changelog"
             className="hover:text-white transition-colors"

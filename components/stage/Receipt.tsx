@@ -117,9 +117,10 @@ export default function Receipt({
       </dl>
 
       <p className="receipt-note">
-        You keep <span ref={saved}>{formatUSD(SAVING)}</span> in the first year. Prices read from
-        each vendor&rsquo;s own page, oldest check {oldestCheck()}. Subscriptions and one-time
-        purchases are summed separately and never amortised.
+        You keep <span ref={saved}>{formatUSD(SAVING)}</span>{" "}
+        in the first year. Prices read from each vendor&rsquo;s own page, oldest check{" "}
+        {oldestCheck()}. Subscriptions and one-time purchases are summed separately and never
+        amortised.
       </p>
     </div>
   );

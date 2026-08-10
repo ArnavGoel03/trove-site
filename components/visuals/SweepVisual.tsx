@@ -59,17 +59,17 @@ export default function SweepVisual() {
     >
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
+          <div className="text-micro uppercase text-fg-mute">
             Sweep ~/Downloads
           </div>
-          <div className="mt-1 text-2xl sm:text-3xl font-semibold tracking-tight">
+          <div className="mt-1 text-title font-semibold tracking-tight">
             <motion.span className="tabular-nums">{reclaimed}</motion.span>{" "}
-            <span className="text-[var(--color-fg-dim)] text-base font-normal">
+            <span className="text-fg-dim text-base font-normal">
               to reclaim
             </span>
           </div>
         </div>
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#ff5d8f]/15 border border-[#ff5d8f]/30 px-2.5 py-1 text-[11px] text-[#ffb0c5]">
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#ff5d8f]/15 border border-[#ff5d8f]/30 px-2.5 py-1 text-caption text-[#ffb0c5]">
           <Trash2 size={11} />
           older than 30 days
         </div>
@@ -87,24 +87,24 @@ export default function SweepVisual() {
               delay: i * 0.06,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 px-3 py-2 rounded-lg border border-white/[0.04] bg-white/[0.015]"
+            className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 px-3 py-2 rounded-lg border border-line-soft bg-surface-1"
           >
             <ArrowDownToLine
               size={13}
-              className="text-[var(--color-fg-mute)]"
+              className="text-fg-mute"
             />
-            <div className="text-[12.5px] font-medium truncate">{f.name}</div>
-            <div className="text-[11px] text-[var(--color-fg-mute)] font-mono tabular-nums">
+            <div className="text-caption font-medium truncate">{f.name}</div>
+            <div className="text-caption text-fg-mute font-mono tabular-nums">
               {f.age}
             </div>
-            <div className="text-[11.5px] tabular-nums font-medium text-white/85 w-16 text-right">
+            <div className="text-caption tabular-nums font-medium text-white/85 w-16 text-right">
               {f.size}
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="text-[11.5px] text-[var(--color-fg-mute)]">
+      <div className="text-caption text-fg-mute">
         Preview every file before it leaves your disk. Sweep is opt-in,
         per-file.
       </div>

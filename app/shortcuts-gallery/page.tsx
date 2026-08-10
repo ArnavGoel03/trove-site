@@ -92,10 +92,10 @@ export default function ShortcutsGalleryPage() {
           },
         ].map((s) => (
           <div key={s.label} className="pane rounded-xl p-4">
-            <div className="text-[28px] font-semibold tracking-tight text-white">
+            <div className="text-title font-semibold tracking-tight text-white">
               {s.value}
             </div>
-            <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)] mt-1">
+            <div className="text-micro uppercase text-fg-mute mt-1">
               {s.label}
             </div>
           </div>
@@ -109,12 +109,12 @@ export default function ShortcutsGalleryPage() {
             <section key={cat.name}>
               <header className="mb-5">
                 <div
-                  className="text-[12px] uppercase tracking-[0.22em] mb-2"
+                  className="text-micro uppercase tracking-[0.22em] mb-2"
                   style={{ color: cat.accent }}
                 >
                   {cat.name}
                 </div>
-                <p className="text-[15px] text-[var(--color-fg-dim)]">
+                <p className="text-body text-fg-dim">
                   {cat.tagline}
                 </p>
               </header>
@@ -138,12 +138,12 @@ export default function ShortcutsGalleryPage() {
                           <Icon size={18} strokeWidth={1.5} />
                         </span>
                         <div className="min-w-0">
-                          <h3 className="text-[15px] font-medium text-white leading-snug">
+                          <h3 className="text-body font-medium text-white leading-snug">
                             {it.title}
                           </h3>
                           <div className="flex items-center gap-2 mt-1">
                             <span
-                              className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] uppercase tracking-[0.12em]"
+                              className="inline-flex items-center rounded-full px-2 py-0.5 text-micro uppercase tracking-[0.12em]"
                               style={{
                                 background: `${KIND_TINT[it.kind]}18`,
                                 color: KIND_TINT[it.kind],
@@ -151,13 +151,13 @@ export default function ShortcutsGalleryPage() {
                             >
                               {it.kind}
                             </span>
-                            <code className="font-mono text-[10.5px] text-[var(--color-fg-mute)]">
+                            <code className="font-mono text-caption text-fg-mute">
                               {it.name}
                             </code>
                           </div>
                         </div>
                       </header>
-                      <p className="text-[13.5px] leading-[1.65] text-[var(--color-fg-dim)]">
+                      <p className="text-caption leading-[1.65] text-fg-dim">
                         {it.description}
                       </p>
                     </article>

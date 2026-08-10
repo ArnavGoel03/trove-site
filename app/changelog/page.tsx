@@ -62,7 +62,7 @@ export default async function ChangelogPage() {
       />
 
       {entries.length === 0 ? (
-        <div className="pane rounded-xl p-6 text-[14px] text-[var(--color-fg-dim)]">
+        <div className="pane rounded-xl p-6 text-caption text-fg-dim">
           Couldn&rsquo;t reach the source changelog right now.{" "}
           <a
             className="md-link"
@@ -79,7 +79,7 @@ export default async function ChangelogPage() {
             aria-label="Version index"
             className="pane rounded-xl p-5 mb-12 sticky top-[88px] z-10 max-h-[40vh] overflow-y-auto"
           >
-            <div className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-3">
+            <div className="text-micro uppercase tracking-[0.2em] text-fg-mute mb-3">
               Jump to version
             </div>
             <ul className="flex flex-wrap gap-2">
@@ -87,15 +87,15 @@ export default async function ChangelogPage() {
                 <li key={e.version}>
                   <Link
                     href={`#${slugifyVersion(e.version)}`}
-                    className={`inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-3 py-1 text-[12px] hover:border-white/20 transition-colors ${
+                    className={`inline-flex items-center gap-2 rounded-full border border-line-soft px-3 py-1 text-caption hover:border-line-strong transition-colors ${
                       e.isStable
                         ? "bg-accent/10 text-white"
-                        : "text-[var(--color-fg-dim)]"
+                        : "text-fg-dim"
                     }`}
                   >
                     <span>{e.version}</span>
                     {e.isStable ? (
-                      <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-accent)]">
+                      <span className="text-micro uppercase text-accent">
                         stable
                       </span>
                     ) : null}
@@ -112,19 +112,19 @@ export default async function ChangelogPage() {
                 id={slugifyVersion(e.version)}
                 className="scroll-mt-32"
               >
-                <header className="flex flex-wrap items-baseline gap-3 mb-6 pb-4 border-b border-white/[0.06]">
-                  <h2 className="text-[28px] font-semibold tracking-[-0.02em] text-white">
+                <header className="flex flex-wrap items-baseline gap-3 mb-6 pb-4 border-b border-line-soft">
+                  <h2 className="text-title font-semibold text-white">
                     {e.version}
                   </h2>
-                  <span className="text-[13px] text-[var(--color-fg-mute)]">
+                  <span className="text-caption text-fg-mute">
                     {e.date}
                   </span>
                   {e.isStable ? (
-                    <span className="ml-auto inline-flex items-center rounded-full border border-[var(--color-accent)]/40 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                    <span className="ml-auto inline-flex items-center rounded-full border border-accent/40 px-2.5 py-0.5 text-micro uppercase text-accent">
                       Stable
                     </span>
                   ) : (
-                    <span className="ml-auto inline-flex items-center rounded-full border border-white/[0.08] px-2.5 py-0.5 text-[10px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
+                    <span className="ml-auto inline-flex items-center rounded-full border border-line-soft px-2.5 py-0.5 text-micro uppercase text-fg-mute">
                       Beta
                     </span>
                   )}

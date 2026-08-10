@@ -64,11 +64,11 @@ export default async function UpdatePostPage({
         ])}
       />
 
-      <div className="mb-10 flex items-center gap-3 text-[12.5px] text-[var(--color-fg-dim)]">
-        <span className="font-mono tabular-nums text-[var(--color-fg-mute)]">
+      <div className="mb-10 flex items-center gap-3 text-caption text-fg-dim">
+        <span className="font-mono tabular-nums text-fg-mute">
           {post.date}
         </span>
-        <span className="text-[var(--color-fg-mute)]">·</span>
+        <span className="text-fg-mute">·</span>
         <span>{post.author}</span>
       </div>
 
@@ -77,10 +77,10 @@ export default async function UpdatePostPage({
         dangerouslySetInnerHTML={{ __html: renderMarkdown(post.body) }}
       />
 
-      <div className="mt-16 pt-8 border-t border-white/[0.06]">
+      <div className="mt-16 pt-8 border-t border-line-soft">
         <Link
           href="/updates"
-          className="text-[13.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors"
+          className="text-caption text-fg-dim hover:text-white transition-colors"
         >
           ← All updates
         </Link>

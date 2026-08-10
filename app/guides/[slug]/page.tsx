@@ -75,14 +75,14 @@ export default async function GuidePage({
             key={i}
             className="pane rounded-xl p-5 flex gap-4"
           >
-            <span className="shrink-0 inline-flex w-8 h-8 rounded-full items-center justify-center bg-accent/12 text-[var(--color-accent)] font-mono text-[13px]">
+            <span className="shrink-0 inline-flex w-8 h-8 rounded-full items-center justify-center bg-accent/12 text-accent font-mono text-caption">
               {i + 1}
             </span>
             <div>
-              <div className="text-[15px] font-medium text-white">
+              <div className="text-body font-medium text-white">
                 {s.name}
               </div>
-              <p className="text-[14px] leading-[1.7] text-[var(--color-fg-dim)] mt-1.5">
+              <p className="text-caption leading-[1.7] text-fg-dim mt-1.5">
                 {s.text}
               </p>
             </div>
@@ -91,14 +91,14 @@ export default async function GuidePage({
       </ol>
 
       {guide.outro ? (
-        <div className="pane rounded-xl p-5 mb-12 text-[14px] leading-[1.7] text-[var(--color-fg-dim)]">
+        <div className="pane rounded-xl p-5 mb-12 text-caption leading-[1.7] text-fg-dim">
           {guide.outro}
         </div>
       ) : null}
 
       {panes.length > 0 ? (
         <section>
-          <h2 className="text-[18px] font-semibold tracking-tight text-white mb-4">
+          <h2 className="text-lead font-semibold tracking-tight text-white mb-4">
             Panes used in this guide
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -108,7 +108,7 @@ export default async function GuidePage({
                 <Link
                   key={p.name}
                   href={`/pane/${slugifyPane(p.name)}`}
-                  className="pane rounded-xl p-4 flex items-center gap-3 hover:border-white/20 transition-colors"
+                  className="pane rounded-xl p-4 flex items-center gap-3 hover:border-line-strong transition-colors"
                 >
                   <span
                     className="inline-flex w-9 h-9 rounded-lg items-center justify-center shrink-0"
@@ -117,10 +117,10 @@ export default async function GuidePage({
                     <Icon size={18} strokeWidth={1.5} />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[14px] font-medium text-white">
+                    <div className="text-caption font-medium text-white">
                       {p.name}
                     </div>
-                    <div className="text-[12px] text-[var(--color-fg-mute)] truncate">
+                    <div className="text-caption text-fg-mute truncate">
                       {p.blurb}
                     </div>
                   </div>

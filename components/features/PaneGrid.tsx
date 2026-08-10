@@ -14,16 +14,16 @@ export default function PaneGrid() {
         {...rise()}
         className="max-w-3xl mb-14"
       >
-        <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
+        <div className="text-micro uppercase tracking-[0.2em] text-fg-mute mb-4">
           The full set
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.02]">
+        <h2 className="text-display font-semibold">
           40+ tools, grouped the way{" "}
-          <span className="text-[var(--color-fg-dim)]">
+          <span className="text-fg-dim">
             the app groups them.
           </span>
         </h2>
-        <p className="mt-5 text-[15px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
+        <p className="mt-5 text-body text-fg-dim max-w-2xl leading-relaxed">
           Hide any pane you don&rsquo;t use from Trove → Settings → Customize
           (Stage is the only one that stays, it&rsquo;s where everything else
           drops). The list below mirrors that panel exactly.
@@ -73,14 +73,14 @@ function SectionBlock({
               boxShadow: `0 0 14px 2px ${accent}55`,
             }}
           />
-          <h3 className="text-[26px] sm:text-[30px] font-semibold tracking-[-0.025em] text-white">
+          <h3 className="text-title font-semibold text-white">
             {title}
           </h3>
-          <span className="text-[12px] text-[var(--color-fg-mute)] font-mono tabular-nums">
+          <span className="text-caption text-fg-mute font-mono tabular-nums">
             {panes.length} pane{panes.length === 1 ? "" : "s"}
           </span>
         </div>
-        <span className="hidden sm:block text-[13px] text-[var(--color-fg-dim)] max-w-md text-right leading-snug">
+        <span className="hidden sm:block text-caption text-fg-dim max-w-md text-right leading-snug">
           {tagline}
         </span>
       </div>
@@ -98,7 +98,7 @@ function PaneCard({ pane, accent }: { pane: Pane; accent: string }) {
   const Icon = pane.icon;
   return (
     <div
-      className="pane rounded-xl p-5 transition-all hover:-translate-y-0.5 hover:border-white/[0.12] relative overflow-hidden"
+      className="pane rounded-xl p-5 transition-all hover:-translate-y-0.5 hover:border-line-strong relative overflow-hidden"
       style={
         {
           // Each card gets a faint accent wash in the bottom-right corner
@@ -110,24 +110,24 @@ function PaneCard({ pane, accent }: { pane: Pane; accent: string }) {
     >
       <div className="flex items-start gap-3.5">
         <div
-          className="w-9 h-9 rounded-lg border border-white/[0.08] bg-white/[0.03] flex items-center justify-center shrink-0"
+          className="w-9 h-9 rounded-lg border border-line-soft bg-surface-1 flex items-center justify-center shrink-0"
           style={{ boxShadow: `inset 0 0 0 1px ${accent}22` }}
         >
           <Icon size={16} className="text-white/90" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline justify-between gap-2">
-            <div className="text-[15px] font-semibold tracking-tight text-white truncate">
+            <div className="text-body font-semibold tracking-tight text-white truncate">
               {pane.name}
             </div>
             <code
-              className="text-[10px] font-mono text-[var(--color-fg-mute)] truncate ml-2"
+              className="text-caption font-mono text-fg-mute truncate ml-2"
               title={`SF Symbol: ${pane.sfSymbol}`}
             >
               {pane.sfSymbol}
             </code>
           </div>
-          <p className="mt-1.5 text-[13px] text-[var(--color-fg-dim)] leading-relaxed">
+          <p className="mt-1.5 text-caption text-fg-dim leading-relaxed">
             {pane.blurb}
           </p>
         </div>

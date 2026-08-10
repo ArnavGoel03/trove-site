@@ -28,7 +28,7 @@ export default function ActionsIndex() {
           <h1 className="text-[clamp(34px,5vw,52px)] font-semibold tracking-tight leading-[1.05]">
             ⌘K inline actions
           </h1>
-          <p className="mt-4 text-[16px] text-[var(--color-fg-dim)] leading-relaxed">
+          <p className="mt-4 text-body text-fg-dim leading-relaxed">
             {ACTIONS.length}+ instant transforms that run on your Mac
             without leaving the keyboard. Open Trove (or hit your bound
             hotkey), type the trigger and your input, hit Return. The
@@ -42,9 +42,9 @@ export default function ActionsIndex() {
           if (inCat.length === 0) return null;
           return (
             <section key={cat.id} id={cat.id} className="mb-12">
-              <h2 className="text-[20px] font-semibold tracking-tight mb-4">
+              <h2 className="text-lead font-semibold tracking-tight mb-4">
                 {cat.label}
-                <span className="ml-2 text-[14px] text-[var(--color-fg-dim)] font-normal">
+                <span className="ml-2 text-caption text-fg-dim font-normal">
                   {inCat.length}
                 </span>
               </h2>
@@ -53,13 +53,13 @@ export default function ActionsIndex() {
                   <Link
                     key={a.slug}
                     href={`/action/${a.slug}`}
-                    className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 hover:bg-white/[0.05] hover:border-white/[0.12] transition-colors block"
+                    className="rounded-xl border border-line-soft bg-surface-1 p-4 hover:bg-surface-2 hover:border-line-strong transition-colors block"
                   >
-                    <div className="text-[14.5px] font-semibold">{a.title}</div>
-                    <div className="text-[12.5px] text-[var(--color-fg-dim)] mt-1 line-clamp-2">
+                    <div className="text-caption font-semibold">{a.title}</div>
+                    <div className="text-caption text-fg-dim mt-1 line-clamp-2">
                       {a.tagline}
                     </div>
-                    <div className="mt-2 text-[11px] font-mono text-[var(--color-fg-dim)] truncate">
+                    <div className="mt-2 text-caption font-mono text-fg-dim truncate">
                       ⌘K {a.triggers[0]}
                     </div>
                   </Link>
@@ -69,11 +69,11 @@ export default function ActionsIndex() {
           );
         })}
 
-        <section className="mt-16 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 max-w-3xl">
-          <h3 className="text-[16px] font-semibold">
+        <section className="mt-16 rounded-2xl border border-line-soft bg-surface-1 p-6 max-w-3xl">
+          <h3 className="text-body font-semibold">
             What about the rest of Trove?
           </h3>
-          <p className="mt-2 text-[13.5px] text-[var(--color-fg-dim)]">
+          <p className="mt-2 text-caption text-fg-dim">
             These actions live in the Quick Switcher; Trove also has 40+
             full panes (API Tester, Speedtest, Hash, OCR, Hosts editor,
             Local LLM chat, Image Editor, …). Browse them at{" "}

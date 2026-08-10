@@ -34,7 +34,7 @@ export default function ScrollToTop() {
       onClick={toTop}
       aria-label="Scroll back to top"
       title="Back to top"
-      className="fixed bottom-5 right-5 z-40 w-10 h-10 inline-flex items-center justify-center rounded-full border border-white/[0.1] bg-[#0e0e12]/85 backdrop-blur-md text-[var(--color-fg-dim)] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] hover:text-white hover:bg-[#171922]/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black print:hidden"
+      className="fixed bottom-5 right-5 z-40 w-10 h-10 inline-flex items-center justify-center rounded-full border border-line-strong bg-[#0e0e12]/85 backdrop-blur-md text-fg-dim shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] hover:text-white hover:bg-[#171922]/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black print:hidden"
     >
       <ArrowUp size={16} strokeWidth={1.75} />
     </button>

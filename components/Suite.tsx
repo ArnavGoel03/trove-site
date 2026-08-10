@@ -25,20 +25,20 @@ export default function Suite() {
   return (
     <section
       id="suite"
-      className="relative px-6 py-24 sm:py-28 border-t border-white/[0.06]"
+      className="relative px-6 py-24 sm:py-28 border-t border-line-soft"
     >
       <div className="max-w-5xl mx-auto">
         <motion.div
           {...rise({ margin: "-20%" })}
           className="text-center max-w-2xl mx-auto"
         >
-          <p className="text-[12.5px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)] mb-3">
+          <p className="text-micro uppercase text-fg-mute mb-3">
             One subscription
           </p>
-          <h2 className="text-[32px] sm:text-[44px] font-semibold tracking-[-0.03em] leading-[1.05] bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
+          <h2 className="text-display font-semibold bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
             One key. Every app.
           </h2>
-          <p className="mt-5 text-[15px] sm:text-[16px] text-[var(--color-fg-dim)] leading-relaxed">
+          <p className="mt-5 text-body text-fg-dim leading-relaxed">
             {STUDIO.name} makes private, native Mac apps that never phone home.
             A single subscription is one license key that unlocks all of them,
             on every Mac you own. {SUITE.trial}, no account required.
@@ -58,13 +58,13 @@ export default function Suite() {
                   duration: 0.55,
                   delay: i * 0.08,
                 })}
-                className="relative flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-[border-color,transform] duration-300 hover:border-white/[0.14] hover:-translate-y-1"
+                className="relative flex flex-col rounded-2xl border border-line-soft bg-surface-1 p-6 transition-[border-color,transform] duration-300 hover:border-line-strong hover:-translate-y-1"
               >
                 <span
-                  className={`inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ${
+                  className={`inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-caption font-medium ${
                     live
                       ? "bg-emerald-500/12 text-emerald-300"
-                      : "bg-white/[0.05] text-[var(--color-fg-mute)]"
+                      : "bg-surface-2 text-fg-mute"
                   }`}
                 >
                   <span
@@ -75,32 +75,32 @@ export default function Suite() {
                   {live ? "Available now" : "Coming soon"}
                 </span>
 
-                <h3 className="mt-4 text-[20px] font-semibold tracking-tight">
+                <h3 className="mt-4 text-lead font-semibold tracking-tight">
                   {a.name}
                 </h3>
-                <p className="mt-1 text-[13.5px] text-[var(--color-accent)]">
+                <p className="mt-1 text-caption text-accent">
                   {a.tagline}
                 </p>
-                <p className="mt-3 text-[13.5px] text-[var(--color-fg-dim)] leading-relaxed flex-1">
+                <p className="mt-3 text-caption text-fg-dim leading-relaxed flex-1">
                   {a.blurb}
                 </p>
 
-                <p className="mt-4 text-[11.5px] text-[var(--color-fg-mute)] font-mono tabular-nums">
+                <p className="mt-4 text-caption text-fg-mute font-mono tabular-nums">
                   v{a.version} &middot; {fmtDate(a.releaseDate)}
                 </p>
 
-                <div className="mt-5 text-[13px]">
+                <div className="mt-5 text-caption">
                   {live ? (
                     <a
                       href={a.href}
-                      className="inline-flex items-center gap-1 font-medium text-white hover:text-[var(--color-accent)] transition-colors"
+                      className="inline-flex items-center gap-1 font-medium text-white hover:text-accent transition-colors"
                     >
                       Learn more &rarr;
                     </a>
                   ) : (
                     <a
                       href={a.href}
-                      className="inline-flex items-center gap-1 font-medium text-[var(--color-fg-dim)] hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1 font-medium text-fg-dim hover:text-white transition-colors"
                     >
                       Preview &rarr;
                     </a>
@@ -111,7 +111,7 @@ export default function Suite() {
           })}
         </div>
 
-        <p className="mt-10 text-center text-[13px] text-[var(--color-fg-mute)]">
+        <p className="mt-10 text-center text-caption text-fg-mute">
           {SUITE.pitch} Buy once, own your tools, keep your data.
         </p>
       </div>

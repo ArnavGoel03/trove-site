@@ -6,14 +6,14 @@ import { ScanLine, Languages, ArrowRight } from "lucide-react";
 export default function OcrVisual() {
   return (
     <div className="w-full h-full p-6 sm:p-10 flex flex-col gap-5 bg-[radial-gradient(120%_80%_at_50%_0%,rgb(var(--color-accent-rgb)/0.12),transparent_60%)]">
-      <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
+      <div className="text-micro uppercase text-fg-mute">
         OCR + Translate
       </div>
 
       <div className="flex-1 grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
         {/* Source: a "screenshot" */}
-        <div className="relative rounded-xl border border-white/[0.06] bg-black/40 p-4 overflow-hidden">
-          <div className="text-[9.5px] uppercase tracking-wider text-[var(--color-fg-mute)] mb-3 flex items-center gap-1.5">
+        <div className="relative rounded-xl border border-line-soft bg-black/40 p-4 overflow-hidden">
+          <div className="text-micro uppercase tracking-wider text-fg-mute mb-3 flex items-center gap-1.5">
             <ScanLine size={11} /> capture
           </div>
           <div className="space-y-1.5">
@@ -29,7 +29,7 @@ export default function OcrVisual() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: false, amount: 0.4 }}
                 transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
-                className="relative inline-block text-[12.5px] text-white/85 font-medium"
+                className="relative inline-block text-caption text-white/85 font-medium"
               >
                 {line}
                 <motion.span
@@ -58,12 +58,12 @@ export default function OcrVisual() {
           />
         </div>
 
-        <div className="flex items-center justify-center text-[var(--color-fg-mute)]">
+        <div className="flex items-center justify-center text-fg-mute">
           <ArrowRight size={18} className="hidden sm:block" />
         </div>
 
-        <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-          <div className="text-[9.5px] uppercase tracking-wider text-[var(--color-fg-mute)] mb-3 flex items-center gap-1.5">
+        <div className="rounded-xl border border-line-soft bg-surface-1 p-4">
+          <div className="text-micro uppercase tracking-wider text-fg-mute mb-3 flex items-center gap-1.5">
             <Languages size={11} /> english
           </div>
           <div className="space-y-1.5">
@@ -79,7 +79,7 @@ export default function OcrVisual() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.4 }}
                 transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
-                className="text-[12.5px] text-white/85"
+                className="text-caption text-white/85"
               >
                 {line}
               </motion.div>
@@ -88,7 +88,7 @@ export default function OcrVisual() {
         </div>
       </div>
 
-      <div className="text-[11.5px] text-[var(--color-fg-mute)]">
+      <div className="text-caption text-fg-mute">
         Snip any region. Text is extracted on-device, translated via Apple
         Translate or your preferred provider, and ready to paste.
       </div>

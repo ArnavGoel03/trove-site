@@ -79,6 +79,43 @@ export function LinkCard({
   );
 }
 
+/**
+ * A call to action.
+ *
+ * Four files were each writing the same pill by hand
+ * (`rounded-full bg-white text-black font-medium px-5 py-2.5 text-[14px]`) with
+ * their own padding and their own hover, so the primary button on /relay sat a
+ * pixel off the one on /brand. One shape, two tones, no page invents a third.
+ */
+export function Button({
+  href,
+  children,
+  tone = "primary",
+  external = false,
+}: {
+  href: string;
+  children: ReactNode;
+  tone?: "primary" | "secondary";
+  external?: boolean;
+}) {
+  const tones = {
+    primary:
+      "bg-fg text-bg hover:-translate-y-0.5 hover:shadow-lift",
+    secondary:
+      "border border-line-strong text-fg hover:border-fg-mute hover:bg-surface-2",
+  } as const;
+  const className = `inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-caption font-medium transition-[transform,background-color,border-color,box-shadow] duration-[--duration-base] ${tones[tone]}`;
+  return external ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </a>
+  ) : (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 /** A titled block within a page. The heading level is the caller's choice. */
 export function Section({
   title,

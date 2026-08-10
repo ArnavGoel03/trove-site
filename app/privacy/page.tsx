@@ -65,7 +65,7 @@ export default function PrivacyPage() {
           <span className="text-white">In the app:</span> All Trove data
           (clipboard history, pane settings, snippets, notes, captures) lives
           on your Mac at{" "}
-          <code className="text-white/90 bg-white/[0.04] px-1.5 py-0.5 rounded">
+          <code className="text-white/90 bg-surface-1 px-1.5 py-0.5 rounded">
             ~/Library/Application Support/Trove/
           </code>
           . License keys are stored in the macOS Keychain.
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
           App data is retained indefinitely on your Mac until you delete it.
           You can delete all Trove data at any time by quitting the app and
           removing the{" "}
-          <code className="text-white/90 bg-white/[0.04] px-1.5 py-0.5 rounded">
+          <code className="text-white/90 bg-surface-1 px-1.5 py-0.5 rounded">
             ~/Library/Application Support/Trove/
           </code>{" "}
           folder, along with the Trove entries in Keychain.

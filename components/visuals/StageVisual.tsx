@@ -31,10 +31,10 @@ export default function StageVisual() {
   return (
     <div className="w-full h-full p-6 sm:p-10 flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
+        <div className="text-micro uppercase text-fg-mute">
           Stage
         </div>
-        <div className="text-[10px] font-mono text-[var(--color-fg-mute)]">
+        <div className="text-caption font-mono text-fg-mute">
           ⌘⇧V to pin
         </div>
       </div>
@@ -53,20 +53,20 @@ export default function StageVisual() {
                 delay: i * 0.08,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={`relative rounded-xl border border-white/[0.06] bg-gradient-to-r ${it.tint} bg-black/30 px-4 py-3 flex items-center gap-3.5 overflow-hidden`}
+              className={`relative rounded-xl border border-line-soft bg-gradient-to-r ${it.tint} bg-black/30 px-4 py-3 flex items-center gap-3.5 overflow-hidden`}
             >
-              <div className="shrink-0 w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center">
+              <div className="shrink-0 w-9 h-9 rounded-lg bg-surface-1 border border-line-soft flex items-center justify-center">
                 <Icon size={16} className="text-white/80" />
               </div>
               <div className="min-w-0">
-                <div className="text-[13px] font-medium truncate">
+                <div className="text-caption font-medium truncate">
                   {it.title}
                 </div>
-                <div className="text-[11.5px] text-[var(--color-fg-dim)] truncate">
+                <div className="text-caption text-fg-dim truncate">
                   {it.preview}
                 </div>
               </div>
-              <div className="ml-auto shrink-0 text-[10px] text-[var(--color-fg-mute)] font-mono">
+              <div className="ml-auto shrink-0 text-caption text-fg-mute font-mono">
                 ⌥{i + 1}
               </div>
             </motion.div>
@@ -74,7 +74,7 @@ export default function StageVisual() {
         })}
       </div>
 
-      <div className="text-[11.5px] text-[var(--color-fg-mute)]">
+      <div className="text-caption text-fg-mute">
         Pin anything to the Stage: survives reboots, syncs across spaces.
       </div>
     </div>

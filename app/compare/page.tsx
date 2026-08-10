@@ -3,6 +3,7 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { Check, Minus, X } from "lucide-react";
 import { PRODUCT, STUDIO } from "@/lib/brand";
+import { citedPrice, oldestCheck } from "@/lib/rivals";
 
 export const metadata: Metadata = {
   title: "Compare Trove vs CleanShot X, Loom, iStat, Boop, CleanMyMac, asitop, Raycast, Maccy, Rectangle, DaisyDisk, TextSniper, Alfred, Soulver",
@@ -40,6 +41,28 @@ const COMPETITORS = [
   { key: "commandx", name: "Command X" },
   { key: "handmirror", name: "Hand Mirror" },
 ] as const;
+
+/**
+ * The price row's footnote, built from the cited ledger.
+ *
+ * This sentence used to carry thirteen hand-typed prices with no source and no
+ * date, four of which disagreed with lib/rivals.ts. Now only the products whose
+ * price was actually read from a vendor page get a number; the rest are named
+ * without one, which is the honest thing to write about a price nobody here
+ * checked. FREE is a claim about a product having no paid tier at all, which is
+ * checkable by anyone in a second and does not need a ledger entry.
+ */
+const FREE = ["Boop", "asitop", "Maccy", "Rectangle"];
+
+const PRICE_NOTE = [
+  `Trove: ${PRODUCT.priceAdjective}.`,
+  ...COMPETITORS.map(({ name }) => {
+    if (FREE.includes(name)) return `${name} is free.`;
+    const price = citedPrice(name);
+    return price ? `${name}: ${price}.` : null;
+  }).filter(Boolean),
+  `Prices read from each vendor's own page, oldest check ${oldestCheck()}. Products listed above without a price are ones whose page could not be read reliably, so no figure is claimed for them.`,
+].join(" ");
 
 const ROWS: Row[] = [
   {
@@ -715,7 +738,7 @@ const ROWS: Row[] = [
       alfred: "partial",
       soulver: "partial",
     },
-    note: `Trove: ${PRODUCT.priceAdjective}. CleanShot $29 one-time. Loom Business $150/yr. iStat $12 one-time. Boop free. CleanMyMac $45/yr. asitop free. Raycast Pro $96/yr. Maccy free. Rectangle free. DaisyDisk $10 one-time. TextSniper $7 one-time. Alfred Powerpack about $40 one-time. Soulver $35 one-time.`,
+    note: PRICE_NOTE,
   },
 ];
 
@@ -733,7 +756,7 @@ function Mark({ value }: { value: "yes" | "no" | "partial" }) {
       </span>
     );
   return (
-    <span className="inline-flex w-6 h-6 rounded-full items-center justify-center bg-white/[0.05] text-[var(--color-fg-mute)]">
+    <span className="inline-flex w-6 h-6 rounded-full items-center justify-center bg-surface-2 text-fg-mute">
       <X size={14} strokeWidth={2.5} />
     </span>
   );
@@ -765,10 +788,10 @@ export default function ComparePage() {
       />
 
       <div className="pane rounded-xl overflow-x-auto">
-        <table className="w-full text-[13px] text-left">
+        <table className="w-full text-caption text-left">
           <thead>
-            <tr className="border-b border-white/[0.08]">
-              <th className="px-4 py-3 font-medium text-[var(--color-fg-mute)] uppercase text-[10.5px] tracking-[0.15em] min-w-[260px]">
+            <tr className="border-b border-line-soft">
+              <th className="px-4 py-3 font-medium text-fg-mute uppercase text-micro min-w-[260px]">
                 Capability
               </th>
               <th className="px-3 py-3 text-center font-medium text-white">
@@ -777,7 +800,7 @@ export default function ComparePage() {
               {COMPETITORS.map((c) => (
                 <th
                   key={c.key}
-                  className="px-3 py-3 text-center font-medium text-[var(--color-fg-dim)]"
+                  className="px-3 py-3 text-center font-medium text-fg-dim"
                 >
                   {c.name}
                 </th>
@@ -790,7 +813,7 @@ export default function ComparePage() {
                 <tr>
                   <td
                     colSpan={COMPETITORS.length + 2}
-                    className="px-4 pt-6 pb-2 text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)]"
+                    className="px-4 pt-6 pb-2 text-micro uppercase tracking-[0.2em] text-accent"
                   >
                     {g}
                   </td>
@@ -798,13 +821,13 @@ export default function ComparePage() {
                 {ROWS.filter((r) => r.group === g).map((r) => (
                   <tr
                     key={r.feature}
-                    className="border-t border-white/[0.04]"
+                    className="border-t border-line-soft"
                     title={r.note}
                   >
                     <td className="px-4 py-3 text-white">
                       <div>{r.feature}</div>
                       {r.note ? (
-                        <div className="text-[11px] text-[var(--color-fg-mute)] mt-0.5 leading-snug">
+                        <div className="text-caption text-fg-mute mt-0.5 leading-snug">
                           {r.note}
                         </div>
                       ) : null}
@@ -825,7 +848,7 @@ export default function ComparePage() {
         </table>
       </div>
 
-      <p className="text-[12px] text-[var(--color-fg-mute)] mt-6 max-w-3xl">
+      <p className="text-caption text-fg-mute mt-6 max-w-3xl">
         Legend: <Mark value="yes" /> shipped · <Mark value="partial" /> partial
         or limited · <Mark value="no" /> not present. Annualized prices are at
         the time of writing; see each vendor&rsquo;s site for current pricing.

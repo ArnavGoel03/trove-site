@@ -80,7 +80,7 @@ export default function DownloadCard({
     : "release date unknown";
 
   return (
-    <div className="relative rounded-3xl border border-white/[0.07] bg-white/[0.025] p-7 flex flex-col gap-5 overflow-hidden">
+    <div className="relative rounded-3xl border border-line-soft bg-surface-1 p-7 flex flex-col gap-5 overflow-hidden">
       <div
         className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full opacity-25 blur-3xl"
         style={{
@@ -103,10 +103,10 @@ export default function DownloadCard({
             <Icon size={20} strokeWidth={2} className="text-white" />
           </span>
           <div>
-            <div className="text-[20px] font-semibold tracking-tight leading-tight">
+            <div className="text-lead font-semibold tracking-tight leading-tight">
               {title}
             </div>
-            <div className="text-[12px] text-[var(--color-fg-dim)] mt-0.5">
+            <div className="text-caption text-fg-dim mt-0.5">
               {tag} · {publishedLabel}
               {sizeMb ? ` · ${sizeMb} MB` : ""}
             </div>
@@ -116,7 +116,7 @@ export default function DownloadCard({
           href={releasePage}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[12px] text-[var(--color-fg-dim)] hover:text-white inline-flex items-center gap-1 transition-colors"
+          className="text-caption text-fg-dim hover:text-white inline-flex items-center gap-1 transition-colors"
           title="Open release page on GitHub"
         >
           Release notes
@@ -124,7 +124,7 @@ export default function DownloadCard({
         </a>
       </div>
 
-      <p className="relative text-[14px] text-[var(--color-fg-dim)] leading-relaxed">
+      <p className="relative text-caption text-fg-dim leading-relaxed">
         {tagline}
       </p>
 
@@ -135,14 +135,14 @@ export default function DownloadCard({
           onClick={onDownload}
           whileHover={{ y: -1 }}
           whileTap={{ y: 0 }}
-          className="btn-primary inline-flex items-center gap-2 rounded-full font-semibold px-5 py-3 text-[14.5px] transition-all"
+          className="btn-primary inline-flex items-center gap-2 rounded-full font-semibold px-5 py-3 text-caption transition-all"
         >
           <Icon size={16} className="-ml-0.5" />
           Download {tag}
         </motion.a>
         <button
           onClick={copyLink}
-          className="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-3 text-[13px] cursor-pointer"
+          className="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-3 text-caption cursor-pointer"
           title="Copy direct download URL"
         >
           <Download size={14} className="opacity-70" />
@@ -151,10 +151,10 @@ export default function DownloadCard({
       </div>
 
       <div className="relative">
-        <div className="text-[12px] uppercase tracking-wide text-[var(--color-fg-dim)] mb-2">
+        <div className="text-micro uppercase tracking-wide text-fg-dim mb-2">
           {instructionsTitle}
         </div>
-        <ol className="text-[13.5px] text-[var(--color-fg-dim)] leading-relaxed space-y-1.5 list-decimal list-outside pl-5">
+        <ol className="text-caption text-fg-dim leading-relaxed space-y-1.5 list-decimal list-outside pl-5">
           {instructions.map((line, i) => (
             <li key={i}>{line}</li>
           ))}

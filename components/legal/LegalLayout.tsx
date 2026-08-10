@@ -17,21 +17,21 @@ export default function LegalLayout({
     <main id="main-content" className="relative">
       <Nav />
       <article className="relative max-w-3xl mx-auto px-6 pt-32 pb-24">
-        <div className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-fg-mute)] mb-4">
+        <div className="text-micro uppercase tracking-[0.2em] text-fg-mute mb-4">
           Legal
         </div>
-        <h1 className="text-4xl sm:text-5xl font-semibold tracking-[-0.03em] leading-[1.05] text-white">
+        <h1 className="text-display font-semibold text-white">
           {title}
         </h1>
-        <div className="mt-4 text-[13px] text-[var(--color-fg-mute)]">
+        <div className="mt-4 text-caption text-fg-mute">
           Last updated: {updated}
         </div>
         {intro ? (
-          <p className="mt-8 text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
+          <p className="mt-8 text-body leading-[1.75] text-fg-dim">
             {intro}
           </p>
         ) : null}
-        <div className="legal-prose mt-10 text-[15px] leading-[1.75] text-[var(--color-fg-dim)] space-y-8">
+        <div className="legal-prose mt-10 text-body leading-[1.75] text-fg-dim space-y-8">
           {children}
         </div>
       </article>
@@ -48,8 +48,8 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="pt-8 border-t border-white/[0.06] first:border-t-0 first:pt-0">
-      <h2 className="text-[20px] font-semibold tracking-tight text-white mb-3">
+    <section className="pt-8 border-t border-line-soft first:border-t-0 first:pt-0">
+      <h2 className="text-lead font-semibold tracking-tight text-white mb-3">
         {title}
       </h2>
       <div className="space-y-4">{children}</div>

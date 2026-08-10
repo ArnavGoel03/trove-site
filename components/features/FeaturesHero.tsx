@@ -23,17 +23,17 @@ export default function FeaturesHero() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] backdrop-blur px-3 py-1 text-[12px] text-[var(--color-fg-dim)] mb-7">
+          <div className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface-1 backdrop-blur px-3 py-1 text-caption text-fg-dim mb-7">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.7)]" />
             v{TROVE.version} · {PANE_COUNT} panes · 11 Shortcuts intents
           </div>
 
-          <h1 className="text-[44px] sm:text-[60px] md:text-[76px] leading-[0.98] font-semibold tracking-[-0.04em] bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
+          <h1 className="text-hero font-semibold bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
             Every pane,
             <br className="hidden sm:block" /> exhaustively.
           </h1>
 
-          <p className="mt-6 text-[16px] sm:text-[18px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
+          <p className="mt-6 text-lead text-fg-dim max-w-2xl leading-relaxed">
             All {PANE_COUNT} panes in Trove {TROVE.version}, grouped by sidebar section:
             Clipboard, Compute, Capture, Files, System, Storage. Plus the
             macOS Shortcuts integration, the URL scheme, SHA256SUMS hash
@@ -41,7 +41,7 @@ export default function FeaturesHero() {
             everything else the 14-beta cycle pulled into the stable release.
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-2 text-[12px]">
+          <div className="mt-7 flex flex-wrap gap-2 text-caption">
             <Chip>{PANE_COUNT} panes</Chip>
             <Chip>11 Shortcuts intents</Chip>
             <Chip>5 URL-scheme verbs</Chip>
@@ -59,7 +59,7 @@ export default function FeaturesHero() {
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-[var(--color-fg-dim)]">
+    <span className="rounded-full border border-line-soft bg-surface-1 px-3 py-1 text-fg-dim">
       {children}
     </span>
   );

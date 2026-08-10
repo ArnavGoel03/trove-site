@@ -77,17 +77,17 @@ export default function ThermalsVisual() {
     >
       <div className="flex items-baseline justify-between">
         <div>
-          <div className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-fg-mute)]">
+          <div className="text-micro uppercase text-fg-mute">
             GPU Temperature
           </div>
           <div className="mt-1 flex items-baseline gap-2">
-            <motion.span className="text-5xl sm:text-6xl font-semibold tabular-nums tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+            <motion.span className="text-display font-semibold tabular-nums tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
               {tempLabel}
             </motion.span>
-            <span className="text-xl text-[var(--color-fg-dim)]">°C</span>
+            <span className="text-xl text-fg-dim">°C</span>
           </div>
         </div>
-        <div className="hidden sm:flex flex-col items-end gap-2 text-[11px] text-[var(--color-fg-dim)]">
+        <div className="hidden sm:flex flex-col items-end gap-2 text-caption text-fg-dim">
           <div>
             CPU{" "}
             <motion.span className="tabular-nums text-white font-medium">
@@ -109,7 +109,7 @@ export default function ThermalsVisual() {
         </div>
       </div>
 
-      <div className="relative flex-1 rounded-xl border border-white/[0.06] bg-black/30 overflow-hidden">
+      <div className="relative flex-1 rounded-xl border border-line-soft bg-black/30 overflow-hidden">
         <svg
           viewBox="0 0 100 60"
           preserveAspectRatio="none"
@@ -135,7 +135,7 @@ export default function ThermalsVisual() {
           <motion.path d={pathD} fill="none" stroke="#ff8aae" strokeWidth="0.5" />
           <motion.path d={filledPath} fill="url(#grad)" />
         </svg>
-        <div className="absolute bottom-2 left-3 text-[10px] font-mono text-[var(--color-fg-mute)]">
+        <div className="absolute bottom-2 left-3 text-caption font-mono text-fg-mute">
           last 60s · sampled via private HID
         </div>
       </div>

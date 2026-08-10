@@ -82,7 +82,7 @@ export default function Nav() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-0 inset-x-0 z-50 px-6 py-4 bg-black/40 backdrop-blur-xl supports-[backdrop-filter]:bg-black/30 border-b border-white/[0.06]"
+      className="fixed top-0 inset-x-0 z-50 px-6 py-4 bg-black/40 backdrop-blur-xl supports-[backdrop-filter]:bg-black/30 border-b border-line-soft"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link
@@ -91,14 +91,14 @@ export default function Nav() {
           aria-label={`${HOME_BRAND} home`}
         >
           <Logomark name={HOME_BRAND} size={40} />
-          <span className="text-[16px] font-semibold tracking-tight">
+          <span className="text-body font-semibold tracking-tight">
             {HOME_BRAND}
           </span>
         </Link>
 
         <nav
           aria-label="Primary"
-          className="hidden md:flex items-center gap-6 text-[13px] text-[var(--color-fg-dim)]"
+          className="hidden md:flex items-center gap-6 text-caption text-fg-dim"
         >
           {PRIMARY_LINKS.map((l) => {
             const active = isActive(pathname, l.href);
@@ -124,13 +124,13 @@ export default function Nav() {
             rel="noopener noreferrer"
             aria-label={`${TROVE.name} releases on GitHub`}
             title="Releases on GitHub"
-            className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-[var(--color-fg-dim)] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-fg-dim hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             <GithubMark size={15} />
           </a>
           <Link
             href="/download"
-            className="btn-ghost rounded-full px-4 py-1.5 text-[13px] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="btn-ghost rounded-full px-4 py-1.5 text-caption font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             Download
           </Link>
@@ -140,7 +140,7 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="md:hidden btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-[var(--color-fg-dim)] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="md:hidden btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-fg-dim hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             {open ? (
               <X size={16} strokeWidth={1.75} />
@@ -165,7 +165,7 @@ export default function Nav() {
           <nav
             id="mobile-nav"
             aria-label="Mobile"
-            className="absolute left-0 right-0 top-full z-50 mx-3 mt-2 rounded-2xl border border-white/[0.08] bg-[#0e0e12]/95 backdrop-blur-xl p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.7)]"
+            className="absolute left-0 right-0 top-full z-50 mx-3 mt-2 rounded-2xl border border-line-soft bg-[#0e0e12]/95 backdrop-blur-xl p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.7)]"
           >
             {NAV_LINKS.map((l) => {
               const active = isActive(pathname, l.href);
@@ -174,10 +174,10 @@ export default function Nav() {
                   key={l.href}
                   href={l.href}
                   aria-current={active ? "page" : undefined}
-                  className={`block rounded-xl px-4 py-3 text-[15px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
+                  className={`block rounded-xl px-4 py-3 text-body transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
                     active
-                      ? "bg-white/[0.06] text-white"
-                      : "text-[var(--color-fg-dim)] hover:bg-white/[0.04] hover:text-white"
+                      ? "bg-surface-2 text-white"
+                      : "text-fg-dim hover:bg-surface-1 hover:text-white"
                   }`}
                 >
                   {l.label}
@@ -186,7 +186,7 @@ export default function Nav() {
             })}
             <Link
               href="/download"
-              className="mt-1 block rounded-xl px-4 py-3 text-[15px] font-medium text-white bg-white/[0.06] hover:bg-white/[0.1] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="mt-1 block rounded-xl px-4 py-3 text-body font-medium text-white bg-surface-2 hover:bg-surface-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
             >
               Download
             </Link>

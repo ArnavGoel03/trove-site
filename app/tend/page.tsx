@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
-import AppComingSoon from "@/components/AppComingSoon";
+import AppPage from "@/components/AppPage";
 import JsonLd, {
   softwareApplicationLdFor,
   webPageLd,
   breadcrumbLd,
 } from "@/components/JsonLd";
 import { APPS, STUDIO } from "@/lib/brand";
+import { SUITE_DETAIL } from "@/lib/suite";
 
 const APP = APPS.tend;
+const DETAIL = SUITE_DETAIL.tend;
 const URL = `${STUDIO.domain}${APP.href}`;
 
 export const metadata: Metadata = {
@@ -34,9 +36,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <PageShell
-      eyebrow="Coming soon &middot; part of the suite"
+      eyebrow={DETAIL.category}
       title={APP.name}
-      lede={APP.tagline}
+      lede={DETAIL.pitch}
     >
       <JsonLd data={softwareApplicationLdFor("tend")} />
       <JsonLd data={webPageLd(`${APP.name}: ${APP.tagline}`, APP.blurb, URL)} />
@@ -46,7 +48,7 @@ export default function Page() {
           { name: APP.name, url: URL },
         ])}
       />
-      <AppComingSoon appKey="tend" />
+      <AppPage appKey="tend" />
     </PageShell>
   );
 }

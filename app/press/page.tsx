@@ -84,16 +84,16 @@ export default function PressPage() {
       />
 
       <section className="mb-14">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-5">
+        <h2 className="text-lead font-semibold text-white mb-5">
           Pitch lines
         </h2>
         <div className="space-y-4">
           {PITCHES.map((p) => (
             <article key={p.angle} className="pane rounded-xl p-5">
-              <div className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-accent)] mb-2">
+              <div className="text-micro uppercase tracking-[0.2em] text-accent mb-2">
                 {p.angle}
               </div>
-              <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
+              <p className="text-body leading-[1.75] text-fg-dim">
                 {p.body}
               </p>
             </article>
@@ -102,29 +102,29 @@ export default function PressPage() {
       </section>
 
       <section className="mb-14">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-5">
+        <h2 className="text-lead font-semibold text-white mb-5">
           Key facts
         </h2>
         <dl className="pane rounded-xl overflow-hidden">
           {FACTS.map((f) => (
             <div
               key={f.label}
-              className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-1 sm:gap-4 px-5 py-3 border-b border-white/[0.04] last:border-b-0"
+              className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-1 sm:gap-4 px-5 py-3 border-b border-line-soft last:border-b-0"
             >
-              <dt className="text-[12px] uppercase tracking-[0.15em] text-[var(--color-fg-mute)]">
+              <dt className="text-micro uppercase text-fg-mute">
                 {f.label}
               </dt>
-              <dd className="text-[14px] text-white">{f.value}</dd>
+              <dd className="text-caption text-white">{f.value}</dd>
             </div>
           ))}
         </dl>
       </section>
 
       <section className="mb-14">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-5">
+        <h2 className="text-lead font-semibold text-white mb-5">
           Brand assets
         </h2>
-        <p className="text-[14px] leading-[1.7] text-[var(--color-fg-dim)] mb-4 max-w-2xl">
+        <p className="text-caption leading-[1.7] text-fg-dim mb-4 max-w-2xl">
           Use the marks as-is, please. Don&rsquo;t alter the gradient or the
           letterform. If you need an alternate aspect ratio, email us and
           we&rsquo;ll send one over within a business day.
@@ -134,16 +134,16 @@ export default function PressPage() {
             <li key={a.name}>
               <a
                 href={a.href}
-                className="pane rounded-xl p-4 flex items-center gap-3 hover:border-white/20 transition-colors"
+                className="pane rounded-xl p-4 flex items-center gap-3 hover:border-line-strong transition-colors"
               >
-                <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-white/[0.05] text-white">
+                <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-surface-2 text-white">
                   <Download size={16} strokeWidth={1.5} />
                 </span>
                 <div>
-                  <div className="text-[14px] font-medium text-white">
+                  <div className="text-caption font-medium text-white">
                     {a.name}
                   </div>
-                  <div className="text-[12px] text-[var(--color-fg-mute)]">
+                  <div className="text-caption text-fg-mute">
                     {a.size}
                   </div>
                 </div>
@@ -154,10 +154,10 @@ export default function PressPage() {
       </section>
 
       <section className="mb-14">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-5">
+        <h2 className="text-lead font-semibold text-white mb-5">
           Community + discussions
         </h2>
-        <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
+        <p className="text-body leading-[1.75] text-fg-dim">
           Feature ideas, pre-release feedback, pane requests and weird bugs all
           go to{" "}
           <a
@@ -174,10 +174,10 @@ export default function PressPage() {
       </section>
 
       <section className="mb-14">
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-5">
+        <h2 className="text-lead font-semibold text-white mb-5">
           Who built this
         </h2>
-        <p className="text-[15px] leading-[1.75] text-[var(--color-fg-dim)]">
+        <p className="text-body leading-[1.75] text-fg-dim">
           Trove is built by Arnav Goel, an independent macOS developer. Every
           build is published on{" "}
           <a

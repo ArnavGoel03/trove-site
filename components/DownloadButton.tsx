@@ -42,7 +42,7 @@ export default function DownloadButton({
   const winHref = downloadURL("windows", tags.win);
 
   const sizeCls =
-    size === "lg" ? "px-6 py-3.5 text-[15px]" : "px-4 py-2 text-[13px]";
+    size === "lg" ? "px-6 py-3.5 text-body" : "px-4 py-2 text-caption";
 
   async function copyLink(url: string, label: string) {
     try {
@@ -103,7 +103,7 @@ export default function DownloadButton({
         </motion.a>
         <a
           href="/download"
-          className="text-[12.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors pl-1"
+          className="text-caption text-fg-dim hover:text-white transition-colors pl-1"
         >
           Or browse all platforms →
         </a>
@@ -127,7 +127,7 @@ export default function DownloadButton({
         </motion.a>
         <a
           href="/download"
-          className="text-[12.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors pl-1"
+          className="text-caption text-fg-dim hover:text-white transition-colors pl-1"
         >
           Or browse all platforms →
         </a>
@@ -147,7 +147,7 @@ export default function DownloadButton({
       </button>
       <a
         href="/download"
-        className="text-[12.5px] text-[var(--color-fg-dim)] hover:text-white transition-colors pl-1"
+        className="text-caption text-fg-dim hover:text-white transition-colors pl-1"
       >
         Or open the downloads page →
       </a>

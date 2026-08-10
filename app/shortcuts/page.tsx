@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 
 function ChordRow({ keys, label }: { keys: string; label: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 px-4 py-2.5 text-[13.5px] border-b border-white/[0.04] last:border-b-0">
-      <span className="text-[var(--color-fg-dim)]">{label}</span>
-      <kbd className="font-mono text-[12px] bg-white/[0.05] border border-white/[0.08] rounded-md px-2 py-0.5 text-white shrink-0">
+    <div className="flex items-center justify-between gap-4 px-4 py-2.5 text-caption border-b border-line-soft last:border-b-0">
+      <span className="text-fg-dim">{label}</span>
+      <kbd className="font-mono text-caption bg-surface-2 border border-line-soft rounded-md px-2 py-0.5 text-white shrink-0">
         {keys}
       </kbd>
     </div>
@@ -66,10 +66,10 @@ export default function ShortcutsPage() {
 
       <section className="mb-12">
         <div className="flex items-baseline justify-between mb-4">
-          <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white">
+          <h2 className="text-lead font-semibold text-white">
             App-wide
           </h2>
-          <span className="text-[12px] text-[var(--color-fg-mute)]">
+          <span className="text-caption text-fg-mute">
             Works in every pane
           </span>
         </div>
@@ -81,7 +81,7 @@ export default function ShortcutsPage() {
       </section>
 
       <section>
-        <h2 className="text-[22px] font-semibold tracking-[-0.01em] text-white mb-6">
+        <h2 className="text-lead font-semibold text-white mb-6">
           Per pane
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -95,7 +95,7 @@ export default function ShortcutsPage() {
                 style={{ borderColor: `${p.accent}30` }}
               >
                 <div
-                  className="flex items-center gap-3 px-4 py-3 border-b border-white/[0.06]"
+                  className="flex items-center gap-3 px-4 py-3 border-b border-line-soft"
                   style={{ background: `${p.accent}10` }}
                 >
                   <span
@@ -106,7 +106,7 @@ export default function ShortcutsPage() {
                   </span>
                   <Link
                     href={`/pane/${slugifyPane(p.name)}`}
-                    className="text-[15px] font-medium text-white hover:text-[var(--color-accent)] transition-colors"
+                    className="text-body font-medium text-white hover:text-accent transition-colors"
                   >
                     {p.name}
                   </Link>
@@ -120,7 +120,7 @@ export default function ShortcutsPage() {
         </div>
       </section>
 
-      <p className="text-[12px] text-[var(--color-fg-mute)] mt-10 max-w-2xl">
+      <p className="text-caption text-fg-mute mt-10 max-w-2xl">
         Panes without bespoke chords fall through to the app-wide list only.
         Trove&rsquo;s in-app overlay (⌘?) merges both views and floats the
         current pane to the top.

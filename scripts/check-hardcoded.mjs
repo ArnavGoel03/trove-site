@@ -77,12 +77,6 @@ const RULES = [
       "lib/rivals.ts",
       // Asserts the exact rendered strings. That is the test.
       "test/pricing.test.ts",
-      // DEBT, remove each line as Phase 3 rebuilds that route. Every one of
-      // these is an uncited rival price typed by hand, which is what
-      // lib/rivals.ts replaces.
-      "app/compare/page.tsx",
-      "app/compare/[slug]/page.tsx",
-      "components/Compare.tsx",
     ],
     use: "formatUSD() over PRICING from lib/pricing.ts, or a cited entry in lib/rivals.ts",
   },

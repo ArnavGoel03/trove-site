@@ -49,16 +49,16 @@ export default function FaqPage() {
         {groups.map((g) => (
           <Fragment key={g}>
             <section>
-              <h2 className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-accent)] mb-5">
+              <h2 className="text-micro uppercase tracking-[0.2em] text-accent mb-5">
                 {g}
               </h2>
               <div className="space-y-4">
                 {FAQ.filter((f) => f.group === g).map((f) => (
                   <article key={f.question} className="pane rounded-xl p-5">
-                    <h3 className="text-[16px] font-semibold text-white leading-snug">
+                    <h3 className="text-body font-semibold text-white leading-snug">
                       {f.question}
                     </h3>
-                    <p className="mt-2.5 text-[14px] leading-[1.75] text-[var(--color-fg-dim)]">
+                    <p className="mt-2.5 text-caption leading-[1.75] text-fg-dim">
                       {f.answer}
                     </p>
                   </article>
