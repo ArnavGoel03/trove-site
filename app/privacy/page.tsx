@@ -26,13 +26,13 @@ export default function PrivacyPage() {
           Trove (&ldquo;Trove,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) is an
           independently developed macOS productivity app. This Privacy Policy
           covers both the Trove desktop app and the marketing website at{" "}
-          <span className="text-white">{STUDIO_HOST}</span>.
+          <span className="text-fg">{STUDIO_HOST}</span>.
         </p>
       </Section>
 
       <Section title="2. What the Trove app collects">
         <p>
-          <span className="text-white">Nothing.</span> Trove is local-only by
+          <span className="text-fg">Nothing.</span> Trove is local-only by
           design. The app runs entirely on your Mac and does not send your
           clipboard history, screenshots, file metadata, captures, notes, or
           any other usage data to us or to any third party.
@@ -62,16 +62,16 @@ export default function PrivacyPage() {
 
       <Section title="4. Where your data is stored">
         <p>
-          <span className="text-white">In the app:</span> All Trove data
+          <span className="text-fg">In the app:</span> All Trove data
           (clipboard history, pane settings, snippets, notes, captures) lives
           on your Mac at{" "}
-          <code className="text-white/90 bg-surface-1 px-1.5 py-0.5 rounded">
+          <code className="text-fg/90 bg-surface-1 px-1.5 py-0.5 rounded">
             ~/Library/Application Support/Trove/
           </code>
           . License keys are stored in the macOS Keychain.
         </p>
         <p>
-          <span className="text-white">On the website:</span> Request logs are
+          <span className="text-fg">On the website:</span> Request logs are
           held within Vercel&rsquo;s edge infrastructure under Vercel&rsquo;s
           standard retention.
         </p>
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
           App data is retained indefinitely on your Mac until you delete it.
           You can delete all Trove data at any time by quitting the app and
           removing the{" "}
-          <code className="text-white/90 bg-surface-1 px-1.5 py-0.5 rounded">
+          <code className="text-fg/90 bg-surface-1 px-1.5 py-0.5 rounded">
             ~/Library/Application Support/Trove/
           </code>{" "}
           folder, along with the Trove entries in Keychain.
@@ -107,7 +107,7 @@ export default function PrivacyPage() {
           nothing to request from us.
         </p>
         <p>
-          <span className="text-white">EU / EEA / UK users:</span> You have
+          <span className="text-fg">EU / EEA / UK users:</span> You have
           additional rights under the GDPR / UK GDPR, including access,
           rectification, erasure, and the right to lodge a complaint with your
           local data protection authority. Because we hold no personal data
@@ -139,7 +139,7 @@ export default function PrivacyPage() {
           Questions about this policy? Email{" "}
           <a
             href={CONTACT.privacy}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>

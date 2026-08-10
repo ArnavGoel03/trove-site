@@ -17,7 +17,7 @@ export default function AcceptableUsePage() {
         <>
           This Acceptable Use Policy (&ldquo;AUP&rdquo;) describes what is and
           is not allowed when using Trove. It supplements our{" "}
-          <a href="/terms" className="text-white hover:underline">
+          <a href="/terms" className="text-fg hover:underline">
             Terms of Service
           </a>
           .
@@ -70,19 +70,19 @@ export default function AcceptableUsePage() {
           If you believe someone is violating this policy, please report it to{" "}
           <a
             href={CONTACT.support}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>
           . Security-sensitive reports should go to{" "}
           <a
             href={CONTACT.security}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>
           . See our{" "}
-          <a href="/security" className="text-white hover:underline">
+          <a href="/security" className="text-fg hover:underline">
             Security
           </a>{" "}
           page.

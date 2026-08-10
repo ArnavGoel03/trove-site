@@ -97,7 +97,7 @@ export default function SweepVisual() {
             <div className="text-caption text-fg-mute font-mono tabular-nums">
               {f.age}
             </div>
-            <div className="text-caption tabular-nums font-medium text-white/85 w-16 text-right">
+            <div className="text-caption tabular-nums font-medium text-fg/85 w-16 text-right">
               {f.size}
             </div>
           </motion.div>

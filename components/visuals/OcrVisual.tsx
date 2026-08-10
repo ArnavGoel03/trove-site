@@ -29,7 +29,7 @@ export default function OcrVisual() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: false, amount: 0.4 }}
                 transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
-                className="relative inline-block text-caption text-white/85 font-medium"
+                className="relative inline-block text-caption text-fg/85 font-medium"
               >
                 {line}
                 <motion.span
@@ -79,7 +79,7 @@ export default function OcrVisual() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.4 }}
                 transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
-                className="text-caption text-white/85"
+                className="text-caption text-fg/85"
               >
                 {line}
               </motion.div>

@@ -93,15 +93,15 @@ export default async function ActionPage({ params }: PageProps) {
           aria-label="Breadcrumb"
           className="text-caption text-fg-dim mb-6"
         >
-          <Link href="/" className="hover:text-white">
+          <Link href="/" className="hover:text-fg">
             Trove
           </Link>
           <span className="mx-2">›</span>
-          <Link href="/action" className="hover:text-white">
+          <Link href="/action" className="hover:text-fg">
             Inline actions
           </Link>
           <span className="mx-2">›</span>
-          <span className="text-white">{action.title}</span>
+          <span className="text-fg">{action.title}</span>
         </nav>
 
         <h1 className="text-[clamp(34px,5vw,52px)] font-semibold tracking-tight leading-[1.05]">
@@ -165,11 +165,11 @@ export default async function ActionPage({ params }: PageProps) {
             </code>
             runs on your Mac in microseconds. The full catalog of inline
             actions is at{" "}
-            <Link href="/action" className="text-white underline">
+            <Link href="/action" className="text-fg underline">
               /action
             </Link>
             ; pane-by-pane features live at{" "}
-            <Link href="/features" className="text-white underline">
+            <Link href="/features" className="text-fg underline">
               /features
             </Link>
             .

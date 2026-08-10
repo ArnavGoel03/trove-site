@@ -81,7 +81,7 @@ export default function ThermalsVisual() {
             GPU Temperature
           </div>
           <div className="mt-1 flex items-baseline gap-2">
-            <motion.span className="text-display font-semibold tabular-nums tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+            <motion.span className="text-display font-semibold tabular-nums tracking-tight bg-gradient-to-b from-fg to-fg/60 bg-clip-text text-transparent">
               {tempLabel}
             </motion.span>
             <span className="text-xl text-fg-dim">°C</span>
@@ -90,14 +90,14 @@ export default function ThermalsVisual() {
         <div className="hidden sm:flex flex-col items-end gap-2 text-caption text-fg-dim">
           <div>
             CPU{" "}
-            <motion.span className="tabular-nums text-white font-medium">
+            <motion.span className="tabular-nums text-fg font-medium">
               {cpuLabel}
             </motion.span>
             °C
           </div>
           <div>
             Fan{" "}
-            <motion.span className="tabular-nums text-white font-medium">
+            <motion.span className="tabular-nums text-fg font-medium">
               {fanLabel}
             </motion.span>{" "}
             rpm

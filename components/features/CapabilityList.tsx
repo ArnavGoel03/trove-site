@@ -63,7 +63,7 @@ export default function CapabilityList() {
                   className="w-10 h-10 rounded-xl border border-line-soft bg-surface-1 flex items-center justify-center shrink-0"
                   style={{ boxShadow: `inset 0 0 0 1px ${cap.accent}33` }}
                 >
-                  <Icon size={18} className="text-white/90" />
+                  <Icon size={18} className="text-fg/90" />
                 </div>
                 <div className="min-w-0">
                   <div
@@ -72,7 +72,7 @@ export default function CapabilityList() {
                   >
                     {cap.eyebrow}
                   </div>
-                  <h3 className="text-lead font-semibold text-white leading-snug">
+                  <h3 className="text-lead font-semibold text-fg leading-snug">
                     {cap.title}
                   </h3>
                 </div>

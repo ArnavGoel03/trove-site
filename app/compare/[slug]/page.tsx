@@ -45,15 +45,15 @@ export default async function ComparisonPage({ params }: PageProps) {
           aria-label="Breadcrumb"
           className="text-caption text-fg-dim mb-6"
         >
-          <Link href="/" className="hover:text-white">
+          <Link href="/" className="hover:text-fg">
             Trove
           </Link>
           <span className="mx-2">›</span>
-          <Link href="/compare" className="hover:text-white">
+          <Link href="/compare" className="hover:text-fg">
             Compare
           </Link>
           <span className="mx-2">›</span>
-          <span className="text-white">Trove vs {c.competitor}</span>
+          <span className="text-fg">Trove vs {c.competitor}</span>
         </nav>
 
         <h1 className="text-[clamp(34px,5vw,52px)] font-semibold tracking-tight leading-[1.05]">

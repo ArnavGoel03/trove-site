@@ -90,7 +90,7 @@ export default async function ChangelogPage() {
                     href={`#${slugifyVersion(e.version)}`}
                     className={`inline-flex items-center gap-2 rounded-full border border-line-soft px-3 py-1 text-caption hover:border-line-strong transition-colors ${
                       e.isStable
-                        ? "bg-accent/10 text-white"
+                        ? "bg-accent/10 text-fg"
                         : "text-fg-dim"
                     }`}
                   >
@@ -114,7 +114,7 @@ export default async function ChangelogPage() {
                 className="scroll-mt-32"
               >
                 <header className="flex flex-wrap items-baseline gap-3 mb-6 pb-4 border-b border-line-soft">
-                  <h2 className="text-title font-semibold text-white">
+                  <h2 className="text-title font-semibold text-fg">
                     {e.version}
                   </h2>
                   <span className="text-caption text-fg-mute">

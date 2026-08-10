@@ -92,7 +92,7 @@ export default function ShortcutsGalleryPage() {
           },
         ].map((s) => (
           <div key={s.label} className="pane rounded-xl p-4">
-            <div className="text-title font-semibold tracking-tight text-white">
+            <div className="text-title font-semibold tracking-tight text-fg">
               {s.value}
             </div>
             <div className="text-micro uppercase text-fg-mute mt-1">
@@ -109,7 +109,7 @@ export default function ShortcutsGalleryPage() {
             <section key={cat.name}>
               <header className="mb-5">
                 <div
-                  className="text-micro uppercase tracking-[0.22em] mb-2"
+                  className="text-micro uppercase mb-2"
                   style={{ color: cat.accent }}
                 >
                   {cat.name}
@@ -138,12 +138,12 @@ export default function ShortcutsGalleryPage() {
                           <Icon size={18} strokeWidth={1.5} />
                         </span>
                         <div className="min-w-0">
-                          <h3 className="text-body font-medium text-white leading-snug">
+                          <h3 className="text-body font-medium text-fg leading-snug">
                             {it.title}
                           </h3>
                           <div className="flex items-center gap-2 mt-1">
                             <span
-                              className="inline-flex items-center rounded-full px-2 py-0.5 text-micro uppercase tracking-[0.12em]"
+                              className="inline-flex items-center rounded-full px-2 py-0.5 text-micro uppercase"
                               style={{
                                 background: `${KIND_TINT[it.kind]}18`,
                                 color: KIND_TINT[it.kind],

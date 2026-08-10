@@ -794,7 +794,7 @@ export default function ComparePage() {
               <th className="px-4 py-3 font-medium text-fg-mute uppercase text-micro min-w-[260px]">
                 Capability
               </th>
-              <th className="px-3 py-3 text-center font-medium text-white">
+              <th className="px-3 py-3 text-center font-medium text-fg">
                 Trove
               </th>
               {COMPETITORS.map((c) => (
@@ -824,7 +824,7 @@ export default function ComparePage() {
                     className="border-t border-line-soft"
                     title={r.note}
                   >
-                    <td className="px-4 py-3 text-white">
+                    <td className="px-4 py-3 text-fg">
                       <div>{r.feature}</div>
                       {r.note ? (
                         <div className="text-caption text-fg-mute mt-0.5 leading-snug">

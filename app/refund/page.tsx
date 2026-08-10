@@ -24,7 +24,7 @@ export default function RefundPage() {
       <Section title="1. 14-day refund window">
         <p>
           You may request a full refund within{" "}
-          <span className="text-white">14 calendar days</span> of your initial
+          <span className="text-fg">14 calendar days</span> of your initial
           purchase, for any reason. No questions asked.
         </p>
       </Section>
@@ -34,7 +34,7 @@ export default function RefundPage() {
           Email{" "}
           <a
             href={CONTACT.support}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>{" "}
@@ -74,13 +74,13 @@ export default function RefundPage() {
           </li>
           <li>
             Accounts terminated for violations of our{" "}
-            <a href="/terms" className="text-white hover:underline">
+            <a href="/terms" className="text-fg hover:underline">
               Terms
             </a>{" "}
             or{" "}
             <a
               href="/acceptable-use"
-              className="text-white hover:underline"
+              className="text-fg hover:underline"
             >
               Acceptable Use Policy
             </a>
@@ -103,7 +103,7 @@ export default function RefundPage() {
           Refund questions? Email{" "}
           <a
             href={CONTACT.support}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>

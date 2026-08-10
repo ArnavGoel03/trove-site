@@ -100,7 +100,7 @@ export default function DownloadCard({
                 : "bg-gradient-to-br from-[#5a9bff] via-[#3b7fdc] to-[#2a55b2]")
             }
           >
-            <Icon size={20} strokeWidth={2} className="text-white" />
+            <Icon size={20} strokeWidth={2} className="text-fg" />
           </span>
           <div>
             <div className="text-lead font-semibold tracking-tight leading-tight">
@@ -116,7 +116,7 @@ export default function DownloadCard({
           href={releasePage}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-caption text-fg-dim hover:text-white inline-flex items-center gap-1 transition-colors"
+          className="text-caption text-fg-dim hover:text-fg inline-flex items-center gap-1 transition-colors"
           title="Open release page on GitHub"
         >
           Release notes

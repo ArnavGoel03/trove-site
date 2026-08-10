@@ -17,7 +17,7 @@ export default function EulaPage() {
         <>
           This End User License Agreement (&ldquo;EULA&rdquo;) is a short
           companion to our{" "}
-          <a href="/terms" className="text-white hover:underline">
+          <a href="/terms" className="text-fg hover:underline">
             Terms of Service
           </a>
           . The Terms contain the substantive provisions; this EULA records
@@ -70,7 +70,7 @@ export default function EulaPage() {
         <p>
           For warranty, liability, dispute resolution, and other substantive
           provisions, see the{" "}
-          <a href="/terms" className="text-white hover:underline">
+          <a href="/terms" className="text-fg hover:underline">
             Terms of Service
           </a>
           . In case of conflict between this EULA and the Terms, the Terms

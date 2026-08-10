@@ -115,7 +115,7 @@ export default function RootLayout({
           toastOptions={{
             classNames: {
               toast:
-                "!bg-[#171922] !border-white/[0.08] !text-white !shadow-[0_10px_40px_-12px_rgba(0,0,0,0.6)]",
+                "!bg-bg-elev !border-line-strong !text-fg !shadow-lift",
             },
           }}
         />

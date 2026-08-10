@@ -120,7 +120,7 @@ export default function SecurityPage() {
                 <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-accent/12 text-accent">
                   <Icon size={20} strokeWidth={1.5} />
                 </span>
-                <h2 className="text-lead font-semibold tracking-tight text-white">
+                <h2 className="text-lead font-semibold tracking-tight text-fg">
                   {s.title}
                 </h2>
               </header>

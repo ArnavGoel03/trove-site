@@ -69,7 +69,7 @@ export default async function UpdatesPage() {
                   {p.date}
                 </span>
               </div>
-              <h2 className="text-lead font-semibold text-white mb-2">
+              <h2 className="text-lead font-semibold text-fg mb-2">
                 {p.title}
               </h2>
               <p className="text-caption leading-[1.7] text-fg-dim">

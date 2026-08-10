@@ -137,7 +137,7 @@ export default function AccessibilityPage() {
                 <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-accent/12 text-accent">
                   <Icon size={20} strokeWidth={1.5} />
                 </span>
-                <h2 className="text-lead font-semibold tracking-tight text-white">
+                <h2 className="text-lead font-semibold tracking-tight text-fg">
                   {s.title}
                 </h2>
               </header>
@@ -162,7 +162,7 @@ export default function AccessibilityPage() {
       </div>
 
       <div className="mt-12 pane rounded-xl p-6">
-        <h2 className="text-lead font-semibold tracking-tight text-white mb-3">
+        <h2 className="text-lead font-semibold tracking-tight text-fg mb-3">
           Report an accessibility bug
         </h2>
         <p className="text-caption leading-[1.7] text-fg-dim">

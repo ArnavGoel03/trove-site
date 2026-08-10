@@ -86,7 +86,7 @@ export default function PressPage() {
       />
 
       <section className="mb-14">
-        <h2 className="text-lead font-semibold text-white mb-5">
+        <h2 className="text-lead font-semibold text-fg mb-5">
           Pitch lines
         </h2>
         <div className="space-y-4">
@@ -104,7 +104,7 @@ export default function PressPage() {
       </section>
 
       <section className="mb-14">
-        <h2 className="text-lead font-semibold text-white mb-5">
+        <h2 className="text-lead font-semibold text-fg mb-5">
           Key facts
         </h2>
         <dl className="pane rounded-xl overflow-hidden">
@@ -116,14 +116,14 @@ export default function PressPage() {
               <dt className="text-micro uppercase text-fg-mute">
                 {f.label}
               </dt>
-              <dd className="text-caption text-white">{f.value}</dd>
+              <dd className="text-caption text-fg">{f.value}</dd>
             </div>
           ))}
         </dl>
       </section>
 
       <section className="mb-14">
-        <h2 className="text-lead font-semibold text-white mb-5">
+        <h2 className="text-lead font-semibold text-fg mb-5">
           Brand assets
         </h2>
         <p className="text-caption leading-[1.7] text-fg-dim mb-4 max-w-2xl">
@@ -138,11 +138,11 @@ export default function PressPage() {
                 href={a.href}
                 className="pane rounded-xl p-4 flex items-center gap-3 hover:border-line-strong transition-colors"
               >
-                <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-surface-2 text-white">
+                <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-surface-2 text-fg">
                   <Download size={16} strokeWidth={1.5} />
                 </span>
                 <div>
-                  <div className="text-caption font-medium text-white">
+                  <div className="text-caption font-medium text-fg">
                     {a.name}
                   </div>
                   <div className="text-caption text-fg-mute">
@@ -156,7 +156,7 @@ export default function PressPage() {
       </section>
 
       <section className="mb-14">
-        <h2 className="text-lead font-semibold text-white mb-5">
+        <h2 className="text-lead font-semibold text-fg mb-5">
           Community + discussions
         </h2>
         <p className="text-body leading-[1.75] text-fg-dim">
@@ -176,7 +176,7 @@ export default function PressPage() {
       </section>
 
       <section className="mb-14">
-        <h2 className="text-lead font-semibold text-white mb-5">
+        <h2 className="text-lead font-semibold text-fg mb-5">
           Who built this
         </h2>
         <p className="text-body leading-[1.75] text-fg-dim">

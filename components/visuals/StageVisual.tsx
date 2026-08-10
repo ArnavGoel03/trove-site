@@ -56,7 +56,7 @@ export default function StageVisual() {
               className={`relative rounded-xl border border-line-soft bg-gradient-to-r ${it.tint} bg-black/30 px-4 py-3 flex items-center gap-3.5 overflow-hidden`}
             >
               <div className="shrink-0 w-9 h-9 rounded-lg bg-surface-1 border border-line-soft flex items-center justify-center">
-                <Icon size={16} className="text-white/80" />
+                <Icon size={16} className="text-fg/80" />
               </div>
               <div className="min-w-0">
                 <div className="text-caption font-medium truncate">

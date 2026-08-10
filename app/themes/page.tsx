@@ -128,12 +128,12 @@ export default function ThemesPage() {
           <Settings size={16} strokeWidth={1.75} />
         </span>
         <div>
-          <div className="text-caption font-medium text-white mb-1">
+          <div className="text-caption font-medium text-fg mb-1">
             How to switch
           </div>
           <p className="text-caption leading-[1.7] text-fg-dim">
             Open Trove, hit <kbd className="md-inline">⌘,</kbd> for Settings,
-            choose <span className="text-white">Theme</span> in the sidebar,
+            choose <span className="text-fg">Theme</span> in the sidebar,
             and pick one of the four palettes. The switch is live: no relaunch,
             no flicker. The selection persists per-Mac in your local
             preferences plist.
@@ -320,7 +320,7 @@ export default function ThemesPage() {
           <Palette size={16} strokeWidth={1.75} />
         </span>
         <div>
-          <div className="text-caption font-medium text-white mb-1">
+          <div className="text-caption font-medium text-fg mb-1">
             Coming in 1.2.0: custom palettes
           </div>
           <p className="text-caption leading-[1.7] text-fg-dim">

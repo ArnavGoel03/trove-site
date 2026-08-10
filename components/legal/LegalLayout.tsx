@@ -20,7 +20,7 @@ export default function LegalLayout({
         <div className="text-micro uppercase tracking-[0.2em] text-fg-mute mb-4">
           Legal
         </div>
-        <h1 className="text-display font-semibold text-white">
+        <h1 className="text-display font-semibold text-fg">
           {title}
         </h1>
         <div className="mt-4 text-caption text-fg-mute">
@@ -49,7 +49,7 @@ export function Section({
 }) {
   return (
     <section className="pt-8 border-t border-line-soft first:border-t-0 first:pt-0">
-      <h2 className="text-lead font-semibold tracking-tight text-white mb-3">
+      <h2 className="text-lead font-semibold tracking-tight text-fg mb-3">
         {title}
       </h2>
       <div className="space-y-4">{children}</div>

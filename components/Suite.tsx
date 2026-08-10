@@ -35,7 +35,7 @@ export default function Suite() {
           <p className="text-micro uppercase text-fg-mute mb-3">
             One subscription
           </p>
-          <h2 className="text-display font-semibold bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
+          <h2 className="text-display font-semibold bg-gradient-to-b from-fg to-fg/70 bg-clip-text text-transparent">
             One key. Every app.
           </h2>
           <p className="mt-5 text-body text-fg-dim leading-relaxed">
@@ -69,7 +69,7 @@ export default function Suite() {
                 >
                   <span
                     className={`inline-block w-1.5 h-1.5 rounded-full ${
-                      live ? "bg-emerald-400" : "bg-white/40"
+                      live ? "bg-emerald-400" : "bg-fg/40"
                     }`}
                   />
                   {live ? "Available now" : "Coming soon"}
@@ -93,14 +93,14 @@ export default function Suite() {
                   {live ? (
                     <a
                       href={a.href}
-                      className="inline-flex items-center gap-1 font-medium text-white hover:text-accent transition-colors"
+                      className="inline-flex items-center gap-1 font-medium text-fg hover:text-accent transition-colors"
                     >
                       Learn more &rarr;
                     </a>
                   ) : (
                     <a
                       href={a.href}
-                      className="inline-flex items-center gap-1 font-medium text-fg-dim hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1 font-medium text-fg-dim hover:text-fg transition-colors"
                     >
                       Preview &rarr;
                     </a>

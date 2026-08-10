@@ -72,7 +72,7 @@ export default function TermsPage() {
           Trove is offered as an annual subscription. Subscriptions renew
           automatically unless cancelled before the renewal date. Refunds are
           governed by our{" "}
-          <a href="/refund" className="text-white hover:underline">
+          <a href="/refund" className="text-fg hover:underline">
             Refund Policy
           </a>
           .
@@ -86,7 +86,7 @@ export default function TermsPage() {
           send a DMCA notice to{" "}
           <a
             href={CONTACT.support}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>{" "}
@@ -141,7 +141,7 @@ export default function TermsPage() {
           Before filing a formal claim, please email{" "}
           <a
             href={CONTACT.support}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>{" "}
@@ -164,7 +164,7 @@ export default function TermsPage() {
           Questions about these Terms? Email{" "}
           <a
             href={CONTACT.support}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>

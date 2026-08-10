@@ -109,7 +109,7 @@ export default function Footer() {
               href={STUDIO.makerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`hover:text-white transition-colors ${FOCUS_RING}`}
+              className={`hover:text-fg transition-colors ${FOCUS_RING}`}
             >
               Made by {STUDIO.maker}
             </a>
@@ -121,14 +121,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${TROVE.name} releases on GitHub`}
-              className={`text-fg-mute hover:text-white transition-colors ${FOCUS_RING}`}
+              className={`text-fg-mute hover:text-fg transition-colors ${FOCUS_RING}`}
             >
               <GithubMark size={16} />
             </a>
             <a
               href={CONTACT.support}
               aria-label="Email support"
-              className={`text-fg-mute hover:text-white transition-colors ${FOCUS_RING}`}
+              className={`text-fg-mute hover:text-fg transition-colors ${FOCUS_RING}`}
             >
               <Mail size={16} />
             </a>
@@ -174,7 +174,7 @@ function LatestReleaseBadge() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Latest release notes on GitHub"
-      className={`inline-flex items-center gap-1.5 text-caption text-fg-dim hover:text-white transition-colors font-medium ${FOCUS_RING}`}
+      className={`inline-flex items-center gap-1.5 text-caption text-fg-dim hover:text-fg transition-colors font-medium ${FOCUS_RING}`}
     >
       <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
       <span className="font-mono tabular-nums">{tag ?? "Releases"}</span>
@@ -204,14 +204,14 @@ function FooterCol({
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-caption text-fg-dim hover:text-white transition-colors ${FOCUS_RING}`}
+                className={`text-caption text-fg-dim hover:text-fg transition-colors ${FOCUS_RING}`}
               >
                 {l.label}
               </a>
             ) : (
               <Link
                 href={l.href}
-                className={`text-caption text-fg-dim hover:text-white transition-colors ${FOCUS_RING}`}
+                className={`text-caption text-fg-dim hover:text-fg transition-colors ${FOCUS_RING}`}
               >
                 {l.label}
               </Link>

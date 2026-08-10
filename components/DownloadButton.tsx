@@ -103,7 +103,7 @@ export default function DownloadButton({
         </motion.a>
         <a
           href="/download"
-          className="text-caption text-fg-dim hover:text-white transition-colors pl-1"
+          className="text-caption text-fg-dim hover:text-fg transition-colors pl-1"
         >
           Or browse all platforms →
         </a>
@@ -127,7 +127,7 @@ export default function DownloadButton({
         </motion.a>
         <a
           href="/download"
-          className="text-caption text-fg-dim hover:text-white transition-colors pl-1"
+          className="text-caption text-fg-dim hover:text-fg transition-colors pl-1"
         >
           Or browse all platforms →
         </a>
@@ -147,7 +147,7 @@ export default function DownloadButton({
       </button>
       <a
         href="/download"
-        className="text-caption text-fg-dim hover:text-white transition-colors pl-1"
+        className="text-caption text-fg-dim hover:text-fg transition-colors pl-1"
       >
         Or open the downloads page →
       </a>

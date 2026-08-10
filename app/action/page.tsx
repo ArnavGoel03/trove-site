@@ -78,11 +78,11 @@ export default function ActionsIndex() {
             These actions live in the Quick Switcher; Trove also has{" "}
             {TOOL_COUNT} full panes (API Tester, Speedtest, Hash, OCR, Hosts editor,
             Local LLM chat, Image Editor, …). Browse them at{" "}
-            <Link href="/features" className="text-white underline">
+            <Link href="/features" className="text-fg underline">
               /features
             </Link>{" "}
             or download the app at{" "}
-            <Link href="/download" className="text-white underline">
+            <Link href="/download" className="text-fg underline">
               /download
             </Link>
             .

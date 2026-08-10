@@ -108,7 +108,7 @@ export default function Nav() {
                 href={l.href}
                 aria-current={active ? "page" : undefined}
                 className={`rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                  active ? "text-white" : "hover:text-white"
+                  active ? "text-fg" : "hover:text-fg"
                 }`}
               >
                 {l.label}
@@ -124,7 +124,7 @@ export default function Nav() {
             rel="noopener noreferrer"
             aria-label={`${TROVE.name} releases on GitHub`}
             title="Releases on GitHub"
-            className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-fg-dim hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-fg-dim hover:text-fg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             <GithubMark size={15} />
           </a>
@@ -140,7 +140,7 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="md:hidden btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-fg-dim hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="md:hidden btn-ghost rounded-full w-8 h-8 inline-flex items-center justify-center text-fg-dim hover:text-fg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             {open ? (
               <X size={16} strokeWidth={1.75} />
@@ -176,8 +176,8 @@ export default function Nav() {
                   aria-current={active ? "page" : undefined}
                   className={`block rounded-xl px-4 py-3 text-body transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
                     active
-                      ? "bg-surface-2 text-white"
-                      : "text-fg-dim hover:bg-surface-1 hover:text-white"
+                      ? "bg-surface-2 text-fg"
+                      : "text-fg-dim hover:bg-surface-1 hover:text-fg"
                   }`}
                 >
                   {l.label}
@@ -186,7 +186,7 @@ export default function Nav() {
             })}
             <Link
               href="/download"
-              className="mt-1 block rounded-xl px-4 py-3 text-body font-medium text-white bg-surface-2 hover:bg-surface-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="mt-1 block rounded-xl px-4 py-3 text-body font-medium text-fg bg-surface-2 hover:bg-surface-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
             >
               Download
             </Link>

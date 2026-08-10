@@ -36,7 +36,7 @@ export default function PdfVisual() {
                 delay: i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="absolute inset-0 rounded-lg border border-line-soft bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] p-4 flex flex-col gap-2 origin-bottom-left"
+              className="absolute inset-0 rounded-lg border border-line-soft bg-gradient-to-br from-fg/[0.06] to-fg/[0.02] backdrop-blur shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] p-4 flex flex-col gap-2 origin-bottom-left"
               style={{ zIndex: 10 - i }}
             >
               <FileText size={20} className="text-[#4cb8ff]" />
@@ -70,7 +70,7 @@ export default function PdfVisual() {
               transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
               className="rounded-lg border border-line-soft bg-surface-1 hover:bg-surface-2 transition-colors px-2 py-2.5 flex flex-col items-center gap-1.5 text-caption text-fg-dim"
             >
-              <Icon size={14} className="text-white/80" />
+              <Icon size={14} className="text-fg/80" />
               {a.label}
             </motion.button>
           );

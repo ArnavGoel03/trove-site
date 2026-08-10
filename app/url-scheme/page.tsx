@@ -193,7 +193,7 @@ export default function URLSchemePage() {
             }
           >
             <header className="flex items-start justify-between gap-4 mb-3">
-              <h2 className="font-mono text-body text-white">{v.verb}</h2>
+              <h2 className="font-mono text-body text-fg">{v.verb}</h2>
               {v.frontmost ? (
                 <span className="shrink-0 inline-flex items-center rounded-full border border-accent/40 px-2.5 py-0.5 text-micro uppercase text-accent">
                   Frontmost-only
@@ -204,7 +204,7 @@ export default function URLSchemePage() {
                 </span>
               )}
             </header>
-            <code className="block font-mono text-caption bg-surface-1 border border-line-soft rounded-md px-3 py-2 text-white mb-3 break-all">
+            <code className="block font-mono text-caption bg-surface-1 border border-line-soft rounded-md px-3 py-2 text-fg mb-3 break-all">
               {v.example}
             </code>
             <p className="text-caption leading-[1.7] text-fg-dim">
@@ -214,7 +214,7 @@ export default function URLSchemePage() {
               <ul className="mt-4 space-y-2">
                 {v.params.map((p) => (
                   <li key={p.name} className="flex gap-3 text-caption">
-                    <code className="font-mono text-caption bg-surface-1 border border-line-soft rounded px-2 py-0.5 text-white h-fit shrink-0">
+                    <code className="font-mono text-caption bg-surface-1 border border-line-soft rounded px-2 py-0.5 text-fg h-fit shrink-0">
                       {p.name}
                     </code>
                     <span className="text-fg-dim leading-[1.65]">

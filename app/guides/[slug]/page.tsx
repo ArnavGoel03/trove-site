@@ -79,7 +79,7 @@ export default async function GuidePage({
               {i + 1}
             </span>
             <div>
-              <div className="text-body font-medium text-white">
+              <div className="text-body font-medium text-fg">
                 {s.name}
               </div>
               <p className="text-caption leading-[1.7] text-fg-dim mt-1.5">
@@ -98,7 +98,7 @@ export default async function GuidePage({
 
       {panes.length > 0 ? (
         <section>
-          <h2 className="text-lead font-semibold tracking-tight text-white mb-4">
+          <h2 className="text-lead font-semibold tracking-tight text-fg mb-4">
             Panes used in this guide
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -117,7 +117,7 @@ export default async function GuidePage({
                     <Icon size={18} strokeWidth={1.5} />
                   </span>
                   <div className="min-w-0">
-                    <div className="text-caption font-medium text-white">
+                    <div className="text-caption font-medium text-fg">
                       {p.name}
                     </div>
                     <div className="text-caption text-fg-mute truncate">

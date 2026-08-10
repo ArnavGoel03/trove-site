@@ -73,7 +73,7 @@ function SectionBlock({
               boxShadow: `0 0 14px 2px ${accent}55`,
             }}
           />
-          <h3 className="text-title font-semibold text-white">
+          <h3 className="text-title font-semibold text-fg">
             {title}
           </h3>
           <span className="text-caption text-fg-mute font-mono tabular-nums">
@@ -113,11 +113,11 @@ function PaneCard({ pane, accent }: { pane: Pane; accent: string }) {
           className="w-9 h-9 rounded-lg border border-line-soft bg-surface-1 flex items-center justify-center shrink-0"
           style={{ boxShadow: `inset 0 0 0 1px ${accent}22` }}
         >
-          <Icon size={16} className="text-white/90" />
+          <Icon size={16} className="text-fg/90" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline justify-between gap-2">
-            <div className="text-body font-semibold tracking-tight text-white truncate">
+            <div className="text-body font-semibold tracking-tight text-fg truncate">
               {pane.name}
             </div>
             <code

@@ -134,6 +134,9 @@ export default function Color() {
         />
         <span
           aria-hidden="true"
+          // Pure white, not the fg token: this ring sits on top of whatever
+          // colour the user is hovering, so it wants maximum contrast rather
+          // than the page's slightly-warm foreground.
           className="pointer-events-none absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-[0_0_0_1px_rgba(0,0,0,0.6)]"
           style={{ left: `${(pos.x / W) * 100}%`, top: `${(pos.y / H) * 100}%` }}
         />

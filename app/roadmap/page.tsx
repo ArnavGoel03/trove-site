@@ -160,7 +160,7 @@ function Bucket({
   return (
     <section className="mb-16">
       <div className="flex items-baseline justify-between mb-5">
-        <h2 className="text-lead font-semibold text-white">
+        <h2 className="text-lead font-semibold text-fg">
           {title}
         </h2>
         <span className="text-caption text-fg-mute">
@@ -191,7 +191,7 @@ function Bucket({
               {it.size}
             </span>
             <div>
-              <div className="text-body font-medium text-white">
+              <div className="text-body font-medium text-fg">
                 {it.title}
               </div>
               <div className="text-caption text-fg-dim leading-[1.65] mt-1.5">

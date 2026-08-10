@@ -55,7 +55,7 @@ export default function FaqPage() {
               <div className="space-y-4">
                 {FAQ.filter((f) => f.group === g).map((f) => (
                   <article key={f.question} className="pane rounded-xl p-5">
-                    <h3 className="text-body font-semibold text-white leading-snug">
+                    <h3 className="text-body font-semibold text-fg leading-snug">
                       {f.question}
                     </h3>
                     <p className="mt-2.5 text-caption leading-[1.75] text-fg-dim">

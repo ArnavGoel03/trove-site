@@ -18,7 +18,7 @@ export default function ContactPage() {
         <>
           Trove is a tiny operation - we read every message, but please be
           patient. Responses typically arrive within{" "}
-          <span className="text-white">2 business days</span>.
+          <span className="text-fg">2 business days</span>.
         </>
       }
     >
@@ -30,7 +30,7 @@ export default function ContactPage() {
         <p>
           <a
             href={CONTACT.support}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>
@@ -48,7 +48,7 @@ export default function ContactPage() {
             href={ISSUES_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {ISSUES_LABEL}
           </a>
@@ -58,13 +58,13 @@ export default function ContactPage() {
       <Section title="Security disclosures">
         <p>
           Please use the responsible-disclosure process described on our{" "}
-          <a href="/security" className="text-white hover:underline">
+          <a href="/security" className="text-fg hover:underline">
             Security
           </a>{" "}
           page. The dedicated address is{" "}
           <a
             href={CONTACT.security}
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             {CONTACT.address}
           </a>
@@ -80,11 +80,11 @@ export default function ContactPage() {
         <p>
           Every release is announced in two places you can subscribe to today:
           the{" "}
-          <a href="/changelog" className="text-white hover:underline">
+          <a href="/changelog" className="text-fg hover:underline">
             changelog
           </a>{" "}
           (which has an{" "}
-          <a href="/changelog/rss.xml" className="text-white hover:underline">
+          <a href="/changelog/rss.xml" className="text-fg hover:underline">
             RSS feed
           </a>
           ), and{" "}
@@ -92,7 +92,7 @@ export default function ContactPage() {
             href={releasePageURL()}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white hover:underline"
+            className="text-fg hover:underline"
           >
             GitHub Releases
           </a>

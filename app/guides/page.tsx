@@ -45,7 +45,7 @@ export default function GuidesIndex() {
                 <div className="text-micro uppercase tracking-[0.2em] text-accent mb-1.5">
                   {g.eyebrow} · {g.estimate}
                 </div>
-                <div className="text-body font-medium text-white leading-snug">
+                <div className="text-body font-medium text-fg leading-snug">
                   {g.title}
                 </div>
                 <div className="text-caption text-fg-dim leading-[1.65] mt-1.5">

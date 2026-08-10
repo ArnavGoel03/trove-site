@@ -67,7 +67,7 @@ export default function FeaturesCta() {
             </div>
             <p className="text-caption text-fg-dim mb-4 leading-relaxed">
               Once the tap is published, install and update sit on the same
-              <code className="text-white/90 bg-surface-1 px-1.5 py-0.5 rounded text-caption mx-1">
+              <code className="text-fg/90 bg-surface-1 px-1.5 py-0.5 rounded text-caption mx-1">
                 brew upgrade --cask
               </code>
               flow as your other Mac apps.
@@ -93,7 +93,7 @@ export default function FeaturesCta() {
             href={ISSUES_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 hover:text-fg transition-colors"
           >
             <Github size={13} /> Report an issue
           </a>
@@ -102,14 +102,14 @@ export default function FeaturesCta() {
             href={releasePageURL()}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors"
+            className="hover:text-fg transition-colors"
           >
             All releases
           </a>
           <span className="text-fg-mute">·</span>
           <a
             href="/changelog"
-            className="hover:text-white transition-colors"
+            className="hover:text-fg transition-colors"
           >
             Full {TROVE.version} changelog
           </a>

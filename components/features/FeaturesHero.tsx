@@ -29,7 +29,7 @@ export default function FeaturesHero() {
             v{TROVE.version} · {PANE_COUNT} panes · {INTENTS.length} Shortcuts intents
           </div>
 
-          <h1 className="text-hero font-semibold bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent">
+          <h1 className="text-hero font-semibold bg-gradient-to-b from-fg via-fg to-fg/60 bg-clip-text text-transparent">
             Every pane,
             <br className="hidden sm:block" /> exhaustively.
           </h1>

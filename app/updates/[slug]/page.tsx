@@ -80,7 +80,7 @@ export default async function UpdatePostPage({
       <div className="mt-16 pt-8 border-t border-line-soft">
         <Link
           href="/updates"
-          className="text-caption text-fg-dim hover:text-white transition-colors"
+          className="text-caption text-fg-dim hover:text-fg transition-colors"
         >
           ← All updates
         </Link>
