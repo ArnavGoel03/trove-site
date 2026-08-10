@@ -43,7 +43,7 @@ const PITCHES = [
   },
   {
     angle: "For the power-user reader",
-    body: "Eleven macOS Shortcuts intents with rich entity pickers for snippets and clipboard history, a full `trove://` URL scheme, a ChordRegistry that keeps the ⌘? cheatsheet in sync with the code, and Saved Recipes in Text Tools. The Recorder pane shipped 17 pro features in one pass: click ripple, keystroke overlay, voice-activity auto-pause, separate audio tracks in the MOV.",
+    body: `${INTENTS.length} macOS Shortcuts intents with rich entity pickers for snippets and clipboard history, a full \`trove://\` URL scheme, a ChordRegistry that keeps the ⌘? cheatsheet in sync with the code, and Saved Recipes in Text Tools. The Recorder pane shipped 17 pro features in one pass: click ripple, keystroke overlay, voice-activity auto-pause, separate audio tracks in the MOV.`,
   },
   {
     angle: "For the bundle-fatigue reader",

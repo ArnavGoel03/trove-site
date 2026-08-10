@@ -115,7 +115,7 @@ const RULES = [
     // "40+ ops" is the Text Tools pipeline, a different number entirely.
     name: "hardcoded tool count",
     pattern:
-      /\b\d+\+[- ](?:tool|pane)s?\b|\b\d+-(?:tool|pane)\b|\b\d+ (?:Shortcuts intents|AppIntents)\b/i,
+      /\b\d+\+[- ](?:tool|pane)s?\b|\b\d+-(?:tool|pane)\b|\b(?:\d+|eleven|twelve|twenty|thirty|forty|fifty) (?:macOS )?(?:Shortcuts )?(?:intents|AppIntents|entity pickers)\b/i,
     allow: ["scripts/check-hardcoded.mjs"],
     use: "TOOL_COUNT from lib/panes.ts, or INTENTS.length from lib/intents.ts",
   },

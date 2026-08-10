@@ -34,7 +34,7 @@ const THEMES: ThemeSpec[] = [
     name: "Dark",
     tagline: "The default.",
     description:
-      "Near-black background with orange accents: the in-app default. Holds up across long sessions and OLED panels.",
+      "Near-black background with the brand red: the in-app default. Holds up across long sessions and OLED panels.",
     surface: "#08080b",
     panel: "linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015))",
     border: "rgba(255,255,255,0.08)",
@@ -50,16 +50,19 @@ const THEMES: ThemeSpec[] = [
     name: "Light",
     tagline: "Bright, but not blinding.",
     description:
-      "Off-white surface with the same orange accent. Auto-toggles when macOS reports Light appearance, if Settings → Theme → System Match is on.",
+      "Off-white surface with the same red accent. Auto-toggles when macOS reports Light appearance, if Settings → Theme → System Match is on.",
     surface: "#f6f6f7",
     panel: "linear-gradient(180deg, rgba(0,0,0,0.025), rgba(0,0,0,0.005))",
     border: "rgba(0,0,0,0.08)",
     text: "#0a0a0c",
     textDim: "#52525b",
     accent: ACCENT,
-    accent2: "#7a4cd6",
+    // The same accent twice, so the primary button renders solid. It used to
+    // be a violet here, which put a red-to-purple gradient on the one theme
+    // whose own description says it uses the same accent as Dark.
+    accent2: ACCENT,
     badge: "Auto",
-    swatch: ["#f6f6f7", ACCENT, "#7a4cd6", "#0a0a0c"],
+    swatch: ["#f6f6f7", ACCENT, ACCENT, "#0a0a0c"],
   },
   {
     id: "linear",

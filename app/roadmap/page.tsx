@@ -3,6 +3,7 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { pageTitle, STUDIO, TROVE } from "@/lib/brand";
 import { STATUS, type StatusTone } from "@/lib/palette";
+import { ENTITY_INTENT_COUNT, INTENTS } from "@/lib/intents";
 
 export const metadata: Metadata = {
   title: pageTitle("Roadmap"),
@@ -21,7 +22,7 @@ type Item = {
 const SHIPPED: Item[] = [
   {
     id: "intents",
-    title: "macOS Shortcuts / AppIntents: 11 intents, 8 entity pickers",
+    title: `macOS Shortcuts / AppIntents: ${INTENTS.length} intents, ${ENTITY_INTENT_COUNT} entity pickers`,
     body: "Snippets and clipboard history render as rich pickers in the Shortcuts editor with name + body / kind + capture-date previews.",
     size: "L",
   },
