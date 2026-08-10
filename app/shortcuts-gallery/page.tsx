@@ -3,6 +3,7 @@ import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { INTENTS, type IntentCategory } from "@/lib/intents";
 import { ACCENT } from "@/lib/brand-tokens.generated";
+import { STATUS } from "@/lib/palette";
 import { pageTitle, STUDIO, TROVE } from "@/lib/brand";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
     {
       name: "Compute",
       tagline: "Calculator, QR, hashing, all callable as Shortcut actions.",
-      accent: "#4cb8ff",
+      accent: STATUS.info,
     },
     {
       name: "Snippets",
@@ -33,14 +34,14 @@ const CATEGORIES: { name: IntentCategory; tagline: string; accent: string }[] =
       name: "Clipboard history",
       tagline:
         "Index-based and picker-based access to persisted clipboard entries.",
-      accent: "#5be3a4",
+      accent: STATUS.ok,
     },
   ];
 
 const KIND_TINT: Record<string, string> = {
-  Action: "#ffd166",
+  Action: STATUS.warn,
   "Entity picker": ACCENT,
-  Query: "#4cb8ff",
+  Query: STATUS.info,
 };
 
 export default function ShortcutsGalleryPage() {

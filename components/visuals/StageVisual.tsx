@@ -23,7 +23,7 @@ const items = [
     icon: LinkIcon,
     title: "github.com/your-org/toolbox",
     preview: "github.com",
-    tint: "from-[#4cb8ff]/15 to-transparent",
+    tint: "from-info/15 to-transparent",
   },
 ];
 

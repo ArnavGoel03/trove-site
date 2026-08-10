@@ -68,7 +68,14 @@ export default async function ComparisonPage({ params }: PageProps) {
             Side by side
           </h2>
           <div className="rounded-3xl border border-line-soft overflow-hidden">
-            <div className="grid grid-cols-[1fr_1fr] text-caption">
+            {/*
+              minmax(0,1fr), not 1fr: a grid item defaults to min-width:auto,
+              so one unbreakable string in a cell ("npm/yarn/pnpm/Chrome/Edge/
+              Firefox/pip/Nuget") widened its column past the card. The card
+              is overflow-hidden, so at 393px the right-hand column was
+              silently cut off rather than scrolled to.
+            */}
+            <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] text-caption">
               <div className="px-5 py-3 bg-surface-1 font-semibold border-b border-line-soft">
                 Trove
               </div>
@@ -125,11 +132,15 @@ function FragmentRow({
   const border = last ? "" : "border-b border-line-soft";
   return (
     <>
-      <div className={`px-5 py-4 ${border} text-caption leading-relaxed`}>
+      {/* break-words so a long slash-joined list wraps inside its cell
+          instead of pushing the column wider than the phone. */}
+      <div
+        className={`px-5 py-4 ${border} text-caption leading-relaxed break-words`}
+      >
         {trove}
       </div>
       <div
-        className={`px-5 py-4 ${border} border-l border-line-soft text-caption leading-relaxed text-fg-dim`}
+        className={`px-5 py-4 ${border} border-l border-line-soft text-caption leading-relaxed text-fg-dim break-words`}
       >
         {them}
       </div>

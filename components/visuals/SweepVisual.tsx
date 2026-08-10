@@ -69,7 +69,10 @@ export default function SweepVisual() {
             </span>
           </div>
         </div>
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#ff5d8f]/15 border border-[#ff5d8f]/30 px-2.5 py-1 text-caption text-[#ffb0c5]">
+        {/* The text is a lightened --color-pink, not the token itself: at
+            caption size the full-strength hue on its own 15% fill is too dim
+            to read. One use, so it stays a literal here. */}
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-pink/15 border border-pink/30 px-2.5 py-1 text-caption text-[#ffb0c5]">
           <Trash2 size={11} />
           older than 30 days
         </div>

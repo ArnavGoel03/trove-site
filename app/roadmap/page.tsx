@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
 import { pageTitle, STUDIO, TROVE } from "@/lib/brand";
+import { STATUS, type StatusTone } from "@/lib/palette";
 
 export const metadata: Metadata = {
   title: pageTitle("Roadmap"),
@@ -150,13 +151,16 @@ function Bucket({
   title,
   blurb,
   items,
-  tint,
+  tone,
 }: {
   title: string;
   blurb: string;
   items: Item[];
-  tint: string;
+  tone: StatusTone;
 }) {
+  // The raw value, not a class: both uses below are hex-alpha fills built by
+  // concatenation, which a CSS custom property cannot do.
+  const tint = STATUS[tone];
   return (
     <section className="mb-16">
       <div className="flex items-baseline justify-between mb-5">
@@ -178,7 +182,7 @@ function Bucket({
             style={{ borderColor: `${tint}30` }}
           >
             <span
-              className="inline-flex shrink-0 mt-0.5 w-6 h-6 rounded-full items-center justify-center text-micro font-semibold uppercase tracking-[0.1em]"
+              className="inline-flex shrink-0 mt-0.5 w-6 h-6 rounded-full items-center justify-center text-micro font-semibold uppercase"
               style={{ background: `${tint}22`, color: tint }}
               title={
                 it.size === "S"
@@ -230,19 +234,19 @@ export default function RoadmapPage() {
         title={`Shipped: v${TROVE.version}`}
         blurb="On the stable channel as of May 31, 2026. The changelog has the per-build breakdown."
         items={SHIPPED}
-        tint="#5be3a4"
+        tone="ok"
       />
       <Bucket
         title="In progress"
         blurb="Being built right now. Beta-channel users see these before they reach stable."
         items={IN_PROGRESS}
-        tint="#4cb8ff"
+        tone="info"
       />
       <Bucket
         title="Deferred"
         blurb="Worth doing, but worth doing properly. Each item needs its own week: none are slipping into the next point release."
         items={DEFERRED}
-        tint="#ffd166"
+        tone="warn"
       />
     </PageShell>
   );

@@ -119,6 +119,18 @@ const RULES = [
     allow: ["scripts/check-hardcoded.mjs"],
     use: "TOOL_COUNT from lib/panes.ts, or INTENTS.length from lib/intents.ts",
   },
+  {
+    // Five hues written out by hand in eight files. lib/panes.ts alone repeated
+    // three of them 53 times, once per pane, always equal to the accent of that
+    // pane's section, so one section's colour was stored in 54 places and a
+    // single typo would have shown a pane page in a colour that disagreed with
+    // its own section header. app/globals.css is not scanned here, so the
+    // stylesheet's copy is pinned by test/palette.test.ts instead.
+    name: "palette hue",
+    pattern: /#(?:5be3a4|4cb8ff|ffd166|ff5d8f|9ca3af)\b/i,
+    allow: ["lib/palette.ts", "scripts/check-hardcoded.mjs"],
+    use: "HUE or STATUS from lib/palette.ts, or the text-ok / bg-warn / border-pink utilities",
+  },
 ];
 
 const SKIP_DIRS = new Set([

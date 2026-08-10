@@ -39,7 +39,7 @@ export default function PdfVisual() {
               className="absolute inset-0 rounded-lg border border-line-soft bg-gradient-to-br from-fg/[0.06] to-fg/[0.02] backdrop-blur shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] p-4 flex flex-col gap-2 origin-bottom-left"
               style={{ zIndex: 10 - i }}
             >
-              <FileText size={20} className="text-[#4cb8ff]" />
+              <FileText size={20} className="text-info" />
               <div className="mt-2 space-y-1.5">
                 {[100, 86, 92, 70, 80, 60].map((w, j) => (
                   <div

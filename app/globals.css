@@ -19,6 +19,16 @@
   --color-accent-2: #b00600;
   --color-accent-3: #3f3f46;
 
+  /* The non-brand hues: shipped / in progress / partial, plus the Storage
+     section's pink. Mirrors HUE and STATUS in lib/palette.ts, which is the
+     source; test/palette.test.ts parses this file and fails if they drift
+     apart. Deliberately not derived from the accent: a red tick meaning "yes"
+     next to a red brand is unreadable. */
+  --color-ok: #5be3a4;
+  --color-info: #4cb8ff;
+  --color-warn: #ffd166;
+  --color-pink: #ff5d8f;
+
   /* Surfaces. Every glass panel, card and inset used to write its own
      rgba(255,255,255,0.04) by hand; there were four slightly different
      values of "the same" surface on one page. Tokens instead, so a lift in

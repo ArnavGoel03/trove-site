@@ -61,7 +61,7 @@ function DirectionCard({ dir }: { dir: Dir }) {
   return (
     <div className="flex flex-col gap-4">
       {/* Faux app window, monochrome base + this accent */}
-      <div className="rounded-2xl overflow-hidden border border-line-soft bg-[#0E1012] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
+      <div className="rounded-2xl overflow-hidden border border-line-soft bg-bg-elev shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]">
         {/* Title bar */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-line-soft bg-black/30">
           <div className="flex items-center gap-1.5">
@@ -91,7 +91,7 @@ function DirectionCard({ dir }: { dir: Dir }) {
             <br />
             One subscription.
           </h3>
-          <p className="mt-2 text-caption text-[#9BA1A9] leading-relaxed">
+          <p className="mt-2 text-caption text-fg-dim leading-relaxed">
             Fast, private Mac apps. One key unlocks all three.
           </p>
 
@@ -130,7 +130,7 @@ function DirectionCard({ dir }: { dir: Dir }) {
                     size={16}
                     style={{ color: active ? dir.accent : "rgba(255,255,255,0.8)" }}
                   />
-                  <span className="text-caption text-[#9BA1A9]">{t.label}</span>
+                  <span className="text-caption text-fg-dim">{t.label}</span>
                 </div>
               );
             })}
@@ -138,7 +138,7 @@ function DirectionCard({ dir }: { dir: Dir }) {
 
           {/* Text link + inline accent */}
           <div className="mt-4 flex items-center justify-between text-caption">
-            <span className="text-[#9BA1A9]">
+            <span className="text-fg-dim">
               Trial ends in{" "}
               <span style={{ color: dir.accent }} className="font-semibold">
                 14 days
@@ -161,11 +161,11 @@ function DirectionCard({ dir }: { dir: Dir }) {
           <span className="text-caption font-semibold text-fg">
             {dir.name}
           </span>
-          <span className="text-caption font-mono text-[#6b7280]">
+          <span className="text-caption font-mono text-fg-mute">
             {dir.accent}
           </span>
         </div>
-        <p className="mt-1.5 text-caption text-[#9BA1A9] leading-relaxed">
+        <p className="mt-1.5 text-caption text-fg-dim leading-relaxed">
           {dir.note}
         </p>
       </div>
@@ -175,16 +175,16 @@ function DirectionCard({ dir }: { dir: Dir }) {
 
 export default function BrandPreview() {
   return (
-    <main className="min-h-screen bg-[#0A0B0D] px-6 py-16 sm:py-24">
+    <main className="min-h-screen bg-bg px-6 py-16 sm:py-24">
       <div className="max-w-6xl mx-auto">
         <div className="max-w-2xl">
-          <p className="text-micro uppercase text-[#6b7280] mb-3">
+          <p className="text-micro uppercase text-fg-mute mb-3">
             Brand directions
           </p>
           <h1 className="text-title font-semibold text-fg">
             Which one feels like software?
           </h1>
-          <p className="mt-4 text-body text-[#9BA1A9] leading-relaxed">
+          <p className="mt-4 text-body text-fg-dim leading-relaxed">
             Monochrome graphite base, one solid accent doing minimal work: the
             premium native-tool look, not an AI launch page. Same mini UI in
             each direction so you can compare the feel, not the mockup. No

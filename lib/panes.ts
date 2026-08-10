@@ -70,6 +70,7 @@ import {
   Wand2,
 } from "lucide-react";
 import { ACCENT } from "@/lib/brand-tokens.generated";
+import { HUE } from "./palette";
 import { TROVE } from "./brand";
 import { ENTITY_INTENT_COUNT, INTENTS } from "./intents";
 
@@ -94,11 +95,33 @@ export type Pane = {
   sfSymbol: string;
   /** Customize-panel blurb from main.swift. */
   blurb: string;
-  /** Accent color hint, used to tint the per-section column. */
+  /**
+   * Accent colour hint, used to tint the per-section column.
+   *
+   * Derived from `section`, never authored: it was written out on all 53
+   * entries below and was identical to the section's own accent every time,
+   * so one section's colour was stored in 54 places.
+   */
   accent: string;
 };
 
-export const PANES: Pane[] = [
+/**
+ * The one place a section's colour is decided. `PANES` and `SECTIONS` both
+ * read it, which is what keeps a pane page the same colour as the section
+ * header that links to it.
+ */
+export const SECTION_ACCENT: Record<PaneSection, string> = {
+  Clipboard: ACCENT,
+  Compute: HUE.blue,
+  Capture: ACCENT,
+  Files: HUE.green,
+  System: HUE.amber,
+  Storage: HUE.pink,
+  App: ACCENT,
+  Profile: HUE.slate,
+};
+
+const PANE_SEEDS: Omit<Pane, "accent">[] = [
   // Clipboard
   {
     name: "Stage",
@@ -107,7 +130,6 @@ export const PANES: Pane[] = [
     sfSymbol: "tray.full.fill",
     blurb:
       "Multi-clipboard staging: drop, paste, screenshot, copy all at once.",
-    accent: ACCENT,
   },
   {
     name: "History",
@@ -116,7 +138,6 @@ export const PANES: Pane[] = [
     sfSymbol: "clock.arrow.circlepath",
     blurb:
       "Persistent clipboard history with regex search, pin, dedup, and recovery.",
-    accent: ACCENT,
   },
   {
     name: "Snippets",
@@ -124,7 +145,6 @@ export const PANES: Pane[] = [
     icon: ClipboardList,
     sfSymbol: "text.append",
     blurb: "Reusable text templates, copy with one click.",
-    accent: ACCENT,
   },
   {
     name: "Notes",
@@ -132,7 +152,6 @@ export const PANES: Pane[] = [
     icon: StickyNote,
     sfSymbol: "note.text",
     blurb: "Five colored tabs of always-on markdown scratchpad.",
-    accent: ACCENT,
   },
 
   // Compute
@@ -143,7 +162,6 @@ export const PANES: Pane[] = [
     sfSymbol: "function",
     blurb:
       "Soulver-style tape: variables, units, live currency, smart percent.",
-    accent: "#4cb8ff",
   },
   {
     name: "Text Tools",
@@ -152,7 +170,6 @@ export const PANES: Pane[] = [
     sfSymbol: "wand.and.stars",
     blurb:
       "Chainable text pipeline: Base64, JSON, JWT, regex, 40+ ops, saved recipes.",
-    accent: "#4cb8ff",
   },
   {
     name: "JSON / XML",
@@ -161,7 +178,6 @@ export const PANES: Pane[] = [
     sfSymbol: "curlybraces",
     blurb:
       "JSON, YAML and XML format, validate, sort keys, minify. Replaces jsonformatter.org.",
-    accent: "#4cb8ff",
   },
   {
     name: "Regex",
@@ -170,7 +186,6 @@ export const PANES: Pane[] = [
     sfSymbol: "slash.circle",
     blurb:
       "Regex playground with live match highlighting, capture groups, and 10 common-pattern presets.",
-    accent: "#4cb8ff",
   },
   {
     name: "Date Calc",
@@ -178,7 +193,6 @@ export const PANES: Pane[] = [
     icon: CalendarClock,
     sfSymbol: "calendar.badge.clock",
     blurb: "Date calculator: business days, time zones, Unix to ISO 8601.",
-    accent: "#4cb8ff",
   },
   {
     name: "Units",
@@ -187,7 +201,6 @@ export const PANES: Pane[] = [
     sfSymbol: "ruler",
     blurb:
       "Unit converter: length, mass, temperature, data, speed, volume, area, time, energy, power.",
-    accent: "#4cb8ff",
   },
   {
     name: "API Tester",
@@ -196,7 +209,6 @@ export const PANES: Pane[] = [
     sfSymbol: "globe.americas",
     blurb:
       "HTTP API client: method, URL, headers, body, auth (including OAuth PKCE). Response with status, headers and pretty JSON. Saved collections, history, and Postman import.",
-    accent: "#4cb8ff",
   },
   {
     name: "Passwords",
@@ -205,7 +217,6 @@ export const PANES: Pane[] = [
     sfSymbol: "key.fill",
     blurb:
       "Strong password generator (random or memorable) plus a Have I Been Pwned breach checker. Only the first 5 hex characters of the SHA-1 ever leave the Mac (k-anonymity).",
-    accent: "#4cb8ff",
   },
   {
     name: "Local AI",
@@ -214,7 +225,6 @@ export const PANES: Pane[] = [
     sfSymbol: "brain",
     blurb:
       "Local LLM chat through Ollama on localhost. Pick any model you have pulled. Streaming replies, system prompt, temperature, multi-turn. Nothing leaves the Mac.",
-    accent: "#4cb8ff",
   },
   {
     name: "Terminal",
@@ -223,7 +233,6 @@ export const PANES: Pane[] = [
     sfSymbol: "terminal",
     blurb:
       "Embedded command runner: zsh with a persistent working directory, command history, and ANSI color. A quick runner, not a full TTY.",
-    accent: "#4cb8ff",
   },
   {
     name: "Markdown",
@@ -232,7 +241,6 @@ export const PANES: Pane[] = [
     sfSymbol: "text.justify.left",
     blurb:
       "Markdown editor with a live, natively rendered preview (no WebView). Split or focus modes, open and save .md, export or copy HTML, live word count.",
-    accent: "#4cb8ff",
   },
 
   // Capture
@@ -242,7 +250,6 @@ export const PANES: Pane[] = [
     icon: Pipette,
     sfSymbol: "eyedropper.halffull",
     blurb: "Pick from screen, palette from image, WCAG contrast checker.",
-    accent: ACCENT,
   },
   {
     name: "QR",
@@ -250,7 +257,6 @@ export const PANES: Pane[] = [
     icon: QrCode,
     sfSymbol: "qrcode",
     blurb: "Generate QR codes from any text. Live preview.",
-    accent: ACCENT,
   },
   {
     name: "OCR",
@@ -259,7 +265,6 @@ export const PANES: Pane[] = [
     sfSymbol: "doc.viewfinder",
     blurb:
       "Capture region → recognize text → optional translate, all local.",
-    accent: ACCENT,
   },
   {
     name: "Record",
@@ -267,7 +272,6 @@ export const PANES: Pane[] = [
     icon: Video,
     sfSymbol: "record.circle",
     blurb: "Screen recording with system audio + mic. ScreenCaptureKit.",
-    accent: ACCENT,
   },
   {
     name: "Snip",
@@ -276,7 +280,6 @@ export const PANES: Pane[] = [
     sfSymbol: "rectangle.dashed.badge.record",
     blurb:
       "Screenshot with delay timer + multi-destination (Stage / Clipboard / file).",
-    accent: ACCENT,
   },
   {
     name: "Mirror",
@@ -285,7 +288,6 @@ export const PANES: Pane[] = [
     sfSymbol: "video",
     blurb:
       "Webcam preview with horizontal flip + opt-in menu bar item. Local-only, no recording.",
-    accent: ACCENT,
   },
   {
     name: "Image Editor",
@@ -294,7 +296,6 @@ export const PANES: Pane[] = [
     sfSymbol: "wand.and.stars.inverse",
     blurb:
       "Photos-class image editor: crop, rotate, perspective, 13 adjustments, 9 filters, auto-enhance, red-eye removal, multi-format export.",
-    accent: ACCENT,
   },
 
   // Files
@@ -304,7 +305,6 @@ export const PANES: Pane[] = [
     icon: ImageIcon,
     sfSymbol: "photo.on.rectangle.angled",
     blurb: "Convert / resize / compress images. HEIC, PNG, JPEG, WebP.",
-    accent: "#5be3a4",
   },
   {
     name: "PDF",
@@ -313,7 +313,6 @@ export const PANES: Pane[] = [
     sfSymbol: "doc.richtext",
     blurb:
       "Merge (reorderable), split, compress, rotate, OCR, watermark, all local.",
-    accent: "#5be3a4",
   },
   {
     name: "Hash",
@@ -322,7 +321,6 @@ export const PANES: Pane[] = [
     sfSymbol: "number",
     blurb:
       "MD5/SHA1/SHA256/SHA512 in one streaming pass · SHA256SUMS verification.",
-    accent: "#5be3a4",
   },
   {
     name: "Rename",
@@ -331,7 +329,6 @@ export const PANES: Pane[] = [
     sfSymbol: "textformat.alt",
     blurb:
       "Mass file rename: find/replace, regex, sequence, date prefix, EXIF date.",
-    accent: "#5be3a4",
   },
   {
     name: "Inspector",
@@ -340,7 +337,6 @@ export const PANES: Pane[] = [
     sfSymbol: "doc.text.magnifyingglass",
     blurb:
       "Drop any file to see EXIF, GPS, PDF info, video tracks, hashes, xattr, Spotlight metadata. Strip metadata. Compare two files.",
-    accent: "#5be3a4",
   },
   {
     name: "Converter",
@@ -349,7 +345,6 @@ export const PANES: Pane[] = [
     sfSymbol: "arrow.up.arrow.down.square",
     blurb:
       "Universal file converter: HEIC to JPG, MOV to MP4, AAC to MP3, DOCX to PDF, anything ffmpeg, LibreOffice and sips can handle. Drag in, pick a target, run.",
-    accent: "#5be3a4",
   },
 
   // System
@@ -359,7 +354,6 @@ export const PANES: Pane[] = [
     icon: LayoutGrid,
     sfSymbol: "rectangle.split.2x1",
     blurb: "Aero-Snap-style window tiling with smart per-app presets.",
-    accent: "#ffd166",
   },
   {
     name: "Switcher",
@@ -367,7 +361,6 @@ export const PANES: Pane[] = [
     icon: Activity,
     sfSymbol: "rectangle.stack",
     blurb: "AltTab-style window switcher with type-to-filter.",
-    accent: "#ffd166",
   },
   {
     name: "Move Files",
@@ -375,7 +368,6 @@ export const PANES: Pane[] = [
     icon: Scissors,
     sfSymbol: "scissors",
     blurb: "⌘X / ⌘V in Finder actually moves files (Windows behavior).",
-    accent: "#ffd166",
   },
   {
     name: "Finder",
@@ -383,7 +375,6 @@ export const PANES: Pane[] = [
     icon: Folder,
     sfSymbol: "macwindow.and.cursorarrow",
     blurb: "Show extensions, path bar, hidden files: Finder tweaks bundled.",
-    accent: "#ffd166",
   },
   {
     name: "Processes",
@@ -391,7 +382,6 @@ export const PANES: Pane[] = [
     icon: Cpu,
     sfSymbol: "cpu",
     blurb: "Live process list, kill, group by parent app.",
-    accent: "#ffd166",
   },
   {
     name: "Awake",
@@ -400,7 +390,6 @@ export const PANES: Pane[] = [
     sfSymbol: "powerplug",
     blurb:
       "Prevent display + system sleep with conditional rules (app, time, power).",
-    accent: "#ffd166",
   },
   {
     name: "Permissions",
@@ -408,7 +397,6 @@ export const PANES: Pane[] = [
     icon: ShieldCheck,
     sfSymbol: "lock.shield",
     blurb: "Audit macOS privacy permissions, deep-link to System Settings.",
-    accent: "#ffd166",
   },
   {
     name: "Log",
@@ -416,7 +404,6 @@ export const PANES: Pane[] = [
     icon: ScrollText,
     sfSymbol: "doc.text.magnifyingglass",
     blurb: "Searchable view of macOS unified log with color-coded levels.",
-    accent: "#ffd166",
   },
   {
     name: "GPU",
@@ -425,7 +412,6 @@ export const PANES: Pane[] = [
     sfSymbol: "memorychip",
     blurb:
       "GPU utilization, thermal pressure, VRAM, battery temp (Apple Silicon SEP-honest).",
-    accent: "#ffd166",
   },
   {
     name: "Network",
@@ -433,7 +419,6 @@ export const PANES: Pane[] = [
     icon: Network,
     sfSymbol: "network",
     blurb: "Per-process network throughput (Little Snitch read-only).",
-    accent: "#ffd166",
   },
   {
     name: "Modes",
@@ -442,7 +427,6 @@ export const PANES: Pane[] = [
     sfSymbol: "rectangle.3.group",
     blurb:
       "Save apps and window layout as a named workspace. Restore with a hotkey.",
-    accent: "#ffd166",
   },
   {
     name: "Workflows",
@@ -451,7 +435,6 @@ export const PANES: Pane[] = [
     sfSymbol: "arrow.triangle.branch",
     blurb:
       "Chain pane outputs into pane inputs. Capture to OCR to AI to Clipboard, all as one keybind.",
-    accent: "#ffd166",
   },
   {
     name: "Battery",
@@ -460,7 +443,6 @@ export const PANES: Pane[] = [
     sfSymbol: "battery.100",
     blurb:
       "Battery cycles, capacity vs design, condition, top energy users, temperature, voltage, amperage.",
-    accent: "#ffd166",
   },
   {
     name: "Speedtest",
@@ -469,7 +451,6 @@ export const PANES: Pane[] = [
     sfSymbol: "speedometer",
     blurb:
       "Internet download, upload, ping and jitter via Cloudflare. No third-party service. History of recent runs.",
-    accent: "#ffd166",
   },
   {
     name: "Devices",
@@ -478,7 +459,6 @@ export const PANES: Pane[] = [
     sfSymbol: "antenna.radiowaves.left.and.right",
     blurb:
       "Connected Bluetooth and USB devices with battery levels (AirPods, Magic Mouse, and more).",
-    accent: "#ffd166",
   },
   {
     name: "Services",
@@ -487,7 +467,6 @@ export const PANES: Pane[] = [
     sfSymbol: "gearshape.2",
     blurb:
       "LaunchAgents and LaunchDaemons: enumerate, start, stop, and reveal the plist.",
-    accent: "#ffd166",
   },
   {
     name: "Hosts",
@@ -496,7 +475,6 @@ export const PANES: Pane[] = [
     sfSymbol: "list.bullet.indent",
     blurb:
       "/etc/hosts editor. Group rules into named packs (block social, dev redirects), toggle whole packs on or off, commit with one auth prompt.",
-    accent: "#ffd166",
   },
 
   // Storage
@@ -506,7 +484,6 @@ export const PANES: Pane[] = [
     icon: HardDrive,
     sfSymbol: "internaldrive",
     blurb: "Disk usage at a glance with top-folders breakdown.",
-    accent: "#ff5d8f",
   },
   {
     name: "Scan",
@@ -514,7 +491,6 @@ export const PANES: Pane[] = [
     icon: ScanSearch,
     sfSymbol: "magnifyingglass.circle",
     blurb: "Drill down into any folder's biggest sub-items.",
-    accent: "#ff5d8f",
   },
   {
     name: "Clean",
@@ -523,7 +499,6 @@ export const PANES: Pane[] = [
     sfSymbol: "sparkles",
     blurb:
       "One-click cleanup of dev caches: npm / pnpm / brew / Xcode / etc.",
-    accent: "#ff5d8f",
   },
   {
     name: "Sweep",
@@ -531,7 +506,6 @@ export const PANES: Pane[] = [
     icon: ArrowDownToLine,
     sfSymbol: "tray.and.arrow.down",
     blurb: "Auto-organize ~/Downloads by age + type.",
-    accent: "#ff5d8f",
   },
   {
     name: "Disk Speed",
@@ -539,7 +513,6 @@ export const PANES: Pane[] = [
     icon: Disc3,
     sfSymbol: "speedometer",
     blurb: "Sequential + random read/write benchmark per volume.",
-    accent: "#ff5d8f",
   },
   {
     name: "Treemap",
@@ -548,7 +521,6 @@ export const PANES: Pane[] = [
     sfSymbol: "square.grid.3x3.fill",
     blurb:
       "Folder size as a squarified treemap. Double-click any tile to drill in.",
-    accent: "#ff5d8f",
   },
 
   // App
@@ -559,7 +531,6 @@ export const PANES: Pane[] = [
     sfSymbol: "books.vertical",
     blurb:
       "Recoverable cache of everything Trove has produced: re-open, re-edit, send to Stage.",
-    accent: ACCENT,
   },
 
   // Profile
@@ -569,53 +540,59 @@ export const PANES: Pane[] = [
     icon: UserCircle,
     sfSymbol: "person.crop.circle",
     blurb: "Sign in with Apple, system identity, preferences.",
-    accent: "#9ca3af",
   },
 ];
 
-export const SECTIONS: { name: PaneSection; tagline: string; accent: string }[] =
-  [
+/**
+ * The catalog the site renders, with each pane's accent filled in from its
+ * section.
+ */
+export const PANES: Pane[] = PANE_SEEDS.map((p) => ({
+  ...p,
+  accent: SECTION_ACCENT[p.section],
+}));
+
+const SECTION_SEEDS: { name: PaneSection; tagline: string }[] = [
     {
       name: "Clipboard",
       tagline: "Four panes for everything you copy.",
-      accent: ACCENT,
     },
     {
       name: "Compute",
       tagline: "Numbers and text, one keystroke away.",
-      accent: "#4cb8ff",
     },
     {
       name: "Capture",
       tagline: "Pixels, screens, and recordings. Local.",
-      accent: ACCENT,
     },
     {
       name: "Files",
       tagline: "Convert, hash, batch-rename without uploading.",
-      accent: "#5be3a4",
     },
     {
       name: "System",
       tagline: "Tile windows, audit permissions, watch processes.",
-      accent: "#ffd166",
     },
     {
       name: "Storage",
       tagline: "Find what's big, clean what's stale.",
-      accent: "#ff5d8f",
     },
     {
       name: "App",
       tagline: "A cache of what Trove has produced for you.",
-      accent: ACCENT,
     },
     {
       name: "Profile",
       tagline: "Identity and preferences.",
-      accent: "#9ca3af",
     },
-  ];
+];
+
+/** Sections with their accent filled in from the same map the panes use. */
+export const SECTIONS: {
+  name: PaneSection;
+  tagline: string;
+  accent: string;
+}[] = SECTION_SEEDS.map((s) => ({ ...s, accent: SECTION_ACCENT[s.name] }));
 
 // Headline / power-user capabilities introduced in v1.11.2.
 export type Capability = {
@@ -652,7 +629,7 @@ export const CAPABILITIES: Capability[] = [
       "Same scheme works from Shortcuts, Alfred, Raycast",
     ],
     icon: PlugZap,
-    accent: "#4cb8ff",
+    accent: HUE.blue,
   },
   {
     eyebrow: "Per-pane Chord HUD",
@@ -678,7 +655,7 @@ export const CAPABILITIES: Capability[] = [
       "Right-click any Text Tools pipeline chip → copy step / send to Stage / inspect",
     ],
     icon: Sparkles,
-    accent: "#5be3a4",
+    accent: HUE.green,
   },
   {
     eyebrow: "Hash · SHA256SUMS",
@@ -691,7 +668,7 @@ export const CAPABILITIES: Capability[] = [
       "Same 4-in-1 streaming pipeline as single-file hashing",
     ],
     icon: FileDigit,
-    accent: "#ffd166",
+    accent: HUE.amber,
   },
   {
     eyebrow: "Text Tools · Saved Recipes",
@@ -704,7 +681,7 @@ export const CAPABILITIES: Capability[] = [
       "Forward-compatible Codable on disk",
     ],
     icon: Palette,
-    accent: "#ff5d8f",
+    accent: HUE.pink,
   },
   {
     eyebrow: "History · Regex + Dedup",
@@ -730,7 +707,7 @@ export const CAPABILITIES: Capability[] = [
       "In-app updater polls GitHub Releases every 6h",
     ],
     icon: Gauge,
-    accent: "#4cb8ff",
+    accent: HUE.blue,
   },
   {
     eyebrow: "Homebrew",
@@ -756,7 +733,7 @@ export const CAPABILITIES: Capability[] = [
       "No silent migration of existing data",
     ],
     icon: HardDrive,
-    accent: "#5be3a4",
+    accent: HUE.green,
   },
   {
     eyebrow: "Performance",
@@ -769,7 +746,7 @@ export const CAPABILITIES: Capability[] = [
       "< 30 MB resident at rest",
     ],
     icon: Gauge,
-    accent: "#ffd166",
+    accent: HUE.amber,
   },
   {
     eyebrow: "Crash Discipline",
@@ -782,7 +759,7 @@ export const CAPABILITIES: Capability[] = [
       `Test suite: 58/58 PASS at ${TROVE.version}`,
     ],
     icon: ShieldCheck,
-    accent: "#ff5d8f",
+    accent: HUE.pink,
   },
 ];
 

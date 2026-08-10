@@ -37,13 +37,13 @@ export default function NotFound() {
           }}
         />
 
-        <p className="text-micro uppercase tracking-[0.2em] text-[#71717a] mb-4">
+        <p className="text-micro uppercase tracking-[0.2em] text-fg-mute mb-4">
           404
         </p>
         <h1 className="text-display font-semibold text-fg mb-4">
           Page not found.
         </h1>
-        <p className="text-body text-[#a1a1aa] max-w-md leading-relaxed mb-10">
+        <p className="text-body text-fg-dim max-w-md leading-relaxed mb-10">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">

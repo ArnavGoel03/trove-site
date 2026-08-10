@@ -745,13 +745,13 @@ const ROWS: Row[] = [
 function Mark({ value }: { value: "yes" | "no" | "partial" }) {
   if (value === "yes")
     return (
-      <span className="inline-flex w-6 h-6 rounded-full items-center justify-center bg-[rgba(91,227,164,0.15)] text-[#5be3a4]">
+      <span className="inline-flex w-6 h-6 rounded-full items-center justify-center bg-ok/15 text-ok">
         <Check size={14} strokeWidth={2.5} />
       </span>
     );
   if (value === "partial")
     return (
-      <span className="inline-flex w-6 h-6 rounded-full items-center justify-center bg-[rgba(255,209,102,0.15)] text-[#ffd166]">
+      <span className="inline-flex w-6 h-6 rounded-full items-center justify-center bg-warn/15 text-warn">
         <Minus size={14} strokeWidth={2.5} />
       </span>
     );

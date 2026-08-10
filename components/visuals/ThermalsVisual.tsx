@@ -8,6 +8,7 @@ import {
   useReducedMotion,
 } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { HUE } from "@/lib/palette";
 
 export default function ThermalsVisual() {
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -117,8 +118,8 @@ export default function ThermalsVisual() {
         >
           <defs>
             <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#ff5d8f" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#ff5d8f" stopOpacity="0" />
+              <stop offset="0%" stopColor={HUE.pink} stopOpacity="0.5" />
+              <stop offset="100%" stopColor={HUE.pink} stopOpacity="0" />
             </linearGradient>
           </defs>
           {[12, 24, 36, 48].map((y) => (

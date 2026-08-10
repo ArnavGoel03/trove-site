@@ -165,7 +165,7 @@ export default function Nav() {
           <nav
             id="mobile-nav"
             aria-label="Mobile"
-            className="absolute left-0 right-0 top-full z-50 mx-3 mt-2 rounded-2xl border border-line-soft bg-[#0e0e12]/95 backdrop-blur-xl p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.7)]"
+            className="absolute left-0 right-0 top-full z-50 mx-3 mt-2 rounded-2xl border border-line-soft bg-bg-elev/95 backdrop-blur-xl p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.7)]"
           >
             {NAV_LINKS.map((l) => {
               const active = isActive(pathname, l.href);
