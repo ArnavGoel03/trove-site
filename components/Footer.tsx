@@ -82,6 +82,9 @@ export default function Footer() {
             { label: "Contact", href: "/contact" },
             { label: "Security", href: "/security" },
             { label: "Accessibility", href: "/accessibility" },
+            // Deep link rather than a floating widget: the switches are an
+            // accessibility preference and live with the rest of them.
+            { label: "Feel and haptics", href: "/accessibility#feel" },
             { label: "Press", href: "/press" },
           ]}
         />

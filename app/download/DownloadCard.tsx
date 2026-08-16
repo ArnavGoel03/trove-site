@@ -2,7 +2,7 @@
 
 import { Apple, MonitorDown, Download, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { SIGNING } from "@/lib/brand";
 
 import {
@@ -49,12 +49,12 @@ export default function DownloadCard({
 
   function onDownload() {
     if (platform === "mac") {
-      toast.success("Mac download starting", {
+      notify.success("Mac download starting", {
         description: SIGNING.firstLaunch,
         duration: 7000,
       });
     } else {
-      toast.success("Windows download starting", {
+      notify.success("Windows download starting", {
         description:
           "SmartScreen: click 'More info' → 'Run anyway' the first time.",
         duration: 7000,
@@ -65,9 +65,9 @@ export default function DownloadCard({
   async function copyLink() {
     try {
       await navigator.clipboard.writeText(href);
-      toast.success(`${title} link copied`);
+      notify.success(`${title} link copied`);
     } catch {
-      toast.error("Couldn't copy link");
+      notify.error("Couldn't copy link");
     }
   }
 

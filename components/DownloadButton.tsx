@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Apple, MonitorDown, Download } from "lucide-react";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { useState, useEffect } from "react";
 import { useMacDetect } from "@/lib/useMacDetect";
 import { SIGNING } from "@/lib/brand";
@@ -47,18 +47,18 @@ export default function DownloadButton({
   async function copyLink(url: string, label: string) {
     try {
       await navigator.clipboard.writeText(url);
-      toast.success(`${label} link copied`, {
+      notify.success(`${label} link copied`, {
         description: "Paste it in a browser on the target machine.",
       });
     } catch {
-      toast.error("Couldn't copy link", {
+      notify.error("Couldn't copy link", {
         description: "Open the URL from the address bar and right-click → Copy.",
       });
     }
   }
 
   function onMacDownload() {
-    toast.success("Download starting", {
+    notify.success("Download starting", {
       description:
         `Check ~/Downloads/Trove.zip. First launch: ${SIGNING.firstLaunch}`,
       duration: 8000,
@@ -66,7 +66,7 @@ export default function DownloadButton({
   }
 
   function onWindowsDownload() {
-    toast.success("Download starting", {
+    notify.success("Download starting", {
       description:
         `Unzip ${ASSET_NAMES.windows} and run Trove.exe. Windows SmartScreen may warn: click 'More info' → 'Run anyway'.`,
       duration: 7000,

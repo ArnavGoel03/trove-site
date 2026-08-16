@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
+import FeelRuntime from "@/components/FeelRuntime";
 import ScrollToTop from "@/components/ScrollToTop";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import { FEEL_BOOT_SCRIPT } from "@/lib/feel";
 import { SEO_TITLE, SEO_DESCRIPTION, TROVE, STUDIO } from "@/lib/brand";
 import "./globals.css";
 
@@ -97,6 +99,11 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* Interaction preferences, applied before the first frame. Same
+            reason a theme script goes here: reading it after hydration means
+            a visitor who switched the press animation off still sees one for
+            the first few hundred milliseconds of every page. */}
+        <script dangerouslySetInnerHTML={{ __html: FEEL_BOOT_SCRIPT }} />
       </head>
       <body className="antialiased">
         <a href="#main-content" className="skip-link">
@@ -104,6 +111,7 @@ export default function RootLayout({
         </a>
         <div className="grain" aria-hidden="true" />
         {children}
+        <FeelRuntime />
         <ScrollToTop />
         <ServiceWorkerRegister />
         <Toaster

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { Terminal, Github, Copy } from "lucide-react";
 import DownloadButton from "@/components/DownloadButton";
 import { PLATFORM, SIGNING, TROVE } from "@/lib/brand";
@@ -15,12 +15,12 @@ export default function FeaturesCta() {
   async function copyBrew() {
     try {
       await navigator.clipboard.writeText(BREW_CMD);
-      toast.success("Homebrew command copied", {
+      notify.success("Homebrew command copied", {
         description:
           "Paste in Terminal: the cask installs Trove from the GitHub release.",
       });
     } catch {
-      toast.error("Couldn't copy", {
+      notify.error("Couldn't copy", {
         description: "Select and copy the command manually.",
       });
     }

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 import JsonLd, { webPageLd, breadcrumbLd } from "@/components/JsonLd";
+import FeelControls from "@/components/FeelControls";
 import {
   Accessibility,
   Ear,
   Eye,
+  Hand,
   Keyboard,
   Languages,
   MousePointer2,
@@ -160,6 +162,27 @@ export default function AccessibilityPage() {
           );
         })}
       </div>
+
+      {/* The one live control on this page. Everything above describes what
+          the app does; this changes what the site does, on this device, now. */}
+      <section id="feel" className="mt-12 pane rounded-xl p-6 scroll-mt-24">
+        <header className="flex items-center gap-3 mb-4">
+          <span className="inline-flex w-10 h-10 rounded-xl items-center justify-center bg-accent/12 text-accent">
+            <Hand size={20} strokeWidth={1.5} />
+          </span>
+          <h2 className="text-lead font-semibold tracking-tight text-fg">
+            Feel and haptics on this site
+          </h2>
+        </header>
+        <p className="text-body leading-[1.7] text-fg-dim mb-5">
+          Buttons here dip when held, and on a phone they can buzz. Both are
+          optional, and the buzz can be narrowed to only the moments you want
+          it. The channels match the ones in the Mac app, so a preference here
+          is the same preference there. Choices are stored in this browser
+          only, and nothing is sent anywhere.
+        </p>
+        <FeelControls />
+      </section>
 
       <div className="mt-12 pane rounded-xl p-6">
         <h2 className="text-lead font-semibold tracking-tight text-fg mb-3">

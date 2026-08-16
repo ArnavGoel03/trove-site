@@ -212,14 +212,13 @@ html {
   background: var(--color-accent);
   color: #fff;
   box-shadow: var(--shadow-inset), var(--shadow-card);
-  transition:
-    filter var(--duration-fast) var(--ease-out-quart),
-    transform var(--duration-fast) var(--ease-out-quart);
+  transition: filter var(--duration-fast) var(--ease-out-quart);
 }
 
-.btn-primary:active {
-  transform: translateY(1px);
-}
+/* The press state used to live here as a 1px nudge, which meant the primary
+   button felt different from every other control on the site. It is now the
+   shared dip in the tactility block below, so there is one press feel and one
+   switch that turns it off. */
 
 .btn-primary:hover {
   filter: brightness(1.08);
@@ -234,6 +233,47 @@ html {
 
 .btn-ghost:hover {
   background: var(--color-surface-2);
+}
+
+/* ---------------------------------------------------------------------------
+ * Tactility: the press dip, defined once for the whole site.
+ *
+ * Pairs with `lib/feel.ts`, which owns the haptic half and stamps
+ * `data-feel-press` on <html> before first paint. This is the half that works
+ * on a laptop: the web has no Force Touch, so on a desktop the dip IS the
+ * feedback.
+ *
+ * `:where()` keeps specificity at zero, so any component that wants a different
+ * press state just declares one and wins without an `!important`. Selecting by
+ * ROLE rather than by class is what makes this cover buttons written later.
+ *
+ * `transform` and `filter` only. Animating a box model property here would
+ * reflow the page on every press, on the interaction people do most. */
+:where(button, summary, [role="button"], .btn-primary, .btn-ghost, [data-tactile]) {
+  transition: transform var(--duration-fast) var(--ease-out-quart);
+}
+
+:where(button, summary, [role="button"], .btn-primary, .btn-ghost, [data-tactile]):active:not(
+    :disabled,
+    [aria-disabled="true"]
+  ) {
+  transform: scale(0.985);
+}
+
+/* The homepage scroll track writes inline transforms from a rAF loop. A CSS
+   transition on those elements makes the value chase the scroll position
+   instead of tracking it, so nothing under the track transitions, ever.
+   Documented in macos/CLAUDE.md and repeated here because this rule is the
+   most likely one to break it. */
+.stage-track :where(button, summary, [role="button"], [data-tactile]) {
+  transition: none;
+}
+
+/* The opt-out. Higher specificity than the rules above (which are :where(), so
+   zero), which is why no !important is needed anywhere in this block. */
+html[data-feel-press="off"]
+  :where(button, summary, [role="button"], .btn-primary, .btn-ghost, [data-tactile]):active {
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
