@@ -41,7 +41,7 @@ export const STUDIO = {
   tagline: "Private, native Mac apps. One subscription.",
   /** When true, the site presents as a studio/suite; until then, Trove-only. */
   live: true,
-  domain: "https://trove.arnavgoel.dev",
+  domain: "https://quiver.arnavgoel.dev",
   /** The maker, links the studio to the personal portfolio (bidirectional). */
   maker: "Arnav Goel",
   makerUrl: "https://arnavgoel.dev",
@@ -77,7 +77,7 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     tagline: "A private, local API client.",
     blurb:
       "Requests, environments, auth, and scripting. Your keys stay in your Keychain, no account, no cloud.",
-    status: "soon",
+    status: "live",
     href: "/relay",
     version: VERSIONS.relay.version,
     releaseDate: VERSIONS.relay.releaseDate,
@@ -87,7 +87,7 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     name: "Tend",
     tagline: "Tasks and calendar that never leave your Mac.",
     blurb: "A calm, local-first task and calendar app.",
-    status: "soon",
+    status: "live",
     href: "/tend",
     version: VERSIONS.tend.version,
     releaseDate: VERSIONS.tend.releaseDate,
@@ -218,14 +218,29 @@ export const PLATFORM = {
  * When Developer ID + notarization land, change these four strings and the
  * whole site follows.
  */
+/**
+ * Both sentences below name an app, and three apps now ship under the same
+ * unnotarized signature, so the app name is a parameter rather than a literal.
+ * The words are unchanged; `SIGNING.firstLaunch` and `SIGNING.why` still read
+ * exactly as they did, because they are these functions applied to Trove. A
+ * second hand-written copy of either sentence for Relay or Tend is what this
+ * avoids: the day notarization lands, one edit still updates every app.
+ */
+export function firstLaunchFor(appName: string): string {
+  return `Right-click ${appName}.app and choose Open, then Open again. Double-clicking will not work the first time.`;
+}
+
+export function signingWhyFor(appName: string): string {
+  return `${appName} is code-signed with a hardened runtime but not yet notarized by Apple, which needs a paid Developer Program membership. After the first right-click Open it launches normally forever.`;
+}
+
 export const SIGNING = {
   /** Compact form for badges and stat rows. */
   short: "Signed, not yet notarized",
   /** What a visitor has to actually do on first launch. */
-  firstLaunch:
-    "Right-click Trove.app and choose Open, then Open again. Double-clicking will not work the first time.",
+  firstLaunch: firstLaunchFor(APPS.trove.name),
   /** One-sentence explanation of why, for prose. */
-  why: "Trove is code-signed with a hardened runtime but not yet notarized by Apple, which needs a paid Developer Program membership. After the first right-click Open it launches normally forever.",
+  why: signingWhyFor(APPS.trove.name),
   /** Requirements-table / press-kit value. */
   detail: "Direct download (.zip) · signed, not yet notarized",
 } as const;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import DownloadCard from "./DownloadCard";
-import { PLATFORM } from "@/lib/brand";
+import { APPS, PLATFORM } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Download Trove: Mac and Windows",
@@ -123,7 +123,20 @@ export default async function DownloadPage() {
           />
         </section>
 
+        {/*
+          The two other suite apps ship from the same release repo and are
+          downloadable today. Their own pages carry the button, the version and
+          the first-launch note, all resolved from the published asset, so
+          linking there cannot go stale the way a second copy of the download
+          UI would. Every word below is the app's own blurb from lib/brand.ts.
+        */}
         <section className="mt-12 grid sm:grid-cols-2 gap-6 text-caption">
+          <LinkCard title={APPS.relay.name} href={APPS.relay.href}>
+            {APPS.relay.blurb}
+          </LinkCard>
+          <LinkCard title={APPS.tend.name} href={APPS.tend.href}>
+            {APPS.tend.blurb}
+          </LinkCard>
           <LinkCard
             title="Want every release?"
             href={`https://github.com/${RELEASE_REPO}/releases`}

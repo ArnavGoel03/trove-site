@@ -112,7 +112,7 @@ per-app license.
 In `licensing_client.swift`, set:
 
 ```swift
-static let baseURL: URL? = URL(string: "https://gettrove.vercel.app/api/license")!
+static let baseURL: URL? = URL(string: "https://quiver.arnavgoel.dev/api/license")!
 ```
 
 The app appends `v1/entitlement` itself. Setting `baseURL` simultaneously

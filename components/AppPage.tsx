@@ -1,6 +1,7 @@
-import { STUDIO, SUITE, TROVE } from "@/lib/brand";
+import { STUDIO, SUITE, TROVE, firstLaunchFor } from "@/lib/brand";
 import { PRICE_LABEL } from "@/lib/pricing";
 import { SUITE_DETAIL } from "@/lib/suite";
+import { releaseFor } from "@/lib/releases";
 import { Bullets, Button, Card, Note, Pill, Section } from "@/components/ui";
 
 /**
@@ -15,16 +16,33 @@ import { Bullets, Button, Card, Note, Pill, Section } from "@/components/ui";
  * (PageShell already renders it as the lede) and then told the reader nothing
  * except that the app was not out yet. A page whose entire content is "not
  * yet" is a page that argues against the purchase it sits next to.
+ *
+ * Whether a download exists is asked of the release repo, never assumed from a
+ * flag in this repo: `releaseFor` matches on the asset filename, so the button
+ * can only appear when there is a file behind it. That is the whole reason the
+ * "In testing" pill and the `horizon` caveat are conditional rather than
+ * deleted. If a release is ever unpublished, this page goes back to telling the
+ * truth by itself.
  */
-export default function AppPage({ appKey }: { appKey: "relay" | "tend" }) {
+export default async function AppPage({
+  appKey,
+}: {
+  appKey: "relay" | "tend";
+}) {
   const app = SUITE_DETAIL[appKey];
   const { brand } = app;
+  const release = await releaseFor(appKey);
+  const ready = release.state === "ready";
 
   return (
     <div className="space-y-0">
       <div className="flex flex-wrap items-center gap-2">
-        <Pill tone="accent">In testing</Pill>
-        <Pill>v{brand.version}</Pill>
+        {ready ? (
+          <Pill tone="live">Available now</Pill>
+        ) : (
+          <Pill tone="accent">In testing</Pill>
+        )}
+        <Pill>v{ready ? release.version : brand.version}</Pill>
         <Pill>Part of the {STUDIO.name} suite</Pill>
       </div>
 
@@ -37,10 +55,23 @@ export default function AppPage({ appKey }: { appKey: "relay" | "tend" }) {
       </div>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Button href="/pricing">See what the licence covers</Button>
-        <Button href="/download" tone="secondary">
-          Download {TROVE.name} now
-        </Button>
+        {ready ? (
+          <>
+            <Button href={release.url} external>
+              Download {brand.name} now
+            </Button>
+            <Button href="/pricing" tone="secondary">
+              See what the licence covers
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button href="/pricing">See what the licence covers</Button>
+            <Button href="/download" tone="secondary">
+              Download {TROVE.name} now
+            </Button>
+          </>
+        )}
       </div>
 
       <Section title="What it does">
@@ -85,7 +116,13 @@ export default function AppPage({ appKey }: { appKey: "relay" | "tend" }) {
 
       <Section title="Where it stands">
         <div className="space-y-4">
-          <Note title="Not downloadable yet">{app.horizon}</Note>
+          {ready ? (
+            <Note title="First launch (please read)">
+              {firstLaunchFor(brand.name)}
+            </Note>
+          ) : (
+            <Note title="Not downloadable yet">{app.horizon}</Note>
+          )}
           <Card>
             <div className="text-caption font-medium tracking-tight text-fg">
               Requirements

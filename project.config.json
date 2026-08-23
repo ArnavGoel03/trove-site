@@ -1,6 +1,6 @@
 {
   "$schema": "./bin/project.config.schema.json",
-  "_comment": "Canonical naming + URL config for the Trove **marketing site** (trove.arnavgoel.dev). Single source of truth: if you rename anything, edit ONLY this file, then run `bin/check-name-drift.sh` to find leftovers, and `bin/validate.sh` to confirm GitHub + Vercel + folder all agree. This config is scoped to the SITE only. The macOS app (../macos/) and the Windows port (../win/) are tracked separately in their own repos. See ../macos/CLAUDE.md for the broader project handoff note.",
+  "_comment": "Canonical naming + URL config for the Trove **marketing site** (quiver.arnavgoel.dev). Single source of truth: if you rename anything, edit ONLY this file, then run `bin/check-name-drift.sh` to find leftovers, and `bin/validate.sh` to confirm GitHub + Vercel + folder all agree. This config is scoped to the SITE only. The macOS app (../macos/) and the Windows port (../win/) are tracked separately in their own repos. See ../macos/CLAUDE.md for the broader project handoff note.",
 
   "version": 1,
   "slug": "trove-site",
@@ -8,7 +8,7 @@
   "tagline": "Native macOS productivity suite: clipboard, snippets, OCR, screen capture, PDF tools, calculator, and more.",
 
   "urls": {
-    "production": "https://trove.arnavgoel.dev",
+    "production": "https://quiver.arnavgoel.dev",
     "aliases": [
       "https://trove-site.vercel.app"
     ]
