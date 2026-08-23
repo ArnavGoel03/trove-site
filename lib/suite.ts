@@ -1,4 +1,4 @@
-import { APPS, PLATFORM, type AppBrand } from "@/lib/brand";
+import { APPS, PLATFORM, minMacOSLabel, type AppBrand } from "@/lib/brand";
 
 /**
  * What each suite app actually does, and what is honestly true about it today.
@@ -44,7 +44,10 @@ export interface AppDetail {
   readonly requirements: string;
 }
 
-const MAC_ONLY = `${PLATFORM.minMacOS}, ${PLATFORM.archLong}.`;
+/** Requirements sentence for one app, from that app's own floor. */
+function macOnly(app: AppBrand): string {
+  return `${minMacOSLabel(app.minMacOS)}, ${PLATFORM.archLong}.`;
+}
 
 export const SUITE_DETAIL: Record<"relay" | "tend", AppDetail> = {
   relay: {
@@ -90,7 +93,7 @@ export const SUITE_DETAIL: Record<"relay" | "tend", AppDetail> = {
     },
     horizon:
       "Relay is in private testing and is not downloadable yet. The engine ships today inside Trove's API tester, so the licence you buy now already includes it.",
-    requirements: MAC_ONLY,
+    requirements: macOnly(APPS.relay),
   },
 
   tend: {
@@ -136,6 +139,6 @@ export const SUITE_DETAIL: Record<"relay" | "tend", AppDetail> = {
     },
     horizon:
       "Tend runs on Mac and in the iOS simulator today. The widget and the watch app are written but need an Apple Developer Team for App Group signing, which is the same thing gating Trove's notarization.",
-    requirements: `${PLATFORM.minMacOS}, ${PLATFORM.archLong}. iPhone version in testing.`,
+    requirements: `${macOnly(APPS.tend)} iPhone version in testing.`,
   },
 };

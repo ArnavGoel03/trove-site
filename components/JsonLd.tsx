@@ -114,7 +114,7 @@ export function softwareApplicationLdFor(appKey: keyof typeof APPS) {
     "@type": "SoftwareApplication",
     name: app.name,
     applicationCategory: APP_CATEGORY[appKey],
-    operatingSystem: "macOS 13.0 or later",
+    operatingSystem: `macOS ${app.minMacOS}.0 or later`,
     url: `${STUDIO.domain}${app.href}`,
     description: app.blurb,
     offers: offerFor(app.name, app.status === "soon"),

@@ -33,6 +33,17 @@ export interface AppBrand {
   version: string;
   /** Release date of `version`, ISO YYYY-MM-DD. */
   releaseDate: string;
+  /**
+   * Oldest macOS this app's shipped binary will launch on, as a major version.
+   *
+   * Per app, not per studio, because they genuinely differ and the site said
+   * otherwise. Tend is built on SwiftData and ships LSMinimumSystemVersion 14,
+   * while /tend advertised "macOS 13 Ventura or later" like everything else.
+   * On the day Tend became downloadable that turned into a real download
+   * button handed to people whose Mac cannot run it. Mirrors
+   * `apps.*.minMacOS` in macos/suite.config.json.
+   */
+  minMacOS: string;
 }
 
 /** The parent studio. Name is a WORKING PLACEHOLDER, change it here only. */
@@ -70,6 +81,7 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     href: "/",
     version: VERSIONS.trove.version,
     releaseDate: VERSIONS.trove.releaseDate,
+    minMacOS: "13",
   },
   relay: {
     key: "relay",
@@ -81,6 +93,7 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     href: "/relay",
     version: VERSIONS.relay.version,
     releaseDate: VERSIONS.relay.releaseDate,
+    minMacOS: "13",
   },
   tend: {
     key: "tend",
@@ -91,6 +104,7 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     href: "/tend",
     version: VERSIONS.tend.version,
     releaseDate: VERSIONS.tend.releaseDate,
+    minMacOS: "14",
   },
 };
 
@@ -188,6 +202,22 @@ export const PRODUCT = {
  * `.github/workflows/release.yml`, publish a release, then change the three
  * strings below. Nothing else needs touching.
  */
+/**
+ * macOS marketing names, so a floor renders as a sentence without anyone
+ * typing "Sonoma" next to the wrong number.
+ */
+const MACOS_NAME: Record<string, string> = {
+  "13": "Ventura",
+  "14": "Sonoma",
+  "15": "Sequoia",
+};
+
+/** "macOS 14 Sonoma or later", from a bare major version. */
+export function minMacOSLabel(major: string): string {
+  const name = MACOS_NAME[major];
+  return name ? `macOS ${major} ${name} or later` : `macOS ${major} or later`;
+}
+
 export const PLATFORM = {
   minMacOS: "macOS 13 Ventura or later",
   /** Compact form for badges and stat rows. */
