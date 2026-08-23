@@ -56,7 +56,12 @@ const RULES = [
   {
     name: "release asset name",
     pattern: /Trove-win-x64\.zip|"Trove\.zip"/,
-    allow: ["lib/releases.ts"],
+    // lib/suite.generated.ts is written by scripts/sync-suite.mjs out of
+    // macos/suite.config.json, which is the file the three binaries and
+    // bin/mirror-release.sh also read. It is upstream of ASSET_NAMES, not a
+    // second copy of it: this rule exists to stop a HAND-TYPED asset name, and
+    // a generated one cannot drift from the source it was generated from.
+    allow: ["lib/releases.ts", "lib/suite.generated.ts"],
     use: "ASSET_NAMES from lib/releases.ts",
   },
   {

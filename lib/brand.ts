@@ -16,6 +16,7 @@ import {
   TRIAL_LABEL,
 } from "./pricing.ts";
 import { VERSIONS } from "./versions.generated.ts";
+import { APP_CONTRACT } from "./suite.generated.ts";
 
 export type AppStatus = "live" | "soon";
 
@@ -77,11 +78,15 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     // sit here was already understating the catalog by seventeen.
     blurb:
       "Clipboard, window manager, system monitor, OCR, PDF kit, disk cleaner, and dozens more, in one private, native Mac app.",
-    status: "live",
+    // status and minMacOS are generated from macos/suite.config.json, the same
+    // file the binaries read. Both were hand-typed here and in that file, and
+    // the floor drifted: this said 13 while Tend's binary refused to launch
+    // below 15, on the morning it became downloadable.
+    status: APP_CONTRACT.trove.status,
     href: "/",
     version: VERSIONS.trove.version,
     releaseDate: VERSIONS.trove.releaseDate,
-    minMacOS: "13",
+    minMacOS: APP_CONTRACT.trove.minMacOS,
   },
   relay: {
     key: "relay",
@@ -89,22 +94,22 @@ export const APPS: Record<"trove" | "relay" | "tend", AppBrand> = {
     tagline: "A private, local API client.",
     blurb:
       "Requests, environments, auth, and scripting. Your keys stay in your Keychain, no account, no cloud.",
-    status: "live",
+    status: APP_CONTRACT.relay.status,
     href: "/relay",
     version: VERSIONS.relay.version,
     releaseDate: VERSIONS.relay.releaseDate,
-    minMacOS: "13",
+    minMacOS: APP_CONTRACT.relay.minMacOS,
   },
   tend: {
     key: "tend",
     name: "Tend",
     tagline: "Tasks and calendar that never leave your Mac.",
     blurb: "A calm, local-first task and calendar app.",
-    status: "live",
+    status: APP_CONTRACT.tend.status,
     href: "/tend",
     version: VERSIONS.tend.version,
     releaseDate: VERSIONS.tend.releaseDate,
-    minMacOS: "14",
+    minMacOS: APP_CONTRACT.tend.minMacOS,
   },
 };
 

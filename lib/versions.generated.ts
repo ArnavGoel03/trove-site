@@ -2,7 +2,7 @@
 export const VERSIONS = {
   "trove": {
     "version": "1.12.8",
-    "releaseDate": "2026-07-22"
+    "releaseDate": "2026-08-04"
   },
   "relay": {
     "version": "0.1.0",

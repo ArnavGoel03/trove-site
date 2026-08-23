@@ -18,6 +18,7 @@
 //      for a real release that happened to match and the loop stopped early.
 
 import { VERSIONS } from "./versions.generated.ts";
+import { APP_CONTRACT } from "./suite.generated.ts";
 
 /** PUBLIC release-binary repo. Never point this at the private source repo. */
 export const RELEASE_REPO = "ArnavGoel03/trove-releases";
@@ -37,7 +38,7 @@ export const ISSUES_URL = `https://github.com/${RELEASE_REPO}/issues`;
 export const ISSUES_LABEL = `github.com/${RELEASE_REPO}/issues`;
 
 export const ASSET_NAMES = {
-  mac: "Trove.zip",
+  mac: APP_CONTRACT.trove.macAsset,
   windows: "Trove-win-x64.zip",
 } as const;
 
@@ -112,11 +113,18 @@ function isWindows(tag: string): boolean {
 
 export type AppKey = "trove" | "relay" | "tend";
 
-/** Tag prefix per app. Trove's is empty for backwards compatibility. */
+/**
+ * Tag prefix per app. Trove's is empty for backwards compatibility.
+ *
+ * Generated, not typed. The same three strings are read by every shipped
+ * binary (SuiteConfig.App.tagPrefix) and by bin/mirror-release.sh, and a
+ * convention with three readers and three hand-written definitions is a
+ * convention waiting to drift. Source: macos/suite.config.json.
+ */
 export const APP_TAG_PREFIX: Record<AppKey, string> = {
-  trove: "",
-  relay: "relay-",
-  tend: "tend-",
+  trove: APP_CONTRACT.trove.tagPrefix,
+  relay: APP_CONTRACT.relay.tagPrefix,
+  tend: APP_CONTRACT.tend.tagPrefix,
 };
 
 /**
@@ -125,9 +133,9 @@ export const APP_TAG_PREFIX: Record<AppKey, string> = {
  * shows "Get notified" next to a release that exists.
  */
 export const APP_MAC_ASSET: Record<AppKey, string> = {
-  trove: ASSET_NAMES.mac,
-  relay: "Relay.zip",
-  tend: "Tend.zip",
+  trove: APP_CONTRACT.trove.macAsset,
+  relay: APP_CONTRACT.relay.macAsset,
+  tend: APP_CONTRACT.tend.macAsset,
 };
 
 /** True when a tag belongs to an app other than Trove. */
