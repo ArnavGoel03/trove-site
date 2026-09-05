@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import DownloadCard from "./DownloadCard";
-import { APPS, PLATFORM } from "@/lib/brand";
+import { APPS, PLATFORM, STUDIO, TROVE } from "@/lib/brand";
+
+// Same rule as Nav: the page is titled for whatever the site presents as.
+const HOME_BRAND = STUDIO.live ? STUDIO.name : TROVE.name;
 
 export const metadata: Metadata = {
-  title: "Download Trove: Mac and Windows",
+  title: `Download ${HOME_BRAND}: Mac and Windows`,
   description:
     "Native, local-only Trove for macOS 13+ and Windows 10/11. Single-file install on both. No account, no telemetry.",
 };
@@ -67,7 +70,7 @@ export default async function DownloadPage() {
       <main id="top" className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
         <header className="max-w-3xl mb-12">
           <h1 className="text-[clamp(34px,5vw,52px)] font-semibold tracking-tight leading-[1.05]">
-            Download Trove
+            Download {HOME_BRAND}
           </h1>
           <p className="mt-4 text-body text-fg-dim leading-relaxed">
             Native on every supported platform. Local-only by default: no

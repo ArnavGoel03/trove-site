@@ -60,7 +60,7 @@ const QUESTIONS: readonly { question: string; answer: string }[] = [
     question: "Does one licence really cover all three apps?",
     answer:
       `Yes. The key you buy carries an entitlement for the whole suite, so ${APPS.relay.name} ` +
-      `and ${APPS.tend.name} unlock with the same key the day they ship, at no extra cost and ` +
+      `and ${APPS.tend.name} unlock with the same key, at no extra cost and ` +
       `with no upgrade path to sit through. That is the whole point of pricing the suite ` +
       `rather than the app.`,
   },
@@ -107,7 +107,7 @@ export default function PricingPage() {
           <>
             {TRIAL_LABEL} of the whole thing: {TOOL_COUNT} tools, no account, no card.
             After that it is {formatUSD(PRICING.yearly)} a year, and the same key unlocks{" "}
-            {APPS.relay.name} and {APPS.tend.name} the day they ship.
+            {APPS.relay.name} and {APPS.tend.name}.
           </>
         }
       >
