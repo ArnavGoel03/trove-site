@@ -19,5 +19,12 @@ clean, and the production build completes without warnings. Regression tests
 cover drafts, missing or wrong assets, Windows tags, app prefixes, prerelease
 policy, publication dates and matching changelog headings.
 
-Deployment verification is pending the release-sync change landing on main.
+Shipped from main `a9a5499bbd96f193f1acffd71467578ecb365bd3` (PR #1).
+Vercel reports the production deployment successful. Fresh Firecrawl requests
+with `--max-age 0` verified HTTP 200 on `/relay` and `/tend`, displaying
+0.3.0 and 0.13.1 respectively. Their download buttons link to the matching
+public release assets: `relay-v0.3.0/Relay.zip` and `tend-v0.13.1/Tend.zip`.
+Evidence is saved locally under
+`/private/tmp/relay-tend-site-check/.firecrawl/relay-after.json` and
+`/private/tmp/relay-tend-site-check/.firecrawl/tend-after.json`.
 The existing workflow schedule is unchanged.
