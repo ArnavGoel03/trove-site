@@ -2,6 +2,15 @@
 
 Verified 2026-09-13.
 
+## Tend claims
+
+Removed the body paragraph naming SwiftData and promising working iCloud
+sync, plus the iCloud clause in the Things comparison. Tend uses CoreData;
+CloudKit remains blocked on the required Apple capability. Existing copy
+was removed without replacing it with new marketing claims.
+`pnpm check` passes all 74 tests and the production build; generated Tend
+HTML omits both sync claims and retains the joined comparison sentence.
+
 ## Release metadata
 
 `scripts/sync-suite.mjs --from-releases` now refreshes Trove, Relay and Tend

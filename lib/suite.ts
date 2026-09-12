@@ -104,7 +104,6 @@ export const SUITE_DETAIL: Record<"relay" | "tend", AppDetail> = {
     body: [
       "Most task apps are storage. You put things in, and the pile grows until you stop opening the app. Tend is built around the review instead: a guided weekly pass that takes your inbox card by card and makes you decide, once, where each thing belongs.",
       "Capture is a single line of plain text. Type “call dentist tomorrow 3pm !today” and Tend parses the date, the time and the bucket out of the sentence, from a menu-bar window that opens over whatever you are doing.",
-      "It is local-first and free to run: SwiftData on your device, syncing through your own iCloud account if you want it, and through nothing at all if you do not. There is no server, so there is no subscription needed to keep your own tasks reachable.",
     ],
     capabilities: [
       {
@@ -135,7 +134,7 @@ export const SUITE_DETAIL: Record<"relay" | "tend", AppDetail> = {
     ],
     instead: {
       of: "Things",
-      why: "Things is a fine list, sold twice: once for the Mac and again for the iPhone, with the weekly review left as an exercise for the reader. Tend puts the review at the centre, syncs through your own iCloud rather than a vendor's, and comes with the same licence as the rest of the suite.",
+      why: "Things is a fine list, sold twice: once for the Mac and again for the iPhone, with the weekly review left as an exercise for the reader. Tend puts the review at the centre and comes with the same licence as the rest of the suite.",
     },
     horizon:
       "Tend runs on Mac and in the iOS simulator today. The widget and the watch app are written but need an Apple Developer Team for App Group signing, which is the same thing gating Trove's notarization.",
