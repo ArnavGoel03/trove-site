@@ -40,8 +40,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Resolve the newest published stable release
-        run: node scripts/sync-suite.mjs --from-releases
+      - name: Resolve published downloadable releases for every app
+        run: node --experimental-strip-types scripts/sync-suite.mjs --from-releases
 
       - name: Commit and push when the published version moved
         run: |
@@ -49,10 +49,9 @@ jobs:
             echo "sync-version: already current, nothing to push"
             exit 0
           fi
-          ver="$(grep -A2 '"trove"' lib/versions.generated.ts | grep '"version"' | cut -d'"' -f4)"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add lib/versions.generated.ts
-          git commit -m "site: sync displayed version to v${ver}"
+          git commit -m "site: sync displayed app versions with public releases"
           git push
-          echo "sync-version: pushed v${ver}"
+          echo "sync-version: pushed current app versions"
