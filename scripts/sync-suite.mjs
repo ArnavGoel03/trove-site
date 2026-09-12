@@ -25,8 +25,7 @@
 // days with VERSION still reading 1.12.8 and nothing anywhere said so.
 //
 // --from-releases needs no siblings. It asks the public release repo what the
-// newest published stable tag actually is and rewrites only trove's entry,
-// carrying relay's and tend's through untouched. That makes the *published
+// newest downloadable release for each app actually is. That makes the *published
 // release* the authority, which is the right one for a marketing site: the
 // number on the page can never claim a version a visitor cannot download.
 // .github/workflows/sync-version.yml runs it daily and on demand.
@@ -34,24 +33,21 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { RELEASE_REPO } from "../lib/releases.ts";
+import { changelogDate, publishedVersions } from "./suite-versions.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(here, "..");
 const suiteRoot = resolve(siteRoot, "..");
 
-// tend/CHANGELOG.md's top heading carries no date (see the file), so its
-// release date is a literal fallback rather than something parsed out.
-const TEND_RELEASE_DATE_FALLBACK = "2026-07-10";
-
 function readTrimmed(path) {
   return readFileSync(path, "utf8").trim();
 }
 
-/** Pulls the date out of the top `## [x.y.z] - YYYY-MM-DD` heading. */
-function topChangelogDate(changelogPath) {
+/** Pulls the date from the heading matching the app's canonical VERSION. */
+function versionChangelogDate(changelogPath, version) {
   const text = readFileSync(changelogPath, "utf8");
-  const match = text.match(/^## \[[^\]]+\]\s*-\s*(\d{4}-\d{2}-\d{2})/m);
-  return match ? match[1] : null;
+  return changelogDate(text, version);
 }
 
 function requireFile(path, label) {
@@ -70,38 +66,17 @@ export const VERSIONS = ${JSON.stringify(versions, null, 2)} as const;
 `;
 }
 
-/**
- * Reads the committed generated file back. Used by --from-releases to carry
- * relay and tend through unchanged: without the sibling checkouts there is no
- * way to re-derive them, and writing a guess would be worse than keeping the
- * last known-good value.
- */
+/** Reads the committed generated file back for the change summary. */
 function readGeneratedVersions() {
   const text = readFileSync(destPath, "utf8");
   const body = text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
   return JSON.parse(body);
 }
 
-/**
- * The release repo slug lives in lib/releases.ts and scripts/check-hardcoded.mjs
- * fails the build if it is typed anywhere else, so it is parsed out rather
- * than repeated here.
- */
-function releaseRepoSlug() {
-  const releasesTs = readFileSync(join(siteRoot, "lib", "releases.ts"), "utf8");
-  const match = releasesTs.match(/RELEASE_REPO\s*=\s*"([^"]+)"/);
-  if (!match) {
-    console.error("sync-suite: RELEASE_REPO not found in lib/releases.ts");
-    process.exit(1);
-  }
-  return match[1];
-}
-
 if (process.argv.includes("--from-releases")) {
-  const repo = releaseRepoSlug();
   const res = await fetch(
-    `https://api.github.com/repos/${repo}/releases?per_page=30`,
-    { headers: { Accept: "application/vnd.github+json" } },
+    `https://api.github.com/repos/${RELEASE_REPO}/releases?per_page=100`,
+    { headers: { Accept: "application/vnd.github+json" }, signal: AbortSignal.timeout(15_000) },
   );
   if (!res.ok) {
     console.error(`sync-suite: GitHub releases HTTP ${res.status}`);
@@ -109,38 +84,19 @@ if (process.argv.includes("--from-releases")) {
   }
   const list = await res.json();
 
-  // Same classification the site uses at runtime (lib/releases.ts resolveTags):
-  // GitHub's own prerelease flag is the channel boundary, `-win` tags belong to
-  // the Windows port, and the API returns newest-first so the first match wins.
-  const latest = list.find(
-    (r) => !r.draft && !r.prerelease && !r.tag_name.includes("-win"),
-  );
-  if (!latest) {
-    console.error(`sync-suite: no published stable release in ${repo}`);
-    process.exit(1);
-  }
-
   const versions = readGeneratedVersions();
-  const next = {
-    ...versions,
-    trove: {
-      version: latest.tag_name.replace(/^v/, ""),
-      releaseDate: latest.published_at.slice(0, 10),
-    },
-  };
+  const next = publishedVersions(list);
 
   const before = readFileSync(destPath, "utf8");
   const after = renderVersionsFile(next);
   if (before === after) {
-    console.log(
-      `sync-suite: already current at trove ${next.trove.version} (${next.trove.releaseDate})`,
-    );
+    console.log("sync-suite: all app versions are current");
     process.exit(0);
   }
   writeFileSync(destPath, after);
-  console.log(
-    `sync-suite: trove ${versions.trove.version} -> ${next.trove.version} (${next.trove.releaseDate})`,
-  );
+  for (const [app, release] of Object.entries(next)) {
+    console.log(`sync-suite: ${app} ${versions[app].version} -> ${release.version} (${release.releaseDate})`);
+  }
   process.exit(0);
 }
 
@@ -155,7 +111,7 @@ const troveChangelogPath = requireFile(
   "trove CHANGELOG.md",
 );
 const troveVersion = readTrimmed(troveVersionPath);
-const troveReleaseDate = topChangelogDate(troveChangelogPath);
+const troveReleaseDate = versionChangelogDate(troveChangelogPath, troveVersion);
 if (!troveReleaseDate) {
   console.error(`sync-suite: no dated heading found in ${troveChangelogPath}`);
   process.exit(1);
@@ -172,7 +128,7 @@ const relayChangelogPath = requireFile(
   "relay CHANGELOG.md",
 );
 const relayVersion = readTrimmed(relayVersionPath);
-const relayReleaseDate = topChangelogDate(relayChangelogPath);
+const relayReleaseDate = versionChangelogDate(relayChangelogPath, relayVersion);
 if (!relayReleaseDate) {
   console.error(`sync-suite: no dated heading found in ${relayChangelogPath}`);
   process.exit(1);
@@ -180,24 +136,20 @@ if (!relayReleaseDate) {
 
 // --- tend ---
 const tendDir = join(suiteRoot, "tend");
-const tendProjectYmlPath = requireFile(
-  join(tendDir, "project.yml"),
-  "tend project.yml",
+const tendVersionPath = requireFile(
+  join(tendDir, "VERSION"),
+  "tend VERSION",
 );
-const tendProjectYml = readFileSync(tendProjectYmlPath, "utf8");
-const tendVersionMatch = tendProjectYml.match(
-  /MARKETING_VERSION:\s*"?([\d.]+)"?/,
+const tendChangelogPath = requireFile(
+  join(tendDir, "CHANGELOG.md"),
+  "tend CHANGELOG.md",
 );
-if (!tendVersionMatch) {
-  console.error(
-    `sync-suite: MARKETING_VERSION not found in ${tendProjectYmlPath}`,
-  );
+const tendVersion = readTrimmed(tendVersionPath);
+const tendReleaseDate = versionChangelogDate(tendChangelogPath, tendVersion);
+if (!tendReleaseDate) {
+  console.error(`sync-suite: no dated heading found in ${tendChangelogPath}`);
   process.exit(1);
 }
-const tendVersion = tendVersionMatch[1];
-// tend's CHANGELOG.md top heading has no date yet, fall back to the literal.
-requireFile(join(tendDir, "CHANGELOG.md"), "tend CHANGELOG.md");
-const tendReleaseDate = TEND_RELEASE_DATE_FALLBACK;
 
 const VERSIONS = {
   trove: { version: troveVersion, releaseDate: troveReleaseDate },

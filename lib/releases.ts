@@ -145,6 +145,12 @@ function isOtherApp(tag: string): boolean {
   );
 }
 
+/** Only the app's canonical version tags can identify one of its binaries. */
+function belongsToApp(tag: string, app: AppKey): boolean {
+  const prefix = APP_TAG_PREFIX[app];
+  return tag.startsWith(prefix) && /^v\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(tag.slice(prefix.length));
+}
+
 export type ReleaseState =
   | {
       state: "ready";
@@ -156,6 +162,7 @@ export type ReleaseState =
       /** Release page, for "what changed" links. */
       page: string;
       prerelease: boolean;
+      publishedAt: string;
     }
   /**
    * No published asset. Every call site must render something other than a
@@ -178,7 +185,7 @@ export function releaseIn(list: GitHubRelease[], app: AppKey): ReleaseState {
     if (r.draft) continue;
     if (isWindows(r.tag_name)) continue;
     // A bare tag is Trove's; a prefixed tag is somebody else's.
-    if (app === "trove" ? isOtherApp(r.tag_name) : !r.tag_name.startsWith(APP_TAG_PREFIX[app])) {
+    if (!belongsToApp(r.tag_name, app)) {
       continue;
     }
     const asset = r.assets.find((a) => a.name === wanted);
@@ -190,6 +197,7 @@ export function releaseIn(list: GitHubRelease[], app: AppKey): ReleaseState {
       bytes: asset.size,
       page: r.html_url,
       prerelease: r.prerelease,
+      publishedAt: r.published_at,
     };
   }
   return { state: "pending" };
