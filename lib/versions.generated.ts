@@ -9,7 +9,7 @@ export const VERSIONS = {
     "releaseDate": "2026-09-13"
   },
   "tend": {
-    "version": "0.13.1",
-    "releaseDate": "2026-09-12"
+    "version": "0.13.2",
+    "releaseDate": "2026-09-13"
   }
 } as const;
