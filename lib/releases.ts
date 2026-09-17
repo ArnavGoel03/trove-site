@@ -138,13 +138,6 @@ export const APP_MAC_ASSET: Record<AppKey, string> = {
   tend: APP_CONTRACT.tend.macAsset,
 };
 
-/** True when a tag belongs to an app other than Trove. */
-function isOtherApp(tag: string): boolean {
-  return (["relay", "tend"] as const).some((k) =>
-    tag.startsWith(APP_TAG_PREFIX[k]),
-  );
-}
-
 /** Only the app's canonical version tags can identify one of its binaries. */
 function belongsToApp(tag: string, app: AppKey): boolean {
   const prefix = APP_TAG_PREFIX[app];
@@ -179,28 +172,40 @@ export type ReleaseState =
  * has nothing to give, and offering it would be the dead download all over
  * again, just with a fresher-looking version number.
  */
+function findRelease(
+  list: GitHubRelease[],
+  app: AppKey,
+  platform: Platform,
+  channel?: Channel,
+): GitHubRelease | null {
+  const wanted = platform === "windows" ? ASSET_NAMES.windows : APP_MAC_ASSET[app];
+  return list.find((release) =>
+    !release.draft &&
+    belongsToApp(release.tag_name, app) &&
+    isWindows(release.tag_name) === (platform === "windows") &&
+    (channel === undefined || release.prerelease === (channel === "beta")) &&
+    release.assets.some((asset) => asset.name === wanted)
+  ) ?? null;
+}
+
+/** The download page and client buttons select the same platform/channel. */
+export function downloadReleaseIn(list: GitHubRelease[], platform: Platform): GitHubRelease | null {
+  return findRelease(list, "trove", platform, platform === "mac" ? "stable" : undefined);
+}
+
 export function releaseIn(list: GitHubRelease[], app: AppKey): ReleaseState {
-  const wanted = APP_MAC_ASSET[app];
-  for (const r of list) {
-    if (r.draft) continue;
-    if (isWindows(r.tag_name)) continue;
-    // A bare tag is Trove's; a prefixed tag is somebody else's.
-    if (!belongsToApp(r.tag_name, app)) {
-      continue;
-    }
-    const asset = r.assets.find((a) => a.name === wanted);
-    if (!asset) continue;
-    return {
-      state: "ready",
-      url: asset.browser_download_url,
-      version: r.tag_name.slice(APP_TAG_PREFIX[app].length).replace(/^v/, ""),
-      bytes: asset.size,
-      page: r.html_url,
-      prerelease: r.prerelease,
-      publishedAt: r.published_at,
-    };
-  }
-  return { state: "pending" };
+  const release = findRelease(list, app, "mac");
+  const asset = release?.assets.find((asset) => asset.name === APP_MAC_ASSET[app]);
+  if (!release || !asset) return { state: "pending" };
+  return {
+    state: "ready",
+    url: asset.browser_download_url,
+    version: release.tag_name.slice(APP_TAG_PREFIX[app].length).replace(/^v/, ""),
+    bytes: asset.size,
+    page: release.html_url,
+    prerelease: release.prerelease,
+    publishedAt: release.published_at,
+  };
 }
 
 /**
@@ -225,28 +230,10 @@ export async function releaseFor(app: AppKey): Promise<ReleaseState> {
  * wins and there is no version comparison to get wrong.
  */
 export function resolveTags(list: GitHubRelease[]): ResolvedTags {
-  let mac: string | null = null;
-  let macBeta: string | null = null;
-  let win: string | null = null;
-
-  for (const r of list) {
-    if (r.draft) continue;
-    // Relay and Tend live in this repo too. Without this line the newest stable
-    // release repo-wide wins, and the Trove updater is offered a Relay build.
-    if (isOtherApp(r.tag_name)) continue;
-    if (isWindows(r.tag_name)) {
-      win ??= r.tag_name;
-    } else if (r.prerelease) {
-      macBeta ??= r.tag_name;
-    } else {
-      mac ??= r.tag_name;
-    }
-  }
-
   return {
-    mac: mac ?? BUILT_IN_MAC_TAG,
-    macBeta,
-    win: win ?? BUILT_IN_WIN_TAG,
+    mac: downloadReleaseIn(list, "mac")?.tag_name ?? BUILT_IN_MAC_TAG,
+    macBeta: findRelease(list, "trove", "mac", "beta")?.tag_name ?? null,
+    win: downloadReleaseIn(list, "windows")?.tag_name ?? BUILT_IN_WIN_TAG,
   };
 }
 

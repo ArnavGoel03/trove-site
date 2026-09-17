@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { chromium, expect } from "@playwright/test";
 import { BOUNDS } from "../lib/timeline.ts";
-import { FALLBACK_TAGS } from "../lib/releases.ts";
+import { FALLBACK_TAGS, ASSET_NAMES } from "../lib/releases.ts";
 
 assert.equal(process.env.CI, "true", "Use the hosted browser workflow");
 assert.equal(process.platform, "linux", "Local browser launches are unavailable");
@@ -154,6 +154,20 @@ try {
       assert.equal(requests(), 1, "Remounted consumers repeated successful release request");
       results.push({ viewport, idleFrames: 30, idleReads: idle, positiveReads: positive, burstEvents: 100, burstReads: burst, releaseRequests: requests() });
       console.log(`Browser ${viewport.width}: all stages, reverse scroll, resize, pageshow, cleanup and release sharing pass`);
+      await page.goto(`${origin}/download`, { waitUntil: "networkidle" });
+      const downloads = page.locator("main a[download]");
+      await expect(downloads).toHaveCount(2);
+      for (const [index, platform] of ["mac", "windows"].entries()) {
+        const href = await downloads.nth(index).getAttribute("href");
+        const parts = new URL(href).pathname.split("/");
+        const tag = parts.at(-2);
+        assert.match(tag, /^v\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/, "Download belongs to another app");
+        assert.equal(tag.includes("-win"), platform === "windows");
+        assert.equal(parts.at(-1), ASSET_NAMES[platform]);
+      }
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Download page horizontal overflow");
+      await page.screenshot({ path: `${output}/downloads-${viewport.width}.png` });
+      console.log(`Downloads ${viewport.width}: platform tags and assets match`);
     } finally { await context.close(); }
   }
   for (const failure of ["http", "json", "shape", "network"]) {

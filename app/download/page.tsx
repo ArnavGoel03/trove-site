@@ -23,39 +23,14 @@ import {
   BUILT_IN_MAC_TAG,
   BUILT_IN_WIN_TAG,
   ASSET_NAMES,
+  fetchReleases,
+  downloadReleaseIn,
 } from "@/lib/releases";
 
-type LatestRelease = {
-  tag_name: string;
-  name: string;
-  published_at: string;
-  html_url: string;
-  body: string;
-  assets: { name: string; size: number; browser_download_url: string }[];
-};
-
-async function fetchLatestReleases(): Promise<{
-  mac: LatestRelease | null;
-  win: LatestRelease | null;
-}> {
+async function fetchLatestReleases() {
   try {
-    const res = await fetch(
-      `https://api.github.com/repos/${RELEASE_REPO}/releases?per_page=20`,
-      { next: { revalidate: 3600 } }
-    );
-    if (!res.ok) return { mac: null, win: null };
-    const list: LatestRelease[] = await res.json();
-    let mac: LatestRelease | null = null;
-    let win: LatestRelease | null = null;
-    for (const r of list) {
-      if (r.tag_name.endsWith("-win")) {
-        if (!win) win = r;
-      } else if (!mac) {
-        mac = r;
-      }
-      if (mac && win) break;
-    }
-    return { mac, win };
+    const list = await fetchReleases();
+    return { mac: downloadReleaseIn(list, "mac"), win: downloadReleaseIn(list, "windows") };
   } catch {
     return { mac: null, win: null };
   }

@@ -17,8 +17,16 @@ The site repository is public, confirmed through GitHub on 2026-09-18. A new
 PR/manual hosted Chromium workflow now verifies shared release requests,
 failure/retry, idle layout reads, scroll stages and responsive fallbacks against
 a production build. Local check passes 77 tests, TypeScript, hardcoded-value
-gate and build; the first hosted browser result is pending. Keep this candidate
-draft and unpromoted until rendered acceptance passes. No native app or release
+gate and build. Hosted run 35268461464 at 7d56e35 passed all nine stages at
+1600x900 and 393x852, release sharing and failure/retry, idle/burst layout work,
+resize, page restoration, unmount/remount and reduced-motion/no-WebGL fallbacks.
+A newly found download-page defect now also uses the canonical release selector:
+newer Relay/Tend, draft, invalid and assetless tags cannot become Trove downloads.
+Mac selects stable Trove; Windows retains its prerelease channel. The page and
+client tags share one selector and fetch path, with published floors on outage.
+Eighty tests and the production build pass, including actual-page mixed-app and
+outage cases. Final hosted verification for this additional source fix is pending.
+Keep this candidate draft and unpromoted until that final rendered check passes. No native app or release
 metadata changed. The connected browser list is empty; no local launch retried.
 Vercel publication remains under the hosting spending hold.
 

@@ -10,15 +10,8 @@ import {
   downloadURL,
   releasePageURL,
   type Platform,
+  type GitHubRelease,
 } from "@/lib/releases";
-
-type Release = {
-  tag_name: string;
-  name: string;
-  published_at: string;
-  html_url: string;
-  assets: { name: string; size: number; browser_download_url: string }[];
-};
 
 export default function DownloadCard({
   platform,
@@ -34,7 +27,7 @@ export default function DownloadCard({
   tagline: string;
   instructionsTitle: string;
   instructions: string[];
-  release: Release | null;
+  release: GitHubRelease | null;
   fallbackTag: string;
 }) {
   const tag = release?.tag_name ?? fallbackTag;

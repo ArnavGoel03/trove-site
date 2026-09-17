@@ -3,6 +3,9 @@ import { test } from "node:test";
 
 import {
   APP_MAC_ASSET,
+  ASSET_NAMES,
+  FALLBACK_TAGS,
+  downloadReleaseIn,
   APP_TAG_PREFIX,
   releaseIn,
   resolveTags,
@@ -104,4 +107,28 @@ test("every app has a distinct asset name and tag prefix", () => {
   assert.equal(new Set(assets).size, assets.length);
   const prefixes = Object.values(APP_TAG_PREFIX);
   assert.equal(new Set(prefixes).size, prefixes.length);
+});
+
+
+test("download page and client tags reject cross-app, draft, malformed and assetless releases", () => {
+  const mac = release({ tag_name: "v1.20.0", assets: [asset(ASSET_NAMES.mac)] });
+  const win = release({ tag_name: "v0.5.0-win", prerelease: true, assets: [asset(ASSET_NAMES.windows)] });
+  const beta = release({ tag_name: "v1.21.0-beta", prerelease: true, assets: [asset(ASSET_NAMES.mac)] });
+  const invalid = [
+    release({ tag_name: `${APP_TAG_PREFIX.relay}v9.0.0`, assets: [asset(ASSET_NAMES.mac), asset(ASSET_NAMES.windows)] }),
+    release({ tag_name: `${APP_TAG_PREFIX.tend}v9.0.0`, assets: [asset(ASSET_NAMES.mac)] }),
+    release({ tag_name: "v99.0.0", draft: true, assets: [asset(ASSET_NAMES.mac)] }),
+    release({ tag_name: "release-v99.0.0", assets: [asset(ASSET_NAMES.mac)] }),
+    release({ tag_name: "v98.0.0" }),
+    release({ tag_name: "v99.0.0-win", assets: [asset(ASSET_NAMES.mac)] }),
+  ];
+  const list = [...invalid, beta, win, mac];
+  // The old page's first-non-Windows selection demonstrably picked Relay.
+  assert.equal(list.find((entry) => !entry.tag_name.endsWith("-win")), invalid[0]);
+  assert.equal(downloadReleaseIn(list, "mac"), mac);
+  assert.equal(downloadReleaseIn(list, "windows"), win);
+  assert.deepEqual(resolveTags(list), { mac: mac.tag_name, macBeta: beta.tag_name, win: win.tag_name });
+  assert.equal(downloadReleaseIn(invalid, "mac"), null);
+  assert.equal(downloadReleaseIn(invalid, "windows"), null);
+  assert.deepEqual(resolveTags(invalid), FALLBACK_TAGS);
 });
