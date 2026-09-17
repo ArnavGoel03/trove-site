@@ -7,7 +7,9 @@ correctly remains 1.13.0 because its 1.13.1 candidate is not published. Both
 new ZIPs were downloaded anonymously and matched their signed universal builds.
 The synchronizer used --from-releases, not sibling candidate VERSION files.
 Local check passes 74 tests, TypeScript, hardcoded-value gate and production
-build. Production deployment verification follows the merged commit.
+build. PR #5 merged as 6f0472780a95ffa2cbaa7cca70527480665c2b6a. Vercel reports
+SUCCESS for production; fresh /relay and /tend HTTP reads contain versions
+0.3.2/0.13.3 and the matching public ZIP links.
 
 
 Verified 2026-09-13.
