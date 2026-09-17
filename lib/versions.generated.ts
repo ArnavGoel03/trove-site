@@ -5,8 +5,8 @@ export const VERSIONS = {
     "releaseDate": "2026-09-05"
   },
   "relay": {
-    "version": "0.3.1",
-    "releaseDate": "2026-09-13"
+    "version": "0.3.2",
+    "releaseDate": "2026-09-17"
   },
   "tend": {
     "version": "0.13.2",
