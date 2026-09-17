@@ -24,11 +24,18 @@ A newly found download-page defect now also uses the canonical release selector:
 newer Relay/Tend, draft, invalid and assetless tags cannot become Trove downloads.
 Mac selects stable Trove; Windows retains its prerelease channel. The page and
 client tags share one selector and fetch path, with published floors on outage.
-Eighty tests and the production build pass, including actual-page mixed-app and
-outage cases. Final hosted verification for this additional source fix is pending.
-Keep this candidate draft and unpromoted until that final rendered check passes. No native app or release
+Final hosted run [35268926975](https://github.com/ArnavGoel03/trove-site/actions/runs/35268926975)
+passes at source `fbe84f53704dc435924aecc616cc36a01829bcdd`: 80 tests,
+TypeScript/build, all scroll and release cases, plus download tags/assets at both
+widths. The actual-page regression rejects the previous Relay-as-Trove selector.
+All nine stage screenshots, both download widths and stacked fallbacks were
+inspected. Rendered acceptance is complete; PR6 remains draft pending final review.
+Full receipt and limits: [BROWSER-2026-09-18.md](BROWSER-2026-09-18.md). No native app or release
 metadata changed. The connected browser list is empty; no local launch retried.
-Vercel publication remains under the hosting spending hold.
+Vercel publication remains under the hosting spending hold. Fresh HTTP read at
+2026-09-17 20:14:19 UTC returns 503 `DEPLOYMENT_PAUSED` at
+https://quiver.arnavgoel.dev. Earlier successful deployment receipts below are
+historical, not current availability.
 
 ## Native performance releases, 2026-09-17
 
