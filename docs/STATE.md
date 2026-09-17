@@ -1,11 +1,21 @@
 # Site state
 
+## Native performance releases, 2026-09-17
+
+Generated metadata now resolves public Relay 0.3.2 and Tend 0.13.3. Trove
+correctly remains 1.13.0 because its 1.13.1 candidate is not published. Both
+new ZIPs were downloaded anonymously and matched their signed universal builds.
+The synchronizer used --from-releases, not sibling candidate VERSION files.
+Local check passes 74 tests, TypeScript, hardcoded-value gate and production
+build. Production deployment verification follows the merged commit.
+
+
 Verified 2026-09-13.
 
 ## Tend claims
 
 Removed the body paragraph naming SwiftData and promising working iCloud
-sync, plus the iCloud clause in the Things comparison. Tend uses CoreData;
+sync, plus the iCloud clause in the Things comparison. Tend uses SwiftData (the prior CoreData wording in this document was incorrect);
 CloudKit remains blocked on the required Apple capability. Existing copy
 was removed without replacing it with new marketing claims.
 `pnpm check` passes all 74 tests and the production build; generated Tend
