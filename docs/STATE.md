@@ -1,8 +1,20 @@
 # Site state
 
 PR6 merged as `e439e51` on 18 September 2026 after final hosted browser checks
-and screenshot inspection. Source acceptance is complete; Vercel remains paused
-and live publication is unverified.
+and screenshot inspection. The owner-authorized project resume and provider
+redeploy published main `7689e266e24cb227ca900dbf57eeffebe629c4e6` as
+`dpl_592MM9DbQHNrbifaiZLTcLd6PqbT`. Vercel confirms READY and `paused: false`;
+https://quiver.arnavgoel.dev is HTTP 200 as of 2026-09-17 20:55:10 UTC.
+
+Live home, download, features and release API responses are 200. All 14 initial
+scripts respond successfully and include the shared release-loader runtime.
+Download links and API tags correctly identify Trove v1.13.0 and Windows
+v0.4.0-win. Only status docs differ from browser-verified source `fbe84f5`,
+whose 80 tests and hosted rendered checks passed in run 35268926975. Receipt:
+[deployment-2026-09-18.json](deployment-2026-09-18.json).
+No native release, Git merge, plan or spending-limit change was performed here.
+The existing active Hobby plan and its controls were preserved. Earlier pause
+receipts below describe the state before this successful publication.
 
 ## Client work candidate, 2026-09-18
 
@@ -33,7 +45,7 @@ passes at source `fbe84f53704dc435924aecc616cc36a01829bcdd`: 80 tests,
 TypeScript/build, all scroll and release cases, plus download tags/assets at both
 widths. The actual-page regression rejects the previous Relay-as-Trove selector.
 All nine stage screenshots, both download widths and stacked fallbacks were
-inspected. Rendered acceptance is complete; PR6 remains draft pending final review.
+inspected. Rendered acceptance is complete; PR6 is merged and published as recorded above.
 Full receipt and limits: [BROWSER-2026-09-18.md](BROWSER-2026-09-18.md). No native app or release
 metadata changed. The connected browser list is empty; no local launch retried.
 Vercel publication remains under the hosting spending hold. Fresh HTTP read at

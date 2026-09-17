@@ -1,0 +1,37 @@
+{
+  "origin": "https://quiver.arnavgoel.dev",
+  "deployment": "dpl_592MM9DbQHNrbifaiZLTcLd6PqbT",
+  "source": "7689e266e24cb227ca900dbf57eeffebe629c4e6",
+  "pages": {
+    "/": {
+      "status": 200
+    },
+    "/download": {
+      "status": 200
+    },
+    "/features": {
+      "status": 200
+    },
+    "/api/releases": {
+      "status": 200
+    }
+  },
+  "downloadLinks": [
+    "https://github.com/ArnavGoel03/trove-releases/releases/download/v0.4.0-win/Trove-win-x64.zip",
+    "https://github.com/ArnavGoel03/trove-releases/releases/download/v1.13.0/Trove.zip"
+  ],
+  "releaseTags": {
+    "mac": "v1.13.0",
+    "macBeta": null,
+    "win": "v0.4.0-win"
+  },
+  "initialScriptsChecked": 14,
+  "sharedReleaseLoaderPresent": true,
+  "verifiedAt": "2026-09-17T20:55:10Z",
+  "providerState": "READY",
+  "paused": false,
+  "browserRun": 35268926975,
+  "verifiedSource": "fbe84f53704dc435924aecc616cc36a01829bcdd",
+  "plan": "hobby",
+  "billingControlsChanged": false
+}
