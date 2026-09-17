@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { APPS, CONTACT, STUDIO, TROVE } from "@/lib/brand";
 import { releasePageURL, ISSUES_URL } from "@/lib/releases";
+import { fetchLatestTags } from "@/lib/releases-client";
 import Logomark from "./Logomark";
 import GithubMark from "./icons/GithubMark";
 
@@ -155,8 +156,7 @@ function LatestReleaseBadge() {
     let aborted = false;
     // Goes through our own cached route rather than GitHub directly, so the
     // footer costs a visitor nothing against GitHub's 60/hour anonymous limit.
-    fetch("/api/releases")
-      .then((r) => (r.ok ? r.json() : null))
+    fetchLatestTags()
       .then((j) => {
         if (aborted) return;
         const t: unknown = j?.mac;
