@@ -1,5 +1,9 @@
 # Site state
 
+PR6 merged as `e439e51` on 18 September 2026 after final hosted browser checks
+and screenshot inspection. Source acceptance is complete; Vercel remains paused
+and live publication is unverified.
+
 ## Client work candidate, 2026-09-18
 
 Release buttons and the footer share one in-flight request and successful result.
