@@ -10,6 +10,7 @@ import { RIVALS } from "@/lib/rivals";
 import Poster from "./Poster";
 import Copy from "./Copy";
 import { createProgressStore } from "./progress";
+import { observeProgress } from "./observe-progress";
 
 /**
  * three.js and react-three-fiber, off the critical path.
@@ -54,12 +55,7 @@ export default function Track() {
    */
   const handleDrawn = useCallback(() => setDrawn(true), []);
 
-  /**
-   * One loop, one read of the scroll position, one `stageAt`, then every
-   * consumer. rAF rather than a scroll listener because a scroll listener fires
-   * at whatever rate the input device chooses (a trackpad can beat 120Hz) and
-   * would do this work several times for one painted frame.
-   */
+  // Input and geometry changes share one frame; idle pages do no layout reads.
   useEffect(() => {
     if (!live) {
       // Stacked mode: clear anything a previous live frame wrote, so the CSS
@@ -68,11 +64,9 @@ export default function Track() {
       return;
     }
 
-    let raf = 0;
     let lastProgress = -1;
 
     const tick = () => {
-      raf = requestAnimationFrame(tick);
       const track = trackRef.current;
       if (!track) return;
 
@@ -113,8 +107,9 @@ export default function Track() {
       }
     };
 
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    const track = trackRef.current;
+    if (!track) return;
+    return observeProgress(window, track, tick);
   }, [live, store]);
 
   return (

@@ -1,5 +1,21 @@
 # Site state
 
+## Client work candidate, 2026-09-18
+
+Release buttons and the footer share one in-flight request and successful result.
+HTTP, parsing and shape failures clear the request so a later mount can retry.
+The scroll driver coalesces input, resize, track geometry and page-restoration
+signals into one frame. Idle pages no longer poll track geometry every frame.
+Copy, progress arithmetic and fallback presentation are unchanged.
+
+Verified: 77 tests, TypeScript, hardcoded-value gate and production build pass.
+A deterministic scheduler fixture reduces 120 idle frames from 120 reads to zero;
+100 input events coalesce into one update. Concurrent and later release consumers
+make one mocked request; all three failure classes recover on a later call.
+These are operation counts, not browser latency or transfer measurements.
+Browser acceptance remains blocked by the recorded environment refusal, so keep
+this candidate draft and unpromoted. No native app or release metadata changed.
+
 ## Native performance releases, 2026-09-17
 
 Generated metadata now resolves public Relay 0.3.2 and Tend 0.13.3. Trove

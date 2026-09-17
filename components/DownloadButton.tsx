@@ -6,6 +6,7 @@ import { notify } from "@/lib/notify";
 import { useState, useEffect } from "react";
 import { useMacDetect } from "@/lib/useMacDetect";
 import { SIGNING } from "@/lib/brand";
+import { fetchLatestTags } from "@/lib/releases-client";
 
 import {
   ASSET_NAMES,
@@ -18,11 +19,6 @@ import {
 // caches it. The initial state is the build-time floor derived from
 // macos/VERSION, so the first paint already shows a real, downloadable tag
 // rather than a hand-typed placeholder that may be months stale.
-async function fetchLatestTags(): Promise<ResolvedTags> {
-  const res = await fetch("/api/releases");
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return (await res.json()) as ResolvedTags;
-}
 
 export default function DownloadButton({
   size = "lg",
@@ -33,9 +29,11 @@ export default function DownloadButton({
   const [tags, setTags] = useState<ResolvedTags>(FALLBACK_TAGS);
 
   useEffect(() => {
+    let active = true;
     fetchLatestTags()
-      .then(setTags)
+      .then((tags) => { if (active) setTags(tags); })
       .catch(() => {});
+    return () => { active = false; };
   }, []);
 
   const macHref = downloadURL("mac", tags.mac);
