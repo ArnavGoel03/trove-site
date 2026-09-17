@@ -1,0 +1,30 @@
+name: Browser acceptance
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: browser-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@12.4.2
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: node scripts/browser-check.mjs
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: browser-evidence
+          path: .vercel/browser-20260918/
+          include-hidden-files: true
+          retention-days: 7

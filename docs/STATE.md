@@ -13,8 +13,14 @@ A deterministic scheduler fixture reduces 120 idle frames from 120 reads to zero
 100 input events coalesce into one update. Concurrent and later release consumers
 make one mocked request; all three failure classes recover on a later call.
 These are operation counts, not browser latency or transfer measurements.
-Browser acceptance remains blocked by the recorded environment refusal, so keep
-this candidate draft and unpromoted. No native app or release metadata changed.
+The site repository is public, confirmed through GitHub on 2026-09-18. A new
+PR/manual hosted Chromium workflow now verifies shared release requests,
+failure/retry, idle layout reads, scroll stages and responsive fallbacks against
+a production build. Local check passes 77 tests, TypeScript, hardcoded-value
+gate and build; the first hosted browser result is pending. Keep this candidate
+draft and unpromoted until rendered acceptance passes. No native app or release
+metadata changed. The connected browser list is empty; no local launch retried.
+Vercel publication remains under the hosting spending hold.
 
 ## Native performance releases, 2026-09-17
 
